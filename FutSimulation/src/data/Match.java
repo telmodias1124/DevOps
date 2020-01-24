@@ -2,16 +2,16 @@ package data;
 
 public class Match {
 	
-	private String teamA;
-	private String teamB;
+	private Team teamA;
+	private Team teamB;
 	private int scoreA;
 	private int scoreB;
-	private String winner;
-	private String loser;
+	private Team winner;
+	private Team loser;
 	
 	public Match() {}
 	
-	public Match(String teamA, String teamB, int scoreA, int scoreB, String winner, String loser) {
+	public Match(Team teamA, Team teamB, int scoreA, int scoreB, Team winner, Team loser) {
 		this.teamA = teamA;
 		this.teamB = teamB;
 		this.scoreA = scoreA;
@@ -19,16 +19,16 @@ public class Match {
 		this.loser = loser;
 		this.winner = winner;
 	}
-	public String getTeamA() {
+	public Team getTeamA() {
 		return teamA;
 	}
-	public void setTeamA(String teamA) {
+	public void setTeamA(Team teamA) {
 		this.teamA = teamA;
 	}
-	public String getTeamB() {
+	public Team getTeamB() {
 		return teamB;
 	}
-	public void setTeamB(String teamB) {
+	public void setTeamB(Team teamB) {
 		this.teamB = teamB;
 	}
 	public int getScoreA() {
@@ -44,19 +44,19 @@ public class Match {
 		this.scoreB = scoreB;
 	}
 
-	public String getWinner() {
+	public Team getWinner() {
 		return winner;
 	}
 
-	public void setWinner(String winner) {
+	public void setWinner(Team winner) {
 		this.winner = winner;
 	}
 
-	public String getLoser() {
+	public Team getLoser() {
 		return loser;
 	}
 
-	public void setLoser(String loser) {
+	public void setLoser(Team loser) {
 		this.loser = loser;
 	}
 	

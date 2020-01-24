@@ -16,7 +16,7 @@ public class ClassFactory {
 		return new  PlayerStatistic(att, def, endurance, vitesse, lvlTech, mental, physique);
 	}
 	
-	public static Match creatMatch(String teamA, String teamB, int scoreA, int scoreB, String winner, String loser) {
+	public static Match creatMatch(Team teamA, Team teamB, int scoreA, int scoreB, Team winner, Team loser) {
 		return new Match(teamA, teamB, scoreA, scoreB, winner, loser);
 	}
 	
