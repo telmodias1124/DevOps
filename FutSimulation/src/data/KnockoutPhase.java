@@ -16,7 +16,6 @@ public class KnockoutPhase {
 	
 	public KnockoutPhase(ArrayList<Match> listQuarter, ArrayList<Match> listSemi, Match finalMatch,
 			ArrayList<Match> listTeamQuarter, ArrayList<Match> listTeamSemi, ArrayList<Team> listTeamFinal) {
-		super();
 		this.listQuarter = listQuarter;
 		this.listSemi = listSemi;
 		this.finalMatch = finalMatch;

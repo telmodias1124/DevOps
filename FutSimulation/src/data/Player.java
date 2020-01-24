@@ -10,7 +10,6 @@ public class Player {
 	public Player() {}
 	
 	public Player(String lastName, String firstName, PlayerStatistic playerStatistic, String position) {
-		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.playerStatistic = playerStatistic;
