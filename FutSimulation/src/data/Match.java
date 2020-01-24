@@ -6,15 +6,18 @@ public class Match {
 	private String teamB;
 	private int scoreA;
 	private int scoreB;
+	private String winner;
+	private String loser;
 	
 	public Match() {}
 	
-	public Match(String teamA, String teamB, int scoreA, int scoreB) {
-		super();
+	public Match(String teamA, String teamB, int scoreA, int scoreB, String winner, String loser) {
 		this.teamA = teamA;
 		this.teamB = teamB;
 		this.scoreA = scoreA;
 		this.scoreB = scoreB;
+		this.loser = loser;
+		this.winner = winner;
 	}
 	public String getTeamA() {
 		return teamA;
@@ -40,6 +43,22 @@ public class Match {
 	public void setScoreB(int scoreB) {
 		this.scoreB = scoreB;
 	}
-	
 
+	public String getWinner() {
+		return winner;
+	}
+
+	public void setWinner(String winner) {
+		this.winner = winner;
+	}
+
+	public String getLoser() {
+		return loser;
+	}
+
+	public void setLoser(String loser) {
+		this.loser = loser;
+	}
+	
+	
 }
