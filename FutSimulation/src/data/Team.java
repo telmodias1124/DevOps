@@ -7,11 +7,19 @@ public class Team {
 	private String teamName;
 	private ArrayList<Player> starter;
 	private ArrayList<Player> bench;
+	private int lvlEq;
+	private int lvlAttack;
+	private int lvlDefense;
 	
 	public Team() {}
 	
+	public Team(String teamName) {
+		this.teamName = teamName;
+		this.starter = new ArrayList<Player>();
+		this.bench =  new ArrayList<Player>();
+	}
+	
 	public Team(String teamName, ArrayList<Player> starter, ArrayList<Player> bench) {
-		super();
 		this.teamName = teamName;
 		this.starter = starter;
 		this.bench = bench;
@@ -34,6 +42,32 @@ public class Team {
 	public void setBench(ArrayList<Player> bench) {
 		this.bench = bench;
 	}
+
+	public int getLvlAttack() {
+		return lvlAttack;
+	}
+
+	public void setLvlAttack(int lvlAttack) {
+		this.lvlAttack = lvlAttack;
+	}
+
+	public int getLvlDefense() {
+		return lvlDefense;
+	}
+
+	public void setLvlDefense(int lvlDefense) {
+		this.lvlDefense = lvlDefense;
+	}
+
+	public int getLvlEq() {
+		return lvlEq;
+	}
+
+	public void setLvlEq(int lvlEq) {
+		this.lvlEq = lvlEq;
+	}
+
+	
 
 	
 }

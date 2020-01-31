@@ -10,10 +10,11 @@ public class PlayerStatistic {
 	private int mental;
 	private int physique;
 	
-	public PlayerStatistic() {}
+	public PlayerStatistic() {
+		
+	}
 	
 	public PlayerStatistic(int att, int def) {
-		super();
 		this.att = att;
 		this.def = def;
 	}
