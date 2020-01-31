@@ -12,6 +12,13 @@ public class PlayerStatistic {
 	
 	public PlayerStatistic() {}
 	
+	public PlayerStatistic(int att, int def) {
+		super();
+		this.att = att;
+		this.def = def;
+	}
+	
+	
 	public PlayerStatistic(int att, int def, int endurance, int vitesse, int lvlTech, int mental, int physique) {
 		super();
 		this.att = att;
