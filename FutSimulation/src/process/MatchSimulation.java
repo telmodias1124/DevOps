@@ -2,8 +2,6 @@ package process;
 
 import java.util.Random;
 
-import org.graalvm.compiler.core.amd64.AMD64ArithmeticLIRGenerator.Maths;
-
 import data.Match;
 import data.Player;
 import data.Team;
@@ -29,7 +27,18 @@ public class MatchSimulation {
 		setLvlEq(game.getTeamB());
 		setNbTeamActions();
 		
+		/*if(r.nextInt(100) 0→100 + (random(-5→ 5)) < attEqA alors
+				si (random(0→100 + (random(-5→ 5)) < defEqB alors
+					( si (random(0→100 + (random(-5→ 5)) > goalEqB alors
+						but pour eqA
+					sinon
+						,,,,,,,,  pas but ) 
+				sinon
+					pas but
+			sinon
+				pas but*/
 	}
+	
 	private void setNbTeamActions() {
 		int lvlEqA, lvlEqB;
 		lvlEqA = game.getTeamA().getLvlEq();
