@@ -36,6 +36,8 @@ public class GroupPhaseSimulation {
 			//allTirage.get(r.nextInt(16));
 			
 			tirage = r.nextInt(allTirage.size());
+			System.out.println(tirage);
+			System.out.println(allTirage.get(tirage).getTeamName());
 			gp.getGroupA().add(allTirage.get(tirage));
 			allTirage.remove(tirage);
 			

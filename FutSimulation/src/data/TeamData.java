@@ -125,9 +125,9 @@ public class TeamData {
 
 		llPlayer.add(ClassFactory.creatPlayer("Thomas","Müller",new PlayerStatistic(76,49),"M"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Mesut","Ozil",new PlayerStatistic(70,19),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Mesut","Ozil",new PlayerStatistic(70,19),"A"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Sebastian","Rudy",new PlayerStatistic(70,74),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Sebastian","Rudy",new PlayerStatistic(70,74),"A"));
 
 		llPlayer.add(ClassFactory.creatPlayer("Mario","Gomez",new PlayerStatistic(70,74),"A"));
 

@@ -8,12 +8,14 @@ public class Match {
 	private int scoreB;
 	private Team winner;
 	private Team loser;
+	private boolean draw;
 	
 	public Match() {}
 	
 	public Match(Team teamA, Team teamB) {
 		this.teamA = teamA;
-		this.teamB = teamB;		
+		this.teamB = teamB;
+		this.draw = false;
 	}
 	
 	public Match(Team teamA, Team teamB, int scoreA, int scoreB, Team winner, Team loser) {
@@ -64,6 +66,14 @@ public class Match {
 	public void setLoser(Team loser) {
 		this.loser = loser;
 	}
+	public boolean isDraw() {
+		return draw;
+	}
+
+	public void setDraw(boolean draw) {
+		this.draw = draw;
+	}
+
 	
 	
 }

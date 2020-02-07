@@ -14,7 +14,17 @@ public class GroupPhase {
 	private ArrayList<Match> listMatchGroupC;
 	private ArrayList<Match> listMatchGroupD;
 	
-	public GroupPhase() {}
+	public GroupPhase() {
+		this.groupA = new ArrayList<Team>();
+		this.groupB = new ArrayList<Team>();
+		this.groupC = new ArrayList<Team>();
+		this.groupD = new ArrayList<Team>();
+		
+		this.listMatchGroupA = new ArrayList<Match>();
+		this.listMatchGroupB = new ArrayList<Match>();
+		this.listMatchGroupC = new ArrayList<Match>();
+		this.listMatchGroupD = new ArrayList<Match>();
+	}
 	
 	public GroupPhase(ArrayList<Team> groupA, ArrayList<Team> groupB, ArrayList<Team> groupC, ArrayList<Team> groupD,
 			ArrayList<Match> listMatchGroupA, ArrayList<Match> listMatchGroupB, ArrayList<Match> listMatchGroupC,
