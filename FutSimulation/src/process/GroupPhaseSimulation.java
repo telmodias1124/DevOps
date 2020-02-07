@@ -58,35 +58,15 @@ public class GroupPhaseSimulation {
 	
 	private void createMatchGroupe(GroupPhase gp) {
 		
-		gp.getListMatchGroupA().add(new Match(gp.getGroupA().get(0),gp.getGroupA().get(1)));
-		gp.getListMatchGroupA().add(new Match(gp.getGroupA().get(0),gp.getGroupA().get(2)));
-		gp.getListMatchGroupA().add(new Match(gp.getGroupA().get(0),gp.getGroupA().get(3)));
-		gp.getListMatchGroupA().add(new Match(gp.getGroupA().get(1),gp.getGroupA().get(2)));
-		gp.getListMatchGroupA().add(new Match(gp.getGroupA().get(1),gp.getGroupA().get(3)));
-		gp.getListMatchGroupA().add(new Match(gp.getGroupA().get(2),gp.getGroupA().get(3)));
-		
-		gp.getListMatchGroupB().add(new Match(gp.getGroupB().get(0),gp.getGroupB().get(1)));
-		gp.getListMatchGroupB().add(new Match(gp.getGroupB().get(0),gp.getGroupB().get(2)));
-		gp.getListMatchGroupB().add(new Match(gp.getGroupB().get(0),gp.getGroupB().get(3)));
-		gp.getListMatchGroupB().add(new Match(gp.getGroupB().get(1),gp.getGroupB().get(2)));
-		gp.getListMatchGroupB().add(new Match(gp.getGroupB().get(1),gp.getGroupB().get(3)));
-		gp.getListMatchGroupB().add(new Match(gp.getGroupB().get(2),gp.getGroupB().get(3)));
-		
-		gp.getListMatchGroupC().add(new Match(gp.getGroupC().get(0),gp.getGroupC().get(1)));
-		gp.getListMatchGroupC().add(new Match(gp.getGroupC().get(0),gp.getGroupC().get(2)));
-		gp.getListMatchGroupC().add(new Match(gp.getGroupC().get(0),gp.getGroupC().get(3)));
-		gp.getListMatchGroupC().add(new Match(gp.getGroupC().get(1),gp.getGroupC().get(2)));
-		gp.getListMatchGroupC().add(new Match(gp.getGroupC().get(1),gp.getGroupC().get(3)));
-		gp.getListMatchGroupC().add(new Match(gp.getGroupC().get(2),gp.getGroupC().get(3)));
-		
-		gp.getListMatchGroupD().add(new Match(gp.getGroupD().get(0),gp.getGroupD().get(1)));
-		gp.getListMatchGroupD().add(new Match(gp.getGroupD().get(0),gp.getGroupD().get(2)));
-		gp.getListMatchGroupD().add(new Match(gp.getGroupD().get(0),gp.getGroupD().get(3)));
-		gp.getListMatchGroupD().add(new Match(gp.getGroupD().get(1),gp.getGroupD().get(2)));
-		gp.getListMatchGroupD().add(new Match(gp.getGroupD().get(1),gp.getGroupD().get(3)));
-		gp.getListMatchGroupD().add(new Match(gp.getGroupD().get(2),gp.getGroupD().get(3)));
-		
-		
+		for(int i=0; i<4; i++) {
+			for(int j=i+1; j<4; j++) {
+				gp.getListMatchGroupA().add(new Match(gp.getGroupA().get(i),gp.getGroupA().get(j)));
+				gp.getListMatchGroupB().add(new Match(gp.getGroupB().get(i),gp.getGroupB().get(j)));
+				gp.getListMatchGroupC().add(new Match(gp.getGroupC().get(i),gp.getGroupC().get(j)));
+				gp.getListMatchGroupD().add(new Match(gp.getGroupD().get(i),gp.getGroupD().get(j)));
+
+			}
+		}
 		
 	}
 }
