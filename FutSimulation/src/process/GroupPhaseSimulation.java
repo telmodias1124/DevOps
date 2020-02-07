@@ -57,7 +57,6 @@ public class GroupPhaseSimulation {
 	}
 	
 	private void createMatchGroupe(GroupPhase gp) {
-		
 		for(int i=0; i<4; i++) {
 			for(int j=i+1; j<4; j++) {
 				gp.getListMatchGroupA().add(new Match(gp.getGroupA().get(i),gp.getGroupA().get(j)));
@@ -68,5 +67,20 @@ public class GroupPhaseSimulation {
 			}
 		}
 		
+	}
+	
+	private void simulateMatchGroupe(GroupPhase gp) {
+		for(int i=0; i<gp.getListMatchGroupA().size(); i++) {
+			
+			ms.setGame(gp.getListMatchGroupA().get(i));
+			ms.simulate();
+			ms.setGame(gp.getListMatchGroupB().get(i));
+			ms.simulate();
+			ms.setGame(gp.getListMatchGroupC().get(i));
+			ms.simulate();
+			ms.setGame(gp.getListMatchGroupD().get(i));
+			ms.simulate();
+			
+		}
 	}
 }
