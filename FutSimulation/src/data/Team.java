@@ -10,6 +10,8 @@ public class Team {
 	private int lvlEq;
 	private int lvlAttack;
 	private int lvlDefense;
+	private int nbPoints;
+	private int goals;
 	
 	public Team() {}
 	
@@ -17,6 +19,8 @@ public class Team {
 		this.teamName = teamName;
 		this.starter = new ArrayList<Player>();
 		this.bench =  new ArrayList<Player>();
+		this.nbPoints = 0;
+		this.goals = 0;
 	}
 	
 	public Team(String teamName, ArrayList<Player> starter, ArrayList<Player> bench) {
@@ -65,6 +69,22 @@ public class Team {
 
 	public void setLvlEq(int lvlEq) {
 		this.lvlEq = lvlEq;
+	}
+
+	public int getNbPoints() {
+		return nbPoints;
+	}
+
+	public void setNbPoints(int nbPoints) {
+		this.nbPoints = nbPoints;
+	}
+
+	public int getGoals() {
+		return goals;
+	}
+
+	public void setGoals(int goals) {
+		this.goals = goals;
 	}
 
 	

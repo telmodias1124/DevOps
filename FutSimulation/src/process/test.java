@@ -2,9 +2,7 @@ package process;
 
 import java.util.ArrayList;
 
-import data.ClassFactory;
-import data.Player;
-import data.PlayerStatistic;
+import data.Match;
 import data.Team;
 import data.TeamData;
 
@@ -43,6 +41,56 @@ public class test {
 		for(Team t : groupePhase.gp.getGroupD()) {
 			System.out.println("Groupe D FirstName: " + t.getTeamName());
 		}
+		
+		
+		for(Match t : groupePhase.gp.getListMatchGroupA()){
+			if(!t.isDraw()) {
+				System.out.println("Groupe A : Gagnant : " + t.getWinner().getTeamName() + " Perdant : " + t.getLoser().getTeamName() + " Score : " + t.getScoreA() +"-" + t.getScoreB());
+			}
+			else {
+				System.out.println("Groupe A  : Draw : " + t.getTeamA().getTeamName() + "," + t.getTeamB().getTeamName() +" Score: " + t.getScoreA() + "-"+ t.getScoreB());
+
+			}
+		}
+		
+		for(Match t : groupePhase.gp.getListMatchGroupB()) {
+			if(!t.isDraw()) {
+				System.out.println("Groupe B : Gagnant : " + t.getWinner().getTeamName() + " Perdant : " + t.getLoser().getTeamName() + " Score : " + t.getScoreA() +"-" + t.getScoreB());
+			}
+			else {
+				System.out.println("Groupe B : Draw : " + t.getTeamA().getTeamName() + "," + t.getTeamB().getTeamName() +" Score: " + t.getScoreA() + "-"+ t.getScoreB());
+			}		
+		}
+		
+		for(Match t : groupePhase.gp.getListMatchGroupC()) {
+			
+			if(!t.isDraw()) {
+				System.out.println("Groupe C : Gagnant : " + t.getWinner().getTeamName() + " Perdant : " + t.getLoser().getTeamName() + " Score : " + t.getScoreA() +"-" + t.getScoreB());
+			}
+			else {
+				System.out.println("Groupe C : Draw : " + t.getTeamA().getTeamName() + "," + t.getTeamB().getTeamName() +" Score: " + t.getScoreA() + "-"+ t.getScoreB());
+
+			}	
+			
+		}
+		
+		for(Match t : groupePhase.gp.getListMatchGroupD()) {
+			
+			if(!t.isDraw()) {
+				System.out.println("Groupe D : Gagnant : " + t.getWinner().getTeamName() + " Perdant : " + t.getLoser().getTeamName() + " Score : " + t.getScoreA() +"-" + t.getScoreB());
+			}
+			else {
+				System.out.println("Groupe D : Draw : " + t.getTeamA().getTeamName() + "," + t.getTeamB().getTeamName() +" Score: " + t.getScoreA() + "-"+ t.getScoreB());
+
+			}		
+			
+		}
+		
+
+		for(Team t : groupePhase.gp.getGroupA()) {
+			System.out.println("Team : " + t.getTeamName() + " : " + t.getNbPoints() + " points");
+		}
+		
 		//Team t = al.get(0);
 		/*System.out.println("FirstName: " + t.getTeamName());
 		System.out.println("Starter Team :");
@@ -62,6 +110,15 @@ public class test {
 				System.out.println("Last Name: " + p.getFirstName() + ", LastName: " + p.getLastName() + " Position: " + p.getPosition());
 		}
 		}*/
+		
+		MatchSimulation ms = new MatchSimulation();
+		Match m = new Match();
+		m.setTeamA(al.get(0));
+		m.setTeamB(al.get(1));
+		ms.setGame(m);
+		ms.simulate();
+		//System.out.println("Score A : " + ms.getGame().getScoreA() + " Score B :" + ms.getGame().getScoreB());
+		//System.out.println("Winner : "+ms.getGame().getWinner().getTeamName()+ " Loser : "+ms.getGame().getLoser().getTeamName()+" Draw : "+ms.getGame().isDraw());
 	}
 
 }

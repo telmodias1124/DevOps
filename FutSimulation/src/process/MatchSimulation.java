@@ -24,16 +24,17 @@ public class MatchSimulation {
 		setLvlEq(game.getTeamA());
 		setLvlEq(game.getTeamB());
 		setNbTeamActions();
-		System.out.println("Att A : " + this.game.getTeamA().getLvlAttack());
+		/*System.out.println("Att A : " + this.game.getTeamA().getLvlAttack());
 		System.out.println("Deff A : " + this.game.getTeamA().getLvlDefense());
 		System.out.println("Att B : " + this.game.getTeamB().getLvlAttack());
 		System.out.println("Deff B : " + this.game.getTeamB().getLvlDefense());
 		System.out.println("Nb tour A : " + this.nbActionEqA);
-		System.out.println("Nb tour B : " + this.nbActionEqA);
+		System.out.println("Nb tour B : " + this.nbActionEqA);*/
 		for(int i=0; i<this.nbActionEqA; i++) {
 			if(r.nextInt(101) + this.calLuck(-5,11) < game.getTeamA().getLvlAttack()) {
 				if(r.nextInt(101) + this.calLuck(-5,11) > game.getTeamB().getLvlDefense()) {
 					game.setScoreA(game.getScoreA()+1);
+					game.getTeamA().setGoals(game.getTeamA().getGoals() + 1);
 					//System.out.println("Goal team A");
 				}
 			}
@@ -42,6 +43,7 @@ public class MatchSimulation {
 			if(r.nextInt(101) + this.calLuck(-5,11) < game.getTeamB().getLvlAttack()) {
 				if(r.nextInt(101) + this.calLuck(-5,11) > game.getTeamA().getLvlDefense()) {
 					game.setScoreB(game.getScoreB()+1);
+					game.getTeamB().setGoals(game.getTeamB().getGoals() + 1);
 					//System.out.println("Goal team B");
 				}
 			}
@@ -49,20 +51,20 @@ public class MatchSimulation {
 		if(game.getScoreA() > game.getScoreB()) {
 			game.setLoser(game.getTeamB());
 			game.setWinner(game.getTeamA());
+			game.getTeamA().setNbPoints(game.getTeamA().getNbPoints() + 3);
 		}
 		else if(game.getScoreA() < game.getScoreB()){
 			game.setLoser(game.getTeamA());
 			game.setWinner(game.getTeamB());
+			game.getTeamB().setNbPoints(game.getTeamB().getNbPoints() + 3);
 		}
 		else {
-			System.out.println("avant "+game.isDraw());
 			game.setDraw(true);
-			System.out.println("apres "+game.isDraw());
 			game.setWinner(null);
 			game.setLoser(null);
+			game.getTeamA().setNbPoints(game.getTeamA().getNbPoints() + 1);
+			game.getTeamB().setNbPoints(game.getTeamB().getNbPoints() + 1);
 		}
-		
-		
 	}
 	
 	
@@ -104,7 +106,7 @@ public class MatchSimulation {
 				sumDefDef += p.getPlayerStatistic().getDef();
 			}
 		}
-		System.out.println(sumAttAtt);
+		//System.out.println(sumAttAtt);
 		// Divide by 4 because 3 attack players and we divided 1/3 of the attack of the medium players
 		t.setLvlAttack((sumAttAtt + ((1/3) * sumAttMid ))/4);
 		t.setLvlDefense((sumDefDef + ((1/3) * sumDefMid ))/4);
