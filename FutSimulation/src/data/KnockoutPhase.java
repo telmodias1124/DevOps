@@ -1,34 +1,21 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class KnockoutPhase {
 	
-	private ArrayList<Match> listQuarter;
+	private LinkedList<Match> listQuarter;
 	private ArrayList<Match> listSemi;
 	private Match finalMatch;
 	
-	private ArrayList<Match> listTeamQuarter;
-	private ArrayList<Match> listTeamSemi;
-	private ArrayList<Team> listTeamFinal;
-	
 	public KnockoutPhase() {}
-	
-	public KnockoutPhase(ArrayList<Match> listQuarter, ArrayList<Match> listSemi, Match finalMatch,
-			ArrayList<Match> listTeamQuarter, ArrayList<Match> listTeamSemi, ArrayList<Team> listTeamFinal) {
-		this.listQuarter = listQuarter;
-		this.listSemi = listSemi;
-		this.finalMatch = finalMatch;
-		this.listTeamQuarter = listTeamQuarter;
-		this.listTeamSemi = listTeamSemi;
-		this.listTeamFinal = listTeamFinal;
-	}
 
-	public ArrayList<Match> getListQuarter() {
+	public LinkedList<Match> getListQuarter() {
 		return listQuarter;
 	}
 
-	public void setListQuarter(ArrayList<Match> listQuarter) {
+	public void setListQuarter(LinkedList<Match> listQuarter) {
 		this.listQuarter = listQuarter;
 	}
 
@@ -47,32 +34,6 @@ public class KnockoutPhase {
 	public void setFinalMatch(Match finalMatch) {
 		this.finalMatch = finalMatch;
 	}
-
-	public ArrayList<Match> getListTeamQuarter() {
-		return listTeamQuarter;
-	}
-
-	public void setListTeamQuarter(ArrayList<Match> listTeamQuarter) {
-		this.listTeamQuarter = listTeamQuarter;
-	}
-
-	public ArrayList<Match> getListTeamSemi() {
-		return listTeamSemi;
-	}
-
-	public void setListTeamSemi(ArrayList<Match> listTeamSemi) {
-		this.listTeamSemi = listTeamSemi;
-	}
-
-	public ArrayList<Team> getListTeamFinal() {
-		return listTeamFinal;
-	}
-
-	public void setListTeamFinal(ArrayList<Team> listTeamFinal) {
-		this.listTeamFinal = listTeamFinal;
-	}
-	
-	
 	
 	
 

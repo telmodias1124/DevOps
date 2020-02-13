@@ -9,13 +9,20 @@ public class Match {
 	private Team winner;
 	private Team loser;
 	private boolean draw;
+	private boolean overtime;
 	
-	public Match() {}
+	public Match() {
+		this.scoreA = 0;
+		this.scoreB = 0;
+	}
 	
 	public Match(Team teamA, Team teamB) {
 		this.teamA = teamA;
 		this.teamB = teamB;
 		this.draw = false;
+		this.overtime = false;
+		this.scoreA = 0;
+		this.scoreB = 0;
 	}
 	
 	public Match(Team teamA, Team teamB, int scoreA, int scoreB, Team winner, Team loser) {
@@ -25,6 +32,8 @@ public class Match {
 		this.scoreB = scoreB;
 		this.loser = loser;
 		this.winner = winner;
+		this.draw = false;
+		this.overtime = false;
 	}
 	public Team getTeamA() {
 		return teamA;
@@ -74,6 +83,14 @@ public class Match {
 		this.draw = draw;
 	}
 
+	public boolean isOvertime() {
+		return overtime;
+	}
+
+	public void setOvertime(boolean overtime) {
+		this.overtime = overtime;
+	}
+	
 	
 	
 }

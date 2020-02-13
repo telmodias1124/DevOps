@@ -97,8 +97,15 @@ public class GroupPhaseSimulation {
 		while(allTirage.size() > 0 ) {
 			t = allTirage.get(0);
 			for(Team t2 : allTirage) {
-				if (t2.getNbPoints() > t.getNbPoints()) {
-					t = t2;
+				if (t2.getNbPoints() >= t.getNbPoints()) {
+					if(t2.getNbPoints() == t.getNbPoints()) {
+						if(t2.getGoals() > t.getGoals() ) {
+							t = t2;
+						}
+					}
+					else {
+						t = t2;
+					}
 				}
 			}
 			switch(i) {
@@ -130,28 +137,54 @@ public class GroupPhaseSimulation {
 		sortGroupByPoints(this.gp.getGroupC(), this.standingGroupC);
 		sortGroupByPoints(this.gp.getGroupD(), this.standingGroupD);
 		
-		System.out.println("First : " + this.standingGroupA.getFirst().getTeamName() + " points : " + this.standingGroupA.getFirst().getNbPoints());
-		System.out.println("First : " + this.standingGroupA.getSecond().getTeamName() + " points : " + this.standingGroupA.getSecond().getNbPoints());
-		System.out.println("First : " + this.standingGroupA.getThird().getTeamName() + " points : " + this.standingGroupA.getThird().getNbPoints());
-		System.out.println("First : " + this.standingGroupA.getFourth().getTeamName() + " points : " + this.standingGroupA.getFourth().getNbPoints());
+		System.out.println("First : " + this.standingGroupA.getFirst().getTeamName() + " points : " + this.standingGroupA.getFirst().getNbPoints() + " goals " + this.standingGroupA.getFirst().getGoals() );
+		System.out.println("Second : " + this.standingGroupA.getSecond().getTeamName() + " points : " + this.standingGroupA.getSecond().getNbPoints() + " goals " + this.standingGroupA.getSecond().getGoals());
+		System.out.println("Third : " + this.standingGroupA.getThird().getTeamName() + " points : " + this.standingGroupA.getThird().getNbPoints() + " goals " + this.standingGroupA.getThird().getGoals());
+		System.out.println("Fourth : " + this.standingGroupA.getFourth().getTeamName() + " points : " + this.standingGroupA.getFourth().getNbPoints() + " goals " + this.standingGroupA.getFourth().getGoals());
 		System.out.println("");
 		
-		System.out.println("First : " + this.standingGroupB.getFirst().getTeamName() + " points : " + this.standingGroupB.getFirst().getNbPoints());
-		System.out.println("First : " + this.standingGroupB.getSecond().getTeamName() + " points : " + this.standingGroupB.getSecond().getNbPoints());
-		System.out.println("First : " + this.standingGroupB.getThird().getTeamName() + " points : " + this.standingGroupB.getThird().getNbPoints());
-		System.out.println("First : " + this.standingGroupB.getFourth().getTeamName() + " points : " + this.standingGroupB.getFourth().getNbPoints());
+		System.out.println("First : " + this.standingGroupB.getFirst().getTeamName() + " points : " + this.standingGroupB.getFirst().getNbPoints() + " goals " + this.standingGroupB.getFirst().getGoals());
+		System.out.println("Second : " + this.standingGroupB.getSecond().getTeamName() + " points : " + this.standingGroupB.getSecond().getNbPoints()  + " goals " + this.standingGroupB.getSecond().getGoals());
+		System.out.println("Third : " + this.standingGroupB.getThird().getTeamName() + " points : " + this.standingGroupB.getThird().getNbPoints()  + " goals " + this.standingGroupB.getThird().getGoals());
+		System.out.println("Fourth : " + this.standingGroupB.getFourth().getTeamName() + " points : " + this.standingGroupB.getFourth().getNbPoints() + " goals " + this.standingGroupB.getFourth().getGoals());
 		System.out.println("");
 		
-		System.out.println("First : " + this.standingGroupC.getFirst().getTeamName() + " points : " + this.standingGroupC.getFirst().getNbPoints());
-		System.out.println("First : " + this.standingGroupC.getSecond().getTeamName() + " points : " + this.standingGroupC.getSecond().getNbPoints());
-		System.out.println("First : " + this.standingGroupC.getThird().getTeamName() + " points : " + this.standingGroupC.getThird().getNbPoints());
-		System.out.println("First : " + this.standingGroupC.getFourth().getTeamName() + " points : " + this.standingGroupC.getFourth().getNbPoints());
+		System.out.println("First : " + this.standingGroupC.getFirst().getTeamName() + " points : " + this.standingGroupC.getFirst().getNbPoints() + " goals " + this.standingGroupC.getFirst().getGoals());
+		System.out.println("Second : " + this.standingGroupC.getSecond().getTeamName() + " points : " + this.standingGroupC.getSecond().getNbPoints()  + " goals " + this.standingGroupC.getSecond().getGoals());
+		System.out.println("Third : " + this.standingGroupC.getThird().getTeamName() + " points : " + this.standingGroupC.getThird().getNbPoints() + " goals " + this.standingGroupC.getThird().getGoals());
+		System.out.println("Fourth : " + this.standingGroupC.getFourth().getTeamName() + " points : " + this.standingGroupC.getFourth().getNbPoints() + " goals " + this.standingGroupC.getFourth().getGoals());
 		System.out.println("");
 
-		System.out.println("First : " + this.standingGroupD.getFirst().getTeamName() + " points : " + this.standingGroupD.getFirst().getNbPoints());
-		System.out.println("First : " + this.standingGroupD.getSecond().getTeamName() + " points : " + this.standingGroupD.getSecond().getNbPoints());
-		System.out.println("First : " + this.standingGroupD.getThird().getTeamName() + " points : " + this.standingGroupD.getThird().getNbPoints());
-		System.out.println("First : " + this.standingGroupD.getFourth().getTeamName() + " points : " + this.standingGroupD.getFourth().getNbPoints());
+		System.out.println("First : " + this.standingGroupD.getFirst().getTeamName() + " points : " + this.standingGroupD.getFirst().getNbPoints() + " goals " + this.standingGroupD.getFirst().getGoals());
+		System.out.println("Second : " + this.standingGroupD.getSecond().getTeamName() + " points : " + this.standingGroupD.getSecond().getNbPoints() + " goals " + this.standingGroupD.getSecond().getGoals());
+		System.out.println("Third : " + this.standingGroupD.getThird().getTeamName() + " points : " + this.standingGroupD.getThird().getNbPoints() + " goals " + this.standingGroupD.getThird().getGoals());
+		System.out.println("Fourth : " + this.standingGroupD.getFourth().getTeamName() + " points : " + this.standingGroupD.getFourth().getNbPoints() + " goals " + this.standingGroupD.getFourth().getGoals());
 		System.out.println("");
 	}
+	public Standing getStandingGroupA() {
+		return standingGroupA;
+	}
+	public void setStandingGroupA(Standing standingGroupA) {
+		this.standingGroupA = standingGroupA;
+	}
+	public Standing getStandingGroupB() {
+		return standingGroupB;
+	}
+	public void setStandingGroupB(Standing standingGroupB) {
+		this.standingGroupB = standingGroupB;
+	}
+	public Standing getStandingGroupC() {
+		return standingGroupC;
+	}
+	public void setStandingGroupC(Standing standingGroupC) {
+		this.standingGroupC = standingGroupC;
+	}
+	public Standing getStandingGroupD() {
+		return standingGroupD;
+	}
+	public void setStandingGroupD(Standing standingGroupD) {
+		this.standingGroupD = standingGroupD;
+	}
+	
+	
 }

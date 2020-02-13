@@ -3,6 +3,7 @@ package process;
 import java.util.ArrayList;
 
 import data.Match;
+import data.Standing;
 import data.Team;
 import data.TeamData;
 
@@ -15,16 +16,13 @@ public class test {
 		// TODO Auto-generated method stub
 		TeamData td = new TeamData();
 		ArrayList<Team> al = new ArrayList<Team>();
-		
-		
-		
-		
 		td.createTeams(al);
 		
 		GroupPhaseSimulation groupePhase = new GroupPhaseSimulation();
 		groupePhase.al=al;
-		
 		groupePhase.simulate();
+		
+		
 		
 		for(Team t : groupePhase.gp.getGroupA()) {
 			System.out.println("Groupe A FirstName: " + t.getTeamName());
@@ -87,8 +85,39 @@ public class test {
 		}
 		
 
-		for(Team t : groupePhase.gp.getGroupA()) {
+		/*for(Team t : groupePhase.gp.getGroupA()) {
 			System.out.println("Team : " + t.getTeamName() + " : " + t.getNbPoints() + " points");
+		}*/
+		
+		
+		KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
+		ks.setListQuarter(groupePhase.getStandingGroupA(), groupePhase.getStandingGroupB(), groupePhase.getStandingGroupC(), groupePhase.getStandingGroupD());
+		ks.simulate();
+		
+		System.out.println("Quarters : ");
+		
+		for(Match t : ks.kp.getListQuarter()) {
+			if(!t.isDraw()) {
+				System.out.println("Groupe D : Gagnant : " + t.getWinner().getTeamName() + " Perdant : " + t.getLoser().getTeamName() + " Score : " + t.getScoreA() +"-" + t.getScoreB());
+			}	
+		}
+		System.out.println("");
+		System.out.println("Semi : ");
+		
+		for(Match t : ks.kp.getListSemi()) {
+			if(!t.isDraw()) {
+				System.out.println("Groupe D : Gagnant : " + t.getWinner().getTeamName() + " Perdant : " + t.getLoser().getTeamName() + " Score : " + t.getScoreA() +"-" + t.getScoreB());
+			}	
+		}
+		System.out.println("");
+		System.out.println("Final : ");
+		
+		Match t = ks.kp.getFinalMatch();
+		System.out.println("Team a :" + t.getTeamA().getTeamName());
+		System.out.println("Team b :" + t.getTeamB().getTeamName());
+		
+		if(!t.isDraw()) {
+			System.out.println("Groupe D : Gagnant : " + t.getWinner().getTeamName() + " Perdant : " + t.getLoser().getTeamName() + " Score : " + t.getScoreA() +"-" + t.getScoreB());
 		}
 		
 		//Team t = al.get(0);
@@ -111,12 +140,12 @@ public class test {
 		}
 		}*/
 		
-		MatchSimulation ms = new MatchSimulation();
+		/*MatchSimulation ms = new MatchSimulation();
 		Match m = new Match();
 		m.setTeamA(al.get(0));
 		m.setTeamB(al.get(1));
 		ms.setGame(m);
-		ms.simulate();
+		ms.simulate();*/
 		//System.out.println("Score A : " + ms.getGame().getScoreA() + " Score B :" + ms.getGame().getScoreB());
 		//System.out.println("Winner : "+ms.getGame().getWinner().getTeamName()+ " Loser : "+ms.getGame().getLoser().getTeamName()+" Draw : "+ms.getGame().isDraw());
 	}

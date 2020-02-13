@@ -59,21 +59,82 @@ public class MatchSimulation {
 			game.getTeamB().setNbPoints(game.getTeamB().getNbPoints() + 3);
 		}
 		else {
-			game.setDraw(true);
-			game.setWinner(null);
-			game.setLoser(null);
-			game.getTeamA().setNbPoints(game.getTeamA().getNbPoints() + 1);
-			game.getTeamB().setNbPoints(game.getTeamB().getNbPoints() + 1);
+			if(!game.isOvertime()) {
+				game.setDraw(true);
+				game.getTeamA().setNbPoints(game.getTeamA().getNbPoints() + 1);
+				game.getTeamB().setNbPoints(game.getTeamB().getNbPoints() + 1);
+			}
+			else {
+				overtime();
+			}
 		}
 	}
 	
 	
-	public void overtime() {
+	private void overtime() {
+		this.nbActionEqA = this.nbActionEqA / 3;
+		this.nbActionEqB = this.nbActionEqB / 3;
 		
+		for(int i=0; i<this.nbActionEqA; i++) {
+			if(r.nextInt(101) + this.calLuck(-5,11) < game.getTeamA().getLvlAttack()) {
+				if(r.nextInt(101) + this.calLuck(-5,11) > game.getTeamB().getLvlDefense()) {
+					game.setScoreA(game.getScoreA()+1);
+					game.getTeamA().setGoals(game.getTeamA().getGoals() + 1);
+					//System.out.println("Goal team A");
+				}
+			}
+		}
+		for(int i=0; i<this.nbActionEqB; i++) {
+			if(r.nextInt(101) + this.calLuck(-5,11) < game.getTeamB().getLvlAttack()) {
+				if(r.nextInt(101) + this.calLuck(-5,11) > game.getTeamA().getLvlDefense()) {
+					game.setScoreB(game.getScoreB()+1);
+					game.getTeamB().setGoals(game.getTeamB().getGoals() + 1);
+					//System.out.println("Goal team B");
+				}
+			}
+		}
+		if(game.getScoreA() > game.getScoreB()) {
+			game.setLoser(game.getTeamB());
+			game.setWinner(game.getTeamA());
+		}
+		else if(game.getScoreA() < game.getScoreB()){
+			game.setLoser(game.getTeamA());
+			game.setWinner(game.getTeamB());
+		}
+		else {
+			penalty();
+		}
+	}
+
+	private void penalty() {
+		int goalsA = 0, goalsB = 0, i = 0;
+        while (i<5 || goalsA==goalsB) {
+            if(r.nextInt(101) + this.calLuck(-5,11) < game.getTeamA().getStarter().get(i%11).getPlayerStatistic().getAtt()) {
+                if(r.nextInt(101) + this.calLuck(-5,11) < game.getTeamB().getGoalKeeper().getPlayerStatistic().getDef()) {
+                	goalsA++;
+                }
+            }
+
+            if(r.nextInt(101) + this.calLuck(-5,11) < game.getTeamB().getStarter().get(i%11).getPlayerStatistic().getAtt()) {
+                if(r.nextInt(101) + this.calLuck(-5,11) < game.getTeamA().getGoalKeeper().getPlayerStatistic().getDef()) {
+                	goalsB++;
+                }
+            }
+            i++;
+        }
+        if(goalsA > goalsB) {
+        	game.setWinner(game.getTeamA());
+        	game.setLoser(game.getTeamB());
+        }
+        else {
+        	game.setWinner(game.getTeamB());
+        	game.setLoser(game.getTeamA());
+        }
+        System.out.println("TeamA pen : " + goalsA + " TeamB pen : " + goalsB);
 	}
 	
 	private void setNbTeamActions() {
-		int lvlEqA, lvlEqB;
+		int lvlEqA = 0, lvlEqB = 0;
 		lvlEqA = game.getTeamA().getLvlEq();
 		lvlEqB = game.getTeamB().getLvlEq();
 		if(lvlEqA > lvlEqB) {

@@ -27,7 +27,7 @@ public class TeamData {
 		ll.add("Pologne");
 		ll.add("Suisse");
 		ll.add("Uruguay");
-		ll.add("Portugual");
+		ll.add("Portugal");
 		ll.add("Angleterre");
 		ll.add("Croatie");
 		ll.add("Argentine");

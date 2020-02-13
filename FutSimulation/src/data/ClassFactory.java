@@ -29,9 +29,4 @@ public class ClassFactory {
 			ArrayList<Match> listMatchGroupD) {
 		return new GroupPhase(groupA, groupB, groupC, groupD, listMatchGroupA, listMatchGroupB, listMatchGroupC, listMatchGroupD);
 	}
-	
-	public static KnockoutPhase creatKnockoutPhase(ArrayList<Match> listQuarter, ArrayList<Match> listSemi, Match finalMatch,
-			ArrayList<Match> listTeamQuarter, ArrayList<Match> listTeamSemi, ArrayList<Team> listTeamFinal) {
-		return new KnockoutPhase(listQuarter, listSemi, finalMatch, listTeamQuarter, listTeamSemi, listTeamFinal);
-	}
 }

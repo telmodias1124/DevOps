@@ -87,7 +87,12 @@ public class Team {
 		this.goals = goals;
 	}
 
-	
-
-	
+	public Player getGoalKeeper() {
+		for(Player p : starter) {
+			if(p.getPosition() == "G") {
+				return p;
+			}
+		}
+		return null;
+	}
 }
