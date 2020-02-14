@@ -51,12 +51,16 @@ public class MatchSimulation {
 		if(game.getScoreA() > game.getScoreB()) {
 			game.setLoser(game.getTeamB());
 			game.setWinner(game.getTeamA());
-			game.getTeamA().setNbPoints(game.getTeamA().getNbPoints() + 3);
+			if(!game.isOvertime()) {
+				game.getTeamA().setNbPoints(game.getTeamA().getNbPoints() + 3);
+			}
 		}
 		else if(game.getScoreA() < game.getScoreB()){
 			game.setLoser(game.getTeamA());
 			game.setWinner(game.getTeamB());
-			game.getTeamB().setNbPoints(game.getTeamB().getNbPoints() + 3);
+			if(!game.isOvertime()) {
+				game.getTeamB().setNbPoints(game.getTeamB().getNbPoints() + 3);
+			}
 		}
 		else {
 			if(!game.isOvertime()) {
@@ -102,6 +106,7 @@ public class MatchSimulation {
 			game.setWinner(game.getTeamB());
 		}
 		else {
+			game.setPenalty(true);
 			penalty();
 		}
 	}
@@ -130,7 +135,8 @@ public class MatchSimulation {
         	game.setWinner(game.getTeamB());
         	game.setLoser(game.getTeamA());
         }
-        System.out.println("TeamA pen : " + goalsA + " TeamB pen : " + goalsB);
+        game.setPenA(goalsA);
+        game.setPenB(goalsB);
 	}
 	
 	private void setNbTeamActions() {

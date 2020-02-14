@@ -65,4 +65,47 @@ public class KnockoutPhaseSimulation {
 		ms.setGame(kp.getFinalMatch());
 		ms.simulate();
 	}
+	
+	public String quartersToString() {
+		String res = "Quarters : \n";
+		for(Match m : this.kp.getListQuarter()) {
+			res+=m.getTeamA().getTeamName() + " vs " + m.getTeamB().getTeamName() + "\n";	
+		}
+		res+="\n";
+		for(Match t : this.kp.getListQuarter()) {
+			res+=t.getTeamA().getTeamName() + " " + t.getScoreA() + " - " + t.getScoreB() + " "+ t.getTeamB().getTeamName() + "\n";
+			if(t.isPenalty()) {
+				res+="Penalty : \n";
+				res+=t.getTeamA().getTeamName() + " " + t.getPenA() + " - " + t.getPenB() + " "+ t.getTeamB().getTeamName() + "\n\n";
+			}
+		}
+		res+="\n";
+		return res;
+	}
+	public String semiToString() {
+		String res = "Semi : \n";
+		for(Match m : this.kp.getListSemi()) {
+			res+=m.getTeamA().getTeamName() + " vs " + m.getTeamB().getTeamName() + "\n";
+		}
+		res+="\n";
+		for(Match t : this.kp.getListSemi()) {
+			res+=t.getTeamA().getTeamName() + " " + t.getScoreA() + " - " + t.getScoreB() + " "+ t.getTeamB().getTeamName() + "\n";
+			if(t.isPenalty()) {
+				res+="Penalty : \n";
+				res+=t.getTeamA().getTeamName() + " " + t.getPenA() + " - " + t.getPenB() + " "+ t.getTeamB().getTeamName() + "\n\n";
+			}
+		}
+		res+="\n";
+		return res;
+	}
+	public String finalToString() {
+		String res = "Final : \n";
+		res+=this.kp.getFinalMatch().getTeamA().getTeamName() + " " + this.kp.getFinalMatch().getScoreA() + " - " + this.kp.getFinalMatch().getScoreB() + " "+ this.kp.getFinalMatch().getTeamB().getTeamName() + "\n";
+		if(this.kp.getFinalMatch().isPenalty()) {
+			res+="Penalty : \n";
+			res+=this.kp.getFinalMatch().getTeamA().getTeamName() + " " + this.kp.getFinalMatch().getPenA() + " - " + this.kp.getFinalMatch().getPenB() + " "+ this.kp.getFinalMatch().getTeamB().getTeamName() + "\n\n";
+		}
+		res+="The winner is : " + this.kp.getFinalMatch().getWinner().getTeamName();
+		return res;
+	}
 }

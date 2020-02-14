@@ -6,14 +6,22 @@ public class Match {
 	private Team teamB;
 	private int scoreA;
 	private int scoreB;
+	private int penA;
+	private int penB;
 	private Team winner;
 	private Team loser;
 	private boolean draw;
 	private boolean overtime;
+	private boolean penalty;
 	
 	public Match() {
 		this.scoreA = 0;
 		this.scoreB = 0;
+		this.penA = 0;
+		this.penB = 0;
+		this.draw = false;
+		this.overtime = false;
+		this.penalty = false;
 	}
 	
 	public Match(Team teamA, Team teamB) {
@@ -21,8 +29,11 @@ public class Match {
 		this.teamB = teamB;
 		this.draw = false;
 		this.overtime = false;
+		this.penalty = false;
 		this.scoreA = 0;
 		this.scoreB = 0;
+		this.penA = 0;
+		this.penB = 0;
 	}
 	
 	public Match(Team teamA, Team teamB, int scoreA, int scoreB, Team winner, Team loser) {
@@ -90,7 +101,29 @@ public class Match {
 	public void setOvertime(boolean overtime) {
 		this.overtime = overtime;
 	}
-	
-	
+
+	public int getPenA() {
+		return penA;
+	}
+
+	public void setPenA(int penA) {
+		this.penA = penA;
+	}
+
+	public int getPenB() {
+		return penB;
+	}
+
+	public void setPenB(int penB) {
+		this.penB = penB;
+	}
+
+	public boolean isPenalty() {
+		return penalty;
+	}
+
+	public void setPenalty(boolean penalty) {
+		this.penalty = penalty;
+	}
 	
 }

@@ -19,21 +19,21 @@ public class TeamData {
 	
 	public void createTeams(ArrayList<Team> alTeams) {
 		ll.add("France");
-		ll.add("Allemagne");
-		ll.add("Belgique");
-		ll.add("Perou");
-		ll.add("Mexique");
-		ll.add("Bresil");
-		ll.add("Pologne");
-		ll.add("Suisse");
-		ll.add("Uruguay");
-		ll.add("Portugal");
-		ll.add("Angleterre");
-		ll.add("Croatie");
-		ll.add("Argentine");
-		ll.add("Espagne");
-		ll.add("Colombie");
-		ll.add("Danemark");
+        ll.add("Germany");
+        ll.add("Belgium");
+        ll.add("Peru");
+        ll.add("Mexico");
+        ll.add("Brazil");
+        ll.add("Poland");
+        ll.add("Switzerland");
+        ll.add("Uruguay");
+        ll.add("Portugal");
+        ll.add("England");
+        ll.add("Croatia");
+        ll.add("Argentina");
+        ll.add("Spain");
+        ll.add("Colombia");
+        ll.add("Denmark");
 		
 		//FRANCE
 

@@ -21,13 +21,24 @@ public class test {
 		GroupPhaseSimulation groupePhase = new GroupPhaseSimulation();
 		groupePhase.al=al;
 		groupePhase.simulate();
+		System.out.println(groupePhase.groupToString());
+		System.out.println(groupePhase.matchsToString());
+		System.out.println(groupePhase.standingToString());
+		
+		KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
+		ks.setListQuarter(groupePhase.getStandingGroupA(), groupePhase.getStandingGroupB(), groupePhase.getStandingGroupC(), groupePhase.getStandingGroupD());
+		ks.simulate();
+		System.out.println(ks.quartersToString());
+		System.out.println(ks.semiToString());
+		System.out.println(ks.finalToString());
 		
 		
 		
-		for(Team t : groupePhase.gp.getGroupA()) {
-			System.out.println("Groupe A FirstName: " + t.getTeamName());
+		/*for(Team t : groupePhase.gp.getGroupA()) {
+			System.out.println(t.getTeamName());
 		}
 		
+		System.out.println("Groupe B:");
 		for(Team t : groupePhase.gp.getGroupB()) {
 			System.out.println("Groupe B FirstName: " + t.getTeamName());
 		}
@@ -39,7 +50,6 @@ public class test {
 		for(Team t : groupePhase.gp.getGroupD()) {
 			System.out.println("Groupe D FirstName: " + t.getTeamName());
 		}
-		
 		
 		for(Match t : groupePhase.gp.getListMatchGroupA()){
 			if(!t.isDraw()) {
@@ -58,9 +68,9 @@ public class test {
 			else {
 				System.out.println("Groupe B : Draw : " + t.getTeamA().getTeamName() + "," + t.getTeamB().getTeamName() +" Score: " + t.getScoreA() + "-"+ t.getScoreB());
 			}		
-		}
+		}*/
 		
-		for(Match t : groupePhase.gp.getListMatchGroupC()) {
+		/*for(Match t : groupePhase.gp.getListMatchGroupC()) {
 			
 			if(!t.isDraw()) {
 				System.out.println("Groupe C : Gagnant : " + t.getWinner().getTeamName() + " Perdant : " + t.getLoser().getTeamName() + " Score : " + t.getScoreA() +"-" + t.getScoreB());
@@ -82,19 +92,14 @@ public class test {
 
 			}		
 			
-		}
+		}*/
 		
 
 		/*for(Team t : groupePhase.gp.getGroupA()) {
 			System.out.println("Team : " + t.getTeamName() + " : " + t.getNbPoints() + " points");
 		}*/
 		
-		
-		KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
-		ks.setListQuarter(groupePhase.getStandingGroupA(), groupePhase.getStandingGroupB(), groupePhase.getStandingGroupC(), groupePhase.getStandingGroupD());
-		ks.simulate();
-		
-		System.out.println("Quarters : ");
+		/*System.out.println("Quarters : ");
 		
 		for(Match t : ks.kp.getListQuarter()) {
 			if(!t.isDraw()) {
@@ -120,6 +125,8 @@ public class test {
 			System.out.println("Groupe D : Gagnant : " + t.getWinner().getTeamName() + " Perdant : " + t.getLoser().getTeamName() + " Score : " + t.getScoreA() +"-" + t.getScoreB());
 		}
 		
+		
+		System.out.println(groupePhase.standingToString());*/
 		//Team t = al.get(0);
 		/*System.out.println("FirstName: " + t.getTeamName());
 		System.out.println("Starter Team :");
