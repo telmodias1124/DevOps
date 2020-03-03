@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author telmo
- *
- */
-module FutSimulation {
-}

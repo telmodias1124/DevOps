@@ -6,6 +6,7 @@ import data.Match;
 import data.Standing;
 import data.Team;
 import data.TeamData;
+import gui.MainFrame;
 
 public class test {
 
@@ -31,6 +32,12 @@ public class test {
 		System.out.println(ks.quartersToString());
 		System.out.println(ks.semiToString());
 		System.out.println(ks.finalToString());
+		
+		
+		MainFrame mf = new MainFrame();
+		mf.createGroupPhasePanel(groupePhase.gp);
+		mf.revalidate();
+		mf.repaint();
 		
 		
 		

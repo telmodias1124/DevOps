@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class GroupPhase {
 
-	private ArrayList<Team> groupA;
-	private ArrayList<Team> groupB;
-	private ArrayList<Team> groupC;
-	private ArrayList<Team> groupD;
+	public ArrayList<Team> groupA;
+	public ArrayList<Team> groupB;
+	public ArrayList<Team> groupC;
+	public ArrayList<Team> groupD;
 	
 	private ArrayList<Match> listMatchGroupA;
 	private ArrayList<Match> listMatchGroupB;

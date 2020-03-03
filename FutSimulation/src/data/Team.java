@@ -12,6 +12,7 @@ public class Team {
 	private int lvlDefense;
 	private int nbPoints;
 	private int goals;
+	private String flagPath;
 	
 	public Team() {}
 	
@@ -21,6 +22,7 @@ public class Team {
 		this.bench =  new ArrayList<Player>();
 		this.nbPoints = 0;
 		this.goals = 0;
+		this.flagPath = "images/bresil.png";
 	}
 	
 	public Team(String teamName, ArrayList<Player> starter, ArrayList<Player> bench) {
@@ -85,6 +87,15 @@ public class Team {
 
 	public void setGoals(int goals) {
 		this.goals = goals;
+	}
+	
+
+	public String getFlagPath() {
+		return flagPath;
+	}
+
+	public void setFlagPath(String flagPath) {
+		this.flagPath = flagPath;
 	}
 
 	public Player getGoalKeeper() {

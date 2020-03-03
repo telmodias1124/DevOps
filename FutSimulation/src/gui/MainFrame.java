@@ -1,0 +1,36 @@
+package gui;
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import javax.swing.JFrame;
+
+import data.GroupPhase;
+import gui.GroupGUI.GroupPhasePanel;
+
+public class MainFrame extends JFrame {
+	private static final long serialVersionUID = 2230254401958956708L;
+	
+	private GroupPhasePanel gpp;
+	
+	public MainFrame() {
+		super("FutSimulation");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setPreferredSize(new Dimension(GlobalParameter.MAINFRAME_WIDTH,GlobalParameter.MAINFRAME_HEIGHT));
+		this.setLayout(new GridLayout(2,1));
+		
+		
+		
+		
+		
+		
+		
+		this.pack();
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+	}
+	public void createGroupPhasePanel(GroupPhase gp) {
+		gpp = new GroupPhasePanel();
+		gpp.createStandingPanel(gp);
+		this.add(gpp);
+	}
+}
