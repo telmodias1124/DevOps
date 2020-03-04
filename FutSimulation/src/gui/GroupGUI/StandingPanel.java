@@ -1,15 +1,14 @@
 package gui.GroupGUI;
 
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import data.Team;
+import gui.JImagePanel;
 
 public class StandingPanel extends JPanel {
 	
@@ -20,32 +19,28 @@ public class StandingPanel extends JPanel {
 		this.setLayout(new GridLayout(1,4));
 	}
 	
-	
-	
 	public void createGroupPanel(String group, ArrayList<Team> alGroup) {
-		JPanel panel = new JPanel();
+		JPanel standingPpanel = new JPanel();
 		JLabel groupLabel = new JLabel(group, SwingConstants.CENTER);
 		JLabel teamLabel = new JLabel("Team", SwingConstants.CENTER);
 		JLabel pointsLabel = new JLabel("Pts", SwingConstants.CENTER);
 
-		panel.setLayout(new GridLayout(6,3));
+		standingPpanel.setLayout(new GridLayout(6,3,20,20));
 		
-		panel.add(new JPanel());
-		panel.add(groupLabel);
-		panel.add(new JPanel());
-		panel.add(new JPanel());
-		panel.add(teamLabel);
-		panel.add(pointsLabel);
+		standingPpanel.add(new JPanel());
+		standingPpanel.add(groupLabel);
+		standingPpanel.add(new JPanel());
+		standingPpanel.add(new JPanel());
+		standingPpanel.add(teamLabel);
+		standingPpanel.add(pointsLabel);
 
 		
 		for(Team t : alGroup) {
-			JLabel jl = new JLabel();
-			System.out.println(t.getFlagPath());
-			jl.setIcon(new ImageIcon(new ImageIcon(t.getFlagPath()).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
-			panel.add(jl);
-			panel.add(new JLabel(t.getTeamName(), SwingConstants.CENTER));
-			panel.add(new JLabel(Integer.toString(t.getNbPoints()), SwingConstants.CENTER));
+			JImagePanel jip = new JImagePanel(t.getFlagPath());
+			standingPpanel.add(jip);
+			standingPpanel.add(new JLabel(t.getTeamName(), SwingConstants.CENTER));
+			standingPpanel.add(new JLabel(Integer.toString(t.getNbPoints()), SwingConstants.CENTER));
 		}
-		this.add(panel);
+		this.add(standingPpanel);
 	}
 }
