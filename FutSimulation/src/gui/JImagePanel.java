@@ -19,12 +19,14 @@ public class JImagePanel extends JPanel {
 	private Image KnockoutBackground;
 	private String name;
 	private String score;
+	private boolean onlyRec;
 	Font tr = new Font("SansSerif", Font.BOLD, 16);
 	
 	public JImagePanel(String path) {
 		this.name = null;
 	    try {
-	      image = ImageIO.read(new File(path));
+	      this.image = ImageIO.read(new File(path));
+	      this.onlyRec = false;
 	    }
 	    catch (Exception e) { /*handled in paintComponent()*/ }
 	  	}
@@ -32,24 +34,34 @@ public class JImagePanel extends JPanel {
 	public JImagePanel(String path, String name, String score) {
 		this.name = name;
 		this.score = score;
+		this.onlyRec = false;
     try {
       image = ImageIO.read(new File(path));
     }
     catch (Exception e) { /*handled in paintComponent()*/ }
   	}
-	
-	
+	public JImagePanel(String path, String name, String score, boolean onlyRec) {
+		this.name = name;
+		this.score = score;
+		this.onlyRec = onlyRec;
+    try {
+      image = ImageIO.read(new File(path));
+    }
+    catch (Exception e) { /*handled in paintComponent()*/ }
+  	}
  
   @Override
   protected void paintComponent(Graphics g){
 	 Graphics2D g2 = (Graphics2D) g;
     super.paintComponent(g); 
     if (name != null) {
-    	g.drawImage(image, 0,this.getHeight()/2 - 15 ,30,30,this);
     	g.setFont(tr);
     	g.setColor(Color.BLACK);
-    	g.drawString(name, 35, this.getHeight()/2 + 5);
-    	g.drawString(score, this.getWidth() - 10 - (score.length()*5), this.getHeight()/2 + 5);
+    	if(!onlyRec) {
+	    	g.drawImage(image, 0,this.getHeight()/2 - 15 ,30,30,this); 	
+	    	g.drawString(name, 35, this.getHeight()/2 + 5);
+	    	g.drawString(score, this.getWidth() - 10 - (score.length()*5), this.getHeight()/2 + 5);
+    	}
     	Stroke stroke = new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 3, 0 }, 0);
     	g2.setStroke(stroke);
     	g.drawLine(0, this.getHeight()/2 - 30, this.getWidth(), this.getHeight()/2 - 30);

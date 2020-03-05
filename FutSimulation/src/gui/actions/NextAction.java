@@ -3,23 +3,21 @@ package gui.actions;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import data.GroupPhase;
 import gui.MainFrame;
-import gui.GroupGUI.GamePanel;
-import gui.GroupGUI.StandingPanel;
-
+import gui.Knockout.KnockoutPanel;
 public class NextAction implements ActionListener {
-	private MainFrame mf;
+	private KnockoutPanel kp;
 	
-	public NextAction(MainFrame mf) {
+	public NextAction(KnockoutPanel kp) {
 		super();
-		this.mf = mf;
+		this.kp = kp;
 	}
 	public void actionPerformed(ActionEvent e) {
-		this.mf.getContentPane().removeAll();
-		mf.createKnockout();
-		this.mf.revalidate();
-		this.mf.repaint();
-		this.mf.setVisible(true);
+		kp.changeStage();
+		this.kp.removeAll();
+		kp.drawQuarters();
+		this.kp.revalidate();
+		this.kp.repaint();
+		this.kp.setVisible(true);
 	}
 }

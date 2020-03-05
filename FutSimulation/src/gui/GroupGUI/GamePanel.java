@@ -16,7 +16,7 @@ import data.Team;
 import gui.JImagePanel;
 import gui.MainFrame;
 import gui.actions.ExitAction;
-import gui.actions.NextAction;
+import gui.actions.KnockoutAction;
 import gui.actions.StartAction;
 
 public class GamePanel extends JPanel {
@@ -87,11 +87,11 @@ public class GamePanel extends JPanel {
             standingPanel.add(jbExit);
         }
         if(group.equals("Group C")) {
-            JButton jbNext;
-            jbNext = new JButton("Next");
-            NextAction na = new NextAction(this.mf);
-            jbNext.addActionListener(na);
-            standingPanel.add(jbNext);
+            JButton jbKnock;
+            jbKnock = new JButton("Knockout Phase");
+            KnockoutAction na = new KnockoutAction(this.mf);
+            jbKnock.addActionListener(na);
+            standingPanel.add(jbKnock);
         }
         this.add(standingPanel);
     }

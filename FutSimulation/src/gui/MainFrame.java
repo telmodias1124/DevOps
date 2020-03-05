@@ -45,8 +45,8 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void createKnockout() {
-		KnockoutPanel knp = new KnockoutPanel();
-		knp.drawQuarters(this.kp);
+		KnockoutPanel knp = new KnockoutPanel(this.kp);
+		knp.drawQuarters();
 		this.add(knp);
 	}
 }
