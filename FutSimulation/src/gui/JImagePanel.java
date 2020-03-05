@@ -1,9 +1,12 @@
 package gui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Stroke;
 import java.io.File;
 
 import javax.imageio.ImageIO;
@@ -16,7 +19,7 @@ public class JImagePanel extends JPanel {
 	private Image KnockoutBackground;
 	private String name;
 	private String score;
-	Font tr = new Font("SansSerif", Font.BOLD, 12);
+	Font tr = new Font("SansSerif", Font.BOLD, 16);
 	
 	public JImagePanel(String path) {
 		this.name = null;
@@ -39,17 +42,20 @@ public class JImagePanel extends JPanel {
  
   @Override
   protected void paintComponent(Graphics g){
+	 Graphics2D g2 = (Graphics2D) g;
     super.paintComponent(g); 
     if (name != null) {
     	g.drawImage(image, 0,this.getHeight()/2 - 15 ,30,30,this);
     	g.setFont(tr);
-    	g.setColor(Color.WHITE);
+    	g.setColor(Color.BLACK);
     	g.drawString(name, 35, this.getHeight()/2 + 5);
     	g.drawString(score, this.getWidth() - 10 - (score.length()*5), this.getHeight()/2 + 5);
-    	g.drawLine(0, this.getHeight()/2 - 15, this.getWidth(), this.getHeight()/2 - 15);
-        g.drawLine(0, this.getHeight()/2 - 15 + 30, this.getWidth(), this.getHeight()/2 - 15 + 30);
-        g.drawLine(0,this.getHeight()/2 - 15 ,0, this.getHeight()/2 - 15 + 30);
-        g.drawLine(this.getWidth()-1,this.getHeight()/2 - 15 ,this.getWidth()-1, this.getHeight()/2 - 15 + 30);
+    	Stroke stroke = new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 3, 0 }, 0);
+    	g2.setStroke(stroke);
+    	g.drawLine(0, this.getHeight()/2 - 30, this.getWidth(), this.getHeight()/2 - 30);
+        g.drawLine(0, this.getHeight()/2 - 30 + 60, this.getWidth(), this.getHeight()/2 - 30 + 60);
+        g.drawLine(0,this.getHeight()/2 - 30 ,0, this.getHeight()/2 - 30 + 60);
+        g.drawLine(this.getWidth()-1,this.getHeight()/2 - 30 ,this.getWidth()-1, this.getHeight()/2 - 30 + 60);
     }
     else {
     	g.drawImage(image, 0,0,this.getWidth(),this.getHeight(),this);

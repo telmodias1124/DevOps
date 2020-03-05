@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -19,6 +20,7 @@ import data.KnockoutPhase;
 import data.Match;
 import gui.JImagePanel;
 import gui.JLinePanel;
+import gui.actions.ExitAction;
 
 public class KnockoutPanel extends JPanel{
 	private GridBagConstraints c;
@@ -35,7 +37,7 @@ public class KnockoutPanel extends JPanel{
 	protected void paintComponent(Graphics g){
 	    super.paintComponent(g); 
 	    try {
-	    	KnockoutBackground = ImageIO.read(new File("images/KnockoutBackground.jpg"));
+	    	KnockoutBackground = ImageIO.read(new File("images/backtest.png"));
 		    }
 		    catch (Exception e) { /*handled in paintComponent()*/ }
 	    g.drawImage(KnockoutBackground, 0, 0, 1500, 1000, null);
@@ -273,6 +275,19 @@ public class KnockoutPanel extends JPanel{
 				  jip76.setOpaque(false);
 				  this.add(jip76);
 			    break;
+			  case 81:
+				  JButton jbExit = new JButton("Exit");
+				  jbExit.setPreferredSize(new Dimension(100, 100));
+				  jbExit.addActionListener(new ExitAction());
+				  this.add(jbExit);
+				  break;
+			  case 83:
+				  JButton jbNext = new JButton("Next");
+				  jbNext.setPreferredSize(new Dimension(100, 100));
+				  jbNext.addActionListener(new ExitAction());
+				  this.add(jbNext);
+				  break;
+				  
 			  
 			  default:
 				  	JPanel standingPpanel = new JPanel();
