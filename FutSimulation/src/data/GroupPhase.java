@@ -14,6 +14,8 @@ public class GroupPhase {
 	private ArrayList<Match> listMatchGroupC;
 	private ArrayList<Match> listMatchGroupD;
 	
+	private Standing standingGroupA, standingGroupB, standingGroupC, standingGroupD; 
+	
 	public GroupPhase() {
 		this.groupA = new ArrayList<Team>();
 		this.groupB = new ArrayList<Team>();
@@ -24,6 +26,11 @@ public class GroupPhase {
 		this.listMatchGroupB = new ArrayList<Match>();
 		this.listMatchGroupC = new ArrayList<Match>();
 		this.listMatchGroupD = new ArrayList<Match>();
+		
+		this.standingGroupA = new Standing();
+		this.standingGroupB = new Standing();
+		this.standingGroupC = new Standing();
+		this.standingGroupD = new Standing();
 	}
 	
 	public GroupPhase(ArrayList<Team> groupA, ArrayList<Team> groupB, ArrayList<Team> groupC, ArrayList<Team> groupD,
@@ -38,6 +45,11 @@ public class GroupPhase {
 		this.listMatchGroupB = listMatchGroupB;
 		this.listMatchGroupC = listMatchGroupC;
 		this.listMatchGroupD = listMatchGroupD;
+		
+		this.standingGroupA = new Standing();
+		this.standingGroupB = new Standing();
+		this.standingGroupC = new Standing();
+		this.standingGroupD = new Standing();
 	}
 
 	public ArrayList<Team> getGroupA() {
@@ -102,6 +114,31 @@ public class GroupPhase {
 
 	public void setListMatchGroupD(ArrayList<Match> listMatchGroupD) {
 		this.listMatchGroupD = listMatchGroupD;
+	}
+	
+	public Standing getStandingGroupA() {
+		return standingGroupA;
+	}
+	public void setStandingGroupA(Standing standingGroupA) {
+		this.standingGroupA = standingGroupA;
+	}
+	public Standing getStandingGroupB() {
+		return standingGroupB;
+	}
+	public void setStandingGroupB(Standing standingGroupB) {
+		this.standingGroupB = standingGroupB;
+	}
+	public Standing getStandingGroupC() {
+		return standingGroupC;
+	}
+	public void setStandingGroupC(Standing standingGroupC) {
+		this.standingGroupC = standingGroupC;
+	}
+	public Standing getStandingGroupD() {
+		return standingGroupD;
+	}
+	public void setStandingGroupD(Standing standingGroupD) {
+		this.standingGroupD = standingGroupD;
 	}
 	
 	public Team getTeamGroupA(String name) {

@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import data.Standing;
 import data.Team;
 import gui.JImagePanel;
 
@@ -21,7 +22,7 @@ public class StandingPanel extends JPanel {
 		this.setLayout(new GridLayout(1,4));
 	}
 	
-	public void createGroupPanel(String group, ArrayList<Team> alGroup) {
+	public void fillStandingPanel(String group, Standing standing, boolean point) {
 		JPanel standingPpanel = new JPanel();
 		JLabel groupLabel = new JLabel(group, SwingConstants.CENTER);
 		//groupLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -38,12 +39,51 @@ public class StandingPanel extends JPanel {
 		standingPpanel.add(pointsLabel);
 
 		
-		for(Team t : alGroup) {
-			JImagePanel jip = new JImagePanel(t.getFlagPath());
-			standingPpanel.add(jip);
-			standingPpanel.add(new JLabel(t.getTeamName(), SwingConstants.CENTER));
-			standingPpanel.add(new JLabel(Integer.toString(t.getNbPoints()), SwingConstants.CENTER));
+		Team tFirst = standing.getFirst();
+		JImagePanel jipf = new JImagePanel(tFirst.getFlagPath());
+		standingPpanel.add(jipf);
+		standingPpanel.add(new JLabel(tFirst.getTeamName(), SwingConstants.CENTER));
+		if(point == true) {
+			standingPpanel.add(new JLabel(Integer.toString(tFirst.getNbPoints()), SwingConstants.CENTER));
+		} else {
+			standingPpanel.add(new JLabel("0", SwingConstants.CENTER));
 		}
+		
+		
+		Team tSecond= standing.getSecond();
+		JImagePanel jips = new JImagePanel(tSecond.getFlagPath());
+		standingPpanel.add(jips);
+		standingPpanel.add(new JLabel(tSecond.getTeamName(), SwingConstants.CENTER));
+		if(point == true) {
+			standingPpanel.add(new JLabel(Integer.toString(tSecond.getNbPoints()), SwingConstants.CENTER));
+		} else {
+			standingPpanel.add(new JLabel("0", SwingConstants.CENTER));
+		}
+		
+		Team tThird = standing.getThird();
+		JImagePanel jipt = new JImagePanel(tThird.getFlagPath());
+		standingPpanel.add(jipt);
+		standingPpanel.add(new JLabel(tThird.getTeamName(), SwingConstants.CENTER));
+		if(point == true) {
+			standingPpanel.add(new JLabel(Integer.toString(tThird.getNbPoints()), SwingConstants.CENTER));
+		} else {
+			standingPpanel.add(new JLabel("0", SwingConstants.CENTER));
+		}
+		
+		Team tFourth = standing.getFourth();
+		JImagePanel jipq = new JImagePanel(tFourth.getFlagPath());
+		standingPpanel.add(jipq);
+		standingPpanel.add(new JLabel(tFourth.getTeamName(), SwingConstants.CENTER));
+		if(point == true) {
+			standingPpanel.add(new JLabel(Integer.toString(tFourth.getNbPoints()), SwingConstants.CENTER));
+		} else {
+			standingPpanel.add(new JLabel("0", SwingConstants.CENTER));
+		}
+		
+		
 		this.add(standingPpanel);
 	}
+	
+	
+	
 }

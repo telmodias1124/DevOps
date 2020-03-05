@@ -38,7 +38,7 @@ public class MainFrame extends JFrame {
 	}
 	public void createGroupPhasePanel(GroupPhase gp) {
 		gpp = new GroupPhasePanel();
-		gpp.createStandingPanel(gp);
+		gpp.fillGroupPhasePanel(gp);
 		this.add(gpp);
 	}
 	

@@ -15,14 +15,14 @@ public class GroupPhasePanel extends JPanel{
 		this.setLayout(new GridLayout(2,1));
 	}
 	
-	public void createStandingPanel(GroupPhase gp) {
+	public void fillGroupPhasePanel(GroupPhase gp) {
 		sp = new StandingPanel();
-		mp = new GamePanel();
+		mp = new GamePanel(gp);
 		
-		sp.createGroupPanel("Group A", gp.getGroupA());
-		sp.createGroupPanel("Group B", gp.getGroupB());
-		sp.createGroupPanel("Group C", gp.getGroupC());
-		sp.createGroupPanel("Group D", gp.getGroupD());
+		sp.fillStandingPanel("Group A", gp.getStandingGroupA(), false);
+		sp.fillStandingPanel("Group B", gp.getStandingGroupB(), false);
+		sp.fillStandingPanel("Group C", gp.getStandingGroupC(), false);
+		sp.fillStandingPanel("Group D", gp.getStandingGroupD(), false);
 		
 		/*mp.createGamePanel("Group A", gp.getListMatchGroupA());
 		mp.createGamePanel("Group B", gp.getListMatchGroupB());

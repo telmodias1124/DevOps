@@ -27,7 +27,7 @@ public class test {
 		System.out.println(groupePhase.standingToString());
 		
 		KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
-		ks.setListQuarter(groupePhase.getStandingGroupA(), groupePhase.getStandingGroupB(), groupePhase.getStandingGroupC(), groupePhase.getStandingGroupD());
+		ks.setListQuarter(groupePhase.gp.getStandingGroupA(), groupePhase.gp.getStandingGroupB(), groupePhase.gp.getStandingGroupC(), groupePhase.gp.getStandingGroupD());
 		ks.simulate();
 		System.out.println(ks.quartersToString());
 		System.out.println(ks.semiToString());
