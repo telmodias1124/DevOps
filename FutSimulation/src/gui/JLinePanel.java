@@ -1,8 +1,11 @@
 package gui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Stroke;
 import java.io.File;
 
 import javax.imageio.ImageIO;
@@ -12,6 +15,7 @@ public class JLinePanel extends JPanel {
 
     private static final long serialVersionUID = -5804186432308558412L;
     private String type;
+    Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 3, 0 }, 0);
 
     public JLinePanel(String path) {
         type = path;
@@ -20,6 +24,9 @@ public class JLinePanel extends JPanel {
   @Override
   protected void paintComponent(Graphics g){
     super.paintComponent(g); 
+    Graphics2D g2 = (Graphics2D) g;
+    g2.setStroke(stroke);
+	g.setColor(Color.WHITE);
 
     switch(type) {
         case "HorizontalLine":

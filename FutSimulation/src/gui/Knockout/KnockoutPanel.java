@@ -6,8 +6,11 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.io.File;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -22,10 +25,40 @@ public class KnockoutPanel extends JPanel{
 	//private LinkedList<Match> alMatch;
 
 	private static final long serialVersionUID = 5552019855023405334L;
+	private Image KnockoutBackground;
 
 	public KnockoutPanel() {
 		super();
 		this.setLayout(new GridLayout(8,11));
+	}
+	
+	protected void paintComponent(Graphics g){
+	    super.paintComponent(g); 
+	    try {
+	    	KnockoutBackground = ImageIO.read(new File("images/KnockoutBackground.jpg"));
+		    }
+		    catch (Exception e) { /*handled in paintComponent()*/ }
+	    g.drawImage(KnockoutBackground, 0, 0, 1500, 1000, null);
+	}
+	public String score(Match m, int team) {
+		int score1, score2, pen;
+		if(team == 1) {
+			score1 = m.getScoreA();
+			score2 = m.getScoreB();
+			pen = m.getPenA();
+		}
+		else {
+			score1 = m.getScoreB();
+			score2 = m.getScoreA();
+			pen = m.getPenB();
+		}
+		if(score1 == score2) {
+			return score1+" +"+pen;
+		}
+		else {
+			return Integer.toString(score1);
+		}
+			
 	}
 	
 	public void drawQuarters(KnockoutPhase kp) {
@@ -35,163 +68,216 @@ public class KnockoutPanel extends JPanel{
 			
 			switch(i) {
 			  case 0:
-				  //JImagePanel jip0 = new JImagePanel(kp.getListQuarter().get(0).getTeamA().getFlagPath(), kp.getListQuarter().get(0).getTeamA().getTeamName(), kp.getListQuarter().get(0).getScoreA());
-				  //this.add(jip0);
-				  JLabel scoreLabe0 = new JLabel(kp.getListQuarter().get(0).getTeamA().getTeamName() + " : " + kp.getListQuarter().get(0).getScoreA(), SwingConstants.CENTER);
-				  this.add(scoreLabe0);
+				  JImagePanel jip0 = new JImagePanel(kp.getListQuarter().get(0).getTeamA().getFlagPath(), kp.getListQuarter().get(0).getTeamA().getTeamName(), score(kp.getListQuarter().get(0),1));
+				  jip0.setOpaque(false);
+				  this.add(jip0);
+				  //JLabel scoreLabe0 = new JLabel(kp.getListQuarter().get(0).getTeamA().getTeamName() + " : " + kp.getListQuarter().get(0).getScoreA(), SwingConstants.CENTER);
+				  //this.add(scoreLabe0);
 			    break;
 			  case 1:
 				  	JLinePanel jip1 = new JLinePanel("RightAngleRB");
+				  	jip1.setOpaque(false);
 					this.add(jip1);
 			    break;
 			  case 9:
 				  	JLinePanel jip9 = new JLinePanel("RightAngleLB");
+				  	jip9.setOpaque(false);
 					this.add(jip9);
 			    break;
 			  case 10:
-				  JLabel scoreLabel10 = new JLabel(kp.getListQuarter().get(2).getTeamA().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel10);
+				  JImagePanel jip10 = new JImagePanel(kp.getListQuarter().get(2).getTeamA().getFlagPath(), kp.getListQuarter().get(2).getTeamA().getTeamName(), score(kp.getListQuarter().get(2),1));
+				  //JLabel scoreLabel10 = new JLabel(kp.getListQuarter().get(2).getTeamA().getTeamName(), SwingConstants.CENTER);
+				  jip10.setOpaque(false);
+				  this.add(jip10);
 			    break;
 			  case 12:
 				  	JLinePanel jip12 = new JLinePanel("RightSwitchAngle");
+				  	jip12.setOpaque(false);
 					this.add(jip12);
 			    break;
 			  case 13:
-				  JLabel scoreLabel13 = new JLabel(kp.getListQuarter().get(0).getWinner().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel13);
+				  JImagePanel jip13 = new JImagePanel(kp.getListSemi().get(0).getTeamA().getFlagPath(), kp.getListSemi().get(0).getTeamA().getTeamName(), score(kp.getListSemi().get(0),1));
+				  //JLabel scoreLabel13 = new JLabel(kp.getListQuarter().get(0).getWinner().getTeamName(), SwingConstants.CENTER);
+				  jip13.setOpaque(false);
+				  this.add(jip13);
 			    break;
 			  case 14:
 				  	JLinePanel jip14 = new JLinePanel("RightAngleRB");
+				  	jip14.setOpaque(false);
 					this.add(jip14);
 			    break;
 			  case 18:
 				  	JLinePanel jip18 = new JLinePanel("RightAngleLB");
+				  	jip18.setOpaque(false);
 					this.add(jip18);
 			    break;
 			  case 19:
-				  JLabel scoreLabel19 = new JLabel(kp.getListQuarter().get(2).getWinner().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel19);
+				  JImagePanel jip19 = new JImagePanel(kp.getListSemi().get(1).getTeamA().getFlagPath(), kp.getListSemi().get(1).getTeamA().getTeamName(), score(kp.getListSemi().get(1),1));
+				  //JLabel scoreLabel19 = new JLabel(kp.getListQuarter().get(2).getWinner().getTeamName(), SwingConstants.CENTER);
+				  jip19.setOpaque(false);
+				  this.add(jip19);
 			    break;
 			  case 20:
 				  	JLinePanel jip20 = new JLinePanel("LeftSwitchAngle");
+				  	jip20.setOpaque(false);
 					this.add(jip20);
 			    break;
 			  case 22:
-				  JLabel scoreLabel22 = new JLabel(kp.getListQuarter().get(0).getTeamB().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel22);
+				  JImagePanel jip22 = new JImagePanel(kp.getListQuarter().get(0).getTeamB().getFlagPath(), kp.getListQuarter().get(0).getTeamB().getTeamName(), score(kp.getListQuarter().get(0),0));
+				  //JLabel scoreLabel22 = new JLabel(kp.getListQuarter().get(0).getTeamB().getTeamName(), SwingConstants.CENTER);
+				  jip22.setOpaque(false);
+				  this.add(jip22);
 			    break;
 			  case 23:
 				  	JLinePanel jip23 = new JLinePanel("RightAngleRT");
+				  	jip23.setOpaque(false);
 					this.add(jip23);
 			    break;
 			  case 25:
 				  	JLinePanel jip25 = new JLinePanel("VerticalLine");
+				  	jip25.setOpaque(false);
 					this.add(jip25);
 			    break;
 			  case 27:
-				  JLabel scoreLabel27 = new JLabel(kp.getFinalMatch().getWinner().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel27);
+				  JImagePanel jip27 = new JImagePanel(kp.getFinalMatch().getWinner().getFlagPath(), kp.getFinalMatch().getWinner().getTeamName(), "Win");
+				  //JLabel scoreLabel27 = new JLabel(kp.getFinalMatch().getWinner().getTeamName(), SwingConstants.CENTER);
+				  jip27.setOpaque(false);
+				  this.add(jip27);
 			    break;
 			  case 29:
 				  	JLinePanel jip29 = new JLinePanel("VerticalLine");
+				  	jip29.setOpaque(false);
 					this.add(jip29);
 			    break;
 			  case 31:
 				  	JLinePanel jip31 = new JLinePanel("RightAngleLT");
+				  	jip31.setOpaque(false);
 					this.add(jip31);
 			    break;
 			  case 32:
-				  JLabel scoreLabel32 = new JLabel(kp.getListQuarter().get(2).getTeamB().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel32);
+				  JImagePanel jip32 = new JImagePanel(kp.getListQuarter().get(2).getTeamB().getFlagPath(), kp.getListQuarter().get(2).getTeamB().getTeamName(), score(kp.getListQuarter().get(2),0));
+				  //JLabel scoreLabel32 = new JLabel(kp.getListQuarter().get(2).getTeamB().getTeamName(), SwingConstants.CENTER);
+				  jip32.setOpaque(false);
+				  this.add(jip32);
 			    break;
 			  case 36:
 				  	JLinePanel jip36 = new JLinePanel("RightSwitchAngle");
+				  	jip36.setOpaque(false);
 					this.add(jip36);
 			    break;
 			  case 37:
-				  JLabel scoreLabel37 = new JLabel(kp.getListSemi().get(0).getWinner().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel37);
+				  JImagePanel jip37 = new JImagePanel(kp.getFinalMatch().getTeamA().getFlagPath(), kp.getFinalMatch().getTeamA().getTeamName(), score(kp.getFinalMatch(),1));
+				  //JLabel scoreLabel37 = new JLabel(kp.getListSemi().get(0).getWinner().getTeamName(), SwingConstants.CENTER);
+				  jip37.setOpaque(false);
+				  this.add(jip37);
 			    break;
 			  case 38:
 				  	JLinePanel jip38 = new JLinePanel("TopSwitchAngle");
+				  	jip38.setOpaque(false);
 					this.add(jip38);
 			    break;
 			  case 39:
-				  JLabel scoreLabel39 = new JLabel(kp.getListSemi().get(1).getWinner().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel39);
+				  JImagePanel jip39 = new JImagePanel(kp.getFinalMatch().getTeamB().getFlagPath(), kp.getFinalMatch().getTeamB().getTeamName(), score(kp.getFinalMatch(),0));
+				  //JLabel scoreLabel39 = new JLabel(kp.getListSemi().get(1).getWinner().getTeamName(), SwingConstants.CENTER);
+				  jip39.setOpaque(false);
+				  this.add(jip39);
 			    break;
 			  case 40:
 				  	JLinePanel jip40 = new JLinePanel("LeftSwitchAngle");
+				  	jip40.setOpaque(false);
 					this.add(jip40);
 			    break;
 			  case 44:
-				  JLabel scoreLabel44 = new JLabel(kp.getListQuarter().get(1).getTeamA().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel44);
+				  JImagePanel jip44 = new JImagePanel(kp.getListQuarter().get(1).getTeamA().getFlagPath(), kp.getListQuarter().get(1).getTeamA().getTeamName(), score(kp.getListQuarter().get(1),1));
+				  //JLabel scoreLabel44 = new JLabel(kp.getListQuarter().get(1).getTeamA().getTeamName(), SwingConstants.CENTER);
+				  jip44.setOpaque(false);
+				  this.add(jip44);
 			    break;
 			  case 45:
 				  	JLinePanel jip45 = new JLinePanel("RightAngleRB");
+				  	jip45.setOpaque(false);
 					this.add(jip45);
 			    break;
 			  case 47:
 				  	JLinePanel jip47 = new JLinePanel("VerticalLine");
+				  	jip47.setOpaque(false);
 					this.add(jip47);
 			    break;
 			  case 51:
 				  	JLinePanel jip51 = new JLinePanel("VerticalLine");
+				  	jip51.setOpaque(false);
 					this.add(jip51);
 			    break;
 			  case 53:
 				  	JLinePanel jip53 = new JLinePanel("RightAngleLB");
+				  	jip53.setOpaque(false);
 					this.add(jip53);
 			    break;
 			  case 54:
-				  JLabel scoreLabel54 = new JLabel(kp.getListQuarter().get(3).getTeamA().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel54);
+				  JImagePanel jip54 = new JImagePanel(kp.getListQuarter().get(3).getTeamA().getFlagPath(), kp.getListQuarter().get(3).getTeamA().getTeamName(), score(kp.getListQuarter().get(3),1));
+				  //JLabel scoreLabel54 = new JLabel(kp.getListQuarter().get(3).getTeamA().getTeamName(), SwingConstants.CENTER);
+				  jip54.setOpaque(false);
+				  this.add(jip54);
 			    break;
 			  case 56:
 				  	JLinePanel jip56 = new JLinePanel("RightSwitchAngle");
+				  	jip56.setOpaque(false);
 					this.add(jip56);
 			    break;
 			  case 57:
-				  JLabel scoreLabel57 = new JLabel(kp.getListQuarter().get(1).getWinner().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel57);
+				  JImagePanel jip57 = new JImagePanel(kp.getListSemi().get(0).getTeamB().getFlagPath(), kp.getListSemi().get(0).getTeamB().getTeamName(), score(kp.getListSemi().get(0),0));
+				  //JLabel scoreLabel57 = new JLabel(kp.getListQuarter().get(1).getWinner().getTeamName(), SwingConstants.CENTER);
+				  jip57.setOpaque(false);
+				  this.add(jip57);
 			    break;
 			  case 58:
 				  	JLinePanel jip58 = new JLinePanel("RightAngleRT");
+				  	jip58.setOpaque(false);
 					this.add(jip58);
 			    break;
 			  case 62:
 				  	JLinePanel jip62 = new JLinePanel("RightAngleLT");
+				  	jip62.setOpaque(false);
 					this.add(jip62);
 			    break;
 			  case 63:
-				  JLabel scoreLabel63 = new JLabel(kp.getListQuarter().get(3).getWinner().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel63);
+				  JImagePanel jip63 = new JImagePanel(kp.getListSemi().get(1).getTeamB().getFlagPath(), kp.getListSemi().get(1).getTeamB().getTeamName(), score(kp.getListSemi().get(0),0));
+				  //JLabel scoreLabel63 = new JLabel(kp.getListQuarter().get(3).getWinner().getTeamName(), SwingConstants.CENTER);
+				  jip63.setOpaque(false);
+				  this.add(jip63);
 			    break;
 			  case 64:
 				  	JLinePanel jip64 = new JLinePanel("LeftSwitchAngle");
+				  	jip64.setOpaque(false);
 					this.add(jip64);
 			    break;
 			  case 66:
-				  JLabel scoreLabel66 = new JLabel(kp.getListQuarter().get(1).getTeamB().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel66);
+				  JImagePanel jip66 = new JImagePanel(kp.getListQuarter().get(1).getTeamB().getFlagPath(), kp.getListQuarter().get(1).getTeamB().getTeamName(), score(kp.getListQuarter().get(1),0));
+				  //JLabel scoreLabel66 = new JLabel(kp.getListQuarter().get(1).getTeamB().getTeamName(), SwingConstants.CENTER);
+				  jip66.setOpaque(false);
+				  this.add(jip66);
 			    break;
 			  case 67:
 				  	JLinePanel jip67 = new JLinePanel("RightAngleRT");
+				  	jip67.setOpaque(false);
 					this.add(jip67);
 			    break;
 			  case 75:
 				  	JLinePanel jip75 = new JLinePanel("RightAngleLT");
+				  	jip75.setOpaque(false);
 					this.add(jip75);
 			    break;
 			  case 76:
-				  JLabel scoreLabel76 = new JLabel(kp.getListQuarter().get(3).getTeamB().getTeamName(), SwingConstants.CENTER);
-				  this.add(scoreLabel76);
+				  JImagePanel jip76 = new JImagePanel(kp.getListQuarter().get(3).getTeamB().getFlagPath(), kp.getListQuarter().get(3).getTeamB().getTeamName(), score(kp.getListQuarter().get(3),0));
+				  //JLabel scoreLabel76 = new JLabel(kp.getListQuarter().get(3).getTeamB().getTeamName(), SwingConstants.CENTER);
+				  jip76.setOpaque(false);
+				  this.add(jip76);
 			    break;
 			  
 			  default:
 				  	JPanel standingPpanel = new JPanel();
-					standingPpanel.setBackground(Color.BLACK);
+				  	standingPpanel.setOpaque(false);
+					//standingPpanel.setBackground(Color.BLACK);
 					this.add(standingPpanel);
 			}
 			

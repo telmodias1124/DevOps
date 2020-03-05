@@ -22,7 +22,7 @@ public class Team {
 		this.bench =  new ArrayList<Player>();
 		this.nbPoints = 0;
 		this.goals = 0;
-		this.flagPath = "images/bresil.png";
+		this.flagPath = "images/"+teamName+".png";
 	}
 	
 	public Team(String teamName, ArrayList<Player> starter, ArrayList<Player> bench) {
