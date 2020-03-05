@@ -24,10 +24,11 @@ public class GroupPhasePanel extends JPanel{
 		sp.createGroupPanel("Group C", gp.getGroupC());
 		sp.createGroupPanel("Group D", gp.getGroupD());
 		
-		mp.createGamePanel("Group A", gp.getListMatchGroupA());
+		/*mp.createGamePanel("Group A", gp.getListMatchGroupA());
 		mp.createGamePanel("Group B", gp.getListMatchGroupB());
 		mp.createGamePanel("Group C", gp.getListMatchGroupC());
-		mp.createGamePanel("Group D", gp.getListMatchGroupD());
+		mp.createGamePanel("Group D", gp.getListMatchGroupD());*/
+		mp.createStartPanel();
 		
 		this.add(sp);
 		this.add(mp);

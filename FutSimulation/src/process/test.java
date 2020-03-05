@@ -35,10 +35,22 @@ public class test {
 		
 		
 		MainFrame mf = new MainFrame();
-		//mf.createGroupPhasePanel(groupePhase.gp);
-		mf.createKnockout(ks.kp);
+		mf.createGroupPhasePanel(groupePhase.gp);
+		//mf.createKnockout(ks.kp);
 		mf.revalidate();
 		mf.repaint();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

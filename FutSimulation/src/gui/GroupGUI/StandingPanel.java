@@ -1,8 +1,10 @@
 package gui.GroupGUI;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -22,6 +24,7 @@ public class StandingPanel extends JPanel {
 	public void createGroupPanel(String group, ArrayList<Team> alGroup) {
 		JPanel standingPpanel = new JPanel();
 		JLabel groupLabel = new JLabel(group, SwingConstants.CENTER);
+		//groupLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		JLabel teamLabel = new JLabel("Team", SwingConstants.CENTER);
 		JLabel pointsLabel = new JLabel("Pts", SwingConstants.CENTER);
 
