@@ -17,9 +17,10 @@ public class StartAction implements ActionListener {
 	private StandingPanel standingPanel;
 	private GroupPhase gp;
 	
-	public StartAction(GamePanel gamePanel, GroupPhase gp) {
+	public StartAction(GamePanel gamePanel, GroupPhase gp, StandingPanel standingPanel) {
 		super();
 		this.gamePanel = gamePanel;
+		this.standingPanel = standingPanel;
 		this.gp = gp;
 	}
 	public void actionPerformed(ActionEvent e) {

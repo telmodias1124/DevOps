@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 import data.GroupPhase;
+import gui.MainFrame;
 
 public class GroupPhasePanel extends JPanel{
 	private StandingPanel sp;
@@ -15,9 +16,9 @@ public class GroupPhasePanel extends JPanel{
 		this.setLayout(new GridLayout(2,1));
 	}
 	
-	public void fillGroupPhasePanel(GroupPhase gp) {
+	public void fillGroupPhasePanel(GroupPhase gp, MainFrame mf) {
 		sp = new StandingPanel();
-		mp = new GamePanel(gp);
+		mp = new GamePanel(gp, sp, mf);
 		
 		sp.fillStandingPanel("Group A", gp.getStandingGroupA(), false);
 		sp.fillStandingPanel("Group B", gp.getStandingGroupB(), false);

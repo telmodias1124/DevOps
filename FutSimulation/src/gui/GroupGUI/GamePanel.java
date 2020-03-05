@@ -14,6 +14,7 @@ import data.GroupPhase;
 import data.Match;
 import data.Team;
 import gui.JImagePanel;
+import gui.MainFrame;
 import gui.actions.ExitAction;
 import gui.actions.NextAction;
 import gui.actions.StartAction;
@@ -22,11 +23,15 @@ public class GamePanel extends JPanel {
 
 	private static final long serialVersionUID = -7903191950575270474L;
 	private GroupPhase gp;
+	private StandingPanel sp;
+	private MainFrame mf;
 	
-	public GamePanel(GroupPhase gp) {
+	public GamePanel(GroupPhase gp, StandingPanel sp, MainFrame mf) {
 		super();
 		this.setLayout(new GridLayout(1,4));
 		this.gp = gp;
+		this.sp = sp;
+		this.mf = mf;
 	}
 	
 	public void createStartPanel() {
@@ -40,7 +45,7 @@ public class GamePanel extends JPanel {
 				}
 				if(i==2) {
 					JButton jbStart;
-					StartAction sa = new StartAction(this, this.gp);
+					StartAction sa = new StartAction(this, this.gp, this.sp);
 					jbStart = new JButton("Start");
 					jbStart.addActionListener(sa);
 					panel.add(jbStart);
@@ -84,7 +89,8 @@ public class GamePanel extends JPanel {
         if(group.equals("Group C")) {
             JButton jbNext;
             jbNext = new JButton("Next");
-            jbNext.addActionListener(new NextAction());
+            NextAction na = new NextAction(this.mf);
+            jbNext.addActionListener(na);
             standingPanel.add(jbNext);
         }
         this.add(standingPanel);

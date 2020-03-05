@@ -35,10 +35,10 @@ public class KnockoutPanel extends JPanel{
 			
 			switch(i) {
 			  case 0:
-				  JImagePanel jip0 = new JImagePanel(kp.getListQuarter().get(0).getTeamA().getFlagPath(), kp.getListQuarter().get(0).getTeamA().getTeamName(), kp.getListQuarter().get(0).getScoreA());
-				  this.add(jip0);
-				  //JLabel scoreLabe0 = new JLabel(kp.getListQuarter().get(0).getTeamA().getTeamName() + " : " + kp.getListQuarter().get(0).getScoreA(), SwingConstants.CENTER);
-				  //this.add(scoreLabe0);
+				  //JImagePanel jip0 = new JImagePanel(kp.getListQuarter().get(0).getTeamA().getFlagPath(), kp.getListQuarter().get(0).getTeamA().getTeamName(), kp.getListQuarter().get(0).getScoreA());
+				  //this.add(jip0);
+				  JLabel scoreLabe0 = new JLabel(kp.getListQuarter().get(0).getTeamA().getTeamName() + " : " + kp.getListQuarter().get(0).getScoreA(), SwingConstants.CENTER);
+				  this.add(scoreLabe0);
 			    break;
 			  case 1:
 				  	JLinePanel jip1 = new JLinePanel("RightAngleRB");

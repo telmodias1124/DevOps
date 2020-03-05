@@ -18,6 +18,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 2230254401958956708L;
 	
 	private GroupPhasePanel gpp;
+	private KnockoutPhase kp;
 	
 	public MainFrame() {
 		super("FutSimulation");
@@ -36,16 +37,16 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	}
-	public void createGroupPhasePanel(GroupPhase gp) {
+	public void createGroupPhasePanel(GroupPhase gp, KnockoutPhase kp) {
+		this.kp = kp;
 		gpp = new GroupPhasePanel();
-		gpp.fillGroupPhasePanel(gp);
+		gpp.fillGroupPhasePanel(gp, this);
 		this.add(gpp);
 	}
 	
-	public void createKnockout(KnockoutPhase kp) {
+	public void createKnockout() {
 		KnockoutPanel knp = new KnockoutPanel();
-		//knp.setAlMatch(kp.getListQuarter());
-		knp.drawQuarters(kp);
+		knp.drawQuarters(this.kp);
 		this.add(knp);
 	}
 }
