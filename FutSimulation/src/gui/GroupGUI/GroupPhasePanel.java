@@ -14,6 +14,7 @@ public class GroupPhasePanel extends JPanel{
 	public GroupPhasePanel() {
 		super();
 		this.setLayout(new GridLayout(2,1));
+		this.setOpaque(false);
 	}
 	
 	public void fillGroupPhasePanel(GroupPhase gp, MainFrame mf) {
@@ -24,13 +25,14 @@ public class GroupPhasePanel extends JPanel{
 		sp.fillStandingPanel("Group B", gp.getStandingGroupB(), false);
 		sp.fillStandingPanel("Group C", gp.getStandingGroupC(), false);
 		sp.fillStandingPanel("Group D", gp.getStandingGroupD(), false);
-		
+		sp.setOpaque(false);
 		/*mp.createGamePanel("Group A", gp.getListMatchGroupA());
 		mp.createGamePanel("Group B", gp.getListMatchGroupB());
 		mp.createGamePanel("Group C", gp.getListMatchGroupC());
 		mp.createGamePanel("Group D", gp.getListMatchGroupD());*/
 		mp.createStartPanel();
-		
+		mp.setOpaque(false);
+
 		this.add(sp);
 		this.add(mp);
 		

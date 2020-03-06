@@ -26,7 +26,7 @@ public class MainFrame extends JFrame {
 		this.setPreferredSize(new Dimension(GlobalParameter.MAINFRAME_WIDTH,GlobalParameter.MAINFRAME_HEIGHT));
 		//this.setLayout(new GridLayout(2,1));
 		this.setMinimumSize(new Dimension(GlobalParameter.MAINFRAME_WIDTH,GlobalParameter.MAINFRAME_HEIGHT));
-		
+		this.getContentPane().setBackground(Color.GRAY);
 		
 		
 		
@@ -41,6 +41,7 @@ public class MainFrame extends JFrame {
 		this.kp = kp;
 		gpp = new GroupPhasePanel();
 		gpp.fillGroupPhasePanel(gp, this);
+		gpp.setOpaque(false);
 		this.add(gpp);
 	}
 	

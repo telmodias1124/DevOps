@@ -5,10 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import java.awt.Color;
 
 import data.GroupPhase;
 import data.Match;
@@ -32,6 +35,7 @@ public class GamePanel extends JPanel {
 		this.gp = gp;
 		this.sp = sp;
 		this.mf = mf;
+		this.setOpaque(false);
 	}
 	
 	public void createStartPanel() {
@@ -41,7 +45,9 @@ public class GamePanel extends JPanel {
 			panel.setLayout(new GridLayout(8,1,20,20));
 			if(i==1 || i== 2) {
 				for(int j=0; j<7; j++) {
-					panel.add(new JPanel());
+					JPanel jvide = new JPanel();
+		        	jvide.setOpaque(false);
+					panel.add(jvide);
 				}
 				if(i==2) {
 					JButton jbStart;
@@ -57,6 +63,7 @@ public class GamePanel extends JPanel {
 					panel.add(jbExit);
 				}
 			}
+			panel.setOpaque(false);
 			this.add(panel);
 		}
 	}
@@ -65,20 +72,27 @@ public class GamePanel extends JPanel {
 
         JPanel standingPanel = new JPanel();
         JLabel groupLabel = new JLabel(group, SwingConstants.CENTER);
+		groupLabel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+		groupLabel.setBackground(Color.LIGHT_GRAY);
+		groupLabel.setOpaque(true);
 
         standingPanel.setLayout(new GridLayout(8,1,20,20));
         standingPanel.add(groupLabel);
 
         for(Match m : alMatch) {
-
             Team a,b;
             a = m.getTeamA();
             b = m.getTeamB();
             JLabel scoreLabel = new JLabel(a.getTeamName()+" "+m.getScoreA()+" - "+m.getScoreB()+" "+b.getTeamName(), SwingConstants.CENTER);
+    		scoreLabel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+    		scoreLabel.setBackground(Color.LIGHT_GRAY);
+    		scoreLabel.setOpaque(true);
             standingPanel.add(scoreLabel);
         }
         if(group.equals("Group A") || group.equals("Group D")) {
-            standingPanel.add(new JPanel());
+        	JPanel jvide = new JPanel();
+        	jvide.setOpaque(false);
+            standingPanel.add(jvide);
         }
         if(group.equals("Group B")) {
             JButton jbExit;
@@ -93,6 +107,7 @@ public class GamePanel extends JPanel {
             jbKnock.addActionListener(na);
             standingPanel.add(jbKnock);
         }
+        standingPanel.setOpaque(false);
         this.add(standingPanel);
     }
 
