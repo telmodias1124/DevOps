@@ -53,12 +53,16 @@ public class GamePanel extends JPanel {
 					JButton jbStart;
 					StartAction sa = new StartAction(this, this.gp, this.sp);
 					jbStart = new JButton("Start");
+					jbStart.setBackground(Color.WHITE);
+					jbStart.setOpaque(true);
 					jbStart.addActionListener(sa);
 					panel.add(jbStart);
 				}
 				else {
 					JButton jbExit;
 					jbExit = new JButton("Exit");
+					jbExit.setBackground(Color.WHITE);
+					jbExit.setOpaque(true);
 					jbExit.addActionListener(new ExitAction());
 					panel.add(jbExit);
 				}
@@ -97,12 +101,16 @@ public class GamePanel extends JPanel {
         if(group.equals("Group B")) {
             JButton jbExit;
             jbExit = new JButton("Exit");
+            jbExit.setBackground(Color.WHITE);
+            jbExit.setOpaque(true);
             jbExit.addActionListener(new ExitAction());
             standingPanel.add(jbExit);
         }
         if(group.equals("Group C")) {
             JButton jbKnock;
             jbKnock = new JButton("Knockout Phase");
+            jbKnock.setBackground(Color.WHITE);
+            jbKnock.setOpaque(true);
             KnockoutAction na = new KnockoutAction(this.mf);
             jbKnock.addActionListener(na);
             standingPanel.add(jbKnock);

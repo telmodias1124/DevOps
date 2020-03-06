@@ -22,6 +22,7 @@ import data.KnockoutPhase;
 import data.Match;
 import gui.JImagePanel;
 import gui.JLinePanel;
+import gui.MainFrame;
 import gui.actions.ExitAction;
 import gui.actions.NextAction;
 
@@ -33,11 +34,13 @@ public class KnockoutPanel extends JPanel{
 	private Image KnockoutBackground;
 	private KnockoutPhase kp;
 	private int stage;
+	private MainFrame mf;
 
-	public KnockoutPanel(KnockoutPhase kp) {
+	public KnockoutPanel(KnockoutPhase kp, MainFrame mf) {
 		super();
 		this.kp = kp;
 		this.stage = 1;
+		this.mf = mf;
 		this.setLayout(new GridLayout(8,11));
 	}
 	
@@ -47,7 +50,7 @@ public class KnockoutPanel extends JPanel{
 	    	KnockoutBackground = ImageIO.read(new File("images/backtest.png"));
 		    }
 		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(KnockoutBackground, 0, 0, 1500, 1000, null);
+	    g.drawImage(KnockoutBackground, 0, 0, mf.getWidth(), mf.getHeight(), null);
 	}
 	public String score(Match m, int team) {
 		int score1, score2, pen;
