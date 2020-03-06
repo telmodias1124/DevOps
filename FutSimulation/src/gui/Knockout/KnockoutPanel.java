@@ -75,7 +75,13 @@ public class KnockoutPanel extends JPanel{
 			
 			switch(i) {
 			  case 0:
-				  JImagePanel jip0 = new JImagePanel(kp.getListQuarter().get(0).getTeamA().getFlagPath(), kp.getListQuarter().get(0).getTeamA().getTeamName(), score(kp.getListQuarter().get(0),1));
+				  JImagePanel jip0;
+				  if(this.stage > 1) {
+					  jip0 = new JImagePanel(kp.getListQuarter().get(0).getTeamA().getFlagPath(), kp.getListQuarter().get(0).getTeamA().getTeamName(), score(kp.getListQuarter().get(0),1));
+				  }
+				  else {
+					  jip0 = new JImagePanel(kp.getListQuarter().get(0).getTeamA().getFlagPath(), kp.getListQuarter().get(0).getTeamA().getTeamName(), null);			 
+				  }
 				  jip0.setOpaque(false);
 				  this.add(jip0);
 				  //JLabel scoreLabe0 = new JLabel(kp.getListQuarter().get(0).getTeamA().getTeamName() + " : " + kp.getListQuarter().get(0).getScoreA(), SwingConstants.CENTER);
@@ -92,7 +98,13 @@ public class KnockoutPanel extends JPanel{
 					this.add(jip9);
 			    break;
 			  case 10:
-				  JImagePanel jip10 = new JImagePanel(kp.getListQuarter().get(2).getTeamA().getFlagPath(), kp.getListQuarter().get(2).getTeamA().getTeamName(), score(kp.getListQuarter().get(2),1));
+				  JImagePanel jip10;
+				  if(this.stage > 1) {
+					  jip10 = new JImagePanel(kp.getListQuarter().get(2).getTeamA().getFlagPath(), kp.getListQuarter().get(2).getTeamA().getTeamName(), score(kp.getListQuarter().get(2),1));
+				  }
+				  else {
+					  jip10 = new JImagePanel(kp.getListQuarter().get(2).getTeamA().getFlagPath(), kp.getListQuarter().get(2).getTeamA().getTeamName(), null);
+				  }
 				  //JLabel scoreLabel10 = new JLabel(kp.getListQuarter().get(2).getTeamA().getTeamName(), SwingConstants.CENTER);
 				  jip10.setOpaque(false);
 				  this.add(jip10);
@@ -104,7 +116,11 @@ public class KnockoutPanel extends JPanel{
 			    break;
 			  case 13:
 				  JImagePanel jip13;
-				  if(this.stage >=2 ) {
+				  if(this.stage == 2) {
+					  jip13 = new JImagePanel(kp.getListSemi().get(0).getTeamA().getFlagPath(), kp.getListSemi().get(0).getTeamA().getTeamName(), null);
+
+				  }
+				  else if(this.stage >= 3 ) {
 					  jip13 = new JImagePanel(kp.getListSemi().get(0).getTeamA().getFlagPath(), kp.getListSemi().get(0).getTeamA().getTeamName(), score(kp.getListSemi().get(0),1));
 					  //JLabel scoreLabel13 = new JLabel(kp.getListQuarter().get(0).getWinner().getTeamName(), SwingConstants.CENTER);
 				  }
@@ -126,7 +142,11 @@ public class KnockoutPanel extends JPanel{
 			    break;
 			  case 19:
 				  JImagePanel jip19;
-				  if(this.stage >=2 ) {
+				  if(this.stage == 2) {
+					  jip19 = new JImagePanel(kp.getListSemi().get(1).getTeamA().getFlagPath(), kp.getListSemi().get(1).getTeamA().getTeamName(), null);
+					  
+				  }
+				  else if(this.stage >= 3 ) {
 					  jip19 = new JImagePanel(kp.getListSemi().get(1).getTeamA().getFlagPath(), kp.getListSemi().get(1).getTeamA().getTeamName(), score(kp.getListSemi().get(1),1));
 					  //JLabel scoreLabel19 = new JLabel(kp.getListQuarter().get(2).getWinner().getTeamName(), SwingConstants.CENTER);	  
 				  }
@@ -142,7 +162,14 @@ public class KnockoutPanel extends JPanel{
 					this.add(jip20);
 			    break;
 			  case 22:
-				  JImagePanel jip22 = new JImagePanel(kp.getListQuarter().get(0).getTeamB().getFlagPath(), kp.getListQuarter().get(0).getTeamB().getTeamName(), score(kp.getListQuarter().get(0),0));
+				  JImagePanel jip22;
+				  if(this.stage > 1 ) {
+					  jip22 = new JImagePanel(kp.getListQuarter().get(0).getTeamB().getFlagPath(), kp.getListQuarter().get(0).getTeamB().getTeamName(), score(kp.getListQuarter().get(0),0));	
+				  }
+				  else {
+					  jip22 = new JImagePanel(kp.getListQuarter().get(0).getTeamB().getFlagPath(), kp.getListQuarter().get(0).getTeamB().getTeamName(), null);
+						
+				  }
 				  //JLabel scoreLabel22 = new JLabel(kp.getListQuarter().get(0).getTeamB().getTeamName(), SwingConstants.CENTER);
 				  jip22.setOpaque(false);
 				  this.add(jip22);
@@ -159,7 +186,11 @@ public class KnockoutPanel extends JPanel{
 			    break;
 			  case 27:
 				  JImagePanel jip27;
-				  if(this.stage >= 4) {
+				  if(this.stage == 0) {
+					  jip27 = new JImagePanel(kp.getFinalMatch().getWinner().getFlagPath(), kp.getFinalMatch().getWinner().getTeamName(), null);
+						
+				  }
+				  else if(this.stage >= 4) {
 					  jip27 = new JImagePanel(kp.getFinalMatch().getWinner().getFlagPath(), kp.getFinalMatch().getWinner().getTeamName(), "Win");
 					  //JLabel scoreLabel27 = new JLabel(kp.getFinalMatch().getWinner().getTeamName(), SwingConstants.CENTER);  
 				  }
@@ -180,7 +211,15 @@ public class KnockoutPanel extends JPanel{
 					this.add(jip31);
 			    break;
 			  case 32:
-				  JImagePanel jip32 = new JImagePanel(kp.getListQuarter().get(2).getTeamB().getFlagPath(), kp.getListQuarter().get(2).getTeamB().getTeamName(), score(kp.getListQuarter().get(2),0));
+				  JImagePanel jip32;
+				  if(this.stage > 1) {
+					  jip32 = new JImagePanel(kp.getListQuarter().get(2).getTeamB().getFlagPath(), kp.getListQuarter().get(2).getTeamB().getTeamName(), score(kp.getListQuarter().get(2),0));
+						 
+				  }
+				  else {
+					  jip32 = new JImagePanel(kp.getListQuarter().get(2).getTeamB().getFlagPath(), kp.getListQuarter().get(2).getTeamB().getTeamName(), null);
+						 
+				  }
 				  //JLabel scoreLabel32 = new JLabel(kp.getListQuarter().get(2).getTeamB().getTeamName(), SwingConstants.CENTER);
 				  jip32.setOpaque(false);
 				  this.add(jip32);
@@ -192,7 +231,10 @@ public class KnockoutPanel extends JPanel{
 			    break;
 			  case 37:
 				  JImagePanel jip37;
-				  if(this.stage >= 3) {
+				  if(this.stage == 3) {
+					  jip37 = new JImagePanel(kp.getFinalMatch().getTeamA().getFlagPath(), kp.getFinalMatch().getTeamA().getTeamName(), null);
+				  }
+				  else if(this.stage >= 4) {
 					  jip37 = new JImagePanel(kp.getFinalMatch().getTeamA().getFlagPath(), kp.getFinalMatch().getTeamA().getTeamName(), score(kp.getFinalMatch(),1));
 					  //JLabel scoreLabel37 = new JLabel(kp.getListSemi().get(0).getWinner().getTeamName(), SwingConstants.CENTER);
 				  }
@@ -209,7 +251,10 @@ public class KnockoutPanel extends JPanel{
 			    break;
 			  case 39:
 				  JImagePanel jip39;
-				  if(this.stage >= 3) {
+				  if(this.stage == 3) {
+					  jip39 = new JImagePanel(kp.getFinalMatch().getTeamB().getFlagPath(), kp.getFinalMatch().getTeamB().getTeamName(), null);
+				  }
+				  else if(this.stage >= 4) {
 					  jip39 = new JImagePanel(kp.getFinalMatch().getTeamB().getFlagPath(), kp.getFinalMatch().getTeamB().getTeamName(), score(kp.getFinalMatch(),0));
 					  //JLabel scoreLabel39 = new JLabel(kp.getListSemi().get(1).getWinner().getTeamName(), SwingConstants.CENTER);
 				  }
@@ -225,7 +270,15 @@ public class KnockoutPanel extends JPanel{
 					this.add(jip40);
 			    break;
 			  case 44:
-				  JImagePanel jip44 = new JImagePanel(kp.getListQuarter().get(1).getTeamA().getFlagPath(), kp.getListQuarter().get(1).getTeamA().getTeamName(), score(kp.getListQuarter().get(1),1));
+				  JImagePanel jip44;
+				  if(this.stage > 1 ) {
+					  jip44 = new JImagePanel(kp.getListQuarter().get(1).getTeamA().getFlagPath(), kp.getListQuarter().get(1).getTeamA().getTeamName(), score(kp.getListQuarter().get(1),1));
+						
+				  }
+				  else {
+					  jip44 = new JImagePanel(kp.getListQuarter().get(1).getTeamA().getFlagPath(), kp.getListQuarter().get(1).getTeamA().getTeamName(),null);
+						
+				  }
 				  //JLabel scoreLabel44 = new JLabel(kp.getListQuarter().get(1).getTeamA().getTeamName(), SwingConstants.CENTER);
 				  jip44.setOpaque(false);
 				  this.add(jip44);
@@ -251,7 +304,14 @@ public class KnockoutPanel extends JPanel{
 					this.add(jip53);
 			    break;
 			  case 54:
-				  JImagePanel jip54 = new JImagePanel(kp.getListQuarter().get(3).getTeamA().getFlagPath(), kp.getListQuarter().get(3).getTeamA().getTeamName(), score(kp.getListQuarter().get(3),1));
+				  JImagePanel jip54;
+				  if(this.stage > 1) {
+					  jip54 = new JImagePanel(kp.getListQuarter().get(3).getTeamA().getFlagPath(), kp.getListQuarter().get(3).getTeamA().getTeamName(), score(kp.getListQuarter().get(3),1));
+				  }
+				  else {
+					  jip54 = new JImagePanel(kp.getListQuarter().get(3).getTeamA().getFlagPath(), kp.getListQuarter().get(3).getTeamA().getTeamName(), null);
+						
+				  }
 				  //JLabel scoreLabel54 = new JLabel(kp.getListQuarter().get(3).getTeamA().getTeamName(), SwingConstants.CENTER);
 				  jip54.setOpaque(false);
 				  this.add(jip54);
@@ -263,7 +323,11 @@ public class KnockoutPanel extends JPanel{
 			    break;
 			  case 57:
 				  JImagePanel jip57;
-				  if(this.stage >= 2) {
+				  if(this.stage == 2 ) {
+					  jip57 = new JImagePanel(kp.getListSemi().get(0).getTeamB().getFlagPath(), kp.getListSemi().get(0).getTeamB().getTeamName(), null);
+						 
+				  }
+				  else if(this.stage >= 3) {
 					  jip57 = new JImagePanel(kp.getListSemi().get(0).getTeamB().getFlagPath(), kp.getListSemi().get(0).getTeamB().getTeamName(), score(kp.getListSemi().get(0),0));
 					  //JLabel scoreLabel57 = new JLabel(kp.getListQuarter().get(1).getWinner().getTeamName(), SwingConstants.CENTER);
 				  }
@@ -285,7 +349,10 @@ public class KnockoutPanel extends JPanel{
 			    break;
 			  case 63:
 				  JImagePanel jip63;
-				  if(this.stage >= 2) {
+				  if(this.stage == 2) {
+					  jip63 = new JImagePanel(kp.getListSemi().get(1).getTeamB().getFlagPath(), kp.getListSemi().get(1).getTeamB().getTeamName(), null);
+				  }
+				  else if(this.stage >= 3) {
 					  jip63 = new JImagePanel(kp.getListSemi().get(1).getTeamB().getFlagPath(), kp.getListSemi().get(1).getTeamB().getTeamName(), score(kp.getListSemi().get(0),0));
 					  //JLabel scoreLabel63 = new JLabel(kp.getListQuarter().get(3).getWinner().getTeamName(), SwingConstants.CENTER); 
 				  }
@@ -301,7 +368,15 @@ public class KnockoutPanel extends JPanel{
 					this.add(jip64);
 			    break;
 			  case 66:
-				  JImagePanel jip66 = new JImagePanel(kp.getListQuarter().get(1).getTeamB().getFlagPath(), kp.getListQuarter().get(1).getTeamB().getTeamName(), score(kp.getListQuarter().get(1),0));
+				  JImagePanel jip66;
+				  if(this.stage > 1) {
+					  jip66 = new JImagePanel(kp.getListQuarter().get(1).getTeamB().getFlagPath(), kp.getListQuarter().get(1).getTeamB().getTeamName(), score(kp.getListQuarter().get(1),0));
+						
+				  }
+				  else {
+					  jip66 = new JImagePanel(kp.getListQuarter().get(1).getTeamB().getFlagPath(), kp.getListQuarter().get(1).getTeamB().getTeamName(), null);
+						
+				  }
 				  //JLabel scoreLabel66 = new JLabel(kp.getListQuarter().get(1).getTeamB().getTeamName(), SwingConstants.CENTER);
 				  jip66.setOpaque(false);
 				  this.add(jip66);
@@ -317,7 +392,15 @@ public class KnockoutPanel extends JPanel{
 					this.add(jip75);
 			    break;
 			  case 76:
-				  JImagePanel jip76 = new JImagePanel(kp.getListQuarter().get(3).getTeamB().getFlagPath(), kp.getListQuarter().get(3).getTeamB().getTeamName(), score(kp.getListQuarter().get(3),0));
+				  JImagePanel jip76;
+				  if(this.stage > 1 ) {
+					  jip76 = new JImagePanel(kp.getListQuarter().get(3).getTeamB().getFlagPath(), kp.getListQuarter().get(3).getTeamB().getTeamName(), score(kp.getListQuarter().get(3),0));
+						
+				  }
+				  else {
+					  jip76 = new JImagePanel(kp.getListQuarter().get(3).getTeamB().getFlagPath(), kp.getListQuarter().get(3).getTeamB().getTeamName(), null);
+						
+				  }
 				  //JLabel scoreLabel76 = new JLabel(kp.getListQuarter().get(3).getTeamB().getTeamName(), SwingConstants.CENTER);
 				  jip76.setOpaque(false);
 				  this.add(jip76);

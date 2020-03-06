@@ -64,7 +64,9 @@ public class JImagePanel extends JPanel {
         	g.setColor(Color.WHITE);
 	    	g.drawImage(image, 0,this.getHeight()/2 - 15 ,30,30,this); 	
 	    	g.drawString(name, 35, this.getHeight()/2 + 5);
-	    	g.drawString(score, this.getWidth() - 10 - (score.length()*5), this.getHeight()/2 + 5);
+	    	if(score != null) {
+	    		g.drawString(score, this.getWidth() - 10 - (score.length()*5), this.getHeight()/2 + 5);
+	    	}
     	}else {
     		g.setColor(Color.BLACK);	
     		g.fillRect(0, this.getHeight()/2 - 30, this.getWidth(), this.getHeight()/2);
