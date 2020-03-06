@@ -59,8 +59,8 @@ public class JImagePanel extends JPanel {
     	if(!onlyRec) {
 
         	g.setColor(Color.BLACK);
-        	g.fillRect(0, this.getHeight()/2 - 30, this.getWidth(), this.getHeight()/2);
-
+        	g.fillRoundRect(0, this.getHeight()/2 - 30, this.getWidth(), this.getHeight()/2, 20, 20);
+        	
         	g.setColor(Color.WHITE);
 	    	g.drawImage(image, 0,this.getHeight()/2 - 15 ,30,30,this); 	
 	    	g.drawString(name, 35, this.getHeight()/2 + 5);
@@ -69,7 +69,7 @@ public class JImagePanel extends JPanel {
 	    	}
     	}else {
     		g.setColor(Color.BLACK);	
-    		g.fillRect(0, this.getHeight()/2 - 30, this.getWidth(), this.getHeight()/2);
+    		g.fillRoundRect(0, this.getHeight()/2 - 30, this.getWidth(), this.getHeight()/2, 20, 20);
     	}
     	
     	Stroke stroke = new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 3, 0 }, 0);

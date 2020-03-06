@@ -11,6 +11,8 @@ import java.io.File;
 import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -406,25 +408,75 @@ public class KnockoutPanel extends JPanel{
 				  this.add(jip76);
 			    break;
 			  case 81:
-				  JButton jbExit = new JButton("Exit");
-				  jbExit.setPreferredSize(new Dimension(100, 100));
-				  jbExit.addActionListener(new ExitAction());
-				  this.add(jbExit);
-				  break;
-			  case 83:
-				  JButton jbNext = new JButton("Next");
-				  jbNext.setPreferredSize(new Dimension(100, 100));
-				  jbNext.addActionListener(new NextAction(this));
-				  this.add(jbNext);
-				  break;
-				  
-			  
-			  default:
-				  	JPanel standingPpanel = new JPanel();
-				  	standingPpanel.setOpaque(false);
-					//standingPpanel.setBackground(Color.BLACK);
-					this.add(standingPpanel);
-			}
+                  JPanel p0 = new JPanel();
+                  p0.setOpaque(false);
+                  
+                  
+                  
+                // BufferedImage buttonIcon = null;
+                  JButton jbExit = new JButton();
+                  try {
+                    Image img = ImageIO.read(new File("images/image01.png"));
+                    jbExit.setIcon(new ImageIcon(img));
+                  } catch (Exception ex) {
+                    System.out.println(ex);
+                  }
+                 
+                  jbExit.setPreferredSize(new Dimension(90,80));        
+                  jbExit.setBorder(BorderFactory.createEmptyBorder());
+                  jbExit.setContentAreaFilled(false);
+                //  JButton jbNext = new JButton("Next");
+                    
+                //  jbNext.setPreferredSize(new Dimension(100, 100));
+                  jbExit.addActionListener(new ExitAction());
+                  p0.add(jbExit);
+                  this.add(p0);
+                  break;
+                  
+                  
+                  
+                  /**
+                  JButton jbExit = new JButton("Exit");
+                  jbExit.setPreferredSize(new Dimension(100, 100));
+                  jbExit.addActionListener(new ExitAction());
+                  this.add(jbExit);
+                  break;
+                  **/
+                  
+                  
+                  
+              case 83:
+                  JPanel p1 = new JPanel();
+                  p1.setOpaque(false);
+                
+                 // BufferedImage buttonIcon = null;
+                  JButton jbNext = new JButton();
+                  try {
+                    Image img = ImageIO.read(new File("images/image00.png"));
+                    jbNext.setIcon(new ImageIcon(img));
+                  } catch (Exception ex) {
+                    System.out.println(ex);
+                  }
+                 
+                      jbNext.setPreferredSize(new Dimension(90,80));        
+                    jbNext.setBorder(BorderFactory.createEmptyBorder());
+                    jbNext.setContentAreaFilled(false);
+                //  JButton jbNext = new JButton("Next");
+                    
+                //  jbNext.setPreferredSize(new Dimension(100, 100));
+                  jbNext.addActionListener(new NextAction(this));
+                  p1.add(jbNext);
+                  this.add(p1);
+                  
+                  break;
+                  
+              
+              default:
+                      JPanel standingPpanel = new JPanel();
+                      standingPpanel.setOpaque(false);
+                    //standingPpanel.setBackground(Color.BLACK);
+                    this.add(standingPpanel);
+            }
 			
 			/*if(i==2) {
 				JPanel standingPpanel = new JPanel();
