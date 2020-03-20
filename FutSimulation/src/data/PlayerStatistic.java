@@ -33,7 +33,7 @@ public class PlayerStatistic {
 	public int getShoot() {
 		return shoot;
 	}
-	public void setShoot(int shoot) {
+	public void setShoot(int shoot   ) {
 		this.shoot = shoot;
 	}
 	public int getDef() {

@@ -199,7 +199,7 @@ public class MatchSimulation {
 					
 			if(random.nextInt(101) + this.calLuck(-5,11) > defense) {
 				//attaque passe la défense
-				if(attaquant + this.calLuck(-5,11) < tDef.getGoalKeeper().getPlayerStatistic().getDef()) {
+				if(attaquant + this.calLuck(-5,11) < tDef.getGoalKeeper().getPlayerStatistic().getDef()   ) {
 					//but
 					game.setScoreA(game.getScoreA()+1);
 					game.getTeamA().setGoals(game.getTeamA().getGoals() + 1);
