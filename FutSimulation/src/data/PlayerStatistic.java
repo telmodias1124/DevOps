@@ -2,11 +2,11 @@ package data;
 
 public class PlayerStatistic {
 	
-	private int att;
+	private int shoot;
 	private int def;
-	private int endurance;
-	private int vitesse;
-	private int lvlTech;
+	private int pass;
+	private int pace;
+	private int dribble;
 	private int mental;
 	private int physique;
 	
@@ -14,27 +14,27 @@ public class PlayerStatistic {
 		
 	}
 	
-	public PlayerStatistic(int att, int def) {
-		this.att = att;
+	public PlayerStatistic(int shoot, int def) {
+		this.shoot = shoot;
 		this.def = def;
 	}
 	
 	
-	public PlayerStatistic(int att, int def, int endurance, int vitesse, int lvlTech, int mental, int physique) {
+	public PlayerStatistic(int shoot, int def, int pass, int pace, int dribble, int mental, int physique) {
 		super();
-		this.att = att;
+		this.shoot = shoot;
 		this.def = def;
-		this.endurance = endurance;
-		this.vitesse = vitesse;
-		this.lvlTech = lvlTech;
+		this.pass = pass;
+		this.pace = pace;
+		this.dribble = dribble;
 		this.mental = mental;
 		this.physique = physique;
 	}
-	public int getAtt() {
-		return att;
+	public int getShoot() {
+		return shoot;
 	}
-	public void setAtt(int att) {
-		this.att = att;
+	public void setShoot(int shoot) {
+		this.shoot = shoot;
 	}
 	public int getDef() {
 		return def;
@@ -42,23 +42,23 @@ public class PlayerStatistic {
 	public void setDef(int def) {
 		this.def = def;
 	}
-	public int getEndurance() {
-		return endurance;
+	public int getPass() {
+		return pass;
 	}
-	public void setEndurance(int endurance) {
-		this.endurance = endurance;
+	public void setPass(int pass) {
+		this.pass = pass;
 	}
-	public int getVitesse() {
-		return vitesse;
+	public int getPace() {
+		return pace;
 	}
-	public void setVitesse(int vitesse) {
-		this.vitesse = vitesse;
+	public void setPace(int pace) {
+		this.pace = pace;
 	}
-	public int getLvlTech() {
-		return lvlTech;
+	public int getDribble() {
+		return dribble;
 	}
-	public void setLvlTech(int lvlTech) {
-		this.lvlTech = lvlTech;
+	public void setDribble(int dribble) {
+		this.dribble = dribble;
 	}
 	public int getMental() {
 		return mental;
