@@ -13,6 +13,7 @@ public class Match {
 	private boolean draw;
 	private boolean overtime;
 	private boolean penalty;
+	public String recap;
 	
 	public Match() {
 		this.scoreA = 0;
@@ -22,6 +23,7 @@ public class Match {
 		this.draw = false;
 		this.overtime = false;
 		this.penalty = false;
+		this.recap="";
 	}
 	
 	public Match(Team teamA, Team teamB) {
@@ -34,6 +36,7 @@ public class Match {
 		this.scoreB = 0;
 		this.penA = 0;
 		this.penB = 0;
+		this.recap="";
 	}
 	
 	public Match(Team teamA, Team teamB, int scoreA, int scoreB, Team winner, Team loser) {
@@ -45,6 +48,7 @@ public class Match {
 		this.winner = winner;
 		this.draw = false;
 		this.overtime = false;
+		this.recap="";
 	}
 	public Team getTeamA() {
 		return teamA;
@@ -60,6 +64,14 @@ public class Match {
 	}
 	public int getScoreA() {
 		return scoreA;
+	}
+	public void setScore(Team t) {
+		if(t.equals(this.teamA)) {
+			this.scoreA++;
+		}else {
+			this.scoreB++;
+		}
+		t.setGoals(t.getGoals()+1);
 	}
 	public void setScoreA(int scoreA) {
 		this.scoreA = scoreA;
@@ -125,5 +137,6 @@ public class Match {
 	public void setPenalty(boolean penalty) {
 		this.penalty = penalty;
 	}
+	
 	
 }

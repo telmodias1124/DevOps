@@ -73,13 +73,13 @@ public class GroupPhaseSimulation {
 		for(int i=0; i<gp.getListMatchGroupA().size(); i++) {
 			
 			ms.setGame(gp.getListMatchGroupA().get(i));
-			ms.simulate();
-			ms.setGame(gp.getListMatchGroupB().get(i));
-			ms.simulate();
+			ms.simulate2();
+			/*ms.setGame(gp.getListMatchGroupB().get(i));
+			ms.simulate2();
 			ms.setGame(gp.getListMatchGroupC().get(i));
-			ms.simulate();
+			ms.simulate2();
 			ms.setGame(gp.getListMatchGroupD().get(i));
-			ms.simulate();
+			ms.simulate2();*/
 			
 		}
 	}

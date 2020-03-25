@@ -20,7 +20,7 @@ public class PlayerStatistic {
 	}
 	
 	
-	public PlayerStatistic(int shoot, int def, int pass, int pace, int dribble, int mental, int physique) {
+	public PlayerStatistic(int shoot, int def, int pass, int pace, int dribble, int physique, int mental) {
 		super();
 		this.shoot = shoot;
 		this.def = def;
