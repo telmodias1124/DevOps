@@ -26,7 +26,7 @@ public class test {
 		groupePhase.simulate();
 		
 		//groupePhase.gp.getListMatchGroupA().get(0);
-		for(Team t : al) {
+		/*for(Team t : al) {
 			if(t.getTeamName().equals("Belgium")) {
 				bel = t;
 			}
@@ -55,10 +55,18 @@ public class test {
 		System.out.println("Score "+match.getScoreA()+" : "+match.getScoreB());
 		System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////////////");
 		
-	
-		//System.out.println(groupePhase.groupToString());
-		//System.out.println(groupePhase.matchsToString());
-		//System.out.println(groupePhase.standingToString());
+		
+		
+		for(String n : ms.getGame().alrecap) {
+			   System.out.println(n);
+		}*/
+		System.out.println(groupePhase.groupToString());
+		System.out.println(groupePhase.matchsToString());
+		System.out.println(groupePhase.standingToString());
+		
+		/*for(String n : groupePhase.gp.getListMatchGroupC().get(2).alrecap) {
+			   System.out.println(n);
+		}*/
 		
 		//KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
 		//ks.setListQuarter(groupePhase.gp.getStandingGroupA(), groupePhase.gp.getStandingGroupB(), groupePhase.gp.getStandingGroupC(), groupePhase.gp.getStandingGroupD());
@@ -122,9 +130,9 @@ public class test {
 			else {
 				System.out.println("Groupe B : Draw : " + t.getTeamA().getTeamName() + "," + t.getTeamB().getTeamName() +" Score: " + t.getScoreA() + "-"+ t.getScoreB());
 			}		
-		}*/
+		}
 		
-		/*for(Match t : groupePhase.gp.getListMatchGroupC()) {
+		for(Match t : groupePhase.gp.getListMatchGroupC()) {
 			
 			if(!t.isDraw()) {
 				System.out.println("Groupe C : Gagnant : " + t.getWinner().getTeamName() + " Perdant : " + t.getLoser().getTeamName() + " Score : " + t.getScoreA() +"-" + t.getScoreB());
@@ -146,10 +154,10 @@ public class test {
 
 			}		
 			
-		}*/
+		}
 		
 
-		/*for(Team t : groupePhase.gp.getGroupA()) {
+		for(Team t : groupePhase.gp.getGroupA()) {
 			System.out.println("Team : " + t.getTeamName() + " : " + t.getNbPoints() + " points");
 		}*/
 		

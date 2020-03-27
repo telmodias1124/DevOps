@@ -74,12 +74,12 @@ public class GroupPhaseSimulation {
 			
 			ms.setGame(gp.getListMatchGroupA().get(i));
 			ms.simulate2();
-			/*ms.setGame(gp.getListMatchGroupB().get(i));
+			ms.setGame(gp.getListMatchGroupB().get(i));
 			ms.simulate2();
 			ms.setGame(gp.getListMatchGroupC().get(i));
 			ms.simulate2();
 			ms.setGame(gp.getListMatchGroupD().get(i));
-			ms.simulate2();*/
+			ms.simulate2();
 			
 		}
 	}
@@ -198,7 +198,7 @@ public class GroupPhaseSimulation {
 		res+= this.gp.getStandingGroupD().getFirst().getTeamName() + " - "+ this.gp.getStandingGroupD().getFirst().getNbPoints() + "\t";
 		res+="\n";
 		
-		res+= this.gp.getStandingGroupB().getSecond().getTeamName() + " - "+ this.gp.getStandingGroupA().getSecond().getNbPoints() + "\t";
+		res+= this.gp.getStandingGroupA().getSecond().getTeamName() + " - "+ this.gp.getStandingGroupA().getSecond().getNbPoints() + "\t";
 		res+= this.gp.getStandingGroupB().getSecond().getTeamName() + " - "+ this.gp.getStandingGroupB().getSecond().getNbPoints() + "\t";
 		res+= this.gp.getStandingGroupC().getSecond().getTeamName() + " - "+ this.gp.getStandingGroupC().getSecond().getNbPoints() + "\t";
 		res+= this.gp.getStandingGroupD().getSecond().getTeamName() + " - "+ this.gp.getStandingGroupD().getSecond().getNbPoints() + "\t";
