@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+
 public class Match {
 	
 	private Team teamA;
@@ -14,6 +16,7 @@ public class Match {
 	private boolean overtime;
 	private boolean penalty;
 	public String recap;
+	public ArrayList<String> alrecap = new ArrayList<String>();
 	
 	public Match() {
 		this.scoreA = 0;
