@@ -6,14 +6,26 @@ public class Player {
 	private String firstName;
 	private PlayerStatistic playerStatistic;
 	private String position;
+	private boolean card;
 	
-	public Player() {}
+	public Player() {
+		this.card = false;
+	}
 	
-	public Player(String lastName, String firstName, PlayerStatistic playerStatistic, String position) {
+	public Player(String firstName, String lastName, PlayerStatistic playerStatistic, String position) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.playerStatistic = playerStatistic;
 		this.position = position;
+		this.card = false;
+	}
+	
+	public Player(String firstName, String lastName, PlayerStatistic playerStatistic, String position, boolean card) {
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.playerStatistic = playerStatistic;
+		this.position = position;
+		this.card = false;
 	}
 	public String getLastName() {
 		return lastName;
@@ -39,5 +51,14 @@ public class Player {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+
+	public Boolean getCard() {
+		return card;
+	}
+
+	public void setCard(Boolean card) {
+		this.card = card;
+	}
+	
 
 }

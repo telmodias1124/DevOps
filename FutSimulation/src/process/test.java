@@ -1,6 +1,11 @@
 package process;
 
+import java.awt.Frame;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import data.Match;
 import data.Player;
@@ -22,11 +27,11 @@ public class test {
 		Team bel = null, fr = null;
 		
 		GroupPhaseSimulation groupePhase = new GroupPhaseSimulation();
-		groupePhase.al=al;
-		groupePhase.simulate();
+		//groupePhase.al=al;
+		//groupePhase.simulate();
 		
 		//groupePhase.gp.getListMatchGroupA().get(0);
-		/*for(Team t : al) {
+		for(Team t : al) {
 			if(t.getTeamName().equals("Belgium")) {
 				bel = t;
 			}
@@ -46,23 +51,21 @@ public class test {
 		Match match = new Match(bel, fr);
 		MatchSimulation ms = new MatchSimulation();
 		
-		System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////////////");
-		System.out.println("Début du match entre "+match.getTeamA().getTeamName()+" et "+match.getTeamB().getTeamName());
-		
+		match.setOvertime(true);
 		ms.setGame(match);
 		ms.simulate2();
 	
-		System.out.println("Score "+match.getScoreA()+" : "+match.getScoreB());
-		System.out.println("///////////////////////////////////////////////////////////////////////////////////////////////////////");
-		
-		
+				
 		
 		for(String n : ms.getGame().alrecap) {
 			   System.out.println(n);
-		}*/
-		System.out.println(groupePhase.groupToString());
-		System.out.println(groupePhase.matchsToString());
-		System.out.println(groupePhase.standingToString());
+		}
+		
+		
+		
+		//System.out.println(groupePhase.groupToString());
+		//System.out.println(groupePhase.matchsToString());
+		//System.out.println(groupePhase.standingToString());
 		
 		/*for(String n : groupePhase.gp.getListMatchGroupC().get(2).alrecap) {
 			   System.out.println(n);

@@ -1,5 +1,6 @@
 package process;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import data.Match;
@@ -13,6 +14,7 @@ public class MatchSimulation {
 	private Random random;
 	private int nbActionEqA, nbActionEqB, diffLevel;
 	private boolean lel =false;
+	private ArrayList<Player> alPlayerStarterTeamA, alPlayerStarterTeamB, alPlayerBenchTeamA, alPlayerBenchTeamB;
 	
 	public MatchSimulation() {
 		this.random = new Random();
@@ -78,27 +80,23 @@ public class MatchSimulation {
 	
 	
 	private void overtime() {
-		this.nbActionEqA = this.nbActionEqA / 3;
-		this.nbActionEqB = this.nbActionEqB / 3;
 		
-		for(int i=0; i<this.nbActionEqA; i++) {
-			if(random.nextInt(101) + this.calLuck(-5,11) < game.getTeamA().getLvlAttack()) {
-				if(random.nextInt(101) + this.calLuck(-5,11) > game.getTeamB().getLvlDefense()) {
-					game.setScoreA(game.getScoreA()+1);
-					game.getTeamA().setGoals(game.getTeamA().getGoals() + 1);
-					//game.alrecap.add("Goal team A");
-				}
-			}
+		Player player = getRandomPlayer("A", game.getTeamB());
+		nbActionsMax = 30;
+		nbActions = 0;
+		game.alrecap.add("Début du match entre "+game.getTeamA().getTeamName()+" et "+game.getTeamB().getTeamName());
+		//Coup d'envoi aléatoire comme en vrai
+		if(random.nextInt(101) < 50) {
+			player = getRandomPlayer("A", game.getTeamA());
+			game.alrecap.add("Coup d'envoi donné par "+player.getLastName()+" pour l'équipe "+game.getTeamA().getTeamName());
+			mid(game.getTeamA(), game.getTeamB(), player);
 		}
-		for(int i=0; i<this.nbActionEqB; i++) {
-			if(random.nextInt(101) + this.calLuck(-5,11) < game.getTeamB().getLvlAttack()) {
-				if(random.nextInt(101) + this.calLuck(-5,11) > game.getTeamA().getLvlDefense()) {
-					game.setScoreB(game.getScoreB()+1);
-					game.getTeamB().setGoals(game.getTeamB().getGoals() + 1);
-					//game.alrecap.add("Goal team B");
-				}
-			}
+		else {
+			player = getRandomPlayer("A", game.getTeamB());
+			game.alrecap.add("Coup d'envoi donné par "+player.getLastName()+" pour l'équipe "+game.getTeamB().getTeamName());
+			mid(game.getTeamB(), game.getTeamA(), player);
 		}
+		
 		if(game.getScoreA() > game.getScoreB()) {
 			game.setLoser(game.getTeamB());
 			game.setWinner(game.getTeamA());
@@ -114,26 +112,48 @@ public class MatchSimulation {
 	}
 
 	private void penalty() {
+		game.alrecap.add("Egalité après les prolongations entre "+game.getTeamA().getTeamName()+" et "+game.getTeamB().getTeamName());
+		game.alrecap.add("On va passer aux pénalties");
 		int goalsA = 0, goalsB = 0, i = 0;
+		Player playerTeamA, playerTeamB;
         while (i<5 || goalsA==goalsB) {
-            if(random.nextInt(101) + this.calLuck(-5,11) < game.getTeamA().getStarter().get(i%11).getPlayerStatistic().getShoot()) {
-                if(random.nextInt(101) + this.calLuck(-5,11) < game.getTeamB().getGoalKeeper().getPlayerStatistic().getDef()) {
+        	playerTeamA = game.getTeamA().getStarter().get(10 - (i%11));
+        	playerTeamB = game.getTeamB().getStarter().get(10 - (i%11));
+        	
+            if(random.nextInt(101)  < playerTeamA.getPlayerStatistic().getShoot()+ this.calLuck(-5,11)) {
+                if(random.nextInt(51)+50  > game.getTeamB().getGoalKeeper().getPlayerStatistic().getDef()+ this.calLuck(-5,11)) {
+                	game.alrecap.add(playerTeamA.getLastName()+" marque le pénaltie");
                 	goalsA++;
                 }
-            }
-
-            if(random.nextInt(101) + this.calLuck(-5,11) < game.getTeamB().getStarter().get(i%11).getPlayerStatistic().getShoot()) {
-                if(random.nextInt(101) + this.calLuck(-5,11) < game.getTeamA().getGoalKeeper().getPlayerStatistic().getDef()) {
-                	goalsB++;
+                else {
+                	game.alrecap.add(game.getTeamB().getGoalKeeper().getLastName()+" arrête le tir");
                 }
             }
+            else {
+            	game.alrecap.add(playerTeamA.getLastName()+" tir à côté");
+            }
+
+            if(random.nextInt(101)  < playerTeamB.getPlayerStatistic().getShoot()+ this.calLuck(-5,11)) {
+                if(random.nextInt(51)+50  > game.getTeamA().getGoalKeeper().getPlayerStatistic().getDef()+ this.calLuck(-5,11)) {
+                	game.alrecap.add(playerTeamB.getLastName()+" marque le pénaltie");
+                	goalsB++;
+                }
+                else {
+                	game.alrecap.add(game.getTeamA().getGoalKeeper().getLastName()+" arrête le tir");
+                }
+            }
+            else {
+            	game.alrecap.add(playerTeamB.getLastName()+" tir à côté");
+            }	
             i++;
         }
         if(goalsA > goalsB) {
+        	game.alrecap.add("Le vainqueur du match est l'équipe "+game.getTeamA().getTeamName()+", l'équipe "+game.getTeamB().getTeamName()+" a perdu le match");
         	game.setWinner(game.getTeamA());
         	game.setLoser(game.getTeamB());
         }
         else {
+        	game.alrecap.add("Le vainqueur du match est l'équipe "+game.getTeamB().getTeamName()+", l'équipe "+game.getTeamA().getTeamName()+" a perdu le match");
         	game.setWinner(game.getTeamB());
         	game.setLoser(game.getTeamA());
         }
@@ -142,17 +162,25 @@ public class MatchSimulation {
 	}
 	
 	public void  simulate2() {
+		
+		alPlayerStarterTeamA =  (ArrayList<Player>)game.getTeamA().getStarter().clone();
+		alPlayerStarterTeamB =  (ArrayList<Player>)game.getTeamB().getStarter().clone();
+		alPlayerBenchTeamA =  (ArrayList<Player>)game.getTeamA().getBench().clone();
+		alPlayerBenchTeamB =  (ArrayList<Player>)game.getTeamB().getBench().clone();
+		Player player = getRandomPlayer("A", game.getTeamB());
 		nbActionsMax = 90;
 		nbActions = 0;
 		game.alrecap.add("Début du match entre "+game.getTeamA().getTeamName()+" et "+game.getTeamB().getTeamName());
 		//Coup d'envoi aléatoire comme en vrai
 		if(random.nextInt(101) < 50) {
-			game.alrecap.add("Coup d'envoi pour l'équipe "+game.getTeamA().getTeamName());
-			mid(game.getTeamA(), game.getTeamB());
+			player = getRandomPlayer("A", game.getTeamA());
+			game.alrecap.add("Coup d'envoi donné par "+player.getLastName()+" pour l'équipe "+game.getTeamA().getTeamName());
+			mid(game.getTeamA(), game.getTeamB(), player);
 		}
 		else {
-			game.alrecap.add("Coup d'envoi pour l'équipe "+game.getTeamB().getTeamName());
-			mid(game.getTeamB(), game.getTeamA());
+			player = getRandomPlayer("A", game.getTeamB());
+			game.alrecap.add("Coup d'envoi donné par "+player.getLastName()+" pour l'équipe "+game.getTeamB().getTeamName());
+			mid(game.getTeamB(), game.getTeamA(), player);
 		}
 		
 		if(game.getScoreA() > game.getScoreB()) {
@@ -173,42 +201,45 @@ public class MatchSimulation {
 		}
 		else {
 			if(!game.isOvertime()) {
-				game.alrecap.add("Le match fini sur une égalité entre l'équipe "+game.getTeamA().getTeamName()+" et l'équipe "+game.getTeamB().getTeamName());
+				game.alrecap.add("Le match fini sur une égalité entre l'équipe "+game.getTeamA().getTeamName()+" et l'équipe ");
 				game.setDraw(true);
 				game.getTeamA().setNbPoints(game.getTeamA().getNbPoints() + 1);
 				game.getTeamB().setNbPoints(game.getTeamB().getNbPoints() + 1);
 			}
 			else {
-				game.alrecap.add("Fin du temps réglementaire les équipes sont à égalités, prolongation à venir");
+				game.alrecap.add("Fin du temps réglementaire les équipes sont à égalités, prolongation à venir ");
 				overtime();
 			}
 		}
 	}
 	
 	
-	private void att(Team tAtt, Team tDef) {
+	private void att(Team tAtt, Team tDef, Player player) {
 		
 		if(this.nbActions>this.nbActionsMax) {
 			game.alrecap.add("Fin du match !");
-			game.alrecap.add("Score "+ tAtt.getTeamName() + ": "+ tAtt.getGoals() + " - "+tDef.getTeamName() + ": "+ tDef.getGoals());
+			game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 			game.alrecap.add("");
 			this.lel =true;
 			return;
 		}
 		else if(this.nbActions == 45) {
+			Player newPlayer;
 			game.alrecap.add("Mi_temps !");
-			game.alrecap.add("Score "+ tAtt.getTeamName() + ": "+ tAtt.getGoals() + " - "+tDef.getTeamName() + ": "+ tDef.getGoals());
+			game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 			game.alrecap.add("");
 			this.nbActions++;
 			if(random.nextInt(101) < 50) {
+				newPlayer = getRandomPlayer("A", game.getTeamA());
 				game.alrecap.add("Début de la deuxième mi-temps");
-				game.alrecap.add("L'equipe "+game.getTeamA()+" engage à son tour");
-				mid(game.getTeamA(), game.getTeamB());
+				game.alrecap.add("L'equipe "+game.getTeamA()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
+				mid(game.getTeamA(), game.getTeamB(), newPlayer);
 			}
 			else {
+				newPlayer = getRandomPlayer("A", game.getTeamB());
 				game.alrecap.add("Début de la deuxième mi-temps");
-				game.alrecap.add("L'equipe "+game.getTeamB()+" engage à son tour");
-				mid(game.getTeamB(), game.getTeamA());
+				game.alrecap.add("L'equipe "+game.getTeamB()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
+				mid(game.getTeamB(), game.getTeamA(), newPlayer);
 			}
 		}
 				
@@ -218,43 +249,46 @@ public class MatchSimulation {
 			if(r < 40) {
 				//game.alrecap.add("Fonction att, kick tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 				//game.alrecap.add("");
-				kick(tAtt, tDef, "att");
+				kick(tAtt, tDef, "att", player);
 			} else if (r < 70){
 				//game.alrecap.add("Fonction att, dribble tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 				//game.alrecap.add("");
-				dribble(tAtt, tDef, "att");
+				dribble(tAtt, tDef, "att", player);
 			} else {
 				//game.alrecap.add("Fonction att, pass tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 				//game.alrecap.add("");
-				pass(tAtt, tDef, "att");
+				pass(tAtt, tDef, "att", player);
 			}
 		}
 		
 		
 	} 
 	
-	private void mid(Team tAtt, Team tDef) {
+	private void mid(Team tAtt, Team tDef, Player player) {
 		if(this.nbActions>this.nbActionsMax) {
 			game.alrecap.add("Fin du match !");
-			game.alrecap.add("Score "+ tAtt.getTeamName() + ": "+ tAtt.getGoals() + " - "+tDef.getTeamName() + ": "+ tDef.getGoals());
+			game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 			game.alrecap.add("");
 			this.lel =true;
 			return;
 		}
 		else if(this.nbActions == 45) {
+			Player newPlayer;
 			game.alrecap.add("Mi_temps !");
-			game.alrecap.add("Score "+ tAtt.getTeamName() + ": "+ tAtt.getGoals() + " - "+tDef.getTeamName() + ": "+ tDef.getGoals());
+			game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 			game.alrecap.add("");
 			this.nbActions++;
 			if(random.nextInt(101) < 50) {
+				newPlayer = getRandomPlayer("A", game.getTeamA());
 				game.alrecap.add("Début de la deuxième mi-temps");
-				game.alrecap.add("L'equipe "+game.getTeamA()+" engage à son tour");
-				mid(game.getTeamA(), game.getTeamB());
+				game.alrecap.add("L'equipe "+game.getTeamA()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
+				mid(game.getTeamA(), game.getTeamB(), newPlayer);
 			}
 			else {
+				newPlayer = getRandomPlayer("A", game.getTeamB());
 				game.alrecap.add("Début de la deuxième mi-temps");
-				game.alrecap.add("L'equipe "+game.getTeamB()+" engage à son tour");
-				mid(game.getTeamB(), game.getTeamA());
+				game.alrecap.add("L'equipe "+game.getTeamB()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
+				mid(game.getTeamB(), game.getTeamA(), newPlayer);
 			}
 		}
 		
@@ -263,42 +297,45 @@ public class MatchSimulation {
 			if(r < 10) {
 				//game.alrecap.add("Fonction mid, kick tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 				//game.alrecap.add("");
-				kick(tAtt, tDef, "mid");
+				kick(tAtt, tDef, "mid", player);
 			} else if (r < 45){
 				//game.alrecap.add("Fonction mid, dribble tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 				//game.alrecap.add("");
-				dribble(tAtt, tDef, "mid");
+				dribble(tAtt, tDef, "mid", player);
 			} else {
 				//game.alrecap.add("Fonction mid, pass tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 				//game.alrecap.add("");
-				pass(tAtt, tDef, "mid");
+				pass(tAtt, tDef, "mid", player);
 			}
 		}
 		
 	}
 	
-	private void def(Team tAtt, Team tDef) {
+	private void def(Team tAtt, Team tDef, Player player) {
 		if(this.nbActions>this.nbActionsMax) {
 			game.alrecap.add("Fin du match !");
-			game.alrecap.add("Score "+ tAtt.getTeamName() + ": "+ tAtt.getGoals() + " - "+tDef.getTeamName() + ": "+ tDef.getGoals());
+			game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 			game.alrecap.add("");
 			this.lel =true;
 			return;
 		}
 		else if(this.nbActions == 45) {
+			Player newPlayer;
 			game.alrecap.add("Mi_temps !");
-			game.alrecap.add("Score "+ tAtt.getTeamName() + ": "+ tAtt.getGoals() + " - "+tDef.getTeamName() + ": "+ tDef.getGoals());
+			game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 			game.alrecap.add("");
 			this.nbActions++;
 			if(random.nextInt(101) < 50) {
+				newPlayer = getRandomPlayer("A", game.getTeamA());
 				game.alrecap.add("Début de la deuxième mi-temps");
-				game.alrecap.add("L'equipe "+game.getTeamA()+" engage à son tour");
-				mid(game.getTeamA(), game.getTeamB());
+				game.alrecap.add("L'equipe "+game.getTeamA()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
+				mid(game.getTeamA(), game.getTeamB(), newPlayer);
 			}
 			else {
+				newPlayer = getRandomPlayer("A", game.getTeamB());
 				game.alrecap.add("Début de la deuxième mi-temps");
-				game.alrecap.add("L'equipe "+game.getTeamB()+" engage à son tour");
-				mid(game.getTeamB(), game.getTeamA());
+				game.alrecap.add("L'equipe "+game.getTeamB()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
+				mid(game.getTeamB(), game.getTeamA(), newPlayer);
 			}
 		}
 		
@@ -307,200 +344,209 @@ public class MatchSimulation {
 			if(r < 10) {
 				//game.alrecap.add("Fonction def, kick tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 				//game.alrecap.add("");
-				kick(tAtt, tDef, "def");
+				kick(tAtt, tDef, "def", player);
 			} else if (r < 35){
 				//game.alrecap.add("Fonction def, dribble tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 				//game.alrecap.add("");
-				dribble(tAtt, tDef, "def");
+				dribble(tAtt, tDef, "def", player);
 			} else {
 				//game.alrecap.add("Fonction def, pass tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 				//game.alrecap.add("");
-				pass(tAtt, tDef, "def");
+				pass(tAtt, tDef, "def", player);
 			}
 		}
 		
 	}
 	
-	private void kick(Team tAtt, Team tDef, String position) {
+	private void kick(Team tAtt, Team tDef, String position, Player player) {
 		//game.alrecap.add("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 		//game.alrecap.add("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 		//game.alrecap.add("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 		//game.alrecap.add("Fonction kick, position "+position+" tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 		int attaquant, defense, goalKeeper;
+		Player newPlayer;
 		//this.numberLaps = this.r.nextInt(15)+35;
 		switch(position) {
 		case "att" : 
 			//Moyenne du tir de l'équipe attaquant et 1/3 millieu
-			attaquant = calculateKickAtt(tAtt, position);
+			attaquant = calculateKickAtt(tAtt, position, player);
 			//Moyenne defense de l'équipe defenseur et 1/3 millieu sans gardien
-			defense = calculateKickDef(tDef, position);
+			newPlayer = getRandomPlayer("D", tDef);
+			defense = calculateKickDef(tDef, position, newPlayer);
 			goalKeeper = calculateGoalKeeper(tDef);
 			//game.alrecap.add("ATTAQUANT : "+attaquant+" DEFENSE : "+defense);
 			//game.alrecap.add("");
 					
 			if(random.nextInt(101)  > defense + this.calLuck(-5,11)) {
 				//attaque passe la défense
-				game.alrecap.add(nbActions+"min - Tir de l'équipe "+ tAtt.getTeamName() + " contre l'équipe "+tDef.getTeamName()+" depuis la surface");
+				game.alrecap.add(nbActions+"min - Tir de "+player.getLastName()+" pour l'équipe "+ tAtt.getTeamName() + " contre l'équipe "+tDef.getTeamName()+" depuis la surface");
 				if(attaquant + this.calLuck(-5,11) > goalKeeper + this.calLuck(-5,11)) {
 					//game.alrecap.add("ATTAQUANT : "+attaquant+" GOAL : "+goalKeeper);
 					//game.alrecap.add("");
 					//but
 					game.setScore(tAtt);
 
-					game.alrecap.add(nbActions+"min - But de l'équipe "+ tAtt.getTeamName() + " !");
-					game.alrecap.add(nbActions+"min - Score "+ tAtt.getTeamName() + ": "+ tAtt.getGoals() + " - "+tDef.getTeamName() + ": "+ tDef.getGoals());
-					game.alrecap.add(nbActions+"Retour au milieu pour l'équipe "+tDef.getTeamName()+ " et engagement !");
+					game.alrecap.add(nbActions+"min - But de l'équipe "+ tAtt.getTeamName() + " marqué par "+player.getLastName());
+					game.alrecap.add(nbActions+"min - Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
+					newPlayer = getRandomPlayer("A", tDef);
+					game.alrecap.add(nbActions+"Retour au milieu pour l'équipe "+tDef.getTeamName()+ " et engagement par "+newPlayer.getLastName());
 					this.nbActions++;
 					//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-					mid(tDef, tAtt);
+					mid(tDef, tAtt, newPlayer);
 				}else {
 					if(random.nextInt(101)<50) {
 						//Gardien arrete la balle
-
-						game.alrecap.add(nbActions+"min - Arrêt du gardien pour l'équipe "+ tDef.getTeamName() + " et passe aux défenseurs");
+						newPlayer = getRandomPlayer("D", tDef);
+						game.alrecap.add(nbActions+"min - Arrêt de "+tDef.getGoalKeeper().getLastName()+" pour l'équipe "+ tDef.getTeamName() + " et passe à "+newPlayer.getLastName());
 						this.nbActions++;
-						pass(tDef, tAtt, "def");
+						pass(tDef, tAtt, "def", newPlayer);
 					}else {
 						//ballon sort corner ou 6metre
 						if(random.nextInt(101)<50) {
 							//corner
 
 							game.alrecap.add(nbActions+"min - Le gardien la touche mais le ballon sort du terrain.");
-							game.alrecap.add(nbActions+"min - Corner pour l'équipe "+ tAtt.getTeamName());
+							game.alrecap.add(nbActions+"min - Corner pour l'équipe "+ tAtt.getTeamName()+" tapé par "+player.getLastName());
 							this.nbActions++;
-							freeKick(tAtt, tDef, "att");
+							freeKick(tAtt, tDef, "att", player);
 						}else {
 							//6metre
-							game.alrecap.add(nbActions+"min - Le tireur a un pied carré, le ballon ne va même pas dans le cadre");
-							game.alrecap.add(nbActions+"min - Six mètre pour l'équipe "+ tDef.getTeamName());
+							game.alrecap.add(nbActions+"min - Le tir de "+player.getLastName()+" sort du terrain, le ballon ne va même pas dans le cadre");
+							game.alrecap.add(nbActions+"min - Six mètre tiré par "+tDef.getGoalKeeper().getLastName()+" pour l'équipe "+ tDef.getTeamName());
 							this.nbActions++;
-							freeKick(tDef, tAtt, "def");
+							freeKick(tDef, tAtt, "def", tDef.getGoalKeeper());
 						}
 					}
 				}
 			}else {
-				game.alrecap.add(nbActions+"min - Tentative de récupération du ballon par l'équipe "+ tDef.getTeamName()+" dans sa surface");
+				game.alrecap.add(nbActions+"min - Tentative de récupération du ballon par "+newPlayer.getLastName()+" pour l'équipe "+ tDef.getTeamName()+" dans sa surface");
 				if(random.nextInt(101) + this.calLuck(-5,11) > defense) {
 					//Defense recupere le ballon
 
-					game.alrecap.add(nbActions+"min - Ballon récupérer par l'équipe "+ tDef.getTeamName()+" dans sa surface");
+					game.alrecap.add(nbActions+"min - Ballon récupérer par "+newPlayer.getLastName()+" pour l'équipe "+ tDef.getTeamName()+" dans sa surface");
 					this.nbActions++;
-					def(tDef, tAtt);
+					def(tDef, tAtt, newPlayer);
 				} else {
 					
-					if(random.nextInt(101) + this.calLuck(-5,11) < 75) {
+					if(random.nextInt(101)  < 75+ this.calLuck(-5,11)) {
 						//ballon sort corner ou 6metre
 						if(random.nextInt(101)<50) {
 							//corner
-							game.alrecap.add(nbActions+"min - Le ballon est dévié par l'équipe "+ tDef.getTeamName()+" dans sa surface");
-							game.alrecap.add(nbActions+"min - Corner pour l'équipe "+ tAtt.getTeamName());
+							game.alrecap.add(nbActions+"min - Le ballon est dévié par "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName()+" dans sa surface");
+							game.alrecap.add(nbActions+"min - Corner pour l'équipe "+ tAtt.getTeamName()+" tapé par "+player.getLastName());
 							this.nbActions++;
-							freeKick(tAtt, tDef, "att");
+							freeKick(tAtt, tDef, "att", player);
 						}else {
 							//6metre
-							game.alrecap.add(nbActions+"min - Le ballon sort suite à la pression du défenseur de l'équipe "+ tDef.getTeamName());
-							game.alrecap.add(nbActions+"min - Six mètre pour l'équipe "+ tDef.getTeamName());
+							game.alrecap.add(nbActions+"min - Le ballon sort suite à la pression de "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName());
+							game.alrecap.add(nbActions+"min - Six mètre pour l'équipe "+ tDef.getTeamName()+" tapé par "+tDef.getGoalKeeper());
 							this.nbActions++;
-							freeKick(tDef, tAtt, "def");
+							freeKick(tDef, tAtt, "def", tDef.getGoalKeeper());
 						}
 					} else {
 						//faute coup franc	
-						game.alrecap.add(nbActions+"min - Faute par l'équipe "+ tDef.getTeamName());
-						game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - Faute commis par "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName());
+						getCard(newPlayer, tDef);
+						injury(player, tAtt);
+						game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName()+" tiré par "+player.getLastName());
 						this.nbActions++;
-						freeKick(tAtt, tDef, "att");
+						freeKick(tAtt, tDef, "att", player);
 					}
 				}
 			}
 			break;
 		case "mid" : 
 			//Moyenne du tir de l'équipe milieu et 1/3 atta
-			attaquant = calculateKickAtt(tAtt, position);
+			attaquant = calculateKickAtt(tAtt, position, player);
 			//Moyenne defense de l'équipe milieu et 1/3 def sans gardien
-			defense = calculateKickDef(tDef, position);
+			newPlayer = getRandomPlayer("M", tDef);
+			defense = calculateKickDef(tDef, position, newPlayer);
 			goalKeeper = calculateGoalKeeper(tDef);
 			//game.alrecap.add("ATTAQUANT : "+attaquant+" DEFENSE : "+defense);
 			//game.alrecap.add("");
 							
 			if(random.nextInt(101) > defense + this.calLuck(-5,11)) {
 				//attaque passe la défense
-				game.alrecap.add(nbActions+"min - Tir de l'équipe "+ tAtt.getTeamName() + " contre l'équipe "+tDef.getTeamName()+" depuis le milieu du terrain");
+				game.alrecap.add(nbActions+"min - Tir de "+player.getLastName()+" pour l'équipe "+ tAtt.getTeamName() + " contre l'équipe "+tDef.getTeamName()+" depuis le milieu du terrain");
 				if(attaquant + this.calLuck(-5,11) > goalKeeper + this.calLuck(-5,11)) {
 					//game.alrecap.add("ATTAQUANT : "+attaquant+" GOAL : "+goalKeeper);
 					//game.alrecap.add("");
 					//but
 					game.setScore(tAtt);
-					game.alrecap.add(nbActions+"min - But de l'équipe "+ tAtt.getTeamName() + " après une grosse frappe depuis le milieu du terrain !");
-					game.alrecap.add(nbActions+"min - Score "+ tAtt.getTeamName() + ": "+ tAtt.getGoals() + " - "+tDef.getTeamName() + ": "+ tDef.getGoals());
-					game.alrecap.add(nbActions+"Retour au milieu pour l'équipe "+tDef.getTeamName()+ " et engagement !");
+					game.alrecap.add(nbActions+"min - But de l'équipe "+ tAtt.getTeamName()+ " marqué par "+player.getLastName());
+					game.alrecap.add(nbActions+"min - Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
+					newPlayer = getRandomPlayer("A", tDef);
+					game.alrecap.add(nbActions+"Retour au milieu pour l'équipe "+tDef.getTeamName()+ " et engagement par "+newPlayer.getLastName());
 					this.nbActions++;
 					//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-					mid(tDef, tAtt);
+					mid(tDef, tAtt, newPlayer);
 				}else {
 					if(random.nextInt(101)<50) {
 						//Gardien arrete la balle
-						game.alrecap.add(nbActions+"min - Arrêt du gardien pour l'équipe "+ tDef.getTeamName() + " et passe aux défenseurs");
+						newPlayer = getRandomPlayer("D", tDef);
+						game.alrecap.add(nbActions+"min - Arrêt de "+tDef.getGoalKeeper().getLastName()+" pour l'équipe "+ tDef.getTeamName() + " et passe "+newPlayer.getLastName());
 						this.nbActions++;
-						pass(tDef, tAtt, "def");
+						pass(tDef, tAtt, "def", newPlayer);
 					}else {
 						//ballon sort corner ou 6metre
 						if(random.nextInt(101)<50) {
 							//corner
 							game.alrecap.add(nbActions+"min - Le gardien la touche mais le ballon sort du terrain.");
-							game.alrecap.add(nbActions+"min - Corner pour l'équipe "+ tAtt.getTeamName());
+							game.alrecap.add(nbActions+"min - Corner pour l'équipe "+ tAtt.getTeamName()+" tapé par "+player.getLastName());
 							this.nbActions++;
-							freeKick(tAtt, tDef, "att");
+							freeKick(tAtt, tDef, "att", player);
 						}else {
 							//6metre
-							game.alrecap.add(nbActions+"min - Le tireur a un pied carré, le ballon ne va même pas dans le cadre");
-							game.alrecap.add(nbActions+"min - Six mètre pour l'équipe "+ tDef.getTeamName());
+							game.alrecap.add(nbActions+"min - Le tir de "+player.getLastName()+" sort du terrain, le ballon ne va même pas dans le cadre");
+							game.alrecap.add(nbActions+"min - Six mètre tiré par "+tDef.getGoalKeeper().getLastName()+" pour l'équipe "+ tDef.getTeamName());
 							this.nbActions++;
-							freeKick(tDef, tAtt, "def");
+							freeKick(tDef, tAtt, "def", tDef.getGoalKeeper());
 						}
 					}
 				}
 			}else {
-				game.alrecap.add(nbActions+"min - Tentative de récupération du ballon par l'équipe "+ tDef.getTeamName()+" dans le milieu de terrain");
+				game.alrecap.add(nbActions+"min - Tentative de récupération du ballon par "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName()+" dans le milieu de terrain");
 				if(random.nextInt(101) + this.calLuck(-5,11) > defense) {
 					//Defense recupere le ballon
-					game.alrecap.add(nbActions+"min - Ballon récupérer par l'équipe "+ tDef.getTeamName()+" au milieu du terrain");
+					game.alrecap.add(nbActions+"min - Ballon récupérer par "+newPlayer.getLastName()+" pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain");
 					this.nbActions++;
-					def(tDef, tAtt);
+					mid(tDef, tAtt, newPlayer);
 				} else {
 					if(random.nextInt(101) + this.calLuck(-5,11) < 75) {
 						//ballon sort touche
 						if(random.nextInt(101)<50) {
-							//touche
-							game.alrecap.add(nbActions+"min - Le ballon est dévié par l'équipe "+ tDef.getTeamName()+" au milieu du terrain");
-							game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName());
+							game.alrecap.add(nbActions+"min - Le ballon est dévié par "+newPlayer.getLastName()+" pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain");
+							game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName()+ " par "+player.getLastName());
 							this.nbActions++;
-							pass(tAtt, tDef, "att");
+							pass(tAtt, tDef, "mid", player);
 						}else {
-							//6metre
-							game.alrecap.add(nbActions+"min - Le ballon sort suite à la pression du défenseur de l'équipe "+ tDef.getTeamName());
-							game.alrecap.add(nbActions+"min - Touche pour l'équipe"+ tDef.getTeamName());
+							game.alrecap.add(nbActions+"min - Le ballon sort suite à la pression de "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName());
+							game.alrecap.add(nbActions+"min - Touche pour l'équipe"+ tDef.getTeamName() +" par "+newPlayer.getLastName());
 							this.nbActions++;
-							pass(tDef, tAtt, "def");
+							pass(tDef, tAtt, "mid", newPlayer);
 						}
 					} else {
 						//faute coup franc	
-						game.alrecap.add(nbActions+"min - Faute par l'équipe "+ tDef.getTeamName());
-						game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - Faute commis par "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName());
+						getCard(newPlayer, tDef);
+						injury(player, tAtt);
+						game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName()+" tiré par "+player.getLastName());
 						this.nbActions++;
-						freeKick(tAtt, tDef, "att");
+						freeKick(tAtt, tDef, "mid", player);
 					}
 				}
 			}
 			break;
 		case "def" : 
 			//Moyenne du tir de l'équipe attaquant et 1/3 millieu
-			attaquant = calculateKickAtt(tAtt, position);
+			attaquant = calculateKickAtt(tAtt, position, player);
 			//Moyenne defense de l'équipe defenseur et 1/3 millieu sans gardien
-			defense = calculateKickDef(tDef, position);
+			newPlayer = getRandomPlayer("A", tDef);
+			defense = calculateKickDef(tDef, position, newPlayer);
 			
 			//On va dire que ya peu de chance quil y ai une faute sur une passe
 			if(random.nextInt(101) + this.calLuck(-5,11) <80) {
-				game.alrecap.add(nbActions+"min - Tentative de dégagement de l'équipe "+ tAtt.getTeamName()+" depuis son camp");
+				game.alrecap.add(nbActions+"min - Tentative de dégagement par "+player.getLastName()+" de l'équipe "+ tAtt.getTeamName()+" depuis son camp");
 				//On regarde si le degagement réussi
 				if(random.nextInt(101) + this.calLuck(-5,11) < attaquant) {
 					//On regarde si la defense intercepte
@@ -509,125 +555,82 @@ public class MatchSimulation {
 						if(random.nextInt(101) + this.calLuck(-5,11) < 60) {
 							//Récupération ou perte de balle a la retombé
 							if(random.nextInt(101) + this.calLuck(-5,11) < 80) {
-								game.alrecap.add(nbActions+"min - Dégagement réussi pour l'équipe "+ tAtt.getTeamName()+" il récupère le ballon au milieu du terrain");
+								newPlayer = getRandomPlayer("M", tAtt);
+								game.alrecap.add(nbActions+"min - Dégagement réussi par "+player.getLastName()+" pour l'équipe "+ tAtt.getTeamName()+", "+newPlayer.getLastName()+" récupère le ballon au milieu du terrain");
 								this.nbActions++;
 								//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-								mid(tAtt, tDef);
+								mid(tAtt, tDef,newPlayer);
 							} else {
-								game.alrecap.add(nbActions+"min - Dégagement raté pour l'équipe "+ tAtt.getTeamName()+", l'équipe "+tDef.getTeamName()+" récupère le ballon au milieu du terrain");
+								newPlayer = getRandomPlayer("M", tDef);
+								game.alrecap.add(nbActions+"min - Dégagement raté par "+player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon au milieu du terrain par "+newPlayer.getLastName()+" l'équipe "+tDef.getTeamName()+"");
 								this.nbActions++;
 								//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-								mid(tDef, tAtt);
+								mid(tDef, tAtt, newPlayer);
 							}
 						} else {
 							//Récupération ou perte de balle a la retombé
 							if(random.nextInt(101) + this.calLuck(-5,11) < 80) {
-								game.alrecap.add(nbActions+"min - Dégagement long réussi pour l'équipe "+ tAtt.getTeamName()+" il récupère le ballon en attaque");
+								newPlayer = getRandomPlayer("A", tAtt);
+								game.alrecap.add(nbActions+"min - Dégagement long réussi par "+player.getLastName()+ "pour l'équipe "+ tAtt.getTeamName()+" "+newPlayer.getLastName()+" récupère le ballon en attaque");
 								this.nbActions++;
-								att(tAtt, tDef);
+								att(tAtt, tDef, newPlayer);
 							} else {
-								game.alrecap.add(nbActions+"min - Dégagement long raté pour l'équipe "+ tAtt.getTeamName()+", l'équipe "+tDef.getTeamName()+" récupère le ballon en défense terrain");
+								newPlayer = getRandomPlayer("D", tAtt);
+								game.alrecap.add(nbActions+"min - Dégagement long raté par "+player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon en défense terrain pour "+tDef.getTeamName());
 								this.nbActions++;
-								def(tDef, tAtt);
+								def(tDef, tAtt, newPlayer);
 							}
 						}
 					}
 					else {
 						//Récupération de la balle
-						game.alrecap.add(nbActions+"min - "+tDef.getTeamName()+" récupère la balle sur le dégagement de "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - "+newPlayer.getLastName()+" récupère la balle avant le dégagement de "+ player.getLastName());
 						this.nbActions++;
-						att(tDef, tAtt);
+						att(tDef, tAtt, newPlayer);
 					}
 				}
 				else {
-					game.alrecap.add(nbActions+"min - Le ballon par vers la touche dans son camp suite au dégagement de l'équipe "+ tDef.getTeamName());
 					if(random.nextInt(101) < 50) {
 						//Touche pour def
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName()+ " dans son camp");
+						game.alrecap.add(nbActions+"min - Le ballon sort suite à la pression de "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe"+ tDef.getTeamName() +" par "+newPlayer.getLastName()+" en attaque");
 						this.nbActions++;
-						pass(tDef, tAtt, "def");
+						pass(tDef, tAtt, "att", newPlayer);
 					}
 					else {
 						//Touche pour att
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName()+" en attaque");
+						game.alrecap.add(nbActions+"min - Le ballon est dévié par "+newPlayer.getLastName()+" pour l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName()+ " par "+player.getLastName()+" dans son camp");
 						this.nbActions++;
-						pass(tAtt, tDef, "att");
+						pass(tAtt, tDef, "def", player);
 					}
 				}
 			}
 			else {
 				//Faute coup franc
-				game.alrecap.add(nbActions+"min - Faute par l'équipe "+ tDef.getTeamName());
-				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName()+" depuis son camp");
+				game.alrecap.add(nbActions+"min - Faute commis par "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName());
+				getCard(newPlayer, tDef);
+				injury(player, tAtt);
+				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName()+" tiré par "+player.getLastName()+" depuis son camp");
 				this.nbActions++;
-				freeKick(tAtt, tDef, "def");
+				freeKick(tAtt, tDef, "def", player);
 			}
 			break;
 		}
 	}
 	
 	
-	private int calculateKickAtt(Team tAtt, String position) {
-		int sumShoot1=0;
-		int sumMental1=0;
-		int sumPhysique1=0;
-		int sumShoot2=0;
-		int sumMental2=0;
-		int sumPhysique2=0;
+	private int calculateKickAtt(Team tAtt, String position, Player player) {
 		int shoot=0;
 		int mental=0;
 		int physique=0;
 		
-		switch(position) {
-		case "att" : 
-			for(Player p : tAtt.getStarter()) {
-				if(p.getPosition().equals("A")) {
-					sumShoot1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumShoot2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-				}
-			}
-			break;
-		case "mid" : 
-			for(Player p : tAtt.getStarter()) {
-				if(p.getPosition().equals("M")) {
-					sumShoot1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-				}
-				else if(p.getPosition().equals("A")) {
-					sumShoot2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-				}
-			}
-			
-			break;
-		case "def" : 
-			for(Player p : tAtt.getStarter()) {
-				if(p.getPosition().equals("D")) {
-					sumShoot1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumShoot2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-				}
-			}
-			break;
-		}
+		
 		
 		// Divide by 4 because 3 attack players and we divided 1/3 of the attack of the medium players
-		shoot = (sumShoot1 + (sumShoot2/3))/4;
-		mental = (sumMental1 + (sumMental2/3))/4;
-		physique = (sumPhysique1 + (sumPhysique2/3))/4;
+		shoot = player.getPlayerStatistic().getShoot();
+		mental = player.getPlayerStatistic().getMental();
+		physique = player.getPlayerStatistic().getPhysique();
 		//game.alrecap.add("");
 		//game.alrecap.add("SumShoot 1 : "+sumShoot1+"  SumShoot 2 : "+sumShoot2);
 		//game.alrecap.add("SumMental 1 : "+sumMental1+"  SumMental 2 : "+sumMental2);
@@ -637,79 +640,19 @@ public class MatchSimulation {
 		return ((shoot*80) + (mental*5) + (physique*15))/100;
 	}
 	
-	private int calculateKickDef(Team tDef, String position) {
-		int sumDefense1=0;
-		int sumMental1=0;
-		int sumPhysique1=0;
-		int sumPace1=0;
-		int sumDefense2=0;
-		int sumMental2=0;
-		int sumPhysique2=0;
-		int sumPace2=0;
+	private int calculateKickDef(Team tDef, String position, Player player) {
 		int defense=0;
 		int mental=0;
 		int physique=0;
 		int pace =0;
 		
-		switch(position) {
-		case "att" : 
-			for(Player p : tDef.getStarter()) {
-				if(p.getPosition().equals("D")) {
-					sumDefense1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumDefense2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			break;
-		case "mid" : 
-			for(Player p : tDef.getStarter()) {
-				if(p.getPosition().equals("M")) {
-					sumDefense1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("D")) {
-					sumDefense2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			
-			break;
-		case "def" : 
-			for(Player p : tDef.getStarter()) {
-				if(p.getPosition().equals("A")) {
-					sumDefense1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumDefense2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			
-			
-			break;
-		}
+		
 		
 		// Divide by 4 because 3 attack players and we divided 1/3 of the attack of the medium players
-		defense = (sumDefense1 + (sumDefense2/3 ))/4;
-		mental = (sumMental1 + (sumMental2/3 ))/4;
-		physique = (sumPhysique1 + (sumPhysique2/3 ))/4;
-		pace = (sumPace1 + (sumPace2/3 ))/4;
+		defense = player.getPlayerStatistic().getDef();
+		mental = player.getPlayerStatistic().getMental();
+		physique = player.getPlayerStatistic().getPhysique();
+		pace = player.getPlayerStatistic().getPace();
 		
 		
 		
@@ -732,10 +675,10 @@ public class MatchSimulation {
 		return ((defense*50) + (mental*5) + (physique*5) + (pace*40))/100;
 	}
 	
-	private void freeKick(Team tAtt, Team tDef, String position) {
+	private void freeKick(Team tAtt, Team tDef, String position, Player player) {
 		//game.alrecap.add("Fonction freeKick, position "+position+" tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 		int attaquant, defense;
-		
+		Player newPlayer;
 		switch(position) {
 		case "att" : 
 			//En attaque souvent tenter le tir direct donc j'ai mis 80 mais a voir
@@ -743,179 +686,197 @@ public class MatchSimulation {
 			game.alrecap.add("L'équipe "+tAtt.getTeamName()+" hésite en la passe et le tir");
 			if(random.nextInt(101) < 80) {
 				//Tente le tir
-				attaquant = calculateKickAtt(tAtt, position);
-				defense = calculateKickDef(tDef, position);
-				game.alrecap.add(nbActions+"min - L'équipe "+ tAtt.getTeamName() + " tente le tir direct");
+				attaquant = calculateKickAtt(tAtt, position, player);
+				newPlayer = getRandomPlayer("D", tDef);
+				defense = calculateKickDef(tDef, position, newPlayer);
+				game.alrecap.add(nbActions+"min - " + player.getLastName() + " tente le tir direct");
 				if(random.nextInt(101) > defense + this.calLuck(-5,11)) {
 					if(attaquant + this.calLuck(-5,11) > calculateGoalKeeper(tDef) + this.calLuck(-5,21)) {
 						//but
 						game.setScore(tAtt);
+						newPlayer = getRandomPlayer("A", tDef);
 						game.alrecap.add(nbActions+"min - But de l'équipe "+ tAtt.getTeamName() + " !");
-						game.alrecap.add(nbActions+"min - Score "+ tAtt.getTeamName() + ": "+ tAtt.getGoals() + " - "+tDef.getTeamName() + ": "+ tDef.getGoals());
+						game.alrecap.add("Quelle frappe enroulée de "+player.getLastName()+" sur le tir !");
+						game.alrecap.add(nbActions+"min - Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
+						game.alrecap.add("Retour au milieu pour l'équipe "+tDef.getTeamName()+ " et engagement par "+newPlayer.getLastName());
 						this.nbActions++;
 						//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-						mid(tDef, tAtt);
+						mid(tDef, tAtt, newPlayer);
 					}else {
 						
 						if(random.nextInt(101)<50) {
 							//Gardien arrete la balle
-							game.alrecap.add(nbActions+"min - Ballon arrêté par le gardion de l'équipe "+ tDef.getTeamName() + "Remet en jeu en passant aux défenseurs");
+							newPlayer = getRandomPlayer("D", tDef);
+							game.alrecap.add(nbActions+"min - Ballon arrêté par "+tDef.getGoalKeeper().getLastName()+" de l'équipe "+ tDef.getTeamName() + ", remet en jeu en passant à "+newPlayer.getLastName());
 							this.nbActions++;
-							pass(tDef, tAtt, "def");
+							pass(tDef, tAtt, "def", newPlayer);
 						}else {
-							game.alrecap.add(nbActions+"min - Le ballon sort sur le tir");
+							game.alrecap.add(nbActions+"min - Le ballon sort sur le tir de "+player.getLastName());
 							//ballon sort corner ou 6metre
 							if(random.nextInt(101)<50) {
 								//corner
-								game.alrecap.add(nbActions+"min - Corner pour l'équipe "+ tAtt.getTeamName());
+								game.alrecap.add(nbActions+"min - Le gardien la touche mais le ballon sort du terrain.");
+								game.alrecap.add(nbActions+"min - Corner pour l'équipe "+ tAtt.getTeamName()+" tiré par "+player.getLastName());
 								this.nbActions++;
-								freeKick(tAtt, tDef, "att");
+								freeKick(tAtt, tDef, "att", player);
 							}else {
 								//6metre
+								game.alrecap.add(nbActions+"min - Le tir de "+player.getLastName()+" passe totalement à côté de la cage");
 								game.alrecap.add(nbActions+"min - Six mètre pour l'équipe "+ tDef.getTeamName());
 								this.nbActions++;
-								freeKick(tDef, tAtt, "def");
+								freeKick(tDef, tAtt, "def", tDef.getGoalKeeper());
 							}
 						}
 					}
 				} else {
 					//tir va dans le mur de jouer
-					game.alrecap.add(nbActions+"min - Le tir va dans le mur de jouer l'équipe "+ tDef.getTeamName()+" récupère la balle");
+					game.alrecap.add(nbActions+"min - Le tir de "+player.getLastName()+" va dans le mur de joueur de l'équipe "+ tDef.getTeamName()+", "+newPlayer.getLastName()+" récupère la balle dans son camp");
 					this.nbActions++;
-					def(tDef, tAtt);
+					def(tDef, tAtt, newPlayer);
 				}
 				
 			} else {
 				//Fait une passe donc passe juste dans laction attaque car presque impossible de se faire intercepter la passe d'un freeKick
 				//ballon intercepté, faible chance
-				game.alrecap.add(nbActions+"min - L'équipe "+ tAtt.getTeamName() + " tente la passe");
+				game.alrecap.add(nbActions+"min - "+ player.getLastName() + " tente la passe en attaque");
 				if(random.nextInt(101)<95) {
-					game.alrecap.add(nbActions+"min - Passe réussi pour l'équipe "+ tAtt.getTeamName());
+					newPlayer = getRandomPlayer("A", tAtt);
+					game.alrecap.add(nbActions+"min - Passe réussi par "+ player.getLastName() +" à "+newPlayer.getLastName()+", ballon dans la surface");
 					this.nbActions++;
-					att(tAtt, tDef);
+					att(tAtt, tDef, newPlayer);
 				}else {
-					game.alrecap.add(nbActions+"min - Passe raté pour l'équipe "+ tAtt.getTeamName()+", l'équipe "+ tDef.getTeamName()+" récupère la balle");
+					newPlayer = getRandomPlayer("D", tDef);
+					game.alrecap.add(nbActions+"min - Passe raté par "+ player.getLastName() +", "+ newPlayer.getLastName()+" récupère la balle dans son camp");
 					this.nbActions++;
-					def(tDef, tAtt);
+					def(tDef, tAtt, newPlayer);
 				}
 				
 			}
 			break;
 		case "mid" : 
 			//Au milieu on va dire 50/50 car je sais pas trop
-			attaquant = calculateKickAtt(tAtt, position);
-			defense = calculateKickDef(tDef, position);
+			attaquant = calculateKickAtt(tAtt, position, player);
+			newPlayer = getRandomPlayer("M", tDef);
+			defense = calculateKickDef(tDef, position, newPlayer);
+			game.alrecap.add("L'équipe "+tAtt.getTeamName()+" hésite en la passe et le dégagement");
 			//Choix entre tenter tir direct ou faire une passe
 			if(random.nextInt(101) < 40) {
-				game.alrecap.add(nbActions+"min - Tentative de dégagement par l'équipe "+ tAtt.getTeamName());
+				game.alrecap.add(nbActions+"min - Tentative de dégagement depuis le milieu du terrain par "+ player.getLastName());
 				//On regarde si la passe réussi
 				if(random.nextInt(101) + this.calLuck(-5,11) < attaquant) {
 					//Récupération ou perte de balle a la retombé
 					if(random.nextInt(101)  < defense + this.calLuck(-5,11)) {
-						game.alrecap.add(nbActions+"min - Dégagement long réussi pour l'équipe "+ tAtt.getTeamName());
+						newPlayer = getRandomPlayer("A", tAtt);
+						game.alrecap.add(nbActions+"min - Dégagement long réussi par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon en attaque");
 						this.nbActions++;
-						att(tAtt, tDef);
+						att(tAtt, tDef, newPlayer);
 					} else {
-						game.alrecap.add(nbActions+"min - Dégagement long raté pour l'équipe "+ tAtt.getTeamName());
+						newPlayer = getRandomPlayer("D", tDef);
+						game.alrecap.add(nbActions+"min - Dégagement long raté par "+ player.getLastName()+", l'équipe "+tDef.getTeamName()+" récupère le ballon au milieu du terrain par l'intermédiaire de "+newPlayer.getLastName());
 						this.nbActions++;
-						def(tDef, tAtt);
+						def(tDef, tAtt, newPlayer);
 					}
 				}
 				//Passe raté
 				else {
-					game.alrecap.add(nbActions+"min - Le ballon par vers la touche suite au dégagement de l'équipe "+ tDef.getTeamName());
 					if(random.nextInt(101) < 50) {
 						//Touche pour def
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName());
+						newPlayer = getRandomPlayer("D", tDef);
+						game.alrecap.add(nbActions+"min - Le ballon sort suite à la pression de "+newPlayer.getLastName());
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe"+ tDef.getTeamName()+ " au milieu du terrain, remis en jeu par "+newPlayer.getLastName());
 						this.nbActions++;
-						pass(tDef, tAtt, "def");
+						pass(tDef, tAtt, "mid", newPlayer);
 					}
 					else {
 						//Touche pour att
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName());
+						newPlayer = getRandomPlayer("D", tDef);
+						game.alrecap.add(nbActions+"min - Le ballon est dévié par "+ newPlayer.getLastName()+" au milieu du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName()+ " au milieu du terrain, remis en jeu par "+player.getLastName());
 						this.nbActions++;
-						pass(tAtt, tDef, "att");
+						pass(tAtt, tDef, "mid", player);
 					}
 				}
-				
+								
 			} else {
 				//ballon intercepté, faible chance
-				game.alrecap.add(nbActions+"min - L'équipe "+ tAtt.getTeamName() + " tente la passe");
+				game.alrecap.add(nbActions+"min - "+ player.getLastName() + " tente la passe depuis le milieu du terrain");
 				if(random.nextInt(101)<=95) {
-					game.alrecap.add(nbActions+"min - Passe réussi pour l'équipe "+ tAtt.getTeamName());
+					newPlayer = getRandomPlayer("M", tAtt);
+					game.alrecap.add(nbActions+"min - Passe réussi par "+ player.getLastName()+ " à "+newPlayer.getLastName()+", ballon au milieu du terrain");
 					this.nbActions++;
 					//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-					mid(tAtt, tDef);
+					mid(tAtt, tDef, newPlayer);
 				}else {
-					game.alrecap.add(nbActions+"min - Passe raté pour l'équipe "+ tAtt.getTeamName()+", l'équipe "+ tDef.getTeamName()+" récupère la balle");
+					game.alrecap.add(nbActions+"min - Passe raté par "+ player.getLastName()+", "+ newPlayer.getLastName()+" récupère la balle au milieu du terrain");
 					this.nbActions++;
 					//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-					mid(tDef, tAtt);
+					mid(tDef, tAtt, newPlayer);
 				}
 			}
 			break;
 		case "def" : 
 			//Au milieu on va dire 50/50 car je sais pas trop
 			//Moyenne du tir de l'équipe attaquant et 1/3 millieu
-			attaquant = calculateKickAtt(tAtt, position);
+			attaquant = calculateKickAtt(tAtt, position, player);
 			//Moyenne defense de l'équipe defenseur et 1/3 millieu sans gardien
-			defense = calculateKickDef(tDef, position);
+			newPlayer = getRandomPlayer("A", tDef);
+			defense = calculateKickDef(tDef, position, newPlayer);
 			//Choix entre tenter tir direct ou faire une passe
 			if(random.nextInt(101) < 30) {
 				//On regarde si la passe réussi
 				if(random.nextInt(101)  < attaquant+ this.calLuck(-5,11)) {
 					//Dégagement long ou moyen
-					if(random.nextInt(101)  < 60 ) {
+					if(random.nextInt(101) < 60) {
 						//Récupération ou perte de balle a la retombé
-						if(random.nextInt(101)  < defense + this.calLuck(-5,11)) {
-							game.alrecap.add(nbActions+"min - Dégagement réussi pour l'équipe "+ tAtt.getTeamName());
+						if(random.nextInt(101) + this.calLuck(-5,11) < 80) {
+							newPlayer = getRandomPlayer("M", tAtt);
+							game.alrecap.add(nbActions+"min - Dégagement réussi par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon au milieu du terrain");
 							this.nbActions++;
 							//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-							mid(tAtt, tDef);
+							mid(tAtt, tDef, newPlayer);
 						} else {
-							game.alrecap.add(nbActions+"min - Dégagement raté pour l'équipe "+ tAtt.getTeamName());
+							newPlayer = getRandomPlayer("M", tDef);
+							game.alrecap.add(nbActions+"min - Dégagement raté par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon au milieu du terrain");
 							this.nbActions++;
 							//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-							mid(tDef, tAtt);
+							mid(tDef, tAtt, newPlayer);
 						}
 					} else {
 						//Récupération ou perte de balle a la retombé
 						if(random.nextInt(101) + this.calLuck(-5,11) < 80) {
-							game.alrecap.add(nbActions+"min - Dégagement long réussi pour l'équipe "+ tAtt.getTeamName());
+							newPlayer = getRandomPlayer("A", tAtt);
+							game.alrecap.add(nbActions+"min - Dégagement long réussi par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon en attaque");
 							this.nbActions++;
-							att(tAtt, tDef);
+							att(tAtt, tDef, newPlayer);
 						} else {
-							game.alrecap.add(nbActions+"min - Dégagement long raté pour l'équipe "+ tAtt.getTeamName());
+							newPlayer = getRandomPlayer("D", tDef);
+							game.alrecap.add(nbActions+"min - Dégagement long raté par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon en défense");
 							this.nbActions++;
-							def(tDef, tAtt);
+							def(tDef, tAtt, newPlayer);
 						}
 					}
 				}else {
-					game.alrecap.add(nbActions+"min - Le ballon par vers la touche suite au dégagement de l'équipe "+ tDef.getTeamName());
-					if(random.nextInt(101) < 50) {
-						//Touche pour def
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName());
-						this.nbActions++;
-						pass(tDef, tAtt, "def");
-					}
-					else {
-						//Touche pour att
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName());
-						this.nbActions++;
-						pass(tAtt, tDef, "att");
-					}
+					game.alrecap.add(nbActions+"min - Le ballon par vers la touche suite au dégagement de "+player.getLastName());
+					//Touche pour def
+					newPlayer = getRandomPlayer("M", tDef);
+					game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain, remis en jeu par"+newPlayer.getLastName());
+					this.nbActions++;
+					pass(tDef, tAtt, "mid", newPlayer);
+					
 				}
 				
 			} else {
+				game.alrecap.add(nbActions+"min - L'équipe "+ tAtt.getTeamName()+ " tente la passe depuis leur camp");
 				//ballon intercepté, faible chance
 				if(random.nextInt(101)<=98) {
-					game.alrecap.add(nbActions+"min - Passe réussi pour l'équipe "+ tAtt.getTeamName());
+					newPlayer = getRandomPlayer("D", tAtt);
+					game.alrecap.add(nbActions+"min - Passe réussi par "+ player.getLastName()+" à "+newPlayer.getLastName()+" ballon en défense");
 					this.nbActions++;
-					def(tAtt, tDef);
+					def(tAtt, tDef, newPlayer);
 				}else {
-					game.alrecap.add(nbActions+"min - Passe réussi pour l'équipe "+ tAtt.getTeamName());
+					game.alrecap.add(nbActions+"min - Passe raté par "+ player.getLastName()+", "+ newPlayer.getLastName()+" récupère le ballon dans la surface");
 					this.nbActions++;
-					att(tDef, tAtt);
+					att(tDef, tAtt, newPlayer);
 				}
 			}
 			break;
@@ -923,14 +884,15 @@ public class MatchSimulation {
 	}
 	
 	
-	private void pass(Team tAtt, Team tDef, String position) {
-		game.alrecap.add("Fonction pass, position "+position+" tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
+	private void pass(Team tAtt, Team tDef, String position, Player player) {
+		//game.alrecap.add("Fonction pass, position "+position+" tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 		int attaquant, defense;
+		Player newPlayer;
 		switch(position) {		
 		case "att" : 
-			attaquant = calculatePassAtt(tAtt, position);
-			defense = calculatePassDef(tDef, position);
-			
+			attaquant = calculatePassAtt(tAtt, position, player);
+			newPlayer = getRandomPlayer("D", tDef);
+			defense = calculatePassDef(tDef, position, newPlayer);
 			//On va dire que ya peu de chance quil y ai une faute sur une passe
 			if(random.nextInt(101)  < 80  + this.calLuck(-5,11)) {
 				//On regarde si la passe réussi
@@ -938,45 +900,51 @@ public class MatchSimulation {
 					//On regarde si la defense intercepte
 					if(random.nextInt(101)  > defense+ this.calLuck(-5,11)) {
 						//Passe réussi action continue
-						game.alrecap.add(nbActions+"min - Passe réussi pour l'équipe "+ tAtt.getTeamName());
+						newPlayer = getRandomPlayer("A", tAtt);
+						game.alrecap.add(nbActions+"min - Passe réussi par "+player.getLastName()+" à "+newPlayer.getLastName()+", il conserve la balle en attaque");
 						this.nbActions++;
-						att(tAtt, tDef);
+						att(tAtt, tDef, newPlayer);
 					}
 					else {
 						//Récupération de la balle
-						game.alrecap.add(nbActions+"min - Passe interceptée par l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Passe interceptée par "+ newPlayer.getLastName()+", il récupère la balle dans sa surface");
 						this.nbActions++;
-						def(tDef, tAtt);
+						def(tDef, tAtt, newPlayer);
 					}
 				}
 				else {
-					game.alrecap.add(nbActions+"min - Passe raté par l'équipe "+ tAtt.getTeamName()+" et le ballon sort du terrain");
+					
 					if(random.nextInt(101) < 50) {
 						//Touche pour def
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Passe raté par "+player.getLastName()+" et le ballon sort du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName()+" dans leur camp, remis en jeu par "+newPlayer.getLastName());
 						this.nbActions++;
-						pass(tDef, tAtt, "def");
+						pass(tDef, tAtt, "def", newPlayer);
 					}
 					else {
 						//Touche pour att
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - Passe déviée par "+ newPlayer.getLastName()+" et le ballon sort du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName()+" en attaque, remis en jeu par "+player.getLastName());
 						this.nbActions++;
-						pass(tAtt, tDef, "att");
+						pass(tAtt, tDef, "att", player);
 					}
 					
 				}
 			}
 			else {
 				//Faute coup franc
-				game.alrecap.add(nbActions+"min - Faute de l'équipe "+ tDef.getTeamName());
-				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName());
+				game.alrecap.add(nbActions+"min - "+ newPlayer.getLastName() +" tente de récupérer la balle mais commet une faute");
+				getCard(newPlayer, tDef);
+				injury(player, tAtt);
+				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName()+", "+player.getLastName()+" peut tenter de marquer");
 				this.nbActions++;
-				freeKick(tAtt, tDef, "att");
+				freeKick(tAtt, tDef, "att", player);
 			}
 			break;
 		case "mid" : 
-			attaquant = calculatePassAtt(tAtt, position);
-			defense = calculatePassDef(tDef, position);
+			attaquant = calculatePassAtt(tAtt, position, player);
+			newPlayer = getRandomPlayer("M", tDef);
+			defense = calculatePassDef(tDef, position, newPlayer);
 			
 			//On va dire que ya peu de chance quil y ai une faute sur une passe
 			if(random.nextInt(101)  < 60+ this.calLuck(-5,11)) {
@@ -985,45 +953,50 @@ public class MatchSimulation {
 					//On regarde si la defense intercepte
 					if(random.nextInt(101)  < defense+ this.calLuck(-5,11)) {
 						//Passe réussi action continue
-						game.alrecap.add(nbActions+"min - Passe réussi pour l'équipe "+ tAtt.getTeamName());
+						newPlayer = getRandomPlayer("A", tAtt);
+						game.alrecap.add(nbActions+"min - Passe réussi par "+player.getLastName()+" à "+newPlayer.getLastName()+" il passe en attaque");
 						this.nbActions++;
-						att(tAtt, tDef);
+						att(tAtt, tDef, newPlayer);
 					}
 					else {
 						//Récupération de la balle
-						game.alrecap.add(nbActions+"min - Passe interceptée par l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Passe interceptée par "+ newPlayer.getLastName()+", il récupère la balle au milieu du terrain");
 						this.nbActions++;
 						//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-						mid(tDef, tAtt);
+						mid(tDef, tAtt, newPlayer);
 					}
 				}
 				else {
-					game.alrecap.add(nbActions+"min - Passe raté par l'équipe "+ tAtt.getTeamName()+" et le ballon sort du terrain");
 					if(random.nextInt(101) < 50) {
 						//Touche pour def
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Passe raté par "+player.getLastName()+" et le ballon sort du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain remis en jeu par "+newPlayer.getLastName());
 						this.nbActions++;
-						pass(tDef, tAtt, "mid");
+						pass(tDef, tAtt, "mid", newPlayer);
 					}
 					else {
 						//Touche pour att
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - Passe déviée par l'équipe "+ newPlayer.getLastName()+" et le ballon sort du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName()+" au milieu du terrain remis en jeu par "+player.getLastName());
 						this.nbActions++;
-						pass(tAtt, tDef, "mid");
+						pass(tAtt, tDef, "mid", player);
 					}
 				}
 			}
 			else {
 				//Faute coup franc
-				game.alrecap.add(nbActions+"min - Faute de l'équipe "+ tDef.getTeamName());
-				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName());
+				game.alrecap.add(nbActions+"min - "+ newPlayer.getLastName()+" tente de récupérer la balle mais commet une faute");
+				getCard(newPlayer, tDef);
+				injury(player, tAtt);
+				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName()+", par "+player.getLastName() +" au milieu du terrain");
 				this.nbActions++;
-				freeKick(tAtt, tDef, "mid");
+				freeKick(tAtt, tDef, "mid", player);
 			}
 			break;
 		case "def" : 
-			attaquant = calculatePassAtt(tAtt, position);
-			defense = calculatePassDef(tDef, position);
+			attaquant = calculatePassAtt(tAtt, position, player);
+			newPlayer = getRandomPlayer("A", tDef);
+			defense = calculatePassDef(tDef, position, newPlayer);
 			
 			//On va dire que ya peu de chance quil y ai une faute sur une passe
 			if(random.nextInt(101)  < 80 + this.calLuck(-5,11)) {
@@ -1032,186 +1005,78 @@ public class MatchSimulation {
 					//On regarde si la defense intercepte
 					if(random.nextInt(101)  < defense+ this.calLuck(-5,11)) {
 						//Passe réussi action continue
-						game.alrecap.add(nbActions+"min - Passe réussi pour l'équipe "+ tAtt.getTeamName());
+						newPlayer = getRandomPlayer("M", tAtt);
+						game.alrecap.add(nbActions+"min - Passe réussi par "+player.getLastName()+" à "+newPlayer.getLastName()+" il passe au milieu du terrain");
 						this.nbActions++;
 						//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-						mid(tAtt, tDef);
+						mid(tAtt, tDef, newPlayer);
 					}
 					else {
 						//Récupération de la balle
-						game.alrecap.add(nbActions+"min - Passe interceptée par l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Passe interceptée par "+ newPlayer.getLastName()+" il récupère la balle et peut directement attaquer");
 						this.nbActions++;
-						att(tDef, tAtt);
+						att(tDef, tAtt, newPlayer);
 					}
 				}
 				else {
-					game.alrecap.add(nbActions+"min - Passe raté par l'équipe "+ tAtt.getTeamName()+" et le ballon sort du terrain");
 					if(random.nextInt(101) < 50) {
 						//Touche pour def
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Passe raté par "+player.getLastName()+" et le ballon sort du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName()+" en attaque remis en jeu par "+newPlayer.getLastName());
 						this.nbActions++;
-						pass(tDef, tAtt, "att");
+						pass(tDef, tAtt, "att", newPlayer);
 					}
 					else {
 						//Touche pour att
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - Passe déviée par "+ newPlayer.getLastName()+" et le ballon sort du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName()+" dans leur camp remis en jeu par "+player.getLastName());
 						this.nbActions++;
-						pass(tAtt, tDef, "def");
+						pass(tAtt, tDef, "def", player);
 					}
 				}
 			}
 			else {
 				//Faute coup franc
-				game.alrecap.add(nbActions+"min - Faute de l'équipe "+ tDef.getTeamName());
-				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName());
+				game.alrecap.add(nbActions+"min - "+ newPlayer.getLastName()+" tente de récupérer la balle mais commet une faute");
+				getCard(newPlayer, tDef);
+				injury(player, tAtt);
+				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName()+", "+player.getLastName()+" peut tenter de se dégager de son camp");
 				this.nbActions++;
-				freeKick(tAtt, tDef, "def");
+				freeKick(tAtt, tDef, "def", player);
 			}
 			break;
 		}
 	}
 	
-	private int calculatePassAtt(Team tAtt, String position) {
-		int sumPass1=0;
-		int sumMental1=0;
-		int sumPhysique1=0;
-		int sumPass2=0;
-		int sumMental2=0;
-		int sumPhysique2=0;
+	private int calculatePassAtt(Team tAtt, String position, Player player) {
 		int pass=0;
 		int mental=0;
 		int physique=0;
 		
-		switch(position) {
-		case "att" : 
-			for(Player p : tAtt.getStarter()) {
-				if(p.getPosition().equals("A")) {
-					sumPass1 += p.getPlayerStatistic().getPass();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumPass2 += p.getPlayerStatistic().getPass();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-				}
-			}
-			break;
-		case "mid" : 
-			for(Player p : tAtt.getStarter()) {
-				if(p.getPosition().equals("M")) {
-					sumPass1 += p.getPlayerStatistic().getPass();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-				}
-				else if(p.getPosition().equals("A")) {
-					sumPass2 += p.getPlayerStatistic().getPass();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-				}
-			}
-			
-			break;
-		case "def" : 
-			for(Player p : tAtt.getStarter()) {
-				if(p.getPosition().equals("D")) {
-					sumPass1 += p.getPlayerStatistic().getPass();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumPass2 += p.getPlayerStatistic().getPass();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-				}
-			}
-			break;
-		}
+		
 		
 		// Divide by 4 because 3 attack players and we divided 1/3 of the attack of the medium players
-		pass = (sumPass1 + (sumPass2/3 ))/4;
-		mental = (sumMental1 + (sumMental2/3 ))/4;
-		physique = (sumPhysique1 + (sumPhysique2/3 ))/4;
+		pass = player.getPlayerStatistic().getPass();
+		mental = player.getPlayerStatistic().getMental();
+		physique = player.getPlayerStatistic().getPhysique();
 		
 		
 		
 		return ((pass*85) + (mental*10) + (physique*5))/100;
 	}
 	
-	private int calculatePassDef(Team tDef, String position) {
-
-		int sumDefense1=0;
-		int sumMental1=0;
-		int sumPhysique1=0;
-		int sumPace1=0;
-		int sumDefense2=0;
-		int sumMental2=0;
-		int sumPhysique2=0;
-		int sumPace2=0;
+	private int calculatePassDef(Team tDef, String position, Player player) {
 		int defense=0;
 		int mental=0;
 		int physique=0;
 		int pace =0;
 		
-		switch(position) {
-		case "att" : 
-			for(Player p : tDef.getStarter()) {
-				if(p.getPosition().equals("D")) {
-					sumDefense1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumDefense2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			break;
-		case "mid" : 
-			for(Player p : tDef.getStarter()) {
-				if(p.getPosition().equals("M")) {
-					sumDefense1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("D")) {
-					sumDefense2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			
-			break;
-		case "def" : 
-			for(Player p : tDef.getStarter()) {
-				if(p.getPosition().equals("A")) {
-					sumDefense1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumDefense2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			
-			
-			break;
-		}
 		
 		// Divide by 4 because 3 attack players and we divided 1/3 of the attack of the medium players
-		defense = (sumDefense1 + (sumDefense2/3 ))/4;
-		mental = (sumMental1 + (sumMental2/3 ))/4;
-		physique = (sumPhysique1 + (sumPhysique2/3 ))/4;
-		pace = (sumPace1 + (sumPace2/3 ))/4;
+		defense = player.getPlayerStatistic().getDef();
+		mental = player.getPlayerStatistic().getMental();
+		physique = player.getPlayerStatistic().getPhysique();
+		pace = player.getPlayerStatistic().getPace();
 		
 		
 		
@@ -1219,13 +1084,15 @@ public class MatchSimulation {
 	}
 	
 	
-	private void dribble(Team tAtt, Team tDef, String position) {
-		game.alrecap.add("Fonction dribble, position "+position+" tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
+	private void dribble(Team tAtt, Team tDef, String position, Player player) {
+		//game.alrecap.add("Fonction dribble, position "+position+" tAtt "+tAtt.getTeamName()+" , tDef "+tDef.getTeamName());
 		int attaquant, defense;
+		Player newPlayer;
 		switch(position) {
 		case "att" : 
-			attaquant = calculateDribbleAtt(tAtt, position);
-			defense = calculateDribbleDef(tDef, position);
+			attaquant = calculateDribbleAtt(tAtt, position, player);
+			newPlayer = getRandomPlayer("D", tDef);
+			defense = calculateDribbleDef(tDef, position, newPlayer);
 			
 			//On va dire que ya peu de chance quil y ai une faute sur une passe
 			if(random.nextInt(101) <80  + this.calLuck(-5,11)) {
@@ -1234,44 +1101,48 @@ public class MatchSimulation {
 					//On regarde si la defense intercepte
 					if(random.nextInt(101)  > defense + this.calLuck(-5,11)) {
 						//Dribble réussi action continue
-						game.alrecap.add(nbActions+"min - Dribble réussi par l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - Dribble réussi par "+ player.getLastName()+" il conserve la balle en attaque");
 						this.nbActions++;
-						att(tAtt, tDef);
+						att(tAtt, tDef, player);
 					}
 					else {
 						//Récupération de la balle
-						game.alrecap.add(nbActions+"min - Ballon récupéré par l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Ballon récupéré par "+ newPlayer.getLastName()+" sur le dribble de "+player.getLastName()+", il récupère la balle dans sa surface");
 						this.nbActions++;
-						def(tDef, tAtt);
+						def(tDef, tAtt, newPlayer);
 					}
 				}
 				else {
-					game.alrecap.add(nbActions+"min - Dribble raté par l'équipe "+ tAtt.getTeamName()+" et le ballon sort du terrain");
 					if(random.nextInt(101) < 50) {
 						//Touche pour def
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Dribble raté par "+ player.getLastName()+" et le ballon sort du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName()+" dans leur camp remis en jeu par "+newPlayer.getLastName());
 						this.nbActions++;
-						pass(tDef, tAtt, "def");
+						pass(tDef, tAtt, "def", newPlayer);
 					}
 					else {
 						//Touche pour att
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - "+ player.getLastName()+" tente de dribbler "+newPlayer.getLastName()+" mais il sort le ballon du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName()+" en attaque remis en jeu par "+player.getLastName());
 						this.nbActions++;
-						pass(tAtt, tDef, "att");
+						pass(tAtt, tDef, "att", player);
 					}
 				}
 			}
 			else {
 				//Faute coup franc
-				game.alrecap.add(nbActions+"min - Faute de l'équipe "+ tDef.getTeamName());
-				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName());
+				game.alrecap.add(nbActions+"min - "+ newPlayer.getLastName()+" tente de récupérer la balle mais commet une faute");
+				getCard(newPlayer, tDef);
+				injury(player, tAtt);
+				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName()+", "+player.getLastName()+" peut tenter de marquer");
 				this.nbActions++;
-				freeKick(tAtt, tDef, "att");
+				freeKick(tAtt, tDef, "att", player);
 			}
 			break;
 		case "mid" : 
-			attaquant = calculateDribbleAtt(tAtt, position);
-			defense = calculateDribbleDef(tDef, position);
+			attaquant = calculateDribbleAtt(tAtt, position, player);
+			newPlayer = getRandomPlayer("M", tDef);
+			defense = calculateDribbleDef(tDef, position, newPlayer);
 			
 			//On va dire que ya peu de chance quil y ai une faute sur une passe
 			if(random.nextInt(101)  <80 + this.calLuck(-5,11)) {
@@ -1280,45 +1151,49 @@ public class MatchSimulation {
 					//On regarde si la defense intercepte
 					if(random.nextInt(101)  > defense + this.calLuck(-5,11)) {
 						//Dribble réussi action continue
-						game.alrecap.add(nbActions+"min - Dribble réussi par l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - Dribble réussi par "+ player.getLastName()+" il passe en attaque");
 						this.nbActions++;
-						att(tAtt, tDef);
+						att(tAtt, tDef, player);
 					}
 					else {
 						//Récupération de la balle
-						game.alrecap.add(nbActions+"min - Ballon récupéré par l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Ballon récupéré par "+ newPlayer.getLastName()+" sur le dribble de "+player.getLastName()+", il récupère la balle au milieu du terrain");
 						this.nbActions++;
 						//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-						mid(tDef, tAtt);
+						mid(tDef, tAtt, newPlayer);
 					}
 				}
 				else {
-					game.alrecap.add(nbActions+"min - Dribble raté par l'équipe "+ tAtt.getTeamName()+" et le ballon sort du terrain");
 					if(random.nextInt(101) < 50) {
 						//Touche pour def
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Dribble raté par "+ player.getLastName()+" et le ballon sort du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain remis en jeu par "+newPlayer.getLastName());
 						this.nbActions++;
-						pass(tDef, tAtt, "mid");
+						pass(tDef, tAtt, "mid", newPlayer);
 					}
 					else {
 						//Touche pour att
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - "+ player.getLastName()+" tente de dribbler "+newPlayer.getLastName()+" mais il sort le ballon du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName()+" au milieu du terrain remis en jeu par "+player.getLastName());
 						this.nbActions++;
-						pass(tAtt, tDef, "mid");
+						pass(tAtt, tDef, "mid", player);
 					}
 				}
 			}
 			else {
 				//Faute coup franc
-				game.alrecap.add(nbActions+"min - Faute de l'équipe "+ tDef.getTeamName());
-				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName());
+				game.alrecap.add(nbActions+"min - "+ newPlayer.getLastName()+" tente de récupérer la balle mais commet une faute");
+				getCard(newPlayer, tDef);
+				injury(player, tAtt);
+				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName()+", par "+player.getLastName() +" au milieu du terrain");
 				this.nbActions++;
-				freeKick(tAtt, tDef, "mid");
+				freeKick(tAtt, tDef, "mid", player);
 			}
 			break;
 		case "def" : 
-			attaquant = calculateDribbleAtt(tAtt, position);
-			defense = calculateDribbleDef(tDef, position);
+			attaquant = calculateDribbleAtt(tAtt, position, player);
+			newPlayer = getRandomPlayer("A", tDef);
+			defense = calculateDribbleDef(tDef, position, newPlayer);
 			
 			//On va dire que ya peu de chance quil y ai une faute sur une passe
 			if(random.nextInt(101)  <80 + this.calLuck(-5,11)) {
@@ -1327,199 +1202,304 @@ public class MatchSimulation {
 					//On regarde si la defense intercepte
 					if(random.nextInt(101)  > defense + this.calLuck(-5,11)) {
 						//Dribble réussi action continue
-						game.alrecap.add(nbActions+"min - Dribble réussi par l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - Dribble réussi par "+ player.getLastName()+" il passe au milieu");
 						this.nbActions++;
 						//game.alrecap.add("BOOLEAN -------------------------- "+this.lel);
-						mid(tAtt, tDef);
+						mid(tAtt, tDef, player);
 					}
 					else {
 						//Récupération de la balle
-						game.alrecap.add(nbActions+"min - Ballon récupéré par l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Ballon récupéré par "+ newPlayer.getLastName() +" sur le dribble de "+player.getLastName()+", il récupère la balle dans sa surface");
 						this.nbActions++;
-						att(tDef, tAtt);
+						att(tDef, tAtt, newPlayer);
 					}
 				}
 				else {
-					game.alrecap.add(nbActions+"min - Dribble raté par l'équipe "+ tAtt.getTeamName()+" et le ballon sort du terrain");
 					if(random.nextInt(101) < 50) {
 						//Touche pour def
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName());
+						game.alrecap.add(nbActions+"min - Dribble raté par "+ player.getLastName()+" et le ballon sort du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tDef.getTeamName()+" en attaque remis en jeu par "+newPlayer.getLastName());
 						this.nbActions++;
-						pass(tDef, tAtt, "att");
+						pass(tDef, tAtt, "att", newPlayer);
 					}
 					else {
 						//Touche pour att
-						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName());
+						game.alrecap.add(nbActions+"min - "+ player.getLastName()+" tente de dribbler "+newPlayer.getLastName()+" mais il sort le ballon du terrain");
+						game.alrecap.add(nbActions+"min - Touche pour l'équipe "+ tAtt.getTeamName()+" dans leur camp remis en jeu par "+player.getLastName());
 						this.nbActions++;
-						pass(tAtt, tDef, "def");
+						pass(tAtt, tDef, "def", player);
 					}
 				}
 			}
 			else {
 				//Faute coup franc
-				game.alrecap.add(nbActions+"min - Faute de l'équipe "+ tDef.getTeamName());
-				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName());
+				game.alrecap.add(nbActions+"min - "+ newPlayer.getLastName()+" tente de récupérer la balle mais commet une faute");
+				getCard(newPlayer, tDef);
+				injury(player, tAtt);
+				game.alrecap.add(nbActions+"min - Coup franc pour l'équipe "+ tAtt.getTeamName()+", "+player.getLastName()+" peut tenter de se dégager de son camp");
 				this.nbActions++;
-				freeKick(tAtt, tDef, "def");
+				freeKick(tAtt, tDef, "def", player);
 			}
 			break;
 		}
 	}
 	
-	private int calculateDribbleAtt(Team tAtt, String position) {
-		int sumDrible1=0;
-		int sumMental1=0;
-		int sumPhysique1=0;
-		int sumPace1=0;
-		int sumDrible2=0;
-		int sumMental2=0;
-		int sumPhysique2=0;
-		int sumPace2=0;
+	private int calculateDribbleAtt(Team tAtt, String position, Player player) {
 		int dribble=0;
 		int mental=0;
 		int physique=0;
 		int pace=0;
 		
-		switch(position) {
-		case "att" : 
-			for(Player p : tAtt.getStarter()) {
-				if(p.getPosition().equals("A")) {
-					sumDrible1 += p.getPlayerStatistic().getDribble();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumDrible2 += p.getPlayerStatistic().getDribble();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			break;
-		case "mid" : 
-			for(Player p : tAtt.getStarter()) {
-				if(p.getPosition().equals("M")) {
-					sumDrible1 += p.getPlayerStatistic().getDribble();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("A")) {
-					sumDrible2 += p.getPlayerStatistic().getDribble();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			
-			break;
-		case "def" : 
-			for(Player p : tAtt.getStarter()) {
-				if(p.getPosition().equals("D")) {
-					sumDrible1 += p.getPlayerStatistic().getDribble();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumDrible2 += p.getPlayerStatistic().getDribble();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			break;
-		}
-		
 		// Divide by 4 because 3 attack players and we divided 1/3 of the attack of the medium players
-		dribble = (sumDrible1 + (sumDrible2/3 ))/4;
-		mental = (sumMental1 + (sumMental2/3 ))/4;
-		physique = (sumPhysique1 + (sumPhysique2/3 ))/4;
-		pace = (sumPace1 + (sumPace2/3 ))/4;
+		dribble = player.getPlayerStatistic().getDribble();
+		mental = player.getPlayerStatistic().getMental();
+		physique = player.getPlayerStatistic().getPhysique();
+		pace = player.getPlayerStatistic().getPace();
 		
 		
 		
 		return ((dribble*80) + (mental*5) + (physique*10) + (pace*5))/100;
 	}
 	
-	private int calculateDribbleDef(Team tDef, String position) {
-		int sumDefense1=0;
-		int sumMental1=0;
-		int sumPhysique1=0;
-		int sumPace1=0;
-		int sumDefense2=0;
-		int sumMental2=0;
-		int sumPhysique2=0;
-		int sumPace2=0;
+	private int calculateDribbleDef(Team tDef, String position, Player player) {
 		int defense=0;
 		int mental=0;
 		int physique=0;
 		int pace =0;
 		
-		switch(position) {
-		case "att" : 
-			for(Player p : tDef.getStarter()) {
-				if(p.getPosition().equals("D")) {
-					sumDefense1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumDefense2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			break;
-		case "mid" : 
-			for(Player p : tDef.getStarter()) {
-				if(p.getPosition().equals("M")) {
-					sumDefense1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("D")) {
-					sumDefense2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			
-			break;
-		case "def" : 
-			for(Player p : tDef.getStarter()) {
-				if(p.getPosition().equals("A")) {
-					sumDefense1 += p.getPlayerStatistic().getShoot();
-					sumMental1 += p.getPlayerStatistic().getMental();
-					sumPhysique1 += p.getPlayerStatistic().getPhysique();
-					sumPace1 += p.getPlayerStatistic().getPace();
-				}
-				else if(p.getPosition().equals("M")) {
-					sumDefense2 += p.getPlayerStatistic().getShoot();
-					sumMental2 += p.getPlayerStatistic().getMental();
-					sumPhysique2  += p.getPlayerStatistic().getPhysique();
-					sumPace2 += p.getPlayerStatistic().getPace();
-				}
-			}
-			
-			
-			break;
-		}
 		
 		// Divide by 4 because 3 attack players and we divided 1/3 of the attack of the medium players
-		defense = (sumDefense1 + (sumDefense2/3 ))/4;
-		mental = (sumMental1 + (sumMental2/3 ))/4;
-		physique = (sumPhysique1 + (sumPhysique2/3 ))/4;
-		pace = (sumPace1 + (sumPace2/3 ))/4;
+		defense = player.getPlayerStatistic().getDef();
+		mental = player.getPlayerStatistic().getMental();
+		physique = player.getPlayerStatistic().getPhysique();
+		pace = player.getPlayerStatistic().getPace();
 		
 		
 		
 		return ((defense*75) + (mental*5) + (physique*10) + (pace*10))/100;
+	}
+	
+	private Player getRandomPlayer(String position, Team team) {
+		ArrayList<Player> def = new ArrayList<Player>();
+		ArrayList<Player> mid = new ArrayList<Player>();
+		ArrayList<Player> att = new ArrayList<Player>();
+		ArrayList<Player> alPlayer = new ArrayList<Player>();
+		Player player = new Player();
+		
+		if(team.getTeamName().equals(game.getTeamA().getTeamName())) {
+			alPlayer = alPlayerStarterTeamA;
+		}
+		else {
+			alPlayer = alPlayerStarterTeamB;
+		}
+		
+		for(Player p : alPlayer) {
+			if(p.getPosition().equals("A")) {
+				att.add(p);
+			}
+			else if(p.getPosition().equals("M")) {
+				mid.add(p);
+			}
+			else if(p.getPosition().equals("D")) {
+				def.add(p);
+			}
+		}
+		
+		/*System.out.println("///////////////////////////////////////////////////////////////////////////");
+		System.out.println("TEAM : "+team.getTeamName());
+		System.out.println(def.get(3).getFirstName());
+		System.out.println("");*/
+		
+		
+		
+		if(position.equals("A")) {
+			player = att.get(random.nextInt(att.size()));
+		}
+		else if(position.equals("M")) {
+			player = mid.get(random.nextInt(mid.size()));
+		}
+		else if(position.equals("D")) {
+			player = def.get(random.nextInt(def.size()));
+		}
+		
+		if(team.getTeamName().equals("France")) {
+			System.out.println("///////////////////////////////////////////////////////////////////////////");
+			System.out.println("PLAYER : "+player.getLastName());
+			
+		}
+		return player;
+	}
+
+	private Player getRandomBenchPlayer(String position, ArrayList<Player> al) {
+
+		ArrayList<Player> def = new ArrayList<Player>();
+		ArrayList<Player> mid = new ArrayList<Player>();
+		ArrayList<Player> att = new ArrayList<Player>();
+		Player player = new Player();
+		
+		for(Player p : al) {
+			if(p.getPosition().equals("A")) {
+				att.add(p);
+			}
+			else if(p.getPosition().equals("M")) {
+				mid.add(p);
+			}
+			else if(p.getPosition().equals("D")) {
+				def.add(p);
+			}
+		}
+		
+		
+		
+		if(position.equals("A")) {
+			player = att.get(random.nextInt(att.size()));
+		}
+		else if(position.equals("M")) {
+			player = mid.get(random.nextInt(mid.size()));
+		}
+		else if(position.equals("D")) {
+			player = def.get(random.nextInt(def.size()));
+		}
+		
+		
+		return player;
+	}
+	
+	
+	private void injury(Player player, Team team) {
+		Player newPlayer;
+		
+		if(player.getPosition().contentEquals("A")) {
+			if(random.nextInt(101) > 97) {
+				game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+				game.alrecap.add("BLESSURE");
+				game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+				if(team.getTeamName().equals(game.getTeamA().getTeamName())) {
+					alPlayerStarterTeamA.remove(player);
+					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamA);
+					alPlayerStarterTeamA.add(newPlayer);
+				}
+				else {
+					alPlayerStarterTeamB.remove(player);
+					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamB);
+					alPlayerStarterTeamB.add(newPlayer);
+				}
+			}
+		} else if(player.getPosition().contentEquals("M")) {
+			if(random.nextInt(101) > 98) {
+				game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+				game.alrecap.add("BLESSURE");
+				game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+				if(team.getTeamName().equals(game.getTeamA().getTeamName())) {
+					alPlayerStarterTeamA.remove(player);
+					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamA);
+					alPlayerStarterTeamA.add(newPlayer);
+				}
+				else {
+					alPlayerStarterTeamB.remove(player);
+					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamB);
+					alPlayerStarterTeamB.add(newPlayer);
+				}
+			}
+		} else if(player.getPosition().contentEquals("D")) {
+			if(random.nextInt(101) > 99) {
+				game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+				game.alrecap.add("BLESSURE");
+				game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+				if(team.getTeamName().equals(game.getTeamA().getTeamName())) {
+					alPlayerStarterTeamA.remove(player);
+					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamA);
+					alPlayerStarterTeamA.add(newPlayer);
+				}
+				else {
+					alPlayerStarterTeamB.remove(player);
+					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamB);
+					alPlayerStarterTeamB.add(newPlayer);
+				}
+			}
+		}
+	}
+	
+	private void getCard(Player player, Team team) {
+		ArrayList<Player> alPlayer = new ArrayList<Player>();
+		if(team.getTeamName().equals(game.getTeamA().getTeamName())) {
+			alPlayer = alPlayerStarterTeamA;
+		}
+		else {
+			alPlayer = alPlayerStarterTeamB;
+		}
+		
+		if(player.getPosition().contentEquals("A")) {
+			if(random.nextInt(101) > (player.getPlayerStatistic().getDef()+player.getPlayerStatistic().getMental())/2 + calLuck(-5, 21)) {
+				if(random.nextInt(101)>98) {
+
+					game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+					game.alrecap.add("CARTON ROUGE");
+					game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+					alPlayer.remove(player);
+				}else {
+					if(player.getCard()) {
+
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+						game.alrecap.add("CARTON ROUGE APRES JAUNE");
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+						alPlayer.remove(player);
+					}else {
+
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+						game.alrecap.add("CARTON JAUNE");
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+						player.setCard(true);
+					}
+				}
+			}
+		} else if(player.getPosition().contentEquals("M")) {
+			if(random.nextInt(101) > (player.getPlayerStatistic().getDef()+player.getPlayerStatistic().getMental())/2 + calLuck(-5, 21)) {
+				if(random.nextInt(101)>95) {
+					alPlayer.remove(player);
+					
+					game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+					game.alrecap.add("CARTON ROUGE");
+					game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+				}else {
+					if(player.getCard()) {
+						alPlayer.remove(player);
+						
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+						game.alrecap.add("CARTON ROUGE APRES JAUNE");
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+					}else {
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+						game.alrecap.add("CARTON JAUNE");
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+						player.setCard(true);
+					}
+				}
+			}
+		} else if(player.getPosition().contentEquals("D")) {
+			if(random.nextInt(101) > (player.getPlayerStatistic().getDef()+player.getPlayerStatistic().getMental())/2 + calLuck(-5, 21)) {
+				if(random.nextInt(101)>90) {
+					alPlayer.remove(player);
+					
+					game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+					game.alrecap.add("CARTON ROUGE");
+					game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+				}else {
+					if(player.getCard()) {
+						alPlayer.remove(player);
+						
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+						game.alrecap.add("CARTON ROUGE APRES JAUNE");
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+					}else {
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+						game.alrecap.add("CARTON JAUNE");
+						game.alrecap.add("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+						player.setCard(true);
+					}
+				}
+			}
+		}
 	}
 	
 	private void setNbTeamActions() {

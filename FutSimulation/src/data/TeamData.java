@@ -123,7 +123,7 @@ public class TeamData {
 
 		llPlayer.add(ClassFactory.creatPlayer("Toni","Kroos",new PlayerStatistic(80,70,90,45,81,69,r.nextInt(50)+50),"M"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Thomas","Müller",new PlayerStatistic(83,55,79,72,78,71,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Thomas","Müller",new PlayerStatistic(83,55,79,72,78,71,r.nextInt(50)+50),"A"));
 
 		llPlayer.add(ClassFactory.creatPlayer("Mesut","Ozil",new PlayerStatistic(72,24,86,70,84,56,r.nextInt(50)+50),"A"));
 
@@ -171,9 +171,9 @@ public class TeamData {
 
 		llPlayer.add(ClassFactory.creatPlayer("Mousa","Dembélé",new PlayerStatistic(68,77,77,73,87,80,r.nextInt(50)+50),"M"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Nacer","Chadli",new PlayerStatistic(73,47,74,71,76,75,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Nacer","Chadli",new PlayerStatistic(73,47,74,71,76,75,r.nextInt(50)+50),"A"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Leander","Dendoncker",new PlayerStatistic(72,78,77,67,71,83,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Leander","Dendoncker",new PlayerStatistic(72,78,77,67,71,83,r.nextInt(50)+50),"A"));
 
 		llPlayer.add(ClassFactory.creatPlayer("Romelu","Lukaku",new PlayerStatistic(82,35,73,75,72,84,r.nextInt(50)+50),"A"));
 
@@ -219,7 +219,7 @@ public class TeamData {
 
 		llPlayer.add(ClassFactory.creatPlayer("Edison","Flores",new PlayerStatistic(63,37,65,76,74,57,r.nextInt(50)+50),"M"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Pedro","Aquino",new PlayerStatistic(59,70,67,77,68,73,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Pedro","Aquino",new PlayerStatistic(59,70,67,77,68,73,r.nextInt(50)+50),"A"));
 
 		llPlayer.add(ClassFactory.creatPlayer("Paolo","Guerrero",new PlayerStatistic(62,71,64,77,72,74,r.nextInt(50)+50),"A"));
 
@@ -365,7 +365,7 @@ public class TeamData {
 
 		llPlayer.add(ClassFactory.creatPlayer("Piotr","Zielinski",new PlayerStatistic(72,70,81,81,83,61,r.nextInt(50)+50),"M"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Rafal","Kurzawa",new PlayerStatistic(65,61,72,57,71,57,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Rafal","Kurzawa",new PlayerStatistic(65,61,72,57,71,57,r.nextInt(50)+50),"A"));
 
 		llPlayer.add(ClassFactory.creatPlayer("Arkadiusz","Milik",new PlayerStatistic(85,39,64,69,76,74,r.nextInt(50)+50),"A"));
 
@@ -413,7 +413,7 @@ public class TeamData {
 
 		llPlayer.add(ClassFactory.creatPlayer("Denis","Zakaria",new PlayerStatistic(63,79,74,84,77,84,r.nextInt(50)+50),"M"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Xherdan","Shaqiri",new PlayerStatistic(77,46,81,80,85,69,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Xherdan","Shaqiri",new PlayerStatistic(77,46,81,80,85,69,r.nextInt(50)+50),"A"));
 
 		llPlayer.add(ClassFactory.creatPlayer("Breel","Embolo",new PlayerStatistic(71,39,67,75,75,75,r.nextInt(50)+50),"A"));
 
@@ -557,7 +557,7 @@ public class TeamData {
 
 		llPlayer.add(ClassFactory.creatPlayer("Dele","Alli",new PlayerStatistic(85,73,83,77,86,82,r.nextInt(50)+50),"M"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Ruben","Loftus-Cheek",new PlayerStatistic(67,62,76,70,80,79,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Ruben","Loftus-Cheek",new PlayerStatistic(67,62,76,70,80,79,r.nextInt(50)+50),"A"));
 
 		llPlayer.add(ClassFactory.creatPlayer("Harry","Kane",new PlayerStatistic(91,47,79,70,81,83,r.nextInt(50)+50),"A"));
 
@@ -653,7 +653,7 @@ public class TeamData {
 
 		llPlayer.add(ClassFactory.creatPlayer("Giovani","Lo Celso",new PlayerStatistic(78,65,82,77,84,72,r.nextInt(50)+50),"M"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Cristian","Pavon",new PlayerStatistic(76,49,75,91,78,74,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Cristian","Pavon",new PlayerStatistic(76,49,75,91,78,74,r.nextInt(50)+50),"A"));
 
 		llPlayer.add(ClassFactory.creatPlayer("Gonzalo","Higuain",new PlayerStatistic(85,31,71,63,80,71,r.nextInt(50)+50),"A"));
 
