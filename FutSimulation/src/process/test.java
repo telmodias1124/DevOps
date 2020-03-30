@@ -27,11 +27,11 @@ public class test {
 		Team bel = null, fr = null;
 		
 		GroupPhaseSimulation groupePhase = new GroupPhaseSimulation();
-		//groupePhase.al=al;
-		//groupePhase.simulate();
+		groupePhase.al=al;
+		groupePhase.simulate();
 		
-		//groupePhase.gp.getListMatchGroupA().get(0);
-		for(Team t : al) {
+		groupePhase.gp.getListMatchGroupA().get(0);
+		/*for(Team t : al) {
 			if(t.getTeamName().equals("Belgium")) {
 				bel = t;
 			}
@@ -59,13 +59,13 @@ public class test {
 		
 		for(String n : ms.getGame().alrecap) {
 			   System.out.println(n);
-		}
+		}*/
 		
 		
 		
-		//System.out.println(groupePhase.groupToString());
-		//System.out.println(groupePhase.matchsToString());
-		//System.out.println(groupePhase.standingToString());
+		System.out.println(groupePhase.groupToString());
+		System.out.println(groupePhase.matchsToString());
+		System.out.println(groupePhase.standingToString());
 		
 		/*for(String n : groupePhase.gp.getListMatchGroupC().get(2).alrecap) {
 			   System.out.println(n);
