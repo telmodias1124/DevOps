@@ -27,7 +27,7 @@ public class test {
 		Team bel = null, fr = null;
 		
 		GroupPhaseSimulation groupePhase = new GroupPhaseSimulation();
-		groupePhase.al=al;
+		groupePhase.setAlTeams(al);
 		groupePhase.simulate();
 		
 		groupePhase.gp.getListMatchGroupA().get(0);
@@ -71,19 +71,19 @@ public class test {
 			   System.out.println(n);
 		}*/
 		
-		//KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
-		//ks.setListQuarter(groupePhase.gp.getStandingGroupA(), groupePhase.gp.getStandingGroupB(), groupePhase.gp.getStandingGroupC(), groupePhase.gp.getStandingGroupD());
-		//ks.simulate();
-		//System.out.println(ks.quartersToString());
-		//System.out.println(ks.semiToString());
-		//System.out.println(ks.finalToString());
+		KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
+		ks.setListQuarter(groupePhase.gp.getStandingGroupA(), groupePhase.gp.getStandingGroupB(), groupePhase.gp.getStandingGroupC(), groupePhase.gp.getStandingGroupD());
+		ks.simulate();
+		System.out.println(ks.quartersToString());
+		System.out.println(ks.semiToString());
+		System.out.println(ks.finalToString());
 		
 		
-		//MainFrame mf = new MainFrame();
-		//mf.createGroupPhasePanel(groupePhase.gp, ks.kp);
-		//mf.createKnockout(ks.kp);
-		//mf.revalidate();
-		//mf.repaint();
+		MainFrame mf = new MainFrame();
+		mf.createGroupPhasePanel(groupePhase.gp, ks.kp);
+		//mf.createKnockout();
+		mf.revalidate();
+		mf.repaint();
 		
 		
 		

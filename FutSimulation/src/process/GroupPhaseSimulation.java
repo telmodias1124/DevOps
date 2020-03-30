@@ -12,8 +12,8 @@ public class GroupPhaseSimulation {
 	public GroupPhase gp;
 	private MatchSimulation ms;
 	private Random r;
-	public ArrayList<Team> al;
-	private ArrayList<Team> allTirage;
+	private ArrayList<Team> alTeams;
+	private ArrayList<Team> alSort;
 	
 	
 	
@@ -25,38 +25,39 @@ public class GroupPhaseSimulation {
 		this.ms = new MatchSimulation();
 		
 	}
+	
 	public void simulate() {
-		createGroups(al);
-		createMatchGroupe(gp);
+		createGroups(alTeams);
+		createMatchGroup(gp);
 		simulateMatchGroupe();
 		updateStandings();
 	}
+	
 	/* ou passer l'arraylist des equipes */
+	@SuppressWarnings("unchecked")
 	private void createGroups(ArrayList<Team> alTeams) {
-		allTirage = (ArrayList<Team>)al.clone();
+		alSort = (ArrayList<Team>)alTeams.clone();
 		int tirage;
-		for(int i=0; i<4; i++) {
-			//allTirage.get(r.nextInt(16));
+		for(int i=0; i<4; i++) {			
+			tirage = r.nextInt(alSort.size());
+			gp.getGroupA().add(alSort.get(tirage));
+			alSort.remove(tirage);
 			
-			tirage = r.nextInt(allTirage.size());
-			gp.getGroupA().add(allTirage.get(tirage));
-			allTirage.remove(tirage);
+			tirage = r.nextInt(alSort.size());
+			gp.getGroupB().add(alSort.get(tirage));
+			alSort.remove(tirage);
 			
-			tirage = r.nextInt(allTirage.size());
-			gp.getGroupB().add(allTirage.get(tirage));
-			allTirage.remove(tirage);
+			tirage = r.nextInt(alSort.size());
+			gp.getGroupC().add(alSort.get(tirage));
+			alSort.remove(tirage);
 			
-			tirage = r.nextInt(allTirage.size());
-			gp.getGroupC().add(allTirage.get(tirage));
-			allTirage.remove(tirage);
-			
-			tirage = r.nextInt(allTirage.size());
-			gp.getGroupD().add(allTirage.get(tirage));
-			allTirage.remove(tirage);
+			tirage = r.nextInt(alSort.size());
+			gp.getGroupD().add(alSort.get(tirage));
+			alSort.remove(tirage);
 		}
 	}
 	
-	private void createMatchGroupe(GroupPhase gp) {
+	private void createMatchGroup(GroupPhase gp) {
 		for(int i=0; i<4; i++) {
 			for(int j=i+1; j<4; j++) {
 				gp.getListMatchGroupA().add(new Match(gp.getGroupA().get(i),gp.getGroupA().get(j)));
@@ -66,33 +67,33 @@ public class GroupPhaseSimulation {
 
 			}
 		}
-		
 	}
 	
 	public void simulateMatchGroupe() {
 		for(int i=0; i<gp.getListMatchGroupA().size(); i++) {
 			
 			ms.setGame(gp.getListMatchGroupA().get(i));
-			ms.simulate2();
+			ms.simulate();
 			ms.setGame(gp.getListMatchGroupB().get(i));
-			ms.simulate2();
+			ms.simulate();
 			ms.setGame(gp.getListMatchGroupC().get(i));
-			ms.simulate2();
+			ms.simulate();
 			ms.setGame(gp.getListMatchGroupD().get(i));
-			ms.simulate2();
+			ms.simulate();
 			
 		}
 	}
 	
 	
 	
-	private void sortGroupByPoints(ArrayList<Team> alT, Standing s) {
+	@SuppressWarnings("unchecked")
+	private void sortGroupByPoints(ArrayList<Team> alT, Standing standing) {
 		Team t;
 		int i=0;
-		allTirage = (ArrayList<Team>)alT.clone();
-		while(allTirage.size() > 0 ) {
-			t = allTirage.get(0);
-			for(Team t2 : allTirage) {
+		alSort = (ArrayList<Team>)alT.clone();
+		while(alSort.size() > 0 ) {
+			t = alSort.get(0);
+			for(Team t2 : alSort) {
 				if (t2.getNbPoints() >= t.getNbPoints()) {
 					if(t2.getNbPoints() == t.getNbPoints()) {
 						if(t2.getGoals() > t.getGoals() ) {
@@ -106,25 +107,23 @@ public class GroupPhaseSimulation {
 			}
 			switch(i) {
 			case 0 :
-				s.setFirst(t);
+				standing.setFirst(t);
 				break;
 			case 1 :
-				s.setSecond(t);
+				standing.setSecond(t);
 				break;
 			case 2 :
-				s.setThird(t);
+				standing.setThird(t);
 				break;
 			case 3 :
-				s.setFourth(t);
+				standing.setFourth(t);
 				break;
 			default :
 				System.out.println("Erreur dans le classement");
 			}
 			i++;
-			//System.out.println("Team : " + t.getTeamName() + " points : " + t.getNbPoints());
-			allTirage.remove(t);
+			alSort.remove(t);
 		}
-		//System.out.println("");
 	}
 	
 	private void updateStandings() {
@@ -132,8 +131,6 @@ public class GroupPhaseSimulation {
 		sortGroupByPoints(this.gp.getGroupB(), this.gp.getStandingGroupB());
 		sortGroupByPoints(this.gp.getGroupC(), this.gp.getStandingGroupC());
 		sortGroupByPoints(this.gp.getGroupD(), this.gp.getStandingGroupD());
-		
-		
 	}
 	
 	
@@ -218,4 +215,46 @@ public class GroupPhaseSimulation {
 		
 		return res;
 	}
+
+	public GroupPhase getGp() {
+		return gp;
+	}
+
+	public void setGp(GroupPhase gp) {
+		this.gp = gp;
+	}
+
+	public MatchSimulation getMs() {
+		return ms;
+	}
+
+	public void setMs(MatchSimulation ms) {
+		this.ms = ms;
+	}
+
+	public Random getR() {
+		return r;
+	}
+
+	public void setR(Random r) {
+		this.r = r;
+	}
+
+	public ArrayList<Team> getAlTeams() {
+		return alTeams;
+	}
+
+	public void setAlTeams(ArrayList<Team> alTeams) {
+		this.alTeams = alTeams;
+	}
+
+	public ArrayList<Team> getAlSort() {
+		return alSort;
+	}
+
+	public void setAlSort(ArrayList<Team> alSort) {
+		this.alSort = alSort;
+	}
+	
+	
 }

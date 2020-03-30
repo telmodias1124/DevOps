@@ -8,6 +8,18 @@ public class Match {
 	private Team teamB;
 	private int scoreA;
 	private int scoreB;
+	private int totalKickA;
+	private int totalKickB;
+	private int passA;
+	private int passB;
+	private int totalPassA;
+	private int totalPassB;
+	private int nbrActionsA;
+	private int nbrActionsB;
+	private int foulsA;
+	private int foulsB;
+	private int cornersA;
+	private int cornersB;
 	private int penA;
 	private int penB;
 	private Team winner;
@@ -15,31 +27,50 @@ public class Match {
 	private boolean draw;
 	private boolean overtime;
 	private boolean penalty;
-	public String recap;
 	public ArrayList<String> alrecap = new ArrayList<String>();
 	
 	public Match() {
 		this.scoreA = 0;
 		this.scoreB = 0;
+		this.totalKickA = 0;
+		this.totalKickB = 0;
+		this.passA = 0;
+		this.passB = 0;
+		this.totalPassA = 0;
+		this.totalPassB = 0;
+		this.nbrActionsA = 0;
+		this.nbrActionsB = 0;
+		this.foulsA = 0;
+		this.foulsB = 0;
+		this.cornersA = 0;
+		this.cornersB = 0;
 		this.penA = 0;
 		this.penB = 0;
 		this.draw = false;
 		this.overtime = false;
-		this.penalty = false;
-		this.recap="";
 	}
 	
 	public Match(Team teamA, Team teamB) {
 		this.teamA = teamA;
 		this.teamB = teamB;
-		this.draw = false;
-		this.overtime = false;
-		this.penalty = false;
 		this.scoreA = 0;
 		this.scoreB = 0;
+		this.totalKickA = 0;
+		this.totalKickB = 0;
+		this.passA = 0;
+		this.passB = 0;
+		this.totalPassA = 0;
+		this.totalPassB = 0;
+		this.nbrActionsA = 0;
+		this.nbrActionsB = 0;
+		this.foulsA = 0;
+		this.foulsB = 0;
+		this.cornersA = 0;
+		this.cornersB = 0;
 		this.penA = 0;
 		this.penB = 0;
-		this.recap="";
+		this.draw = false;
+		this.overtime = false;
 	}
 	
 	public Match(Team teamA, Team teamB, int scoreA, int scoreB, Team winner, Team loser) {
@@ -51,8 +82,38 @@ public class Match {
 		this.winner = winner;
 		this.draw = false;
 		this.overtime = false;
-		this.recap="";
 	}
+	
+		public Match(Team teamA, Team teamB, int scoreA, int scoreB, int totalKickA, int totalKickB, int passA, int passB,
+			int totalPassA, int totalPassB, int nbrActionsA, int nbrActionsB, int foulsA, int foulsB, int cornersA,
+			int cornersB, int penA, int penB, Team winner, Team loser, boolean draw, boolean overtime, boolean penalty,
+			ArrayList<String> alrecap) {
+		this.teamA = teamA;
+		this.teamB = teamB;
+		this.scoreA = scoreA;
+		this.scoreB = scoreB;
+		this.totalKickA = totalKickA;
+		this.totalKickB = totalKickB;
+		this.passA = passA;
+		this.passB = passB;
+		this.totalPassA = totalPassA;
+		this.totalPassB = totalPassB;
+		this.nbrActionsA = nbrActionsA;
+		this.nbrActionsB = nbrActionsB;
+		this.foulsA = foulsA;
+		this.foulsB = foulsB;
+		this.cornersA = cornersA;
+		this.cornersB = cornersB;
+		this.penA = penA;
+		this.penB = penB;
+		this.winner = winner;
+		this.loser = loser;
+		this.draw = draw;
+		this.overtime = overtime;
+		this.penalty = penalty;
+		this.alrecap = alrecap;
+	}
+
 	public Team getTeamA() {
 		return teamA;
 	}
@@ -139,6 +200,110 @@ public class Match {
 
 	public void setPenalty(boolean penalty) {
 		this.penalty = penalty;
+	}
+
+	public int getTotalKickA() {
+		return totalKickA;
+	}
+
+	public void setTotalKickA(int totalKickA) {
+		this.totalKickA = totalKickA;
+	}
+
+	public int getTotalKickB() {
+		return totalKickB;
+	}
+
+	public void setTotalKickB(int totalKickB) {
+		this.totalKickB = totalKickB;
+	}
+
+	public int getPassA() {
+		return passA;
+	}
+
+	public void setPassA(int passA) {
+		this.passA = passA;
+	}
+
+	public int getPassB() {
+		return passB;
+	}
+
+	public void setPassB(int passB) {
+		this.passB = passB;
+	}
+
+	public int getTotalPassA() {
+		return totalPassA;
+	}
+
+	public void setTotalPassA(int totalPassA) {
+		this.totalPassA = totalPassA;
+	}
+
+	public int getTotalPassB() {
+		return totalPassB;
+	}
+
+	public void setTotalPassB(int totalPassB) {
+		this.totalPassB = totalPassB;
+	}
+
+	public int getNbrActionsA() {
+		return nbrActionsA;
+	}
+
+	public void setNbrActionsA(int nbrActionsA) {
+		this.nbrActionsA = nbrActionsA;
+	}
+
+	public int getNbrActionsB() {
+		return nbrActionsB;
+	}
+
+	public void setNbrActionsB(int nbrActionsB) {
+		this.nbrActionsB = nbrActionsB;
+	}
+
+	public int getFoulsA() {
+		return foulsA;
+	}
+
+	public void setFoulsA(int foulsA) {
+		this.foulsA = foulsA;
+	}
+
+	public int getFoulsB() {
+		return foulsB;
+	}
+
+	public void setFoulsB(int foulsB) {
+		this.foulsB = foulsB;
+	}
+
+	public int getCornersA() {
+		return cornersA;
+	}
+
+	public void setCornersA(int cornersA) {
+		this.cornersA = cornersA;
+	}
+
+	public int getCornersB() {
+		return cornersB;
+	}
+
+	public void setCornersB(int cornersB) {
+		this.cornersB = cornersB;
+	}
+
+	public ArrayList<String> getAlrecap() {
+		return alrecap;
+	}
+
+	public void setAlrecap(ArrayList<String> alrecap) {
+		this.alrecap = alrecap;
 	}
 	
 	

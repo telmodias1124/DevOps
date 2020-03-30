@@ -7,9 +7,6 @@ public class Team {
 	private String teamName;
 	private ArrayList<Player> starter;
 	private ArrayList<Player> bench;
-	private int lvlEq;
-	private int lvlAttack;
-	private int lvlDefense;
 	private int nbPoints;
 	private int goals;
 	private String flagPath;
@@ -47,30 +44,6 @@ public class Team {
 	}
 	public void setBench(ArrayList<Player> bench) {
 		this.bench = bench;
-	}
-
-	public int getLvlAttack() {
-		return lvlAttack;
-	}
-
-	public void setLvlAttack(int lvlAttack) {
-		this.lvlAttack = lvlAttack;
-	}
-
-	public int getLvlDefense() {
-		return lvlDefense;
-	}
-
-	public void setLvlDefense(int lvlDefense) {
-		this.lvlDefense = lvlDefense;
-	}
-
-	public int getLvlEq() {
-		return lvlEq;
-	}
-
-	public void setLvlEq(int lvlEq) {
-		this.lvlEq = lvlEq;
 	}
 
 	public int getNbPoints() {

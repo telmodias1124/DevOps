@@ -6,18 +6,15 @@ public class Standing {
 
 	private Team first, second, third, fourth;
 	
-	private HashMap<Team, Integer> hm;
 	
 	public Standing() {
-		this.hm =  new HashMap<Team, Integer>();
 	}
 
-	public Standing(Team first, Team second, Team third, Team fourth, HashMap<Team, Integer> hm) {
+	public Standing(Team first, Team second, Team third, Team fourth) {
 		this.first = first;
 		this.second = second;
 		this.third = third;
 		this.fourth = fourth;
-		this.hm = hm;
 	}
 
 	public Team getFirst() {
@@ -57,18 +54,6 @@ public class Standing {
 		this.second = second;
 		this.third = third;
 		this.fourth = fourth;
-	}
-	
-	
-	public HashMap<Team, Integer> getHm() {
-		return hm;
-	}
-
-	public void setHm(HashMap<Team, Integer> hm) {
-		this.hm = hm;
-	}
-
-	
-	
+	}	
 	
 }
