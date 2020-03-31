@@ -11,8 +11,11 @@ import javax.swing.JPanel;
 import data.GroupPhase;
 import data.KnockoutPhase;
 import data.Match;
+import data.Team;
 import gui.GroupGUI.GroupPhasePanel;
 import gui.Knockout.KnockoutPanel;
+import gui.MatchView.MatchView;
+import listener.Mouse;
 
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 2230254401958956708L;
@@ -22,16 +25,12 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame() {
 		super("FutSimulation");
+		this.addMouseListener(new Mouse());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(new Dimension(GlobalParameter.MAINFRAME_WIDTH,GlobalParameter.MAINFRAME_HEIGHT));
 		//this.setLayout(new GridLayout(2,1));
 		this.setMinimumSize(new Dimension(GlobalParameter.MAINFRAME_WIDTH,GlobalParameter.MAINFRAME_HEIGHT));
 		this.getContentPane().setBackground(Color.GRAY);
-		
-		
-		
-		
-		
 		
 		this.pack();
 		this.setVisible(true);
@@ -49,5 +48,10 @@ public class MainFrame extends JFrame {
 		KnockoutPanel knp = new KnockoutPanel(this.kp, this);
 		knp.drawQuarters();
 		this.add(knp);
+	}
+	
+	public void createMatchView(Match m) {
+		MatchView mv = new MatchView(m, this);
+		this.add(mv);
 	}
 }

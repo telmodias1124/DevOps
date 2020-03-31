@@ -622,8 +622,4 @@ public class KnockoutPanel extends JPanel{
 			this.stage++;
 		}
 	}
-	
-	
-	
-
 }

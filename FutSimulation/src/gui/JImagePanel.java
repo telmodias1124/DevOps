@@ -12,6 +12,8 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import listener.Mouse;
+
 public class JImagePanel extends JPanel {
 	
 	private static final long serialVersionUID = -5804186432308558412L;
@@ -40,6 +42,7 @@ public class JImagePanel extends JPanel {
     }
     catch (Exception e) { /*handled in paintComponent()*/ }
   	}
+	
 	public JImagePanel(String path, String name, String score, boolean onlyRec) {
 		this.name = name;
 		this.score = score;
@@ -49,6 +52,11 @@ public class JImagePanel extends JPanel {
     }
     catch (Exception e) { /*handled in paintComponent()*/ }
   	}
+	
+	/*public JImagePanel(String name, int i) {
+		this.addMouseListener(new Mouse());
+		this.set
+	}*/
  
   @Override
   protected void paintComponent(Graphics g){
