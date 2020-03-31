@@ -20,10 +20,6 @@ public class ClassFactory {
 		return new Match(teamA, teamB, scoreA, scoreB, winner, loser);
 	}
 	
-	public static TeamManager creatTeamManager(ArrayList<Team> listTeam, int nbrTeam) {
-		return new TeamManager( listTeam, nbrTeam);
-	}
-	
 	public static GroupPhase creatGroupPhase(ArrayList<Team> groupA, ArrayList<Team> groupB, ArrayList<Team> groupC, ArrayList<Team> groupD,
 			ArrayList<Match> listMatchGroupA, ArrayList<Match> listMatchGroupB, ArrayList<Match> listMatchGroupC,
 			ArrayList<Match> listMatchGroupD) {

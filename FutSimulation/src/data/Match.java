@@ -209,6 +209,10 @@ public class Match {
 	public void setTotalKickA(int totalKickA) {
 		this.totalKickA = totalKickA;
 	}
+	
+	public void incrementTotalKickA() {
+		this.totalKickA++;
+	}
 
 	public int getTotalKickB() {
 		return totalKickB;
@@ -216,6 +220,10 @@ public class Match {
 
 	public void setTotalKickB(int totalKickB) {
 		this.totalKickB = totalKickB;
+	}
+	
+	public void incrementTotalKickB() {
+		this.totalKickB++;
 	}
 
 	public int getPassA() {
@@ -225,6 +233,10 @@ public class Match {
 	public void setPassA(int passA) {
 		this.passA = passA;
 	}
+	
+	public void incrementPassA() {
+		this.passA++;
+	}
 
 	public int getPassB() {
 		return passB;
@@ -233,6 +245,10 @@ public class Match {
 	public void setPassB(int passB) {
 		this.passB = passB;
 	}
+	
+	public void incrementPassB() {
+		this.passB++;
+	}
 
 	public int getTotalPassA() {
 		return totalPassA;
@@ -240,6 +256,10 @@ public class Match {
 
 	public void setTotalPassA(int totalPassA) {
 		this.totalPassA = totalPassA;
+	}
+	
+	public void incrementTotalPassA() {
+		this.totalPassA++;
 	}
 
 	public int getTotalPassB() {
@@ -250,12 +270,20 @@ public class Match {
 		this.totalPassB = totalPassB;
 	}
 
+	public void incrementTotalPassB() {
+		this.totalPassB++;
+	}
+	
 	public int getNbrActionsA() {
 		return nbrActionsA;
 	}
 
 	public void setNbrActionsA(int nbrActionsA) {
 		this.nbrActionsA = nbrActionsA;
+	}
+	
+	public void incrementNbrActionsA() {
+		this.nbrActionsA++;
 	}
 
 	public int getNbrActionsB() {
@@ -265,6 +293,10 @@ public class Match {
 	public void setNbrActionsB(int nbrActionsB) {
 		this.nbrActionsB = nbrActionsB;
 	}
+	
+	public void incrementNbrActionsB() {
+		this.nbrActionsB++;
+	}
 
 	public int getFoulsA() {
 		return foulsA;
@@ -272,6 +304,10 @@ public class Match {
 
 	public void setFoulsA(int foulsA) {
 		this.foulsA = foulsA;
+	}
+	
+	public void incrementFoulsA() {
+		this.foulsA++;
 	}
 
 	public int getFoulsB() {
@@ -281,6 +317,10 @@ public class Match {
 	public void setFoulsB(int foulsB) {
 		this.foulsB = foulsB;
 	}
+	
+	public void incrementFoulsB() {
+		this.foulsB++;
+	}
 
 	public int getCornersA() {
 		return cornersA;
@@ -289,6 +329,10 @@ public class Match {
 	public void setCornersA(int cornersA) {
 		this.cornersA = cornersA;
 	}
+	
+	public void incrementCornersA() {
+		this.cornersA++;
+	}
 
 	public int getCornersB() {
 		return cornersB;
@@ -296,6 +340,10 @@ public class Match {
 
 	public void setCornersB(int cornersB) {
 		this.cornersB = cornersB;
+	}
+	
+	public void incrementCornersB() {
+		this.cornersB++;
 	}
 
 	public ArrayList<String> getAlrecap() {
