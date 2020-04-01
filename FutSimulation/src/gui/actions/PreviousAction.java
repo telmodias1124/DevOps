@@ -18,7 +18,7 @@ public class PreviousAction implements ActionListener {
 		mf.getContentPane().removeAll();
 		mf.add(mf.getGpp().getSp());
 		mf.add(mf.getGpp().getMp());
-		mf.createGroupPhasePanel(mf.getGp(), mf.getKp());
+		//mf.createGroupPhasePanel(mf.getGp(), mf.getKp());
 		mf.revalidate();
 		mf.repaint();
 		mf.setVisible(true);

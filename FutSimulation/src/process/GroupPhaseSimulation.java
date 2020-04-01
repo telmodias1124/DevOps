@@ -57,7 +57,7 @@ public class GroupPhaseSimulation {
 		}
 	}
 	
-	private void createMatchGroup(GroupPhase gp) {
+	public void createMatchGroup(GroupPhase gp) {
 		for(int i=0; i<4; i++) {
 			for(int j=i+1; j<4; j++) {
 				gp.getListMatchGroupA().add(new Match(gp.getGroupA().get(i),gp.getGroupA().get(j)));
@@ -126,7 +126,7 @@ public class GroupPhaseSimulation {
 		}
 	}
 	
-	private void updateStandings() {
+	public void updateStandings() {
 		sortGroupByPoints(this.gp.getGroupA(), this.gp.getStandingGroupA());
 		sortGroupByPoints(this.gp.getGroupB(), this.gp.getStandingGroupB());
 		sortGroupByPoints(this.gp.getGroupC(), this.gp.getStandingGroupC());
