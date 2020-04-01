@@ -37,4 +37,22 @@ public class GroupPhasePanel extends JPanel{
 		this.add(mp);
 		
 	}
+
+	public StandingPanel getSp() {
+		return sp;
+	}
+
+	public void setSp(StandingPanel sp) {
+		this.sp = sp;
+	}
+
+	public GamePanel getMp() {
+		return mp;
+	}
+
+	public void setMp(GamePanel mp) {
+		this.mp = mp;
+	}
+	
+	
 }

@@ -81,7 +81,7 @@ public class test {
 		
 		MainFrame mf = new MainFrame();
 		mf.createGroupPhasePanel(groupePhase.gp, ks.kp);
-		mf.createMatchView(groupePhase.gp.getListMatchGroupA().get(0));
+		//mf.createMatchView(groupePhase.gp.getListMatchGroupA().get(0));
 		//mf.createKnockout();
 		mf.revalidate();
 		mf.repaint();

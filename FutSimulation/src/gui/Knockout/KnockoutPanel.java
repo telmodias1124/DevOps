@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.LinkedList;
 
@@ -25,6 +27,7 @@ import gui.JLinePanel;
 import gui.MainFrame;
 import gui.actions.ExitAction;
 import gui.actions.NextAction;
+import gui.actions.PreviousAction;
 
 public class KnockoutPanel extends JPanel{
 	private GridBagConstraints c;
@@ -83,6 +86,18 @@ public class KnockoutPanel extends JPanel{
 				  JImagePanel jip0;
 				  if(this.stage > 1) {
 					  jip0 = new JImagePanel(kp.getListQuarter().get(0).getTeamA().getFlagPath(), kp.getListQuarter().get(0).getTeamA().getTeamName(), score(kp.getListQuarter().get(0),1));
+					  jip0.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	System.out.println("Ca moche pas");
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListQuarter().get(0).getTeamA().getTeamName()+" - "+kp.getListQuarter().get(0).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListQuarter().get(0)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip0 = new JImagePanel(kp.getListQuarter().get(0).getTeamA().getFlagPath(), kp.getListQuarter().get(0).getTeamA().getTeamName(), null);			 
@@ -106,7 +121,19 @@ public class KnockoutPanel extends JPanel{
 				  JImagePanel jip10;
 				  if(this.stage > 1) {
 					  jip10 = new JImagePanel(kp.getListQuarter().get(2).getTeamA().getFlagPath(), kp.getListQuarter().get(2).getTeamA().getTeamName(), score(kp.getListQuarter().get(2),1));
+					  jip10.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListQuarter().get(2).getTeamA().getTeamName()+" - "+kp.getListQuarter().get(2).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListQuarter().get(2)));
+			                	
+
+			                }  
+			            });
 				  }
+				  
 				  else {
 					  jip10 = new JImagePanel(kp.getListQuarter().get(2).getTeamA().getFlagPath(), kp.getListQuarter().get(2).getTeamA().getTeamName(), null);
 				  }
@@ -123,11 +150,22 @@ public class KnockoutPanel extends JPanel{
 				  JImagePanel jip13;
 				  if(this.stage == 2) {
 					  jip13 = new JImagePanel(kp.getListSemi().get(0).getTeamA().getFlagPath(), kp.getListSemi().get(0).getTeamA().getTeamName(), null);
-
+					  
 				  }
 				  else if(this.stage >= 3 ) {
 					  jip13 = new JImagePanel(kp.getListSemi().get(0).getTeamA().getFlagPath(), kp.getListSemi().get(0).getTeamA().getTeamName(), score(kp.getListSemi().get(0),1));
 					  //JLabel scoreLabel13 = new JLabel(kp.getListQuarter().get(0).getWinner().getTeamName(), SwingConstants.CENTER);
+					  jip13.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListSemi().get(0).getTeamA().getTeamName()+" - "+kp.getListSemi().get(0).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListSemi().get(0)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip13 = new JImagePanel(kp.getListSemi().get(0).getTeamA().getFlagPath(), kp.getListSemi().get(0).getTeamA().getTeamName(), score(kp.getListSemi().get(0),1),true);
@@ -153,7 +191,18 @@ public class KnockoutPanel extends JPanel{
 				  }
 				  else if(this.stage >= 3 ) {
 					  jip19 = new JImagePanel(kp.getListSemi().get(1).getTeamA().getFlagPath(), kp.getListSemi().get(1).getTeamA().getTeamName(), score(kp.getListSemi().get(1),1));
-					  //JLabel scoreLabel19 = new JLabel(kp.getListQuarter().get(2).getWinner().getTeamName(), SwingConstants.CENTER);	  
+					  //JLabel scoreLabel19 = new JLabel(kp.getListQuarter().get(2).getWinner().getTeamName(), SwingConstants.CENTER);	
+					  jip19.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListSemi().get(1).getTeamA().getTeamName()+" - "+kp.getListSemi().get(1).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListSemi().get(1)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip19 = new JImagePanel(kp.getListSemi().get(1).getTeamA().getFlagPath(), kp.getListSemi().get(1).getTeamA().getTeamName(), score(kp.getListSemi().get(1),1),true);
@@ -169,7 +218,18 @@ public class KnockoutPanel extends JPanel{
 			  case 22:
 				  JImagePanel jip22;
 				  if(this.stage > 1 ) {
-					  jip22 = new JImagePanel(kp.getListQuarter().get(0).getTeamB().getFlagPath(), kp.getListQuarter().get(0).getTeamB().getTeamName(), score(kp.getListQuarter().get(0),0));	
+					  jip22 = new JImagePanel(kp.getListQuarter().get(0).getTeamB().getFlagPath(), kp.getListQuarter().get(0).getTeamB().getTeamName(), score(kp.getListQuarter().get(0),0));
+					  jip22.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListQuarter().get(0).getTeamA().getTeamName()+" - "+kp.getListQuarter().get(0).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListQuarter().get(0)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip22 = new JImagePanel(kp.getListQuarter().get(0).getTeamB().getFlagPath(), kp.getListQuarter().get(0).getTeamB().getTeamName(), null);
@@ -219,7 +279,17 @@ public class KnockoutPanel extends JPanel{
 				  JImagePanel jip32;
 				  if(this.stage > 1) {
 					  jip32 = new JImagePanel(kp.getListQuarter().get(2).getTeamB().getFlagPath(), kp.getListQuarter().get(2).getTeamB().getTeamName(), score(kp.getListQuarter().get(2),0));
-						 
+					  jip32.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListQuarter().get(2).getTeamA().getTeamName()+" - "+kp.getListQuarter().get(2).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListQuarter().get(2)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip32 = new JImagePanel(kp.getListQuarter().get(2).getTeamB().getFlagPath(), kp.getListQuarter().get(2).getTeamB().getTeamName(), null);
@@ -242,7 +312,19 @@ public class KnockoutPanel extends JPanel{
 				  else if(this.stage >= 4) {
 					  jip37 = new JImagePanel(kp.getFinalMatch().getTeamA().getFlagPath(), kp.getFinalMatch().getTeamA().getTeamName(), score(kp.getFinalMatch(),1));
 					  //JLabel scoreLabel37 = new JLabel(kp.getListSemi().get(0).getWinner().getTeamName(), SwingConstants.CENTER);
+					  jip37.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getFinalMatch().getTeamA().getTeamName()+" - "+kp.getFinalMatch().getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getFinalMatch()));
+			                	
+
+			                }  
+			            });
 				  }
+				  
 				  else {
 					  jip37 = new JImagePanel(kp.getFinalMatch().getTeamA().getFlagPath(), kp.getFinalMatch().getTeamA().getTeamName(), score(kp.getFinalMatch(),1),true);
 				  }
@@ -262,6 +344,17 @@ public class KnockoutPanel extends JPanel{
 				  else if(this.stage >= 4) {
 					  jip39 = new JImagePanel(kp.getFinalMatch().getTeamB().getFlagPath(), kp.getFinalMatch().getTeamB().getTeamName(), score(kp.getFinalMatch(),0));
 					  //JLabel scoreLabel39 = new JLabel(kp.getListSemi().get(1).getWinner().getTeamName(), SwingConstants.CENTER);
+					  jip39.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getFinalMatch().getTeamA().getTeamName()+" - "+kp.getFinalMatch().getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getFinalMatch()));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip39 = new JImagePanel(kp.getFinalMatch().getTeamB().getFlagPath(), kp.getFinalMatch().getTeamB().getTeamName(), score(kp.getFinalMatch(),0),true);
@@ -278,7 +371,17 @@ public class KnockoutPanel extends JPanel{
 				  JImagePanel jip44;
 				  if(this.stage > 1 ) {
 					  jip44 = new JImagePanel(kp.getListQuarter().get(1).getTeamA().getFlagPath(), kp.getListQuarter().get(1).getTeamA().getTeamName(), score(kp.getListQuarter().get(1),1));
-						
+					  jip44.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListQuarter().get(1).getTeamA().getTeamName()+" - "+kp.getListQuarter().get(1).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListQuarter().get(1)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip44 = new JImagePanel(kp.getListQuarter().get(1).getTeamA().getFlagPath(), kp.getListQuarter().get(1).getTeamA().getTeamName(),null);
@@ -312,6 +415,17 @@ public class KnockoutPanel extends JPanel{
 				  JImagePanel jip54;
 				  if(this.stage > 1) {
 					  jip54 = new JImagePanel(kp.getListQuarter().get(3).getTeamA().getFlagPath(), kp.getListQuarter().get(3).getTeamA().getTeamName(), score(kp.getListQuarter().get(3),1));
+					  jip54.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListQuarter().get(3).getTeamA().getTeamName()+" - "+kp.getListQuarter().get(3).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListQuarter().get(3)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip54 = new JImagePanel(kp.getListQuarter().get(3).getTeamA().getFlagPath(), kp.getListQuarter().get(3).getTeamA().getTeamName(), null);
@@ -335,6 +449,17 @@ public class KnockoutPanel extends JPanel{
 				  else if(this.stage >= 3) {
 					  jip57 = new JImagePanel(kp.getListSemi().get(0).getTeamB().getFlagPath(), kp.getListSemi().get(0).getTeamB().getTeamName(), score(kp.getListSemi().get(0),0));
 					  //JLabel scoreLabel57 = new JLabel(kp.getListQuarter().get(1).getWinner().getTeamName(), SwingConstants.CENTER);
+					  jip57.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListSemi().get(0).getTeamA().getTeamName()+" - "+kp.getListSemi().get(0).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListSemi().get(0)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip57 = new JImagePanel(kp.getListSemi().get(0).getTeamB().getFlagPath(), kp.getListSemi().get(0).getTeamB().getTeamName(), score(kp.getListSemi().get(0),0),true);
@@ -360,6 +485,17 @@ public class KnockoutPanel extends JPanel{
 				  else if(this.stage >= 3) {
 					  jip63 = new JImagePanel(kp.getListSemi().get(1).getTeamB().getFlagPath(), kp.getListSemi().get(1).getTeamB().getTeamName(), score(kp.getListSemi().get(0),0));
 					  //JLabel scoreLabel63 = new JLabel(kp.getListQuarter().get(3).getWinner().getTeamName(), SwingConstants.CENTER); 
+					  jip63.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListSemi().get(1).getTeamA().getTeamName()+" - "+kp.getListSemi().get(1).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListSemi().get(1)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip63 = new JImagePanel(kp.getListSemi().get(1).getTeamB().getFlagPath(), kp.getListSemi().get(1).getTeamB().getTeamName(), score(kp.getListSemi().get(0),0),true);
@@ -376,7 +512,17 @@ public class KnockoutPanel extends JPanel{
 				  JImagePanel jip66;
 				  if(this.stage > 1) {
 					  jip66 = new JImagePanel(kp.getListQuarter().get(1).getTeamB().getFlagPath(), kp.getListQuarter().get(1).getTeamB().getTeamName(), score(kp.getListQuarter().get(1),0));
-						
+					  jip66.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListQuarter().get(1).getTeamA().getTeamName()+" - "+kp.getListQuarter().get(1).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListQuarter().get(1)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip66 = new JImagePanel(kp.getListQuarter().get(1).getTeamB().getFlagPath(), kp.getListQuarter().get(1).getTeamB().getTeamName(), null);
@@ -400,7 +546,17 @@ public class KnockoutPanel extends JPanel{
 				  JImagePanel jip76;
 				  if(this.stage > 1 ) {
 					  jip76 = new JImagePanel(kp.getListQuarter().get(3).getTeamB().getFlagPath(), kp.getListQuarter().get(3).getTeamB().getTeamName(), score(kp.getListQuarter().get(3),0));
-						
+					  jip76.addMouseListener(new MouseAdapter()  
+			            {  
+			                public void mouseClicked(MouseEvent e)  
+			                {  
+			                	MainFrame frameMatch = new MainFrame();
+			                	frameMatch.setTitle(kp.getListQuarter().get(3).getTeamA().getTeamName()+" - "+kp.getListQuarter().get(3).getTeamB().getTeamName());
+			                	frameMatch.createMatchView((kp.getListQuarter().get(3)));
+			                	
+
+			                }  
+			            });
 				  }
 				  else {
 					  jip76 = new JImagePanel(kp.getListQuarter().get(3).getTeamB().getFlagPath(), kp.getListQuarter().get(3).getTeamB().getTeamName(), null);
@@ -411,6 +567,30 @@ public class KnockoutPanel extends JPanel{
 				  this.add(jip76);
 			    break;
 			  case 81:
+                  JPanel p1 = new JPanel();
+                  p1.setOpaque(false);
+                
+                 // BufferedImage buttonIcon = null;
+                  JButton jbPrev = new JButton();
+                  try {
+                    Image img = ImageIO.read(new File("images/flecheGauche.png"));
+                    jbPrev.setIcon(new ImageIcon(img));
+                  } catch (Exception ex) {
+                    System.out.println(ex);
+                  }
+                 
+                  jbPrev.setPreferredSize(new Dimension(90,80));        
+                  jbPrev.setBorder(BorderFactory.createEmptyBorder());
+                  jbPrev.setContentAreaFilled(false);
+                //  JButton jbPrev = new JButton("Next");
+                    
+                //  jbPrev.setPreferredSize(new Dimension(100, 100));
+                  jbPrev.addActionListener(new PreviousAction(mf,this));
+                  p1.add(jbPrev);
+                  this.add(p1);
+                  
+                  break;
+			  case 82:
                   JPanel p0 = new JPanel();
                   p0.setOpaque(false);
                   
@@ -419,7 +599,7 @@ public class KnockoutPanel extends JPanel{
                 // BufferedImage buttonIcon = null;
                   JButton jbExit = new JButton();
                   try {
-                    Image img = ImageIO.read(new File("images/image01.png"));
+                    Image img = ImageIO.read(new File("images/close.png"));
                     jbExit.setIcon(new ImageIcon(img));
                   } catch (Exception ex) {
                     System.out.println(ex);
@@ -449,13 +629,13 @@ public class KnockoutPanel extends JPanel{
                   
                   
               case 83:
-                  JPanel p1 = new JPanel();
-                  p1.setOpaque(false);
+                  JPanel p2 = new JPanel();
+                  p2.setOpaque(false);
                 
                  // BufferedImage buttonIcon = null;
                   JButton jbNext = new JButton();
                   try {
-                    Image img = ImageIO.read(new File("images/image00.png"));
+                    Image img = ImageIO.read(new File("images/flecheDroite.png"));
                     jbNext.setIcon(new ImageIcon(img));
                   } catch (Exception ex) {
                     System.out.println(ex);
@@ -468,8 +648,8 @@ public class KnockoutPanel extends JPanel{
                     
                 //  jbNext.setPreferredSize(new Dimension(100, 100));
                   jbNext.addActionListener(new NextAction(this));
-                  p1.add(jbNext);
-                  this.add(p1);
+                  p2.add(jbNext);
+                  this.add(p2);
                   
                   break;
                   

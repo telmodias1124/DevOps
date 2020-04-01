@@ -3,10 +3,13 @@ package gui.GroupGUI;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -18,6 +21,8 @@ import data.Match;
 import data.Team;
 import gui.JImagePanel;
 import gui.MainFrame;
+import gui.MatchView.MatchView;
+import gui.MatchView.MatchView.*;
 import gui.actions.ExitAction;
 import gui.actions.KnockoutAction;
 import gui.actions.StartAction;
@@ -88,6 +93,18 @@ public class GamePanel extends JPanel {
             a = m.getTeamA();
             b = m.getTeamB();
             JLabel scoreLabel = new JLabel(a.getTeamName()+" "+m.getScoreA()+" - "+m.getScoreB()+" "+b.getTeamName(), SwingConstants.CENTER);
+            scoreLabel.addMouseListener(new MouseAdapter()  
+            {  
+                public void mouseClicked(MouseEvent e)  
+                {  
+                	System.out.println("Ca moche pas");
+                	MainFrame frameMatch = new MainFrame();
+                	frameMatch.setTitle(m.getTeamA().getTeamName()+" - "+m.getTeamB().getTeamName());
+                	frameMatch.createMatchView(m);
+                	
+
+                }  
+            });
     		scoreLabel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
     		scoreLabel.setBackground(Color.LIGHT_GRAY);
     		scoreLabel.setOpaque(true);
