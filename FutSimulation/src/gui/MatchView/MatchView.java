@@ -43,6 +43,7 @@ public class MatchView extends JPanel{
 	private Image carte;
 	private Match m;
 	private MainFrame mf;
+	private int state = 0;
 	Font font = new Font("SansSerif", Font.BOLD, 18);
 	Font fontScore = new Font("SansSerif", Font.BOLD, 40);
 
@@ -196,14 +197,51 @@ public class MatchView extends JPanel{
 	    
 	    g.drawOval(mf.getWidth() - 600, 160, 50, 50);
 	    g.drawOval(mf.getWidth() - 600, 240, 50, 50);
+	    
+	    
 	    g.drawString(Integer.toString(m.getAlrecap().size()), 400, 620);
-	    for(int i=0; i< m.getAlrecap().size(); i++) {
+	    g.drawString(Integer.toString(state), 400, 640);
+	    /*for(int i=0; i< m.getAlrecap().size(); i++) {
 		    g.drawString(m.getAlrecap().get(i), 460, 620+(i*20));
-	    }
+	    }*/
         
+	    if(Mouse.x > 1050 && Mouse.x < 1100) {
+	    	if(Mouse.y > 600+30 && Mouse.y < 650+30 && Mouse.click == true) {
+	    		if(state > 0) {
+	    			state--;
+	    		}
+	    	}
+	    	if(Mouse.y > 900 +30 && Mouse.y < 950+30 && Mouse.click == true) {
+	    		if(state < (m.getAlrecap().size()/17)) {
+	    			state++;
+	    		}
+	    	}
+	    }
+	    
+	    for(int i=0; i< 17; i++) {
+	    	if(i+(state*17)< m.getAlrecap().size()) {
+		    g.drawString(m.getAlrecap().get(i+(state*17)), 460, 625+(i*20));
+	    	}
+	    }
+	    	
+	    
+	    
+	 
+	    
+	    g.drawString(Integer.toString(m.getCornersA()), 10, 600);
+	    g.drawString(Integer.toString(m.getFoulsA()), 10, 620);
+	    g.drawString(Integer.toString(m.getNbrActionsA()), 10, 640);
+	    g.drawString(Integer.toString(m.getPassA()), 10, 660);
+	    g.drawString(Integer.toString(m.getPenA()), 10, 680);
+	    g.drawString(Integer.toString(m.getTotalKickA()), 10, 700);
+	    g.drawString(Integer.toString(m.getTotalPassA()), 10, 720);
         
 	    g.setColor(Color.WHITE);
 	    g.drawLine(0, 600, mf.getWidth(), 600);
+	    
+	    g.drawRect(1050, 600, 50, 50);
+	    g.drawRect(1050, 900, 50, 50);
+
 	 
 		
 	    repaint();
