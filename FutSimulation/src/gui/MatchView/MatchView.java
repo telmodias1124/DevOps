@@ -25,6 +25,7 @@ import data.Match;
 import data.Player;
 import data.PlayerStatistic;
 import data.Team;
+import gui.GlobalParameter;
 import gui.JImagePanel;
 import gui.JLinePanel;
 import gui.MainFrame;
@@ -44,60 +45,33 @@ public class MatchView extends JPanel{
 	private Match m;
 	private MainFrame mf;
 	private int state = 0;
+	private static int MAINFRAME_WIDTH = GlobalParameter.MAINFRAME_WIDTH;
 	Font font = new Font("SansSerif", Font.BOLD, 18);
 	Font fontScore = new Font("SansSerif", Font.BOLD, 40);
 
+	public MatchView() {
+		super();
+	}
+	
 	public MatchView(Match m, MainFrame mf) {
 		super();
 		this.m = m;
 		this.mf = mf;
 	}
 	
+	
 	protected void paintComponent(Graphics g){
 		
-	    super.paintComponent(g); 
+		super.paintComponent(g); 
 	    g.setFont(font);
-	    
-	    /*g.setColor(Color.GRAY);
-	    for(int i=0;i<150;i++) {
-	    	g.drawLine(10*i, 0, 10*i, 1000);
-	    }
-	    
-	    for(int j=0;j<100;j++) {
-	    	g.drawLine(0, 10*j, 1500, 10*j);
-	    }*/
-	    
 	    g.setColor(Color.BLACK);
-	    try {
-	    	viewBackground = ImageIO.read(new File("images/mvback.jpg"));
-		    }
-		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(viewBackground, 0, 0, mf.getWidth(), mf.getHeight(), null);
 	    
-	    try {
-	    	field = ImageIO.read(new File("images/field2.png"));
-		    }
-		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(field, 50, 10, mf.getWidth() - 100, 400, null);
-	    
-	    //Score
-	    g.setColor(Color.BLACK);
-	  //Phase + deroulement
+	    g = drawImages(g);
+	    //Phase + deroulement
 	    g.fillRect(650, 475, 200, 100);
 	    g.fillRect(450, 600, 600, 400);
 	    
-	   //lé carré
-	    try {
-	    	field = ImageIO.read(new File("images/score_gauche.png"));
-		    }
-		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(field, 390, 510, 172, 78, null);
-	    try {
-	    	field = ImageIO.read(new File("images/score_droite.png"));
-		    }
-		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(field, 950, 510, 172, 78, null);
-	    
+	   
 	    g.setColor(Color.WHITE);
 	    g.setFont(fontScore);
 
@@ -108,142 +82,23 @@ public class MatchView extends JPanel{
 	    g.setFont(font);
 
 	    //Drapeau et equipe
-	    try {
-	    	flag = ImageIO.read(new File(m.getTeamA().getFlagPath()));
-		    }
-		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(flag, 370, 430, 50, 50, null);
-	    
-	    try {
-	    	flag = ImageIO.read(new File(m.getTeamB().getFlagPath()));
-		    }
-		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(flag, 970, 430, 50, 50, null);
 	    
 	    g.drawString(m.getTeamA().getTeamName(), 435, 460);
 	    g.drawString(m.getTeamB().getTeamName(), 1035, 460);
 	    
-	   
-	    
-	    //Stats
-	    g.setColor(Color.BLACK);
-	    g.fillRect(0, 600, 300, mf.getHeight() - 600);
-	    g.fillRect(mf.getWidth() - 299, 600, 300, mf.getHeight() - 600);
-	    
-	    try {
-	    	flag = ImageIO.read(new File("images/fond2.png"));
-		    }
-		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(flag, 0, 600, 300, mf.getHeight() - 600, null);
-	    g.drawImage(flag, mf.getWidth() - 299, 600, 300, mf.getHeight() - 600, null);
-	    
-	    
-	    
-	    try {
-	    	flag = ImageIO.read(new File("images/ballon.png"));
-		    }
-		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(flag, 550, 600, 400, 400, null);
-	    
-	    Player p = null;
-	    //Joueurs
-	    g.setColor(Color.WHITE);
-	    g.drawString(m.getTeamA().getStarter().get(0).getPosition() +" " +m.getTeamA().getStarter().get(0).getFirstName().substring(0,1)+"."+" "+ m.getTeamA().getStarter().get(0).getLastName(), 125, 215);
-	    
-	    g.drawString(m.getTeamA().getStarter().get(1).getPosition() +"  " +m.getTeamA().getStarter().get(1).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(1).getLastName(), 260, 90);
-	    g.drawString(m.getTeamA().getStarter().get(2).getPosition() +" " +m.getTeamA().getStarter().get(2).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(2).getLastName(), 260, 170);
-	    g.drawString(m.getTeamA().getStarter().get(3).getPosition() +" " +m.getTeamA().getStarter().get(3).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(3).getLastName(), 260, 260);
-	    g.drawString(m.getTeamA().getStarter().get(4).getPosition() +" " +m.getTeamA().getStarter().get(4).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(4).getLastName(), 260, 330);
-	    
-	    g.drawString(m.getTeamA().getStarter().get(5).getPosition() +" " +m.getTeamA().getStarter().get(5).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(5).getLastName(), 400, 140);
-	    g.drawString(m.getTeamA().getStarter().get(6).getPosition() +" " +m.getTeamA().getStarter().get(6).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(6).getLastName(), 400, 215);
-	    g.drawString(m.getTeamA().getStarter().get(7).getPosition() +" " +m.getTeamA().getStarter().get(7).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(7).getLastName(), 400, 295);
-	    
-	    g.drawString(m.getTeamA().getStarter().get(8).getPosition() +" " +m.getTeamA().getStarter().get(8).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(8).getLastName(), 590, 140);
-	    g.drawString(m.getTeamA().getStarter().get(9).getPosition() +" " +m.getTeamA().getStarter().get(9).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(9).getLastName(), 590, 215);
-	    g.drawString(m.getTeamA().getStarter().get(10).getPosition() +" " +m.getTeamA().getStarter().get(10).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(10).getLastName(), 590, 295);
-
-	    g = choosePlayer(125, 195, m.getTeamA().getStarter().get(0), m.getTeamA(), g);
-	    g = choosePlayer(260, 70, m.getTeamA().getStarter().get(1), m.getTeamA(), g);
-	    g = choosePlayer(260, 150, m.getTeamA().getStarter().get(2), m.getTeamA(), g);
-	    g = choosePlayer(260, 240, m.getTeamA().getStarter().get(3), m.getTeamA(), g);
-	    g = choosePlayer(260, 310, m.getTeamA().getStarter().get(4), m.getTeamA(), g);
-	    g = choosePlayer(400, 120, m.getTeamA().getStarter().get(5), m.getTeamA(), g);
-	    g = choosePlayer(400, 195, m.getTeamA().getStarter().get(6), m.getTeamA(), g);
-	    g = choosePlayer(400, 275, m.getTeamA().getStarter().get(7), m.getTeamA(), g);
-	    g = choosePlayer(590, 120, m.getTeamA().getStarter().get(8), m.getTeamA(), g);
-	    g = choosePlayer(590, 195, m.getTeamA().getStarter().get(9), m.getTeamA(), g);
-	    g = choosePlayer(590, 275, m.getTeamA().getStarter().get(10), m.getTeamA(), g);
-
-
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    g.drawOval(mf.getWidth() - 50, 200, 50, 50);
-	    
-	    g.drawOval(mf.getWidth() - 225, 30, 50, 50);
-	    g.drawOval(mf.getWidth() - 225, 140, 50, 50);
-	    g.drawOval(mf.getWidth() - 225, 230, 50, 50);
-	    g.drawOval(mf.getWidth() - 225, 350, 50, 50);
-	    
-	    g.drawOval(mf.getWidth() - 450, 30, 50, 50);
-	    g.drawOval(mf.getWidth() - 450, 140, 50, 50);
-	    g.drawOval(mf.getWidth() - 450, 230, 50, 50);
-	    g.drawOval(mf.getWidth() - 450, 350, 50, 50);
-	    
-	    g.drawOval(mf.getWidth() - 600, 160, 50, 50);
-	    g.drawOval(mf.getWidth() - 600, 240, 50, 50);
-	    
 	    
 	    g.drawString(Integer.toString(m.getAlrecap().size()), 400, 620);
 	    g.drawString(Integer.toString(state), 400, 640);
-	    /*for(int i=0; i< m.getAlrecap().size(); i++) {
-		    g.drawString(m.getAlrecap().get(i), 460, 620+(i*20));
-	    }*/
-        
-	    if(Mouse.x > 1050 && Mouse.x < 1100) {
-	    	if(Mouse.y > 600+30 && Mouse.y < 650+30 && Mouse.click == true) {
-	    		if(state > 0) {
-	    			state--;
-	    		}
-	    	}
-	    	if(Mouse.y > 900 +30 && Mouse.y < 950+30 && Mouse.click == true) {
-	    		if(state < (m.getAlrecap().size()/17)) {
-	    			state++;
-	    		}
-	    	}
-	    }
-	    
-	    for(int i=0; i< 17; i++) {
-	    	if(i+(state*17)< m.getAlrecap().size()) {
-		    g.drawString(m.getAlrecap().get(i+(state*17)), 460, 625+(i*20));
-	    	}
-	    }
+	   
+	    g = drawRecap(g);
 	    	
+	    g = drawPlayers(g);
 	    
-	    
-	 
-	    
-	    g.drawString(Integer.toString(m.getCornersA()), 10, 600);
-	    g.drawString(Integer.toString(m.getFoulsA()), 10, 620);
-	    g.drawString(Integer.toString(m.getNbrActionsA()), 10, 640);
-	    g.drawString(Integer.toString(m.getPassA()), 10, 660);
-	    g.drawString(Integer.toString(m.getPenA()), 10, 680);
-	    g.drawString(Integer.toString(m.getTotalKickA()), 10, 700);
-	    g.drawString(Integer.toString(m.getTotalPassA()), 10, 720);
-        
+	    g = drawStatistiqes(g);
+
 	    g.setColor(Color.WHITE);
 	    g.drawLine(0, 600, mf.getWidth(), 600);
 	    
-	    g.drawRect(1050, 600, 50, 50);
-	    g.drawRect(1050, 900, 50, 50);
-
-	 
-		
 	    repaint();
 	}
 	
@@ -275,9 +130,179 @@ public class MatchView extends JPanel{
 		return g;
 	}
 	
+	public Graphics drawImages(Graphics g) {
+		try {
+	    	viewBackground = ImageIO.read(new File("images/mvback.jpg"));
+		    }
+		    catch (Exception e) { /*handled in paintComponent()*/ }
+	    g.drawImage(viewBackground, 0, 0, mf.getWidth(), mf.getHeight(), null);
+	    
+	    try {
+	    	field = ImageIO.read(new File("images/field2.png"));
+		    }
+		    catch (Exception e) { /*handled in paintComponent()*/ }
+	    g.drawImage(field, 50, 10, ((MAINFRAME_WIDTH - 100)*mf.getWidth())/MAINFRAME_WIDTH, 400, null);
+	    
+	    try {
+	    	field = ImageIO.read(new File("images/score_gauche.png"));
+		    }
+		    catch (Exception e) { /*handled in paintComponent()*/ }
+	    g.drawImage(field, 390, 510, 172, 78, null);
+	    
+	    try {
+	    	field = ImageIO.read(new File("images/score_droite.png"));
+		    }
+		    catch (Exception e) { /*handled in paintComponent()*/ }
+	    g.drawImage(field, 950, 510, 172, 78, null);
+	    
+	    try {
+	    	flag = ImageIO.read(new File(m.getTeamA().getFlagPath()));
+		    }
+		    catch (Exception e) { /*handled in paintComponent()*/ }
+	    g.drawImage(flag, 370, 430, 50, 50, null);
+	    
+	    try {
+	    	flag = ImageIO.read(new File(m.getTeamB().getFlagPath()));
+		    }
+		    catch (Exception e) { /*handled in paintComponent()*/ }
+	    g.drawImage(flag, 970, 430, 50, 50, null);
+	    
+	    try {
+	    	flag = ImageIO.read(new File("images/fond2.png"));
+		    }
+		    catch (Exception e) { /*handled in paintComponent()*/ }
+	    g.drawImage(flag, 0, 600, 300, mf.getHeight() - 600, null);
+	    g.drawImage(flag, mf.getWidth() - 299, 600, 300, mf.getHeight() - 600, null);
+	    
+	    try {
+	    	flag = ImageIO.read(new File("images/ballon.png"));
+		    }
+		    catch (Exception e) { /*handled in paintComponent()*/ }
+	    g.drawImage(flag, 550, 600, 400, 400, null);
+	    
+		return g;
+	}
 	
-	public void drawCarte(int x, int y) {
-	    System.out.println(x +", "+ y + " Matchview");
+	public Graphics drawPlayers(Graphics g) {
+		g.setColor(Color.WHITE);
+	    int dep = (125 * mf.getWidth())/1500;
+	    g.drawString(m.getTeamA().getStarter().get(0).getPosition() +" " +m.getTeamA().getStarter().get(0).getFirstName().substring(0,1)+"."+" "+ m.getTeamA().getStarter().get(0).getLastName(), dep, 215);
+	    
+	    g.drawString(m.getTeamA().getStarter().get(1).getPosition() +"  " +m.getTeamA().getStarter().get(1).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(1).getLastName(), 260, 90);
+	    g.drawString(m.getTeamA().getStarter().get(2).getPosition() +" " +m.getTeamA().getStarter().get(2).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(2).getLastName(), 260, 170);
+	    g.drawString(m.getTeamA().getStarter().get(3).getPosition() +" " +m.getTeamA().getStarter().get(3).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(3).getLastName(), 260, 260);
+	    g.drawString(m.getTeamA().getStarter().get(4).getPosition() +" " +m.getTeamA().getStarter().get(4).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(4).getLastName(), 260, 330);
+	    
+	    g.drawString(m.getTeamA().getStarter().get(5).getPosition() +" " +m.getTeamA().getStarter().get(5).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(5).getLastName(), 400, 140);
+	    g.drawString(m.getTeamA().getStarter().get(6).getPosition() +" " +m.getTeamA().getStarter().get(6).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(6).getLastName(), 400, 215);
+	    g.drawString(m.getTeamA().getStarter().get(7).getPosition() +" " +m.getTeamA().getStarter().get(7).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(7).getLastName(), 400, 295);
+	    
+	    g.drawString(m.getTeamA().getStarter().get(8).getPosition() +" " +m.getTeamA().getStarter().get(8).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(8).getLastName(), 590, 140);
+	    g.drawString(m.getTeamA().getStarter().get(9).getPosition() +" " +m.getTeamA().getStarter().get(9).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(9).getLastName(), 590, 215);
+	    g.drawString(m.getTeamA().getStarter().get(10).getPosition() +" " +m.getTeamA().getStarter().get(10).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(10).getLastName(), 590, 295);
+
+	    
+	    g.drawString(m.getTeamB().getStarter().get(0).getPosition() +" " +m.getTeamB().getStarter().get(0).getFirstName().substring(0,1)+"."+" "+ m.getTeamB().getStarter().get(0).getLastName(), (((1500 - 125)* mf.getWidth())/1500), 215);
+	    
+	    g.drawString(m.getTeamB().getStarter().get(1).getPosition() +"  " +m.getTeamB().getStarter().get(1).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(1).getLastName(), (1500 - 260), 90);
+	    g.drawString(m.getTeamB().getStarter().get(2).getPosition() +" " +m.getTeamB().getStarter().get(2).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(2).getLastName(), (1500 - 260), 170);
+	    g.drawString(m.getTeamB().getStarter().get(3).getPosition() +" " +m.getTeamB().getStarter().get(3).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(3).getLastName(), (1500 - 260), 260);
+	    g.drawString(m.getTeamB().getStarter().get(4).getPosition() +" " +m.getTeamB().getStarter().get(4).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(4).getLastName(), (1500 - 260), 330);
+	    
+	    g.drawString(m.getTeamB().getStarter().get(5).getPosition() +" " +m.getTeamB().getStarter().get(5).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(5).getLastName(), (1500 - 400), 140);
+	    g.drawString(m.getTeamB().getStarter().get(6).getPosition() +" " +m.getTeamB().getStarter().get(6).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(6).getLastName(), (1500 -  400), 215);
+	    g.drawString(m.getTeamB().getStarter().get(7).getPosition() +" " +m.getTeamB().getStarter().get(7).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(7).getLastName(), (1500 - 400), 295);
+	    
+	    g.drawString(m.getTeamB().getStarter().get(8).getPosition() +" " +m.getTeamB().getStarter().get(8).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(8).getLastName(), (1500 - 590), 140);
+	    g.drawString(m.getTeamB().getStarter().get(9).getPosition() +" " +m.getTeamB().getStarter().get(9).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(9).getLastName(), (1500 - 590), 215);
+	    g.drawString(m.getTeamB().getStarter().get(10).getPosition() +" " +m.getTeamB().getStarter().get(10).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(10).getLastName(), (1500 - 590), 295);
+
+	    g = choosePlayer(125, 195, m.getTeamA().getStarter().get(0), m.getTeamA(), g);
+	    g = choosePlayer(260, 70, m.getTeamA().getStarter().get(1), m.getTeamA(), g);
+	    g = choosePlayer(260, 150, m.getTeamA().getStarter().get(2), m.getTeamA(), g);
+	    g = choosePlayer(260, 240, m.getTeamA().getStarter().get(3), m.getTeamA(), g);
+	    g = choosePlayer(260, 310, m.getTeamA().getStarter().get(4), m.getTeamA(), g);
+	    g = choosePlayer(400, 120, m.getTeamA().getStarter().get(5), m.getTeamA(), g);
+	    g = choosePlayer(400, 195, m.getTeamA().getStarter().get(6), m.getTeamA(), g);
+	    g = choosePlayer(400, 275, m.getTeamA().getStarter().get(7), m.getTeamA(), g);
+	    g = choosePlayer(590, 120, m.getTeamA().getStarter().get(8), m.getTeamA(), g);
+	    g = choosePlayer(590, 195, m.getTeamA().getStarter().get(9), m.getTeamA(), g);
+	    g = choosePlayer(590, 275, m.getTeamA().getStarter().get(10), m.getTeamA(), g);
+	    
+	    g = choosePlayer((MAINFRAME_WIDTH - 125), 195, m.getTeamB().getStarter().get(0), m.getTeamB(), g);
+	    g = choosePlayer((MAINFRAME_WIDTH - 260), 70, m.getTeamB().getStarter().get(1), m.getTeamB(), g);
+	    g = choosePlayer((MAINFRAME_WIDTH - 260), 150, m.getTeamB().getStarter().get(2), m.getTeamB(), g);
+	    g = choosePlayer((MAINFRAME_WIDTH - 260), 240, m.getTeamB().getStarter().get(3), m.getTeamB(), g);
+	    g = choosePlayer((MAINFRAME_WIDTH - 260), 310, m.getTeamB().getStarter().get(4), m.getTeamB(), g);
+	    g = choosePlayer((MAINFRAME_WIDTH - 400), 120, m.getTeamB().getStarter().get(5), m.getTeamB(), g);
+	    g = choosePlayer((MAINFRAME_WIDTH - 400), 195, m.getTeamB().getStarter().get(6), m.getTeamB(), g);
+	    g = choosePlayer((MAINFRAME_WIDTH - 400), 275, m.getTeamB().getStarter().get(7), m.getTeamB(), g);
+	    g = choosePlayer((MAINFRAME_WIDTH - 590), 120, m.getTeamB().getStarter().get(8), m.getTeamB(), g);
+	    g = choosePlayer((MAINFRAME_WIDTH - 590), 195, m.getTeamB().getStarter().get(9), m.getTeamB(), g);
+	    g = choosePlayer((MAINFRAME_WIDTH - 590), 275, m.getTeamB().getStarter().get(10), m.getTeamB(), g);
+		return g;
+	}
+	
+	public Graphics drawStatistiqes(Graphics g) {
+		g.drawString("Statistiques : " + m.getTeamA().getTeamName(), 50, 630);
+		g.drawString("Corners : " + Integer.toString(m.getCornersA()), 35, 660);
+		g.drawString("Fautes : " + Integer.toString(m.getFoulsA()), 35, 690);
+		g.drawString("Nbr d'actions : " + Integer.toString(m.getNbrActionsA()), 35, 720);
+		g.drawString("Pénaltis : " + Integer.toString(m.getPenA()), 35, 750);
+		g.drawString("Tirs : " + Integer.toString(m.getTotalKickA()), 35, 780);
+		g.drawString("Passes : " + Integer.toString(m.getPassA()), 35, 810);
+		g.drawString("Total passes : " + Integer.toString(m.getTotalPassA()), 35, 840);
+		float percentPass = ((float)m.getPassA()/(float)m.getTotalPassA())*100;
+		g.drawString("Pourcentages de passes réussis : " + Integer.toString((int) percentPass), 35, 870);
+		return g;
+	}
+	
+	public Graphics drawRecap(Graphics g) {
+		if(Mouse.x > 1050 && Mouse.x < 1100) {
+		    if(Mouse.y > 600+30 && Mouse.y < 650+30 && Mouse.click == true) {
+		    	if(state > 0) {
+		    		state--;
+		    		Mouse.click = false;
+		    	}
+		    }
+		    if(Mouse.y > 900 +30 && Mouse.y < 950+30 && Mouse.click == true) {
+		    	if(state < (m.getAlrecap().size()/17)) {
+		    		state++;
+		    		Mouse.click = false;
+		    	}
+		    }
+		}
+		    
+		g.setColor(Color.WHITE);
+
+		for(int i=0; i< 17; i++) {
+		    if(i+(state*17)< m.getAlrecap().size()) {
+		    	String str = new String();
+                String str2 = new String();
+                int lastIndex = m.getAlrecap().get(i+(state*17)).length();
+                int lastIndexOri = m.getAlrecap().get(i+(state*17)).length();
+                int width = g.getFontMetrics().stringWidth(m.getAlrecap().get(i+(state*17)));
+                str = m.getAlrecap().get(i+(state*17));
+                while(width > 580) {
+
+                    lastIndex = str.lastIndexOf(" ");
+                    str = str.substring(0, lastIndex);
+                    width = g.getFontMetrics().stringWidth(str);
+                    str2 = m.getAlrecap().get(i+(state*17)).substring(lastIndex, lastIndexOri);
+
+                }
+
+
+                if(g.getFontMetrics().stringWidth(m.getAlrecap().get(i+(state*17))) > 580) {
+                    g.drawString(str, 460, 625+(i*20));
+                    i++;
+                    g.drawString(str2, 460, 625+(i*20));
+                }else {
+                    g.drawString(str, 460, 625+(i*20));
+                }
+		    }
+		}
+		return g;
 	}
 	
 }
