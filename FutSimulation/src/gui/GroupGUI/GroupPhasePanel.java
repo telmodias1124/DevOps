@@ -6,8 +6,10 @@ import javax.swing.JPanel;
 
 import data.GroupPhase;
 import gui.MainFrame;
+import process.GroupPhaseSimulation;
 
 public class GroupPhasePanel extends JPanel{
+	
 	private StandingPanel sp;
 	private GamePanel mp;
 	

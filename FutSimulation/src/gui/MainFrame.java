@@ -16,6 +16,7 @@ import gui.GroupGUI.GroupPhasePanel;
 import gui.Knockout.KnockoutPanel;
 import gui.MatchView.MatchView;
 import listener.Mouse;
+import process.GroupPhaseSimulation;
 
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 2230254401958956708L;
@@ -23,6 +24,7 @@ public class MainFrame extends JFrame {
 	private GroupPhasePanel gpp;
 	private KnockoutPhase kp;
 	private GroupPhase gp;
+	private GroupPhaseSimulation groupPhase;
 	
 	public MainFrame() {
 		super("FutSimulation");
@@ -37,7 +39,7 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	}
-	public void createGroupPhasePanel(GroupPhase gp, KnockoutPhase kp) {
+	public void createGroupPhasePanel(GroupPhase gp, KnockoutPhase kp,GroupPhaseSimulation groupPhase) {
 		this.kp = kp;
 		this.gp =gp;
 		gpp = new GroupPhasePanel();
@@ -74,6 +76,12 @@ public class MainFrame extends JFrame {
 	}
 	public void setGpp(GroupPhasePanel gpp) {
 		this.gpp = gpp;
+	}
+	public GroupPhaseSimulation getGroupPhase() {
+		return groupPhase;
+	}
+	public void setGroupPhase(GroupPhaseSimulation groupPhase) {
+		this.groupPhase = groupPhase;
 	}
 	
 	

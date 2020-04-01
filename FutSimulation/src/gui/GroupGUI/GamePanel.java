@@ -25,6 +25,8 @@ import gui.MatchView.MatchView;
 import gui.MatchView.MatchView.*;
 import gui.actions.ExitAction;
 import gui.actions.KnockoutAction;
+import gui.actions.RestartAction;
+import gui.actions.RestartMatchAction;
 import gui.actions.StartAction;
 
 public class GamePanel extends JPanel {
@@ -33,7 +35,7 @@ public class GamePanel extends JPanel {
 	private GroupPhase gp;
 	private StandingPanel sp;
 	private MainFrame mf;
-	
+	private Color perso = new Color(83,83,83);
 	public GamePanel(GroupPhase gp, StandingPanel sp, MainFrame mf) {
 		super();
 		this.setLayout(new GridLayout(1,4));
@@ -48,7 +50,7 @@ public class GamePanel extends JPanel {
 		for(int i=0; i<4; i++) {
 			panel = new JPanel();
 			panel.setLayout(new GridLayout(8,1,20,20));
-			if(i==1 || i== 2) {
+			if(i ==0 ||i==1 || i== 2 || i==3) {
 				for(int j=0; j<7; j++) {
 					JPanel jvide = new JPanel();
 		        	jvide.setOpaque(false);
@@ -63,13 +65,27 @@ public class GamePanel extends JPanel {
 					jbStart.addActionListener(sa);
 					panel.add(jbStart);
 				}
-				else {
+				else if(i==1){
 					JButton jbExit;
 					jbExit = new JButton("Exit");
 					jbExit.setBackground(Color.WHITE);
 					jbExit.setOpaque(true);
 					jbExit.addActionListener(new ExitAction());
 					panel.add(jbExit);
+				}else if(i==3) {
+					JButton jbRestart;
+					jbRestart = new JButton("Restart Match");
+					jbRestart.setBackground(perso);
+					jbRestart.setOpaque(true);
+					jbRestart.addActionListener(null);
+					panel.add(jbRestart);
+				}else if(i==0) {
+					JButton jbRestart;
+					jbRestart = new JButton("Restart");
+					jbRestart.setBackground(Color.WHITE);
+					jbRestart.setOpaque(true);
+					jbRestart.addActionListener(new RestartAction(mf));
+					panel.add(jbRestart);
 				}
 			}
 			panel.setOpaque(false);
@@ -110,10 +126,13 @@ public class GamePanel extends JPanel {
     		scoreLabel.setOpaque(true);
             standingPanel.add(scoreLabel);
         }
-        if(group.equals("Group A") || group.equals("Group D")) {
-        	JPanel jvide = new JPanel();
-        	jvide.setOpaque(false);
-            standingPanel.add(jvide);
+        if(group.equals("Group A")) {
+        	JButton jbRestart;
+			jbRestart = new JButton("Restart");
+			jbRestart.setBackground(Color.WHITE);
+			jbRestart.setOpaque(true);
+			jbRestart.addActionListener(new RestartAction(mf));
+			standingPanel.add(jbRestart);
         }
         if(group.equals("Group B")) {
             JButton jbExit;
@@ -131,6 +150,13 @@ public class GamePanel extends JPanel {
             KnockoutAction na = new KnockoutAction(this.mf);
             jbKnock.addActionListener(na);
             standingPanel.add(jbKnock);
+        }if(group.equals("Group D")) {
+        	JButton jbRestart;
+			jbRestart = new JButton("Restart Match");
+			jbRestart.setBackground(Color.WHITE);
+			jbRestart.setOpaque(true);
+			jbRestart.addActionListener(new RestartMatchAction(mf,mf.getGroupPhase()));
+			standingPanel.add(jbRestart);
         }
         standingPanel.setOpaque(false);
         this.add(standingPanel);

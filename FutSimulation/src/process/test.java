@@ -80,7 +80,7 @@ public class test {
 		
 		
 		MainFrame mf = new MainFrame();
-		mf.createGroupPhasePanel(groupePhase.gp, ks.kp);
+		mf.createGroupPhasePanel(groupePhase.gp, ks.kp, groupePhase);
 		//mf.createMatchView(groupePhase.gp.getListMatchGroupA().get(0));
 		//mf.createKnockout();
 		mf.revalidate();

@@ -90,7 +90,6 @@ public class KnockoutPanel extends JPanel{
 			            {  
 			                public void mouseClicked(MouseEvent e)  
 			                {  
-			                	System.out.println("Ca moche pas");
 			                	MainFrame frameMatch = new MainFrame();
 			                	frameMatch.setTitle(kp.getListQuarter().get(0).getTeamA().getTeamName()+" - "+kp.getListQuarter().get(0).getTeamB().getTeamName());
 			                	frameMatch.createMatchView((kp.getListQuarter().get(0)));
