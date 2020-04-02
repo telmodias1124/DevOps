@@ -22,10 +22,12 @@ public class RestartAction implements ActionListener {
 		ArrayList<Team> al = new ArrayList<Team>();
 		td.createTeams(al);
 		GroupPhaseSimulation groupePhase = new GroupPhaseSimulation();
+		mf.setGroupPhase(groupePhase);
 		groupePhase.setAlTeams(al);
 		groupePhase.simulate();
 		
 		groupePhase.gp.getListMatchGroupA().get(0);
+		groupePhase.updateStandingsFalse();
 		
 		
 		System.out.println(groupePhase.groupToString());

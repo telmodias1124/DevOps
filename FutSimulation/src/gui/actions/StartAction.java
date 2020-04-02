@@ -32,12 +32,14 @@ public class StartAction implements ActionListener {
 		this.gamePanel.revalidate();
 		this.gamePanel.repaint();
 		this.gamePanel.setVisible(true);
+		this.gamePanel.getMf().getGroupPhase().updateStandings();
 		
 		this.standingPanel.removeAll();
 		this.standingPanel.fillStandingPanel("Group A", this.gp.getStandingGroupA(), true);
 		this.standingPanel.fillStandingPanel("Group B", this.gp.getStandingGroupB(), true);
 		this.standingPanel.fillStandingPanel("Group C", this.gp.getStandingGroupC(), true);
 		this.standingPanel.fillStandingPanel("Group D", this.gp.getStandingGroupD(), true);
+		
 		this.standingPanel.revalidate();
 		this.standingPanel.repaint();
 		this.standingPanel.setVisible(true);
