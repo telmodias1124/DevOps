@@ -212,13 +212,13 @@ public class MatchView extends JPanel{
 	    g.drawImage(field, (550*mf.getWidth())/MAINFRAME_WIDTH, (600*mf.getHeight())/MAINFRAME_HEIGHT, (400*mf.getWidth())/MAINFRAME_WIDTH, (400*mf.getHeight())/MAINFRAME_HEIGHT, null);
 	    
 	    try {
-	    	flag = ImageIO.read(new File("images/ballon.png"));
+	    	flag = ImageIO.read(new File("images/fleche_haut.png"));
 		    }
 		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(flag, (1050*mf.getWidth())/MAINFRAME_WIDTH, (600*mf.getHeight())/MAINFRAME_HEIGHT, (50*mf.getWidth())/MAINFRAME_WIDTH, (50*mf.getHeight())/MAINFRAME_HEIGHT, null);
+	    g.drawImage(flag, (1050*mf.getWidth())/MAINFRAME_WIDTH, (610*mf.getHeight())/MAINFRAME_HEIGHT, (50*mf.getWidth())/MAINFRAME_WIDTH, (50*mf.getHeight())/MAINFRAME_HEIGHT, null);
 	    
 	    try {
-	    	flag = ImageIO.read(new File("images/ballon.png"));
+	    	flag = ImageIO.read(new File("images/fleche_bas.png"));
 		    }
 		    catch (Exception e) { /*handled in paintComponent()*/ }
 	    g.drawImage(flag, (1050*mf.getWidth())/MAINFRAME_WIDTH, (900*mf.getHeight())/MAINFRAME_HEIGHT, (50*mf.getWidth())/MAINFRAME_WIDTH, (50*mf.getHeight())/MAINFRAME_HEIGHT, null);
@@ -323,7 +323,7 @@ public class MatchView extends JPanel{
 	
 	public Graphics drawRecap(Graphics g) {
 		if(Mouse.x > 1050 && Mouse.x < 1100) {
-		    if(Mouse.y > 600+30 && Mouse.y < 650+30 && Mouse.click == true) {
+		    if(Mouse.y > 610+30 && Mouse.y < 650+30 && Mouse.click == true) {
 		    	if(state > 0) {
 		    		state--;
 		    		Mouse.click = false;
