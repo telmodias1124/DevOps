@@ -26,6 +26,8 @@ public class MainFrame extends JFrame {
 	private GroupPhase gp;
 	private GroupPhaseSimulation groupPhase;
 	
+	private Color blue_dark = new Color(11,21,70);
+	
 	public MainFrame() {
 		super("FutSimulation");
 		this.addMouseListener(new Mouse());
@@ -33,7 +35,7 @@ public class MainFrame extends JFrame {
 		this.setPreferredSize(new Dimension(GlobalParameter.MAINFRAME_WIDTH,GlobalParameter.MAINFRAME_HEIGHT));
 		//this.setLayout(new GridLayout(2,1));
 		this.setMinimumSize(new Dimension(GlobalParameter.MAINFRAME_WIDTH,GlobalParameter.MAINFRAME_HEIGHT));
-		this.getContentPane().setBackground(Color.GRAY);
+		this.getContentPane().setBackground(blue_dark);
 		
 		this.pack();
 		this.setVisible(true);

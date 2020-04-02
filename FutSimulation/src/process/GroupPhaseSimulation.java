@@ -31,6 +31,7 @@ public class GroupPhaseSimulation {
 		createMatchGroup(gp);
 		simulateMatchGroupe();
 		updateStandings();
+		//updateStandingsFalse();
 	}
 	
 	/* ou passer l'arraylist des equipes */
@@ -126,6 +127,47 @@ public class GroupPhaseSimulation {
 		}
 	}
 	
+	private void sortGroupByRandom(ArrayList<Team> alT, Standing standing) {
+		Random random = new Random();
+		Team t;
+		int i=0;
+		int p;
+		int r;
+		alSort = (ArrayList<Team>)alT.clone();
+		
+		ArrayList<Integer> listInt = new ArrayList<Integer>();
+		listInt.add(1);
+		listInt.add(2);
+		listInt.add(3);
+		listInt.add(4);
+		
+		while(alSort.size() > 0 ) {
+			t = alSort.get(i);
+			r = random.nextInt(4-i);
+			p = (int) listInt.get(r);
+			listInt.remove(r);
+			
+			switch(p) {
+				case 0 :
+					standing.setFirst(t);
+					break;
+				case 1 :
+					standing.setSecond(t);
+					break;
+				case 2 :
+					standing.setThird(t);
+					break;
+				case 3 :
+					standing.setFourth(t);
+					break;
+				default :
+					System.out.println("Erreur dans le classement");
+			}
+			i++;
+			alSort.remove(t);
+		}
+	}
+	
 	public void updateStandings() {
 		sortGroupByPoints(this.gp.getGroupA(), this.gp.getStandingGroupA());
 		sortGroupByPoints(this.gp.getGroupB(), this.gp.getStandingGroupB());
@@ -133,6 +175,12 @@ public class GroupPhaseSimulation {
 		sortGroupByPoints(this.gp.getGroupD(), this.gp.getStandingGroupD());
 	}
 	
+	public void updateStandingsFalse() {
+		sortGroupByRandom(this.gp.getGroupA(), this.gp.getStandingGroupA());
+		sortGroupByRandom(this.gp.getGroupB(), this.gp.getStandingGroupB());
+		sortGroupByRandom(this.gp.getGroupC(), this.gp.getStandingGroupC());
+		sortGroupByRandom(this.gp.getGroupD(), this.gp.getStandingGroupD());
+	}
 	
 	public String groupToString(){
 		String res ="Group A : ";

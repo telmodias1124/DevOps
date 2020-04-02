@@ -572,7 +572,7 @@ public class KnockoutPanel extends JPanel{
                  // BufferedImage buttonIcon = null;
                   JButton jbPrev = new JButton();
                   try {
-                    Image img = ImageIO.read(new File("images/flecheGauche.png"));
+                    Image img = ImageIO.read(new File("images/back_group.png"));
                     jbPrev.setIcon(new ImageIcon(img));
                   } catch (Exception ex) {
                     System.out.println(ex);
@@ -634,13 +634,14 @@ public class KnockoutPanel extends JPanel{
                  // BufferedImage buttonIcon = null;
                   JButton jbNext = new JButton();
                   try {
-                    Image img = ImageIO.read(new File("images/flecheDroite.png"));
+                    Image img = ImageIO.read(new File("images/next_match.png"));
                     jbNext.setIcon(new ImageIcon(img));
                   } catch (Exception ex) {
                     System.out.println(ex);
                   }
                  
-                      jbNext.setPreferredSize(new Dimension(90,80));        
+                      
+                  	jbNext.setPreferredSize(new Dimension(370,80));        
                     jbNext.setBorder(BorderFactory.createEmptyBorder());
                     jbNext.setContentAreaFilled(false);
                 //  JButton jbNext = new JButton("Next");
