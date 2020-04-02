@@ -23,10 +23,10 @@ public class GroupPhasePanel extends JPanel{
 		sp = new StandingPanel();
 		mp = new GamePanel(gp, sp, mf);
 		
-		sp.fillStandingPanel("Group A", gp.getStandingGroupA(), false);
-		sp.fillStandingPanel("Group B", gp.getStandingGroupB(), false);
-		sp.fillStandingPanel("Group C", gp.getStandingGroupC(), false);
-		sp.fillStandingPanel("Group D", gp.getStandingGroupD(), false);
+		sp.fillStandingPanel("Groupe A", gp.getStandingGroupA(), false);
+		sp.fillStandingPanel("Groupe B", gp.getStandingGroupB(), false);
+		sp.fillStandingPanel("Groupe C", gp.getStandingGroupC(), false);
+		sp.fillStandingPanel("Groupe D", gp.getStandingGroupD(), false);
 		sp.setOpaque(false);
 		/*mp.createGamePanel("Group A", gp.getListMatchGroupA());
 		mp.createGamePanel("Group B", gp.getListMatchGroupB());

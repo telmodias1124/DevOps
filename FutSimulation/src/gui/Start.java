@@ -5,9 +5,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -56,12 +60,23 @@ public class Start extends JFrame{
 		private static final long serialVersionUID = 7690322266208392032L;
 		protected void paintComponent(Graphics g){
 			super.paintComponent(g); 
+			try {
+		           Image img = ImageIO.read(new File("images/viewBackground_base.png"));
+		           g.drawImage(img, 0, 0, 800, 500, null, null);
+		        } catch (Exception ex) {
+		           System.out.println(ex);
+		        }
+			
 			g.setFont(font);
-			g.drawString("FutSimulation", 280, 80);
-			g.drawString("Exit", 200, 380);
-			g.drawString("Start Simulation", 420, 380);
-			g.drawRect(0, 300, 400, 200);
-			g.drawRect(400, 300, 400, 200);
+			g.setColor(Color.WHITE);
+			g.drawString("FutSimulation", 270, 80);
+			g.drawString("Quitter", 100, 380);
+			
+			g.drawString("Commencer", 500, 360);
+			g.drawString("Simulation", 517, 400);
+			//g.drawRect(0, 300, 400, 200);
+			//g.drawRect(400, 300, 400, 200);
+			
 			if(chooseOption()) {
 				JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 				topFrame.dispose();

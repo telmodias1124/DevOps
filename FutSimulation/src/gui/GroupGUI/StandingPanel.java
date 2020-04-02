@@ -33,7 +33,7 @@ public class StandingPanel extends JPanel {
 		groupLabel.setForeground(Color.WHITE);
 		groupLabel.setBackground(blue_sky);
 		groupLabel.setOpaque(true);
-		JLabel teamLabel = new JLabel("Team", SwingConstants.CENTER);
+		JLabel teamLabel = new JLabel("Equipe", SwingConstants.CENTER);
 		teamLabel.setForeground(Color.WHITE);
 		teamLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		teamLabel.setBackground(blue_sky);

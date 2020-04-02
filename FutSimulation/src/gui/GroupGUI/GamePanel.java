@@ -151,7 +151,6 @@ public class GamePanel extends JPanel {
             {  
                 public void mouseClicked(MouseEvent e)  
                 {  
-                	System.out.println("Ca moche pas");
                 	MainFrame frameMatch = new MainFrame();
                 	frameMatch.setTitle(m.getTeamA().getTeamName()+" - "+m.getTeamB().getTeamName());
                 	frameMatch.createMatchView(m);
@@ -165,7 +164,7 @@ public class GamePanel extends JPanel {
     		scoreLabel.setOpaque(true);
             standingPanel.add(scoreLabel);
         }
-        if(group.equals("Group A")) {
+        if(group.equals("Groupe A")) {
         	JButton jbRestart;
 			jbRestart = new JButton("Restart");
 			try {
@@ -179,7 +178,7 @@ public class GamePanel extends JPanel {
 			jbRestart.addActionListener(new RestartAction(mf));
 			standingPanel.add(jbRestart);
         }
-        if(group.equals("Group B")) {
+        if(group.equals("Groupe B")) {
             JButton jbExit;
             jbExit = new JButton("Exit");
             try {
@@ -193,7 +192,7 @@ public class GamePanel extends JPanel {
             jbExit.addActionListener(new ExitAction());
             standingPanel.add(jbExit);
         }
-        if(group.equals("Group C")) {
+        if(group.equals("Groupe C")) {
             JButton jbKnock;
             jbKnock = new JButton("Knockout Phase");
             try {
@@ -207,7 +206,7 @@ public class GamePanel extends JPanel {
             KnockoutAction na = new KnockoutAction(this.mf);
             jbKnock.addActionListener(na);
             standingPanel.add(jbKnock);
-        }if(group.equals("Group D")) {
+        }if(group.equals("Groupe D")) {
         	JButton jbRestart;
 			jbRestart = new JButton("Restart Match");
 			try {
