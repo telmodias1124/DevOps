@@ -25,17 +25,17 @@ public class MatchSimulation {
 		//Maximum action number in overtime
 		this.nbActionsMax = 30 ;
 		this.nbActions = 0;
-		Player player;
+		Player player = new Player();
 		
 		game.alrecap.add("Début des prolongations");
 		//Kick-off, select a random team who will begin
 		if(random.nextInt(101) < 50) {
-			player = getRandomPlayer("A", game.getTeamA(), "");
+			player = getRandomPlayer("A", game.getTeamA(), player);
 			game.alrecap.add("Coup d'envoi donné par "+player.getLastName()+" pour l'équipe "+game.getTeamA().getTeamName());
 			mid(game.getTeamA(), game.getTeamB(), player);
 		}
 		else {
-			player = getRandomPlayer("A", game.getTeamB(), "");
+			player = getRandomPlayer("A", game.getTeamB(), player);
 			game.alrecap.add("Coup d'envoi donné par "+player.getLastName()+" pour l'équipe "+game.getTeamB().getTeamName());
 			mid(game.getTeamB(), game.getTeamA(), player);
 		}
@@ -106,7 +106,7 @@ public class MatchSimulation {
 	}
 	
 	public void  simulate() {
-		Player player;
+		Player player = new Player();
 		//Maximum action number in the game
 		this.nbActionsMax = 90;
 		this.nbActions = 0;
@@ -122,14 +122,14 @@ public class MatchSimulation {
 		game.alrecap.add("Début du match entre "+game.getTeamA().getTeamName()+" et "+game.getTeamB().getTeamName());
 		//Kick-off, select a random team who will begin
 		if(random.nextInt(101) < 50) {
-			player = getRandomPlayer("A", game.getTeamA(), "");
+			player = getRandomPlayer("A", game.getTeamA(), player);
 			teamStart = game.getTeamA();
 			game.alrecap.add("Coup d'envoi donné par "+player.getLastName()+" pour l'équipe "+game.getTeamA().getTeamName());
 			game.alrecap.add("");
 			mid(game.getTeamA(), game.getTeamB(), player);
 		}
 		else {
-			player = getRandomPlayer("A", game.getTeamB(), "");
+			player = getRandomPlayer("A", game.getTeamB(), player);
 			teamStart = game.getTeamB();
 			game.alrecap.add("Coup d'envoi donné par "+player.getLastName()+" pour l'équipe "+game.getTeamB().getTeamName());
 			game.alrecap.add("");
@@ -179,19 +179,19 @@ public class MatchSimulation {
 		}
 		//Check if it is half time
 		else if((this.nbActions > 45) && (this.halfTime == false)) {
-			Player newPlayer;
+			Player newPlayer = new Player();
 			game.alrecap.add("Mi_temps !");
 			game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 			game.alrecap.add("");
 			this.halfTime=true;
 			if(teamStart.getTeamName().equals(game.getTeamB().getTeamName())) {
-				newPlayer = getRandomPlayer("A", game.getTeamA(), "");
+				newPlayer = getRandomPlayer("A", game.getTeamA(), newPlayer);
 				game.alrecap.add("Début de la deuxième mi-temps");
 				game.alrecap.add("L'equipe "+game.getTeamA().getTeamName()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
 				mid(game.getTeamA(), game.getTeamB(), newPlayer);
 			}
 			else {
-				newPlayer = getRandomPlayer("A", game.getTeamB(), "");
+				newPlayer = getRandomPlayer("A", game.getTeamB(), newPlayer);
 				game.alrecap.add("Début de la deuxième mi-temps");
 				game.alrecap.add("L'equipe "+game.getTeamB().getTeamName()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
 				mid(game.getTeamB(), game.getTeamA(), newPlayer);
@@ -223,19 +223,19 @@ public class MatchSimulation {
 		}
 		//Check if it is half time
 		else if((this.nbActions > 45) && (this.halfTime == false)) {
-			Player newPlayer;
+			Player newPlayer = new Player();
 			game.alrecap.add("Mi_temps !");
 			game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 			game.alrecap.add("");
 			this.halfTime=true;
 			if(teamStart.getTeamName().equals(game.getTeamB().getTeamName())) {
-				newPlayer = getRandomPlayer("A", game.getTeamA(), "");
+				newPlayer = getRandomPlayer("A", game.getTeamA(), newPlayer);
 				game.alrecap.add("Début de la deuxième mi-temps");
 				game.alrecap.add("L'equipe "+game.getTeamA().getTeamName()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
 				mid(game.getTeamA(), game.getTeamB(), newPlayer);
 			}
 			else {
-				newPlayer = getRandomPlayer("A", game.getTeamB(), "");
+				newPlayer = getRandomPlayer("A", game.getTeamB(), newPlayer);
 				game.alrecap.add("Début de la deuxième mi-temps");
 				game.alrecap.add("L'equipe "+game.getTeamB().getTeamName()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
 				mid(game.getTeamB(), game.getTeamA(), newPlayer);
@@ -266,19 +266,19 @@ public class MatchSimulation {
 		}
 		//Check if it is half time
 		else if((this.nbActions > 45) && (this.halfTime == false)) {
-			Player newPlayer;
+			Player newPlayer = new Player();
 			game.alrecap.add("Mi_temps !");
 			game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 			game.alrecap.add("");
 			this.halfTime=true;
 			if(teamStart.getTeamName().equals(game.getTeamB().getTeamName())) {
-				newPlayer = getRandomPlayer("A", game.getTeamA(), "");
+				newPlayer = getRandomPlayer("A", game.getTeamA(), newPlayer);
 				game.alrecap.add("Début de la deuxième mi-temps");
 				game.alrecap.add("L'equipe "+game.getTeamA().getTeamName()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
 				mid(game.getTeamA(), game.getTeamB(), newPlayer);
 			}
 			else {
-				newPlayer = getRandomPlayer("A", game.getTeamB(), "");
+				newPlayer = getRandomPlayer("A", game.getTeamB(), newPlayer);
 				game.alrecap.add("Début de la deuxième mi-temps");
 				game.alrecap.add("L'equipe "+game.getTeamB().getTeamName()+" engage à son tour par l'intermédiaire de "+newPlayer.getLastName());
 				mid(game.getTeamB(), game.getTeamA(), newPlayer);
@@ -306,7 +306,7 @@ public class MatchSimulation {
 		switch(position) {
 		case "att" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("D", tDef, player);
 			
 			//Force is calculated according to statistics
 			attacker = calculateKickAtt(tAtt, position, player);
@@ -327,7 +327,7 @@ public class MatchSimulation {
 					game.alrecap.add("But de l'équipe "+ tAtt.getTeamName() + " marqué par "+player.getLastName());
 					game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 					game.alrecap.add("");
-					newPlayer = getRandomPlayer("A", tDef, player.getLastName());
+					newPlayer = getRandomPlayer("A", tDef, player);
 					game.alrecap.add("Retour au milieu pour l'équipe "+tDef.getTeamName()+ " et engagement par "+newPlayer.getLastName());
 					incrementAction(tAtt);
 					mid(tDef, tAtt, newPlayer);
@@ -335,7 +335,7 @@ public class MatchSimulation {
 					//Check if the goalkeeper can catch the ball
 					if(random.nextInt(101)<50) {
 						//Goalkeeper catch the ball
-						newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+						newPlayer = getRandomPlayer("D", tDef, player);
 						game.alrecap.add("Arrêt de "+tDef.getGoalKeeper().getLastName()+" pour l'équipe "+ tDef.getTeamName() + " et passe à "+newPlayer.getLastName());
 						incrementAction(tAtt);
 						pass(tDef, tAtt, "def", newPlayer);
@@ -399,7 +399,7 @@ public class MatchSimulation {
 			break;
 		case "mid" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("M", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("M", tDef, player);
 			
 			//Force is calculated according to statistics
 			attacker = calculateKickAtt(tAtt, position, player);
@@ -420,7 +420,7 @@ public class MatchSimulation {
 					game.alrecap.add("But de l'équipe "+ tAtt.getTeamName()+ " marqué par "+player.getLastName());
 					game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 					game.alrecap.add("");
-					newPlayer = getRandomPlayer("A", tDef, player.getLastName());
+					newPlayer = getRandomPlayer("A", tDef, player);
 					game.alrecap.add("Retour au milieu pour l'équipe "+tDef.getTeamName()+ " et engagement par "+newPlayer.getLastName());
 					incrementAction(tAtt);
 					mid(tDef, tAtt, newPlayer);
@@ -428,7 +428,7 @@ public class MatchSimulation {
 					//Check if the goalkeeper can catch the ball
 					if(random.nextInt(101)<50) {
 						//Goalkeeper catch the ball
-						newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+						newPlayer = getRandomPlayer("D", tDef, player);
 						game.alrecap.add("Arrêt de "+tDef.getGoalKeeper().getLastName()+" pour l'équipe "+ tDef.getTeamName() + " et passe "+newPlayer.getLastName());
 						incrementAction(tAtt);
 						pass(tDef, tAtt, "def", newPlayer);
@@ -489,7 +489,7 @@ public class MatchSimulation {
 			break;
 		case "def" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("A", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("A", tDef, player);
 			
 			//Force is calculated according to statistics
 			attacker = calculateKickAtt(tAtt, position, player);
@@ -508,14 +508,14 @@ public class MatchSimulation {
 							//Medium kick, check who will get the ball
 							if(random.nextInt(101)  < 80+ this.calLuck(-5,11)) {
 								//Attacker get the ball
-								newPlayer = getRandomPlayer("M", tAtt, player.getLastName());
+								newPlayer = getRandomPlayer("M", tAtt, player);
 								game.alrecap.add("Dégagement réussi par "+player.getLastName()+" pour l'équipe "+ tAtt.getTeamName()+", "+newPlayer.getLastName()+" récupère le ballon au milieu du terrain");
 								incrementAction(tAtt);
 								incrementPass(tAtt);
 								mid(tAtt, tDef,newPlayer);
 							} else {
 								//Defender get the ball
-								newPlayer = getRandomPlayer("M", tDef, player.getLastName());
+								newPlayer = getRandomPlayer("M", tDef, player);
 								game.alrecap.add("Dégagement raté par "+player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon au milieu du terrain par "+newPlayer.getLastName()+" l'équipe "+tDef.getTeamName()+"");
 								incrementAction(tAtt);
 								mid(tDef, tAtt, newPlayer);
@@ -524,14 +524,14 @@ public class MatchSimulation {
 							//Long kick, check who will get the ball
 							if(random.nextInt(101)  < 70+ this.calLuck(-5,11)) {
 								//Attacker get the ball
-								newPlayer = getRandomPlayer("A", tAtt, player.getLastName());
+								newPlayer = getRandomPlayer("A", tAtt, player);
 								game.alrecap.add("Dégagement long réussi par "+player.getLastName()+ "pour l'équipe "+ tAtt.getTeamName()+" "+newPlayer.getLastName()+" récupère le ballon en attaque");
 								incrementAction(tAtt);
 								incrementPass(tAtt);
 								att(tAtt, tDef, newPlayer);
 							} else {
 								//Defender get the ball
-								newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+								newPlayer = getRandomPlayer("D", tDef, player);
 								game.alrecap.add("Dégagement long raté par "+player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon en défense terrain pour "+tDef.getTeamName());
 								incrementAction(tAtt);
 								def(tDef, tAtt, newPlayer);
@@ -628,7 +628,7 @@ public class MatchSimulation {
 		switch(position) {
 		case "att" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("D", tDef, player);
 			
 			//Force is calculated according to statistics
 			attacker = calculateKickAtt(tAtt, position, player);
@@ -648,7 +648,7 @@ public class MatchSimulation {
 					if(attacker + this.calLuck(-5,11) > calculateGoalKeeper(tDef) + this.calLuck(-5,21)) {
 						//Score a goal
 						game.setScore(tAtt);
-						newPlayer = getRandomPlayer("A", tDef, player.getLastName());
+						newPlayer = getRandomPlayer("A", tDef, player);
 						game.alrecap.add("But de l'équipe "+ tAtt.getTeamName() + " !");
 						game.alrecap.add("Quelle frappe enroulée de "+player.getLastName()+" sur le tir !");
 						game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
@@ -660,7 +660,7 @@ public class MatchSimulation {
 						//Check if the goalkeeper can catch the ball
 						if(random.nextInt(101)<50) {
 							//Goalkeeper catch the ball
-							newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+							newPlayer = getRandomPlayer("D", tDef, player);
 							game.alrecap.add("Ballon arrêté par "+tDef.getGoalKeeper().getLastName()+" de l'équipe "+ tDef.getTeamName() + ", remet en jeu en passant à "+newPlayer.getLastName());
 							incrementAction(tAtt);
 							pass(tDef, tAtt, "def", newPlayer);
@@ -697,14 +697,14 @@ public class MatchSimulation {
 				//Check if the pass is intercept
 				if(random.nextInt(101)<95) {
 					//Pass successful
-					newPlayer = getRandomPlayer("A", tAtt, player.getLastName());
+					newPlayer = getRandomPlayer("A", tAtt, player);
 					game.alrecap.add("Passe réussi par "+ player.getLastName() +" à "+newPlayer.getLastName()+", ballon dans la surface");
 					incrementPass(tAtt);
 					incrementAction(tAtt);
 					att(tAtt, tDef, newPlayer);
 				}else {
 					//Pass intercept
-					newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+					newPlayer = getRandomPlayer("D", tDef, player);
 					game.alrecap.add("Passe raté par "+ player.getLastName() +", "+ newPlayer.getLastName()+" récupère la balle dans son camp");
 					incrementAction(tAtt);
 					def(tDef, tAtt, newPlayer);
@@ -713,7 +713,7 @@ public class MatchSimulation {
 			break;
 		case "mid" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("M", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("M", tDef, player);
 			
 			//Force is calculated according to statistics
 			attacker = calculateKickAtt(tAtt, position, player);
@@ -729,14 +729,14 @@ public class MatchSimulation {
 					//Check who will get the ball
 					if(random.nextInt(101)  < defender + this.calLuck(-5,11)) {
 						//Attacker get the ball
-						newPlayer = getRandomPlayer("A", tAtt, player.getLastName());
+						newPlayer = getRandomPlayer("A", tAtt, player);
 						game.alrecap.add("Dégagement long réussi par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon en attaque");
 						incrementPass(tAtt);
 						incrementAction(tAtt);
 						att(tAtt, tDef, newPlayer);
 					} else {
 						//Defender get the ball
-						newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+						newPlayer = getRandomPlayer("D", tDef, player);
 						game.alrecap.add("Dégagement long raté par "+ player.getLastName()+", l'équipe "+tDef.getTeamName()+" récupère le ballon au milieu du terrain par l'intermédiaire de "+newPlayer.getLastName());
 						incrementAction(tAtt);
 						def(tDef, tAtt, newPlayer);
@@ -746,14 +746,14 @@ public class MatchSimulation {
 				else {
 					//Check who pulls out the ball
 					if(random.nextInt(101) < 50) {
-						newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+						newPlayer = getRandomPlayer("D", tDef, player);
 						game.alrecap.add("Le ballon sort suite à la pression de "+newPlayer.getLastName());
 						game.alrecap.add("Touche pour l'équipe"+ tDef.getTeamName()+ " au milieu du terrain, remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
 						pass(tDef, tAtt, "mid", newPlayer);
 					}
 					else {
-						newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+						newPlayer = getRandomPlayer("D", tDef, player);
 						game.alrecap.add("Le ballon est dévié par "+ newPlayer.getLastName()+" au milieu du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tAtt.getTeamName()+ " au milieu du terrain, remis en jeu par "+player.getLastName());
 						incrementAction(tAtt);
@@ -767,7 +767,7 @@ public class MatchSimulation {
 				//Check if the ball will be intercept
 				if(random.nextInt(101)<=95) {
 					//Pass successful
-					newPlayer = getRandomPlayer("M", tAtt, player.getLastName());
+					newPlayer = getRandomPlayer("M", tAtt, player);
 					game.alrecap.add("Passe réussi par "+ player.getLastName()+ " à "+newPlayer.getLastName()+", ballon au milieu du terrain");
 					incrementPass(tAtt);
 					incrementAction(tAtt);
@@ -782,7 +782,7 @@ public class MatchSimulation {
 			break;
 		case "def" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("A", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("A", tDef, player);
 			
 			//Force is calculated according to statistics
 			attacker = calculateKickAtt(tAtt, position, player);
@@ -799,14 +799,14 @@ public class MatchSimulation {
 						//Check who will get the ball
 						if(random.nextInt(101) + this.calLuck(-5,11) < 80) {
 							//Attacker get the ball
-							newPlayer = getRandomPlayer("M", tAtt, player.getLastName());
+							newPlayer = getRandomPlayer("M", tAtt, player);
 							game.alrecap.add("Dégagement réussi par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon au milieu du terrain");
 							incrementPass(tAtt);
 							incrementAction(tAtt);
 							mid(tAtt, tDef, newPlayer);
 						} else {
 							//Defender get the ball
-							newPlayer = getRandomPlayer("M", tDef, player.getLastName());
+							newPlayer = getRandomPlayer("M", tDef, player);
 							game.alrecap.add("Dégagement raté par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon au milieu du terrain");
 							incrementAction(tAtt);
 							mid(tDef, tAtt, newPlayer);
@@ -815,14 +815,14 @@ public class MatchSimulation {
 						//Check who will get the ball
 						if(random.nextInt(101) + this.calLuck(-5,11) < 80) {
 							//Attacker get the ball
-							newPlayer = getRandomPlayer("A", tAtt, player.getLastName());
+							newPlayer = getRandomPlayer("A", tAtt, player);
 							game.alrecap.add("Dégagement long réussi par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon en attaque");
 							incrementPass(tAtt);
 							incrementAction(tAtt);
 							att(tAtt, tDef, newPlayer);
 						} else {
 							//Defender get the ball
-							newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+							newPlayer = getRandomPlayer("D", tDef, player);
 							game.alrecap.add("Dégagement long raté par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon en défense");
 							incrementAction(tAtt);
 							def(tDef, tAtt, newPlayer);
@@ -832,7 +832,7 @@ public class MatchSimulation {
 				}else {
 					//Defender get tje ball
 					game.alrecap.add("Le ballon par vers la touche suite au dégagement de "+player.getLastName());
-					newPlayer = getRandomPlayer("M", tDef, player.getLastName());
+					newPlayer = getRandomPlayer("M", tDef, player);
 					game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain, remis en jeu par"+newPlayer.getLastName());
 					incrementAction(tAtt);
 					pass(tDef, tAtt, "mid", newPlayer);
@@ -844,7 +844,7 @@ public class MatchSimulation {
 				//Check if the ball will be intercept
 				if(random.nextInt(101)<=98) {
 					//Pass successful
-					newPlayer = getRandomPlayer("D", tAtt, player.getLastName());
+					newPlayer = getRandomPlayer("D", tAtt, player);
 					game.alrecap.add("Passe réussi par "+ player.getLastName()+" à "+newPlayer.getLastName()+" ballon en défense");
 					incrementPass(tAtt);
 					incrementAction(tAtt);
@@ -868,7 +868,7 @@ public class MatchSimulation {
 		switch(position) {		
 		case "att" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("D", tDef, player);
 			
 			//Force is calculated according to statistics
 			attacker = calculatePassAtt(tAtt, position, player);
@@ -882,7 +882,7 @@ public class MatchSimulation {
 					//Check if defender intercept the pass
 					if(random.nextInt(101)  > defender + this.calLuck(-5,11)) {
 						//Pass successful
-						newPlayer = getRandomPlayer("A", tAtt, player.getLastName());
+						newPlayer = getRandomPlayer("A", tAtt, player);
 						game.alrecap.add(nbActions+"min - Passe réussi par "+player.getLastName()+" à "+newPlayer.getLastName()+", il conserve la balle en attaque");
 						incrementPass(tAtt);
 						incrementAction(tAtt);
@@ -925,7 +925,7 @@ public class MatchSimulation {
 			break;
 		case "mid" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("M", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("M", tDef, player);
 			
 			//Force is calculated according to statistics
 			attacker = calculatePassAtt(tAtt, position, player);
@@ -939,7 +939,7 @@ public class MatchSimulation {
 					//Check if defender intercept the pass
 					if(random.nextInt(101)  < defender+ this.calLuck(-5,11)) {
 						//Pass successful
-						newPlayer = getRandomPlayer("A", tAtt, player.getLastName());
+						newPlayer = getRandomPlayer("A", tAtt, player);
 						game.alrecap.add(nbActions+"min - Passe réussi par "+player.getLastName()+" à "+newPlayer.getLastName()+" il passe en attaque");
 						incrementPass(tAtt);
 						incrementAction(tAtt);
@@ -982,7 +982,7 @@ public class MatchSimulation {
 			break;
 		case "def" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("A", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("A", tDef, player);
 			
 			//Force is calculated according to statistics
 			attacker = calculatePassAtt(tAtt, position, player);
@@ -996,7 +996,7 @@ public class MatchSimulation {
 					//Check if defender intercept the pass
 					if(random.nextInt(101)  < defender+ this.calLuck(-5,11)) {
 						//Pass successful
-						newPlayer = getRandomPlayer("M", tAtt, player.getLastName());
+						newPlayer = getRandomPlayer("M", tAtt, player);
 						game.alrecap.add(nbActions+"min - Passe réussi par "+player.getLastName()+" à "+newPlayer.getLastName()+" il passe au milieu du terrain");
 						incrementPass(tAtt);
 						incrementAction(tAtt);
@@ -1078,7 +1078,7 @@ public class MatchSimulation {
 		switch(position) {
 		case "att" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("D", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("D", tDef, player);
 			
 			//Force is calculated according to statistics
 			attacker = calculateDribbleAtt(tAtt, position, player);
@@ -1132,7 +1132,7 @@ public class MatchSimulation {
 			break;
 		case "mid" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("M", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("M", tDef, player);
 			
 			attacker = calculateDribbleAtt(tAtt, position, player);
 			defender = calculateDribbleDef(tDef, position, newPlayer);
@@ -1185,7 +1185,7 @@ public class MatchSimulation {
 			break;
 		case "def" : 
 			//Get random player who will defend
-			newPlayer = getRandomPlayer("A", tDef, player.getLastName());
+			newPlayer = getRandomPlayer("A", tDef, player);
 			
 			attacker = calculateDribbleAtt(tAtt, position, player);
 			defender = calculateDribbleDef(tDef, position, newPlayer);
@@ -1274,7 +1274,7 @@ public class MatchSimulation {
 	}
 	
 	
-	private Player getRandomPlayer(String position, Team team, String name) {
+	private Player getRandomPlayer(String position, Team team, Player actualPlayer) {
 		//Get the starter player and put them in array by there positions
 		ArrayList<Player> def = new ArrayList<Player>();
 		ArrayList<Player> mid = new ArrayList<Player>();
@@ -1336,9 +1336,9 @@ public class MatchSimulation {
 			System.out.println("////////////////////// att "+att.size()+" def "+def.size()+" mid "+mid.size());
 		}
 		//Check if the new player name is note equals to the current player name
-		if(name.equals(player.getLastName())) {
-			System.out.println(" Player "+name+" newplayer "+ player.getLastName());
-			player = getRandomPlayer(position, team, name);
+		if(actualPlayer.equals(player)) {
+			System.out.println(" Player "+actualPlayer.getLastName()+" newplayer "+ player.getLastName());
+			player = getRandomPlayer(position, team, actualPlayer);
 		}
 		
 		return player;
