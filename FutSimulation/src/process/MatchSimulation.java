@@ -1476,6 +1476,10 @@ public class MatchSimulation {
 				game.alrecap.add(player.getLastName()+" sort suite à une blessure, remplacé par "+newPlayer.getLastName());
 			}
 		}
+		
+
+		
+		
 	}
 	
 	private void getCard(Player player, Team team) {

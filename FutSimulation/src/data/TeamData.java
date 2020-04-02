@@ -19,167 +19,112 @@ public class TeamData {
 	
 	public void createTeams(ArrayList<Team> alTeams) {
 		ll.add("France");
-        ll.add("Germany");
-        ll.add("Belgium");
-        ll.add("Peru");
-        ll.add("Mexico");
-        ll.add("Brazil");
-        ll.add("Poland");
-        ll.add("Switzerland");
+        ll.add("Allemagne");
+        ll.add("Belgique");
+        ll.add("Perou");
+        ll.add("Mexique");
+        ll.add("Brésil");
+        ll.add("Pologne");
+        ll.add("Suisse");
         ll.add("Uruguay");
         ll.add("Portugal");
-        ll.add("England");
-        ll.add("Croatia");
-        ll.add("Argentina");
-        ll.add("Spain");
-        ll.add("Colombia");
-        ll.add("Denmark");
+        ll.add("Angleterre");
+        ll.add("Craotie");
+        ll.add("Argentine");
+        ll.add("Espagne");
+        ll.add("Colombie");
+        ll.add("Danemark");
 		
 		//FRANCE
-
-		llPlayer.add(ClassFactory.creatPlayer("Hugo","Lloris",new PlayerStatistic(82,62,68,89,91,84,r.nextInt(50)+50),"G"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Steve","Mandanda",new PlayerStatistic(79,43,74,80,81,79,r.nextInt(50)+50),"G"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Alphonse","Areola",new PlayerStatistic(79,54,80,85,84,78,r.nextInt(50)+50),"G"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Benjamin","Pavard",new PlayerStatistic(47,81,72,69,70,74,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Presnel","Kimpembe",new PlayerStatistic(39,81,67,75,68,83,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Raphäel","Varane",new PlayerStatistic(45,85,62,83,64,80,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Samuel","Umtiti",new PlayerStatistic(63,86,69,69,70,82,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Adil","Rami",new PlayerStatistic(48,76,53,47,60,81,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Djibril","Sidibé",new PlayerStatistic(62,73,74,77,74,79,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Lucas","Hernandez",new PlayerStatistic(54,83,70,81,71,82,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Benjamin","Mendy",new PlayerStatistic(51,77,77,81,77,77,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Paul","Pogba",new PlayerStatistic(81,66,86,74,85,86,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Corentin","Tolisso",new PlayerStatistic(77,76,79,69,78,79,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("N’Golo","Kanté",new PlayerStatistic(65,87,77,78,81,83,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Blaise","Matudi",new PlayerStatistic(66,83,76,75,78,81,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Steven","Nzonzi",new PlayerStatistic(55,79,71,42,69,86,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Antoine","Griezmann",new PlayerStatistic(86,57,84,81,89,72,r.nextInt(50)+50),"A"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Thomas","Lemar",new PlayerStatistic(76,59,82,83,85,67,r.nextInt(50)+50),"A"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Olivier","Giroud",new PlayerStatistic(81,42,71,46,73,79,r.nextInt(50)+50),"A"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Kylian","Mbappé",new PlayerStatistic(84,39,78,96,90,75,r.nextInt(50)+50),"A"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Ousmane","Dembélé",new PlayerStatistic(79,36,80,93,87,57,r.nextInt(50)+50),"A"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Nabil","Fekir",new PlayerStatistic(82,33,81,78,88,77,r.nextInt(50)+50),"A"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Florian","Thauvin",new PlayerStatistic(80,41,81,83,83,69,r.nextInt(50)+50),"A"));
+        Team france = new Team("France");
+        
+        france.getStarter().add(ClassFactory.creatPlayer("Hugo","Lloris",new PlayerStatistic(82,62,68,89,91,84,r.nextInt(50)+50),"G"));
+        france.getStarter().add(ClassFactory.creatPlayer("Benjamin","Pavard",new PlayerStatistic(47,81,72,69,70,74,r.nextInt(50)+50),"D"));
+        france.getStarter().add(ClassFactory.creatPlayer("Presnel","Kimpembe",new PlayerStatistic(39,81,67,75,68,83,r.nextInt(50)+50),"D"));
+        france.getStarter().add(ClassFactory.creatPlayer("Raphäel","Varane",new PlayerStatistic(45,85,62,83,64,80,r.nextInt(50)+50),"D"));
+        france.getStarter().add(ClassFactory.creatPlayer("Samuel","Umtiti",new PlayerStatistic(63,86,69,69,70,82,r.nextInt(50)+50),"D"));
+        france.getStarter().add(ClassFactory.creatPlayer("Paul","Pogba",new PlayerStatistic(81,66,86,74,85,86,r.nextInt(50)+50),"M"));
+		france.getStarter().add(ClassFactory.creatPlayer("Blaise","Matudi",new PlayerStatistic(66,83,76,75,78,81,r.nextInt(50)+50),"M"));
+		france.getStarter().add(ClassFactory.creatPlayer("N’Golo","Kanté",new PlayerStatistic(65,87,77,78,81,83,r.nextInt(50)+50),"M"));
+		france.getStarter().add(ClassFactory.creatPlayer("Antoine","Griezmann",new PlayerStatistic(86,57,84,81,89,72,r.nextInt(50)+50),"A"));
+		france.getStarter().add(ClassFactory.creatPlayer("Olivier","Giroud",new PlayerStatistic(81,42,71,46,73,79,r.nextInt(50)+50),"A"));
+		france.getStarter().add(ClassFactory.creatPlayer("Kylian","Mbappé",new PlayerStatistic(84,39,78,96,90,75,r.nextInt(50)+50),"A"));
+		
+		france.getBench().add(ClassFactory.creatPlayer("Steve","Mandanda",new PlayerStatistic(79,43,74,80,81,79,r.nextInt(50)+50),"G"));
+		france.getBench().add(ClassFactory.creatPlayer("Alphonse","Areola",new PlayerStatistic(79,54,80,85,84,78,r.nextInt(50)+50),"G"));
+		france.getBench().add(ClassFactory.creatPlayer("Adil","Rami",new PlayerStatistic(48,76,53,47,60,81,r.nextInt(50)+50),"D"));
+		france.getBench().add(ClassFactory.creatPlayer("Djibril","Sidibé",new PlayerStatistic(62,73,74,77,74,79,r.nextInt(50)+50),"D"));
+		france.getBench().add(ClassFactory.creatPlayer("Lucas","Hernandez",new PlayerStatistic(54,83,70,81,71,82,r.nextInt(50)+50),"D"));
+		france.getBench().add(ClassFactory.creatPlayer("Benjamin","Mendy",new PlayerStatistic(51,77,77,81,77,77,r.nextInt(50)+50),"D"));
+		france.getBench().add(ClassFactory.creatPlayer("Corentin","Tolisso",new PlayerStatistic(77,76,79,69,78,79,r.nextInt(50)+50),"M"));
+		france.getBench().add(ClassFactory.creatPlayer("Steven","Nzonzi",new PlayerStatistic(55,79,71,42,69,86,r.nextInt(50)+50),"M"));
+		france.getBench().add(ClassFactory.creatPlayer("Thomas","Lemar",new PlayerStatistic(76,59,82,83,85,67,r.nextInt(50)+50),"M"));
+		france.getBench().add(ClassFactory.creatPlayer("Ousmane","Dembélé",new PlayerStatistic(79,36,80,93,87,57,r.nextInt(50)+50),"A"));
+		france.getBench().add(ClassFactory.creatPlayer("Nabil","Fekir",new PlayerStatistic(82,33,81,78,88,77,r.nextInt(50)+50),"A"));
+		france.getBench().add(ClassFactory.creatPlayer("Florian","Thauvin",new PlayerStatistic(80,41,81,83,83,69,r.nextInt(50)+50),"A"));
 
 
 		//ALLEMAGNE
-
-
 		llPlayer.add(ClassFactory.creatPlayer("Manuel","Neuer",new PlayerStatistic(87,60,91,87,87,85,r.nextInt(50)+50),"G"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Marc-André","Ter Stegen",new PlayerStatistic(85,43,88,88,90,88,r.nextInt(50)+50),"G"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Kevin","Trapp",new PlayerStatistic(77,52,79,82,85,83,r.nextInt(50)+50),"G"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Jérôme","Boateng",new PlayerStatistic(50,84,72,66,66,82,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Matthias","Ginter",new PlayerStatistic(58,82,69,62,65,77,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Jonas","Hector",new PlayerStatistic(60,78,75,75,75,75,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Joshua","Kimmich",new PlayerStatistic(69,79,86,72,84,78,r.nextInt(50)+50),"D"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Mats","Hummels",new PlayerStatistic(58,89,76,51,73,76,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Marvin","Plattenhardt",new PlayerStatistic(55,74,77,71,75,72,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Antonio","Rüdiger",new PlayerStatistic(43,82,67,72,64,78,r.nextInt(50)+50),"D"));
-
+		llPlayer.add(ClassFactory.creatPlayer("Joshua","Kimmich",new PlayerStatistic(69,79,86,72,84,78,r.nextInt(50)+50),"D"));
 		llPlayer.add(ClassFactory.creatPlayer("Niklas","Süle",new PlayerStatistic(42,86,55,72,51,82,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Julian","Brandt",new PlayerStatistic(78,40,81,82,85,68,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Julian","Draxler",new PlayerStatistic(79,55,81,77,86,63,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Marco","Reus",new PlayerStatistic(88,45,84,85,87,66,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Leon","Goretzka",new PlayerStatistic(77,75,80,81,81,79,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Ilkay","Gündogan",new PlayerStatistic(74,72,84,66,84,71,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Sami","Khedira",new PlayerStatistic(74,80,78,51,78,80,r.nextInt(50)+50),"M"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Toni","Kroos",new PlayerStatistic(80,70,90,45,81,69,r.nextInt(50)+50),"M"));
-
+		llPlayer.add(ClassFactory.creatPlayer("Marco","Reus",new PlayerStatistic(88,45,84,85,87,66,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Julian","Draxler",new PlayerStatistic(79,55,81,77,86,63,r.nextInt(50)+50),"M"));
 		llPlayer.add(ClassFactory.creatPlayer("Thomas","Müller",new PlayerStatistic(83,55,79,72,78,71,r.nextInt(50)+50),"A"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Mesut","Ozil",new PlayerStatistic(72,24,86,70,84,56,r.nextInt(50)+50),"A"));
-
+		llPlayer.add(ClassFactory.creatPlayer("Mesut","Ozil",new PlayerStatistic(78,24,86,70,84,56,r.nextInt(50)+50),"A"));
+		llPlayer.add(ClassFactory.creatPlayer("Timo","Werner",new PlayerStatistic(81,35,67,92,82,69,r.nextInt(50)+50),"A"));
+		
+		
+		llPlayer.add(ClassFactory.creatPlayer("Marc-André","Ter Stegen",new PlayerStatistic(85,43,88,88,90,88,r.nextInt(50)+50),"G"));
+		llPlayer.add(ClassFactory.creatPlayer("Kevin","Trapp",new PlayerStatistic(77,52,79,82,85,83,r.nextInt(50)+50),"G"));
+		llPlayer.add(ClassFactory.creatPlayer("Matthias","Ginter",new PlayerStatistic(58,82,69,62,65,77,r.nextInt(50)+50),"D"));
+		llPlayer.add(ClassFactory.creatPlayer("Jonas","Hector",new PlayerStatistic(60,78,75,75,75,75,r.nextInt(50)+50),"D"));
+		llPlayer.add(ClassFactory.creatPlayer("Marvin","Plattenhardt",new PlayerStatistic(55,74,77,71,75,72,r.nextInt(50)+50),"D"));
+		llPlayer.add(ClassFactory.creatPlayer("Antonio","Rüdiger",new PlayerStatistic(43,82,67,72,64,78,r.nextInt(50)+50),"D"));
+		llPlayer.add(ClassFactory.creatPlayer("Julian","Brandt",new PlayerStatistic(78,40,81,82,85,68,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Leon","Goretzka",new PlayerStatistic(77,75,80,81,81,79,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Ilkay","Gündogan",new PlayerStatistic(74,72,84,66,84,71,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Sami","Khedira",new PlayerStatistic(74,80,78,51,78,80,r.nextInt(50)+50),"M"));
 		llPlayer.add(ClassFactory.creatPlayer("Sebastian","Rudy",new PlayerStatistic(67,75,79,64,78,67,r.nextInt(50)+50),"A"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Mario","Gomez",new PlayerStatistic(75,35,59,58,67,75,r.nextInt(50)+50),"A"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Timo","Werner",new PlayerStatistic(81,35,67,92,82,69,r.nextInt(50)+50),"A"));
+		
 
 		//BELGIQUE
 
 		llPlayer.add(ClassFactory.creatPlayer("Thibault","Courtois",new PlayerStatistic(89,43,72,85,87,85,r.nextInt(50)+50),"G"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Simon","Mignolet",new PlayerStatistic(72,52,62,79,80,75,r.nextInt(50)+50),"G"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Koen","Casteels",new PlayerStatistic(79,46,79,83,82,82,r.nextInt(50)+50),"G"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Toby","Alderweireld",new PlayerStatistic(55,88,72,64,67,79,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Thomas","Vemaelen",new PlayerStatistic(61,77,70,64,61,69,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Vincent","Kompany",new PlayerStatistic(53,84,65,50,64,79,r.nextInt(50)+50),"D"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Jan","Vertonghen",new PlayerStatistic(63,87,74,63,73,79,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Thomas","Meunier",new PlayerStatistic(75,68,77,79,75,84,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Dedryck","Boyata",new PlayerStatistic(30,74,51,64,60,85,r.nextInt(50)+50),"D"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Axel","Wistel",new PlayerStatistic(74,83,80,73,80,81,r.nextInt(50)+50),"M"));
-
+		llPlayer.add(ClassFactory.creatPlayer("Thomas","Vemaelen",new PlayerStatistic(61,77,70,64,61,69,r.nextInt(50)+50),"D"));
+		llPlayer.add(ClassFactory.creatPlayer("Vincent","Kompany",new PlayerStatistic(53,84,65,50,64,79,r.nextInt(50)+50),"D"));
 		llPlayer.add(ClassFactory.creatPlayer("Kevin","De Bruyne",new PlayerStatistic(86,61,92,67,87,78,r.nextInt(50)+50),"M"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Marouane","Fellaini",new PlayerStatistic(71,76,70,42,69,88,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Yannick","Carrasco",new PlayerStatistic(80,39,75,90,86,64,r.nextInt(50)+50),"M"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Dries","Mertens",new PlayerStatistic(83,35,80,88,90,53,r.nextInt(50)+50),"M"));
-
-		llPlayer.add(ClassFactory.creatPlayer("Thorgan","Hazard",new PlayerStatistic(77,47,80,82,85,64,r.nextInt(50)+50),"M"));
-
+		llPlayer.add(ClassFactory.creatPlayer("Romelu","Lukaku",new PlayerStatistic(82,35,73,75,72,84,r.nextInt(50)+50),"A"));
+		llPlayer.add(ClassFactory.creatPlayer("Eden","Hazard",new PlayerStatistic(83,35,86,91,94,66,r.nextInt(50)+50),"A"));
+		llPlayer.add(ClassFactory.creatPlayer("Michy","Batshuayi",new PlayerStatistic(79,33,58,76,78,72,r.nextInt(50)+50),"A"));
+		
+		llPlayer.add(ClassFactory.creatPlayer("Simon","Mignolet",new PlayerStatistic(72,52,62,79,80,75,r.nextInt(50)+50),"G"));
+		llPlayer.add(ClassFactory.creatPlayer("Koen","Casteels",new PlayerStatistic(79,46,79,83,82,82,r.nextInt(50)+50),"G"));
+		llPlayer.add(ClassFactory.creatPlayer("Thomas","Meunier",new PlayerStatistic(75,68,77,79,75,84,r.nextInt(50)+50),"D"));
+		llPlayer.add(ClassFactory.creatPlayer("Dedryck","Boyata",new PlayerStatistic(30,74,51,64,60,85,r.nextInt(50)+50),"D"));
+		llPlayer.add(ClassFactory.creatPlayer("Axel","Wistel",new PlayerStatistic(74,83,80,73,80,81,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Yannick","Carrasco",new PlayerStatistic(80,39,75,90,86,64,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Thorgan","Hazar",new PlayerStatistic(77,47,80,82,85,64,r.nextInt(50)+50),"M"));
 		llPlayer.add(ClassFactory.creatPlayer("Youri","Tielemans",new PlayerStatistic(78,68,82,63,78,67,r.nextInt(50)+50),"M"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Adnan","Januzaj",new PlayerStatistic(76,29,74,76,82,56,r.nextInt(50)+50),"M"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Mousa","Dembélé",new PlayerStatistic(68,77,77,73,87,80,r.nextInt(50)+50),"M"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Nacer","Chadli",new PlayerStatistic(73,47,74,71,76,75,r.nextInt(50)+50),"A"));
-
 		llPlayer.add(ClassFactory.creatPlayer("Leander","Dendoncker",new PlayerStatistic(72,78,77,67,71,83,r.nextInt(50)+50),"A"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Romelu","Lukaku",new PlayerStatistic(82,35,73,75,72,84,r.nextInt(50)+50),"A"));
+		
 
-		llPlayer.add(ClassFactory.creatPlayer("Eden","Hazard",new PlayerStatistic(83,35,86,91,94,66,r.nextInt(50)+50),"A"));
+		
 
-		llPlayer.add(ClassFactory.creatPlayer("Michy","Batshuayi",new PlayerStatistic(79,33,58,76,78,72,r.nextInt(50)+50),"A"));
+		
 
 		//PEROU
 
@@ -253,7 +198,7 @@ public class TeamData {
 
 		llPlayer.add(ClassFactory.creatPlayer("Rafael","Marquez",new PlayerStatistic(68,70,63,78,71,65,r.nextInt(50)+50),"M"));
 
-		llPlayer.add(ClassFactory.creatPlayer("Jonathan","Dos Santos",new PlayerStatistic(67,68,78,72,78,70,r.nextInt(50)+50),"M"));
+		llPlayer.add(ClassFactory.creatPlayer("Jonathan","Ramirez",new PlayerStatistic(67,68,78,72,78,70,r.nextInt(50)+50),"M"));
 
 		llPlayer.add(ClassFactory.creatPlayer("Marco","Fabian",new PlayerStatistic(75,34,75,63,78,63,r.nextInt(50)+50),"M"));
 
