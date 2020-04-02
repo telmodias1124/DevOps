@@ -77,6 +77,7 @@ public class Start extends JFrame{
 	    ArrayList<Team> al = new ArrayList<Team>();
 	    td.createTeams(al);
 	    GroupPhaseSimulation groupePhase = new GroupPhaseSimulation();
+	    mf.setGroupPhase(groupePhase);
 	    groupePhase.setAlTeams(al);
 	    groupePhase.simulate();
 
