@@ -101,7 +101,7 @@ public class GamePanel extends JPanel {
 					JButton jbRestart;
 					jbRestart = new JButton("Restart Match");
 					try {
-	                    Image img = ImageIO.read(new File("images/restart_all.png"));
+	                    Image img = ImageIO.read(new File("images/restart.png"));
 	                    jbRestart.setIcon(new ImageIcon(img));
 	                  } catch (Exception ex) {
 	                    System.out.println(ex);
@@ -114,7 +114,7 @@ public class GamePanel extends JPanel {
 					JButton jbRestart;
 					jbRestart = new JButton("Restart");
 					try {
-	                    Image img = ImageIO.read(new File("images/restart.png"));
+	                    Image img = ImageIO.read(new File("images/restart_all.png"));
 	                    jbRestart.setIcon(new ImageIcon(img));
 	                  } catch (Exception ex) {
 	                    System.out.println(ex);
@@ -169,7 +169,7 @@ public class GamePanel extends JPanel {
         	JButton jbRestart;
 			jbRestart = new JButton("Restart");
 			try {
-                Image img = ImageIO.read(new File("images/restart.png"));
+                Image img = ImageIO.read(new File("images/restart_all.png"));
                 jbRestart.setIcon(new ImageIcon(img));
               } catch (Exception ex) {
                 System.out.println(ex);
@@ -211,7 +211,7 @@ public class GamePanel extends JPanel {
         	JButton jbRestart;
 			jbRestart = new JButton("Restart Match");
 			try {
-                Image img = ImageIO.read(new File("images/restart_all.png"));
+                Image img = ImageIO.read(new File("images/restart.png"));
                 jbRestart.setIcon(new ImageIcon(img));
               } catch (Exception ex) {
                 System.out.println(ex);
@@ -224,6 +224,14 @@ public class GamePanel extends JPanel {
         standingPanel.setOpaque(false);
         this.add(standingPanel);
     }
+
+	public MainFrame getMf() {
+		return mf;
+	}
+
+	public void setMf(MainFrame mf) {
+		this.mf = mf;
+	}
 
 	
 	

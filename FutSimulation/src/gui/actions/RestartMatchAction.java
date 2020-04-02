@@ -36,6 +36,7 @@ public class RestartMatchAction implements ActionListener {
 		ArrayList<Match> matchC = new ArrayList<Match>();
 		ArrayList<Match> matchD = new ArrayList<Match>();
 		
+		
 		groupPhase.gp.setListMatchGroupA(matchA);
 		groupPhase.gp.setListMatchGroupB(matchB);
 		groupPhase.gp.setListMatchGroupC(matchC);
@@ -45,7 +46,6 @@ public class RestartMatchAction implements ActionListener {
 		groupPhase.setAlTeams(al);
 		
 		groupPhase.simulateMatchGroupe();
-		groupPhase.updateStandings();
 		
 		System.out.println(groupPhase.groupToString());
 		System.out.println(groupPhase.matchsToString());

@@ -30,8 +30,7 @@ public class GroupPhaseSimulation {
 		createGroups(alTeams);
 		createMatchGroup(gp);
 		simulateMatchGroupe();
-		updateStandings();
-		//updateStandingsFalse();
+		updateStandingsFalse();
 	}
 	
 	/* ou passer l'arraylist des equipes */
@@ -130,42 +129,38 @@ public class GroupPhaseSimulation {
 	private void sortGroupByRandom(ArrayList<Team> alT, Standing standing) {
 		Random random = new Random();
 		Team t;
-		int i=0;
-		int p;
+
 		int r;
 		alSort = (ArrayList<Team>)alT.clone();
 		
-		ArrayList<Integer> listInt = new ArrayList<Integer>();
-		listInt.add(1);
-		listInt.add(2);
-		listInt.add(3);
-		listInt.add(4);
 		
-		while(alSort.size() > 0 ) {
-			t = alSort.get(i);
-			r = random.nextInt(4-i);
-			p = (int) listInt.get(r);
-			listInt.remove(r);
 			
-			switch(p) {
-				case 0 :
-					standing.setFirst(t);
-					break;
-				case 1 :
-					standing.setSecond(t);
-					break;
-				case 2 :
-					standing.setThird(t);
-					break;
-				case 3 :
-					standing.setFourth(t);
-					break;
-				default :
-					System.out.println("Erreur dans le classement");
-			}
-			i++;
-			alSort.remove(t);
-		}
+		r = random.nextInt(alSort.size());
+		t = alSort.get(r);
+		alSort.remove(r);	
+		
+		standing.setFirst(t);
+				
+		r = random.nextInt(alSort.size());
+		t = alSort.get(r);
+		alSort.remove(r);
+		
+		standing.setSecond(t);
+		
+		r = random.nextInt(alSort.size());
+		t = alSort.get(r);
+		alSort.remove(r);
+		
+		standing.setThird(t);
+		
+		r = random.nextInt(alSort.size());
+		t = alSort.get(r);
+		alSort.remove(r);
+		
+		standing.setFourth(t);
+					
+			
+		
 	}
 	
 	public void updateStandings() {
