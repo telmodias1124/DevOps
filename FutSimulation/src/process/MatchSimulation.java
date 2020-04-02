@@ -23,7 +23,7 @@ public class MatchSimulation {
 	
 	private void overtime() {
 		//Maximum action number in overtime
-		this.nbActionsMax = 30;
+		this.nbActionsMax = 30 ;
 		this.nbActions = 0;
 		Player player;
 		

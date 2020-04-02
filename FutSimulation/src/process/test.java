@@ -38,17 +38,17 @@ public class test {
 			if(t.getTeamName().equals("France")) {
 				fr = t;
 			}
-		}
+		}/*
 		
-		for(Player p : bel.getStarter()) {
-			System.out.println("Nom "+p.getFirstName()+" Position "+p.getPosition()+" Att "+p.getPlayerStatistic().getShoot());
-		}
+		//for(Player p : bel.getStarter()) {
+		//	System.out.println("Nom "+p.getFirstName()+" Position "+p.getPosition()+" Att "+p.getPlayerStatistic().getShoot());
+		//}
 		//System.out.println(""+p.getFirstName()+" Position "+p.getPosition()+" Att "+p.getPlayerStatistic().getShoot());
-		for(Player p : fr.getStarter()) {
-			System.out.println("Nom "+p.getFirstName()+" Position "+p.getPosition()+" Att "+p.getPlayerStatistic().getShoot());
-		}
+		/*for(Player p : fr.getStarter()) {
+			System.out.println("Nom "+p.getLastName()+" Position "+p.getPosition()+" Att "+p.getPlayerStatistic().getShoot());
+		}*/
 		
-		Match match = new Match(bel, fr);
+		/*Match match = new Match(bel, fr);
 		MatchSimulation ms = new MatchSimulation();
 		
 		match.setOvertime(true);
@@ -63,9 +63,9 @@ public class test {
 		
 		
 		
-		System.out.println(groupePhase.groupToString());
-		System.out.println(groupePhase.matchsToString());
-		System.out.println(groupePhase.standingToString());
+		//System.out.println(groupePhase.groupToString());
+		//System.out.println(groupePhase.matchsToString());
+		//System.out.println(groupePhase.standingToString());
 		
 		/*for(String n : groupePhase.gp.getListMatchGroupC().get(2).alrecap) {
 			   System.out.println(n);
@@ -74,9 +74,9 @@ public class test {
 		KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
 		ks.setListQuarter(groupePhase.gp.getStandingGroupA(), groupePhase.gp.getStandingGroupB(), groupePhase.gp.getStandingGroupC(), groupePhase.gp.getStandingGroupD());
 		ks.simulate();
-		System.out.println(ks.quartersToString());
-		System.out.println(ks.semiToString());
-		System.out.println(ks.finalToString());
+		//System.out.println(ks.quartersToString());
+		//System.out.println(ks.semiToString());
+		//System.out.println(ks.finalToString());
 		
 		
 		MainFrame mf = new MainFrame();

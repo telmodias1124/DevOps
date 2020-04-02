@@ -47,18 +47,18 @@ public class RestartMatchAction implements ActionListener {
 		groupPhase.simulateMatchGroupe();
 		groupPhase.updateStandings();
 		
-		System.out.println(groupPhase.groupToString());
-		System.out.println(groupPhase.matchsToString());
-		System.out.println(groupPhase.standingToString());
+		//System.out.println(groupPhase.groupToString());
+		//System.out.println(groupPhase.matchsToString());
+		//System.out.println(groupPhase.standingToString());
 		
 		
 		
 		KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
 		ks.setListQuarter(groupPhase.gp.getStandingGroupA(), groupPhase.gp.getStandingGroupB(), groupPhase.gp.getStandingGroupC(), groupPhase.gp.getStandingGroupD());
 		ks.simulate();
-		System.out.println(ks.quartersToString());
-		System.out.println(ks.semiToString());
-		System.out.println(ks.finalToString());
+		//System.out.println(ks.quartersToString());
+		//System.out.println(ks.semiToString());
+		//System.out.println(ks.finalToString());
 
 		mf.createGroupPhasePanel(groupPhase.gp, ks.kp, groupPhase);
 
