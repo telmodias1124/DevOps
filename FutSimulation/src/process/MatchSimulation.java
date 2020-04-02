@@ -163,6 +163,7 @@ public class MatchSimulation {
 			}
 			else {
 				game.alrecap.add("Fin du temps réglementaire les équipes sont à égalités, prolongation à venir ");
+				game.setDraw(true);
 				overtime();
 			}
 		}
