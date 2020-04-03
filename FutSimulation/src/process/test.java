@@ -23,18 +23,18 @@ public class test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Start StartFrame = new Start();
-		/*TeamData td = new TeamData();
-		ArrayList<Team> al = new ArrayList<Team>();
-		td.createTeams(al);
-		Team bel = null, fr = null;
+		//TeamData td = new TeamData();
+		//ArrayList<Team> al = new ArrayList<Team>();
+		//td.createTeams(al);
+		//Team bel = null, fr = null;
 		
-		GroupPhaseSimulation groupePhase = new GroupPhaseSimulation();
-		groupePhase.setAlTeams(al);
-		groupePhase.simulate();
+		//GroupPhaseSimulation groupePhase = new GroupPhaseSimulation();
+		//groupePhase.setAlTeams(al);
+		//groupePhase.simulate();
 		
-		groupePhase.gp.getListMatchGroupA().get(0);*/
+		//groupePhase.gp.getListMatchGroupA().get(0);
 		/*for(Team t : al) {
-			if(t.getTeamName().equals("Belgium")) {
+			if(t.getTeamName().equals("Belgique")) {
 				bel = t;
 			}
 			if(t.getTeamName().equals("France")) {
@@ -55,15 +55,29 @@ public class test {
 		
 		match.setOvertime(true);
 		ms.setGame(match);
-		ms.simulate2();
+		ms.simulate();*/
 	
 				
 		
-		for(String n : ms.getGame().alrecap) {
+		/*for(String n : ms.getGame().alrecap) {
 			   System.out.println(n);
 		}*/
 		
+		/*ms.printjoeur();
 		
+		Match match2 = new Match(bel, fr);
+		
+		match2.setOvertime(true);
+		ms.setGame(match2);
+		ms.simulate();*/
+	
+				
+		
+		/*for(String n : ms.getGame().alrecap) {
+			   System.out.println(n);
+		}*/
+		
+		//ms.printjoeur();
 		
 		/*System.out.println(groupePhase.groupToString());
 		System.out.println(groupePhase.matchsToString());

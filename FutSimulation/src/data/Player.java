@@ -8,10 +8,12 @@ public class Player {
 	private String position;
 	private boolean yellowCard;
 	private boolean redCard;
+	private int nbrAction;
 	
 	public Player() {
 		this.yellowCard = false;
 		this.redCard = false;
+		this.nbrAction = 0;
 	}
 	
 	public Player(String firstName, String lastName, PlayerStatistic playerStatistic, String position) {
@@ -21,6 +23,7 @@ public class Player {
 		this.position = position;
 		this.yellowCard = false;
 		this.redCard = false;
+		this.nbrAction = 0;
 	}
 	
 	public Player(String firstName, String lastName, PlayerStatistic playerStatistic, String position, boolean card) {
@@ -30,7 +33,22 @@ public class Player {
 		this.position = position;
 		this.yellowCard = false;
 		this.redCard = false;
+		this.nbrAction = 0;
 	}
+	
+	public void resetGameStatistique() {
+		this.yellowCard = false;
+		this.redCard = false;
+		this.nbrAction = 0;
+	}
+	
+	public void clonePlayer(Player player) {
+		this.lastName = player.getLastName();
+		this.firstName = player.getFirstName();
+		this.playerStatistic = player.getPlayerStatistic();
+		this.position = player.getPosition();
+	}
+	
 	public String getLastName() {
 		return lastName;
 	}
@@ -70,6 +88,14 @@ public class Player {
 
 	public void setRedCard(Boolean card) {
 		this.redCard = card;
+	}
+
+	public int getNbrAction() {
+		return nbrAction;
+	}
+
+	public void setNbrAction(int nbrAction) {
+		this.nbrAction = nbrAction;
 	}
 	
 

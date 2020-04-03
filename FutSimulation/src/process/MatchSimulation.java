@@ -20,6 +20,7 @@ public class MatchSimulation {
 	
 	public MatchSimulation() {
 		this.random = new Random();
+		
 	}
 	
 	private void overtime() {
@@ -113,12 +114,36 @@ public class MatchSimulation {
 		this.nbActions = MatchSimulationParameter.NBR_ACTIONS_START;
 		this.halfTime = false;
 		
-		//Copy player's array to make replacement
-		alPlayerStarterTeamA =  (ArrayList<Player>)game.getTeamA().getStarter().clone();
-		alPlayerStarterTeamB =  (ArrayList<Player>)game.getTeamB().getStarter().clone();
-		alPlayerBenchTeamA =  (ArrayList<Player>)game.getTeamA().getBench().clone();
-		alPlayerBenchTeamB =  (ArrayList<Player>)game.getTeamB().getBench().clone();
+		this.alPlayerStarterTeamA = new ArrayList<Player>();
+		this.alPlayerBenchTeamA = new ArrayList<Player>();
+		this.alPlayerStarterTeamB = new ArrayList<Player>();
+		this.alPlayerBenchTeamB = new ArrayList<Player>();
 		
+		for(Player p : game.getTeamA().getStarter()) {
+			Player clonePlayer = new Player();
+			clonePlayer.clonePlayer(p);
+			alPlayerStarterTeamA.add(clonePlayer);
+		}
+		for(Player p : game.getTeamA().getBench()) {
+			Player clonePlayer = new Player();
+			clonePlayer.clonePlayer(p);
+			alPlayerBenchTeamA.add(clonePlayer);
+		}
+		for(Player p : game.getTeamB().getStarter()) {
+			Player clonePlayer = new Player();
+			clonePlayer.clonePlayer(p);
+			alPlayerStarterTeamB.add(clonePlayer);
+		}
+		for(Player p : game.getTeamB().getBench()) {
+			Player clonePlayer = new Player();
+			clonePlayer.clonePlayer(p);
+			alPlayerBenchTeamB.add(clonePlayer);
+		}
+		
+		game.setAlPlayerBenchTeamA(alPlayerBenchTeamA);
+		game.setAlPlayerBenchTeamB(alPlayerBenchTeamB);
+		game.setAlPlayerStarterTeamA(alPlayerStarterTeamA);
+		game.setAlPlayerStarterTeamB(alPlayerStarterTeamB);
 		
 		game.alrecap.add("Début du match entre "+game.getTeamA().getTeamName()+" et "+game.getTeamB().getTeamName());
 		//Kick-off, select a random team who will begin
@@ -332,6 +357,7 @@ public class MatchSimulation {
 					newPlayer = getRandomPlayer("A", tDef, player);
 					game.alrecap.add("Retour au milieu pour l'équipe "+tDef.getTeamName()+ " et engagement par "+newPlayer.getLastName());
 					incrementAction(tAtt);
+					checkTirednessPlayers();
 					mid(tDef, tAtt, newPlayer);
 				}else {
 					//Check if the goalkeeper can catch the ball
@@ -349,12 +375,14 @@ public class MatchSimulation {
 							game.alrecap.add("Corner pour l'équipe "+ tAtt.getTeamName()+" tapé par "+player.getLastName());
 							incrementCorners(tAtt);
 							incrementAction(tAtt);
+							checkTirednessPlayers();
 							freeKick(tAtt, tDef, "att", player);
 						}else {
 							//Goalie kick
 							game.alrecap.add("Le tir de "+player.getLastName()+" sort du terrain, le ballon ne va même pas dans le cadre");
 							game.alrecap.add("Six mètre tiré par "+tDef.getGoalKeeper().getLastName()+" pour l'équipe "+ tDef.getTeamName());
 							incrementAction(tAtt);
+							checkTirednessPlayers();
 							freeKick(tDef, tAtt, "def", tDef.getGoalKeeper());
 						}
 					}
@@ -378,12 +406,14 @@ public class MatchSimulation {
 							game.alrecap.add("Corner pour l'équipe "+ tAtt.getTeamName()+" tapé par "+player.getLastName());
 							incrementAction(tAtt);
 							incrementCorners(tAtt);
+							checkTirednessPlayers();
 							freeKick(tAtt, tDef, "att", player);
 						}else {
 							//Goalie kick
 							game.alrecap.add("Le ballon sort suite à la pression de "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName());
 							game.alrecap.add("Six mètre pour l'équipe "+ tDef.getTeamName()+" tapé par "+tDef.getGoalKeeper().getLastName());
 							incrementAction(tAtt);
+							checkTirednessPlayers();
 							freeKick(tDef, tAtt, "def", tDef.getGoalKeeper());
 						}
 					} else {
@@ -392,6 +422,7 @@ public class MatchSimulation {
 						incrementFouls(tDef);
 						getCard(newPlayer, tDef);
 						injury(player, tAtt);
+						checkTirednessPlayers();
 						game.alrecap.add("Coup franc pour l'équipe "+ tAtt.getTeamName()+" tiré par "+player.getLastName());
 						incrementAction(tAtt);
 						freeKick(tAtt, tDef, "att", player);
@@ -422,6 +453,7 @@ public class MatchSimulation {
 					game.alrecap.add("But de l'équipe "+ tAtt.getTeamName()+ " marqué par "+player.getLastName());
 					game.alrecap.add("Score "+ game.getTeamA().getTeamName() + ": "+ game.getScoreA() + " - "+game.getTeamB().getTeamName() + ": "+ game.getScoreB());
 					game.alrecap.add("");
+					checkTirednessPlayers();
 					newPlayer = getRandomPlayer("A", tDef, player);
 					game.alrecap.add("Retour au milieu pour l'équipe "+tDef.getTeamName()+ " et engagement par "+newPlayer.getLastName());
 					incrementAction(tAtt);
@@ -442,12 +474,14 @@ public class MatchSimulation {
 							game.alrecap.add("Corner pour l'équipe "+ tAtt.getTeamName()+" tapé par "+player.getLastName());
 							incrementCorners(tAtt);
 							incrementAction(tAtt);
+							checkTirednessPlayers();
 							freeKick(tAtt, tDef, "att", player);
 						}else {
 							//Goalie kick
 							game.alrecap.add("Le tir de "+player.getLastName()+" sort du terrain, le ballon ne va même pas dans le cadre");
 							game.alrecap.add("Six mètre tiré par "+tDef.getGoalKeeper().getLastName()+" pour l'équipe "+ tDef.getTeamName());
 							incrementAction(tAtt);
+							checkTirednessPlayers();
 							freeKick(tDef, tAtt, "def", tDef.getGoalKeeper());
 						}
 					}
@@ -469,11 +503,13 @@ public class MatchSimulation {
 							game.alrecap.add("Le ballon est dévié par "+newPlayer.getLastName()+" pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain");
 							game.alrecap.add("Touche pour l'équipe "+ tAtt.getTeamName()+ " par "+player.getLastName());
 							incrementAction(tAtt);
+							checkTirednessPlayers();
 							pass(tAtt, tDef, "mid", player);
 						}else {
 							game.alrecap.add("Le ballon sort suite à la pression de "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName());
 							game.alrecap.add("Touche pour l'équipe"+ tDef.getTeamName() +" par "+newPlayer.getLastName());
 							incrementAction(tAtt);
+							checkTirednessPlayers();
 							pass(tDef, tAtt, "mid", newPlayer);
 						}
 					} else {
@@ -482,6 +518,7 @@ public class MatchSimulation {
 						incrementFouls(tDef);
 						getCard(newPlayer, tDef);
 						injury(player, tAtt);
+						checkTirednessPlayers();
 						game.alrecap.add("Coup franc pour l'équipe "+ tAtt.getTeamName()+" tiré par "+player.getLastName());
 						incrementAction(tAtt);
 						freeKick(tAtt, tDef, "mid", player);
@@ -553,12 +590,14 @@ public class MatchSimulation {
 						game.alrecap.add("Le ballon sort suite à la pression de "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName());
 						game.alrecap.add("Touche pour l'équipe"+ tDef.getTeamName() +" par "+newPlayer.getLastName()+" en attaque");
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tDef, tAtt, "att", newPlayer);
 					}
 					else {
 						game.alrecap.add("Le ballon est dévié par "+newPlayer.getLastName()+" pour l'équipe "+ tDef.getTeamName());
 						game.alrecap.add("Touche pour l'équipe "+ tAtt.getTeamName()+ " par "+player.getLastName()+" dans son camp");
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tAtt, tDef, "def", player);
 					}
 				}
@@ -569,6 +608,7 @@ public class MatchSimulation {
 				incrementFouls(tDef);
 				getCard(newPlayer, tDef);
 				injury(player, tAtt);
+				checkTirednessPlayers();
 				game.alrecap.add("Coup franc pour l'équipe "+ tAtt.getTeamName()+" tiré par "+player.getLastName()+" depuis son camp");
 				incrementAction(tAtt);
 				freeKick(tAtt, tDef, "def", player);
@@ -904,12 +944,14 @@ public class MatchSimulation {
 						game.alrecap.add(nbActions+"min - Passe raté par "+player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" dans leur camp, remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tDef, tAtt, "def", newPlayer);
 					}
 					else {
 						game.alrecap.add(nbActions+"min - Passe déviée par "+ newPlayer.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tAtt.getTeamName()+" en attaque, remis en jeu par "+player.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tAtt, tDef, "att", player);
 					}
 				}
@@ -920,6 +962,7 @@ public class MatchSimulation {
 				incrementFouls(tDef);
 				getCard(newPlayer, tDef);
 				injury(player, tAtt);
+				checkTirednessPlayers();
 				game.alrecap.add("Coup franc pour l'équipe "+ tAtt.getTeamName()+", "+player.getLastName()+" peut tenter de marquer");
 				incrementAction(tAtt);
 				freeKick(tAtt, tDef, "att", player);
@@ -961,12 +1004,14 @@ public class MatchSimulation {
 						game.alrecap.add(nbActions+"min - Passe raté par "+player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tDef, tAtt, "mid", newPlayer);
 					}
 					else {
 						game.alrecap.add(nbActions+"min - Passe déviée par l'équipe "+ newPlayer.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tAtt.getTeamName()+" au milieu du terrain remis en jeu par "+player.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tAtt, tDef, "mid", player);
 					}
 				}
@@ -977,6 +1022,7 @@ public class MatchSimulation {
 				incrementFouls(tDef);
 				getCard(newPlayer, tDef);
 				injury(player, tAtt);
+				checkTirednessPlayers();
 				game.alrecap.add("Coup franc pour l'équipe "+ tAtt.getTeamName()+", par "+player.getLastName() +" au milieu du terrain");
 				incrementAction(tAtt);
 				freeKick(tAtt, tDef, "mid", player);
@@ -1018,12 +1064,14 @@ public class MatchSimulation {
 						game.alrecap.add(nbActions+"min - Passe raté par "+player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" en attaque remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tDef, tAtt, "att", newPlayer);
 					}
 					else {
 						game.alrecap.add(nbActions+"min - Passe déviée par "+ newPlayer.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tAtt.getTeamName()+" dans leur camp remis en jeu par "+player.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tAtt, tDef, "def", player);
 					}
 				}
@@ -1036,6 +1084,7 @@ public class MatchSimulation {
 				injury(player, tAtt);
 				game.alrecap.add("Coup franc pour l'équipe "+ tAtt.getTeamName()+", "+player.getLastName()+" peut tenter de se dégager de son camp");
 				incrementAction(tAtt);
+				checkTirednessPlayers();
 				freeKick(tAtt, tDef, "def", player);
 			}
 			break;
@@ -1111,12 +1160,14 @@ public class MatchSimulation {
 						game.alrecap.add(nbActions+"min - Dribble raté par "+ player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" dans leur camp remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tDef, tAtt, "def", newPlayer);
 					}
 					else {
 						game.alrecap.add(nbActions+"min - "+ player.getLastName()+" tente de dribbler "+newPlayer.getLastName()+" mais il sort le ballon du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tAtt.getTeamName()+" en attaque remis en jeu par "+player.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tAtt, tDef, "att", player);
 					}
 				}
@@ -1127,6 +1178,7 @@ public class MatchSimulation {
 				incrementFouls(tDef);
 				getCard(newPlayer, tDef);
 				injury(player, tAtt);
+				checkTirednessPlayers();
 				game.alrecap.add("Coup franc pour l'équipe "+ tAtt.getTeamName()+", "+player.getLastName()+" peut tenter de marquer");
 				incrementAction(tAtt);
 				freeKick(tAtt, tDef, "att", player);
@@ -1164,12 +1216,14 @@ public class MatchSimulation {
 						game.alrecap.add(nbActions+"min - Dribble raté par "+ player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("min - Touche pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tDef, tAtt, "mid", newPlayer);
 					}
 					else {
 						game.alrecap.add(nbActions+"min - "+ player.getLastName()+" tente de dribbler "+newPlayer.getLastName()+" mais il sort le ballon du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tAtt.getTeamName()+" au milieu du terrain remis en jeu par "+player.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tAtt, tDef, "mid", player);
 					}
 				}
@@ -1180,6 +1234,7 @@ public class MatchSimulation {
 				incrementFouls(tDef);
 				getCard(newPlayer, tDef);
 				injury(player, tAtt);
+				checkTirednessPlayers();
 				game.alrecap.add("Coup franc pour l'équipe "+ tAtt.getTeamName()+", par "+player.getLastName() +" au milieu du terrain");
 				incrementAction(tAtt);
 				freeKick(tAtt, tDef, "mid", player);
@@ -1217,12 +1272,14 @@ public class MatchSimulation {
 						game.alrecap.add(nbActions+"min - Dribble raté par "+ player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" en attaque remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tDef, tAtt, "att", newPlayer);
 					}
 					else {
 						game.alrecap.add(nbActions+"min - "+ player.getLastName()+" tente de dribbler "+newPlayer.getLastName()+" mais il sort le ballon du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tAtt.getTeamName()+" dans leur camp remis en jeu par "+player.getLastName());
 						incrementAction(tAtt);
+						checkTirednessPlayers();
 						pass(tAtt, tDef, "def", player);
 					}
 				}
@@ -1235,6 +1292,7 @@ public class MatchSimulation {
 				injury(player, tAtt);
 				game.alrecap.add("Coup franc pour l'équipe "+ tAtt.getTeamName()+", "+player.getLastName()+" peut tenter de se dégager de son camp");
 				incrementAction(tAtt);
+				checkTirednessPlayers();
 				freeKick(tAtt, tDef, "def", player);
 			}
 			break;
@@ -1339,10 +1397,10 @@ public class MatchSimulation {
 		}
 		//Check if the new player name is note equals to the current player name
 		if(actualPlayer.equals(player)) {
-			System.out.println(" Player "+actualPlayer.getLastName()+" newplayer "+ player.getLastName());
 			player = getRandomPlayer(position, team, actualPlayer);
 		}
 		
+		player.setNbrAction(player.getNbrAction()+1);
 		return player;
 	}
 
@@ -1395,7 +1453,7 @@ public class MatchSimulation {
 				player = att.get(random.nextInt(att.size()));
 			}
 		}
-		
+		al.remove(player);
 		player.setPosition(position);
 		return player;
 	}
@@ -1425,6 +1483,27 @@ public class MatchSimulation {
 		
 	}
 	
+	private void checkTirednessPlayers() {
+		for(int i = 0 ; i <  alPlayerStarterTeamA.size(); i++) {
+			if((alPlayerStarterTeamA.get(i).getNbrAction()>8) && (game.getNbrReplacementTeamA()<3)) {
+				Player newPlayer;
+				newPlayer = getRandomBenchPlayer(alPlayerStarterTeamA.get(i).getPosition(), alPlayerBenchTeamA);
+				alPlayerStarterTeamA.remove(i);
+				alPlayerStarterTeamA.add(newPlayer);
+				game.incrementNbrReplacementTeamA();
+			}
+		}
+		for(int i = 0 ; i <  alPlayerStarterTeamB.size(); i++) {
+			if((alPlayerStarterTeamB.get(i).getNbrAction()>8) && (game.getNbrReplacementTeamB()<3)) {
+				Player newPlayer;
+				newPlayer = getRandomBenchPlayer(alPlayerStarterTeamB.get(i).getPosition(), alPlayerBenchTeamB);
+				alPlayerStarterTeamB.remove(i);
+				alPlayerStarterTeamB.add(newPlayer);
+				game.incrementNbrReplacementTeamB();
+			}
+		}
+	}
+	
 	private void injury(Player player, Team team) {
 		Player newPlayer;
 		
@@ -1437,11 +1516,13 @@ public class MatchSimulation {
 					alPlayerStarterTeamA.remove(player);
 					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamA);
 					alPlayerStarterTeamA.add(newPlayer);
+					game.incrementNbrReplacementTeamA();
 				}
 				else {
 					alPlayerStarterTeamB.remove(player);
 					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamB);
 					alPlayerStarterTeamB.add(newPlayer);
+					game.incrementNbrReplacementTeamB();
 				}
 				game.alrecap.add(player.getLastName()+" sort suite à une blessure, remplacé par "+newPlayer.getLastName());
 			}
@@ -1453,11 +1534,13 @@ public class MatchSimulation {
 					alPlayerStarterTeamA.remove(player);
 					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamA);
 					alPlayerStarterTeamA.add(newPlayer);
+					game.incrementNbrReplacementTeamA();
 				}
 				else {
 					alPlayerStarterTeamB.remove(player);
 					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamB);
 					alPlayerStarterTeamB.add(newPlayer);
+					game.incrementNbrReplacementTeamB();
 				}
 				game.alrecap.add(player.getLastName()+" sort suite à une blessure, remplacé par "+newPlayer.getLastName());
 			}
@@ -1469,11 +1552,13 @@ public class MatchSimulation {
 					alPlayerStarterTeamA.remove(player);
 					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamA);
 					alPlayerStarterTeamA.add(newPlayer);
+					game.incrementNbrReplacementTeamA();
 				}
 				else {
 					alPlayerStarterTeamB.remove(player);
 					newPlayer = getRandomBenchPlayer(player.getPosition(), alPlayerBenchTeamB);
 					alPlayerStarterTeamB.add(newPlayer);
+					game.incrementNbrReplacementTeamB();
 				}
 				game.alrecap.add(player.getLastName()+" sort suite à une blessure, remplacé par "+newPlayer.getLastName());
 			}
@@ -1485,6 +1570,7 @@ public class MatchSimulation {
 	}
 	
 	private void getCard(Player player, Team team) {
+		game.alrecap.add(player.getLastName()+" ///////////////////////////////////////////////////////////////////////////////////////////////");
 		ArrayList<Player> alPlayer = new ArrayList<Player>();
 		//Check the team to get the players starter array
 		if(team.getTeamName().equals(game.getTeamA().getTeamName())) {
@@ -1730,6 +1816,33 @@ public class MatchSimulation {
 
 	public void setGame(Match game) {
 		this.game = game;
+	}
+	
+	public void printjoeur() {
+		System.out.println("Match simulation");
+		for(Player p : alPlayerStarterTeamA) {
+			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
+		}
+		System.out.println("");
+		for(Player p : alPlayerStarterTeamB) {
+			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
+		}
+		System.out.println("Match");
+		for(Player p : game.getAlPlayerStarterTeamA()) {
+			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
+		}
+		System.out.println("");
+		for(Player p : game.getAlPlayerStarterTeamB()) {
+			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
+		}
+		System.out.println("Team");
+		for(Player p : game.getTeamA().getStarter()) {
+			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
+		}
+		System.out.println("");
+		for(Player p : game.getTeamB().getStarter()) {
+			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
+		}
 	}
 	
 	

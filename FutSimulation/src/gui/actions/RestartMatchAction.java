@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import data.GroupPhase;
 import data.Match;
+import data.Player;
 import data.Team;
 import data.TeamData;
 import gui.MainFrame;
@@ -30,7 +31,16 @@ public class RestartMatchAction implements ActionListener {
 		for(int i=0;i<16;i++) {
 			al.get(i).setGoals(0);
 			al.get(i).setNbPoints(0);
+			for(Player p : al.get(i).getStarter()) {
+				p.resetGameStatistique();
+			}
+			for(Player p : al.get(i).getBench()) {
+				p.resetGameStatistique();
+			}
 		}
+		
+		
+		
 		ArrayList<Match> matchA = new ArrayList<Match>();
 		ArrayList<Match> matchB = new ArrayList<Match>();
 		ArrayList<Match> matchC = new ArrayList<Match>();

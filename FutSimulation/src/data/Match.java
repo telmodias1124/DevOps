@@ -27,7 +27,10 @@ public class Match {
 	private boolean draw;
 	private boolean overtime;
 	private boolean penalty;
+	private int nbrReplacementTeamA;
+	private int nbrReplacementTeamB;
 	public ArrayList<String> alrecap = new ArrayList<String>();
+	private ArrayList<Player> alPlayerStarterTeamA, alPlayerStarterTeamB, alPlayerBenchTeamA, alPlayerBenchTeamB;
 	
 	public Match() {
 		this.scoreA = 0;
@@ -46,8 +49,14 @@ public class Match {
 		this.cornersB = 0;
 		this.penA = 0;
 		this.penB = 0;
+		this.nbrReplacementTeamA = 0;
+		this.nbrReplacementTeamB = 0;
 		this.draw = false;
 		this.overtime = false;
+		this.alPlayerStarterTeamA = new ArrayList<Player>();
+		this.alPlayerBenchTeamA = new ArrayList<Player>();
+		this.alPlayerStarterTeamB = new ArrayList<Player>();
+		this.alPlayerBenchTeamB = new ArrayList<Player>();
 	}
 	
 	public Match(Team teamA, Team teamB) {
@@ -69,8 +78,14 @@ public class Match {
 		this.cornersB = 0;
 		this.penA = 0;
 		this.penB = 0;
+		this.nbrReplacementTeamA = 0;
+		this.nbrReplacementTeamB = 0;
 		this.draw = false;
 		this.overtime = false;
+		this.alPlayerStarterTeamA = new ArrayList<Player>();
+		this.alPlayerBenchTeamA = new ArrayList<Player>();
+		this.alPlayerStarterTeamB = new ArrayList<Player>();
+		this.alPlayerBenchTeamB = new ArrayList<Player>();
 	}
 	
 	public Match(Team teamA, Team teamB, int scoreA, int scoreB, Team winner, Team loser) {
@@ -82,6 +97,10 @@ public class Match {
 		this.winner = winner;
 		this.draw = false;
 		this.overtime = false;
+		this.alPlayerStarterTeamA = new ArrayList<Player>();
+		this.alPlayerBenchTeamA = new ArrayList<Player>();
+		this.alPlayerStarterTeamB = new ArrayList<Player>();
+		this.alPlayerBenchTeamB = new ArrayList<Player>();
 	}
 	
 		public Match(Team teamA, Team teamB, int scoreA, int scoreB, int totalKickA, int totalKickB, int passA, int passB,
@@ -112,7 +131,14 @@ public class Match {
 		this.overtime = overtime;
 		this.penalty = penalty;
 		this.alrecap = alrecap;
+		this.nbrReplacementTeamA = 0;
+		this.nbrReplacementTeamB = 0;
+		this.alPlayerStarterTeamA = new ArrayList<Player>();
+		this.alPlayerBenchTeamA = new ArrayList<Player>();
+		this.alPlayerStarterTeamB = new ArrayList<Player>();
+		this.alPlayerBenchTeamB = new ArrayList<Player>();
 	}
+		
 
 	public Team getTeamA() {
 		return teamA;
@@ -352,6 +378,60 @@ public class Match {
 
 	public void setAlrecap(ArrayList<String> alrecap) {
 		this.alrecap = alrecap;
+	}
+
+	public int getNbrReplacementTeamA() {
+		return nbrReplacementTeamA;
+	}
+
+	public void setNbrReplacementTeamA(int nbrReplacementTeamA) {
+		this.nbrReplacementTeamA = nbrReplacementTeamA;
+	}
+	public void incrementNbrReplacementTeamA() {
+		this.nbrReplacementTeamA++;
+	}
+
+	public int getNbrReplacementTeamB() {
+		return nbrReplacementTeamB;
+	}
+
+	public void setNbrReplacementTeamB(int nbrReplacementTeamB) {
+		this.nbrReplacementTeamB = nbrReplacementTeamB;
+	}
+	public void incrementNbrReplacementTeamB() {
+		this.nbrReplacementTeamB++;
+	}
+
+	public ArrayList<Player> getAlPlayerStarterTeamA() {
+		return alPlayerStarterTeamA;
+	}
+
+	public void setAlPlayerStarterTeamA(ArrayList<Player> alPlayerStarterTeamA) {
+		this.alPlayerStarterTeamA = alPlayerStarterTeamA;
+	}
+
+	public ArrayList<Player> getAlPlayerStarterTeamB() {
+		return alPlayerStarterTeamB;
+	}
+
+	public void setAlPlayerStarterTeamB(ArrayList<Player> alPlayerStarterTeamB) {
+		this.alPlayerStarterTeamB = alPlayerStarterTeamB;
+	}
+
+	public ArrayList<Player> getAlPlayerBenchTeamA() {
+		return alPlayerBenchTeamA;
+	}
+
+	public void setAlPlayerBenchTeamA(ArrayList<Player> alPlayerBenchTeamA) {
+		this.alPlayerBenchTeamA = alPlayerBenchTeamA;
+	}
+
+	public ArrayList<Player> getAlPlayerBenchTeamB() {
+		return alPlayerBenchTeamB;
+	}
+
+	public void setAlPlayerBenchTeamB(ArrayList<Player> alPlayerBenchTeamB) {
+		this.alPlayerBenchTeamB = alPlayerBenchTeamB;
 	}
 	
 	
