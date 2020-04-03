@@ -82,7 +82,7 @@ public class MatchView extends JPanel{
 	    g.drawString(m.getTeamB().getTeamName(), ((MAINFRAME_WIDTH - 435)*mf.getWidth()/MAINFRAME_WIDTH), ((460*mf.getHeight())/MAINFRAME_HEIGHT));
 	    g.drawString(m.getTeamA().getTeamName(), ((MAINFRAME_WIDTH - 1035)*mf.getWidth()/MAINFRAME_WIDTH), ((460*mf.getHeight())/MAINFRAME_HEIGHT));
 	    
-	    g.drawString("Pages : "+Integer.toString(state+1), (360*mf.getWidth())/MAINFRAME_WIDTH, (620*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString("Page : "+Integer.toString(state+1), (360*mf.getWidth())/MAINFRAME_WIDTH, (620*mf.getHeight())/MAINFRAME_HEIGHT);
 	   
 	    g = drawRecap(g);
 	    	
@@ -109,14 +109,13 @@ public class MatchView extends JPanel{
 		for(Player player : alTeamMatch) {
 			if((player.getLastName().equals(p.getLastName())) && (player.getFirstName().equals(p.getFirstName()))) {
 				contains = true;
+				if(player.getYellowCard()) {
+					g.setColor(Color.YELLOW);
+				    g.fillRect(x-15, y, 10, 20);
+				}
 			}
 		}
-		if(contains) {
-			if(p.getYellowCard()) {
-				g.setColor(Color.YELLOW);
-			    g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
-			}
-		}else {
+		if(!contains) {
 			boolean getCard = false;
 			for(Player player : m.getAlPlayerRedCard()) {
 				if((player.getLastName().equals(p.getLastName())) && (player.getFirstName().equals(p.getFirstName()))) {
@@ -125,7 +124,7 @@ public class MatchView extends JPanel{
 			}
 			if(getCard) {
 				g.setColor(Color.RED);
-				g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
+				g.fillRect(x-15, y, 10, 20);
 			}
 		}
 		
@@ -155,14 +154,6 @@ public class MatchView extends JPanel{
 			g.drawString(Integer.toString(p.getPlayerStatistic().getDribble()), (765*mf.getWidth())/MAINFRAME_WIDTH, (375*mf.getHeight())/MAINFRAME_HEIGHT);
 			g.drawString(Integer.toString(p.getPlayerStatistic().getDef()), (765*mf.getWidth())/MAINFRAME_WIDTH, (400*mf.getHeight())/MAINFRAME_HEIGHT);
 			g.drawString(Integer.toString(p.getPlayerStatistic().getPhysique()), (765*mf.getWidth())/MAINFRAME_WIDTH, (425*mf.getHeight())/MAINFRAME_HEIGHT);
-			if(p.getYellowCard()) {
-				g.setColor(Color.YELLOW);
-			    g.fillRect((685*mf.getWidth())/MAINFRAME_WIDTH, (285*mf.getHeight())/MAINFRAME_HEIGHT, 15, 20);
-			}
-			if(p.getRedCard()) {
-				g.setColor(Color.RED);
-			    g.fillRect((685*mf.getWidth())/MAINFRAME_WIDTH, (285*mf.getHeight())/MAINFRAME_HEIGHT, 15, 20);
-			}
 		}
 		return g;
 	}
@@ -293,6 +284,21 @@ public class MatchView extends JPanel{
 		float percentPassA = ((float)m.getPassA()/(float)m.getTotalPassA())*100;
 		float percentShootA = ((float)m.getScoreA()/(float)m.getTotalKickA())*100;
 		float percentPossA = ((float)m.getNbrActionsA()/((float)m.getNbrActionsA()+(float)m.getNbrActionsB()))*100;
+		
+		float percentPassB = ((float)m.getPassB()/(float)m.getTotalPassB())*100;
+		float percentShootB = ((float)m.getScoreB()/(float)m.getTotalKickB())*100;
+		float percentPossB = ((float)m.getNbrActionsB()/((float)m.getNbrActionsA()+(float)m.getNbrActionsB()))*100;
+		
+		if(((int)percentPossA+(int)percentPossB) != 100) {
+			if(percentPossA < percentPossB) {
+				percentPossB = percentPossB + 1;
+
+			}
+			else {
+				percentPossA = percentPossA + 1;
+
+			}
+		}
 
 		g.drawString("Statistiques : " + m.getTeamA().getTeamName(), (50*mf.getWidth())/MAINFRAME_WIDTH, (630*mf.getHeight())/MAINFRAME_HEIGHT);
 		g.drawString("Tirs : " + Integer.toString(m.getTotalKickA()), (35*mf.getWidth())/MAINFRAME_WIDTH, (680*mf.getHeight())/MAINFRAME_HEIGHT);
@@ -301,10 +307,6 @@ public class MatchView extends JPanel{
 		g.drawString("Corners : " + Integer.toString(m.getCornersA()), (35*mf.getWidth())/MAINFRAME_WIDTH, (770*mf.getHeight())/MAINFRAME_HEIGHT);
 		g.drawString("Précision Tirs : " + Integer.toString((int)percentShootA)+"%", (35*mf.getWidth())/MAINFRAME_WIDTH, (800*mf.getHeight())/MAINFRAME_HEIGHT);
 		g.drawString("Précision Passes : " + Integer.toString((int)percentPassA)+"%", (35*mf.getWidth())/MAINFRAME_WIDTH, (830*mf.getHeight())/MAINFRAME_HEIGHT);
-		
-		float percentPassB = ((float)m.getPassB()/(float)m.getTotalPassB())*100;
-		float percentShootB = ((float)m.getScoreB()/(float)m.getTotalKickB())*100;
-		float percentPossB = ((float)m.getNbrActionsB()/((float)m.getNbrActionsA()+(float)m.getNbrActionsB()))*100;
 		
 		g.drawString("Statistiques : " + m.getTeamB().getTeamName(), ((1201 + 50)*mf.getWidth())/MAINFRAME_WIDTH, (630*mf.getHeight())/MAINFRAME_HEIGHT);
 		g.drawString("Tirs : " + Integer.toString(m.getCornersA()), ((1201 + 35)*mf.getWidth())/MAINFRAME_WIDTH, (680*mf.getHeight())/MAINFRAME_HEIGHT);
