@@ -35,9 +35,9 @@ public class MatchSimulationParameter {
 	public static int LUCK_NOT_INJURY_DEF = 99;
 	
 	//Card
-	public static int LUCK_NOT_GET_CARD_ATT = 98;
-	public static int LUCK_NOT_GET_CARD_MID = 95;
-	public static int LUCK_NOT_GET_CARD_DEF = 92;
+	public static int LUCK_NOT_GET_CARD_ATT = 95;
+	public static int LUCK_NOT_GET_CARD_MID = 93;
+	public static int LUCK_NOT_GET_CARD_DEF = 90;
 	public static int LUCK_GET_YELLOW_CARD_ATT = 98;
 	public static int LUCK_GET_YELLOW_CARD_MID = 97;
 	public static int LUCK_GET_YELLOW_CARD_DEF = 96;
