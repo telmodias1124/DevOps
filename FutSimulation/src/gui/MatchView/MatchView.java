@@ -117,8 +117,16 @@ public class MatchView extends JPanel{
 			    g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
 			}
 		}else {
-			g.setColor(Color.RED);
-			g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
+			boolean getCard = false;
+			for(Player player : m.getAlPlayerRedCard()) {
+				if((player.getLastName().equals(p.getLastName())) && (player.getFirstName().equals(p.getFirstName()))) {
+					getCard = true;
+				}
+			}
+			if(getCard) {
+				g.setColor(Color.RED);
+				g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
+			}
 		}
 		
 		

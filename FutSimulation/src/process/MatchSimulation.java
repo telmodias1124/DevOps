@@ -145,6 +145,7 @@ public class MatchSimulation {
 		game.setAlPlayerBenchTeamB(alPlayerBenchTeamB);
 		game.setAlPlayerStarterTeamA(alPlayerStarterTeamA);
 		game.setAlPlayerStarterTeamB(alPlayerStarterTeamB);
+		game.setAlPlayerRedCard(alPlayerRedCard);
 		
 		game.alrecap.add("Début du match entre "+game.getTeamA().getTeamName()+" et "+game.getTeamB().getTeamName());
 		//Kick-off, select a random team who will begin
@@ -1590,7 +1591,7 @@ public class MatchSimulation {
 				//Check if it is a red or yellow card
 				if(random.nextInt(101)> MatchSimulationParameter.LUCK_GET_YELLOW_CARD_ATT) {
 					//Red card
-					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !");
+					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge ! ////////////////////////////////////////////////////////");
 					this.alPlayerRedCard.add(player);
 					player.setRedCard(true);
 					alPlayer.remove(player);
@@ -1598,7 +1599,7 @@ public class MatchSimulation {
 					//Yellow card, check if the player already had a yellow card
 					if(player.getYellowCard()) {
 						//Red card
-						game.alrecap.add(player.getLastName()+" commet une faute, il prend un carton jaune mais en avait déjà un donc c'est le rouge !");
+						game.alrecap.add(player.getLastName()+" commet une faute, il prend un carton jaune mais en avait déjà un donc c'est le rouge !//////////////////////////////////////");
 						this.alPlayerRedCard.add(player);
 						player.setRedCard(true);
 						alPlayer.remove(player);
@@ -1615,7 +1616,7 @@ public class MatchSimulation {
 				//Check if it is a red or yellow card
 				if(random.nextInt(101)> MatchSimulationParameter.LUCK_GET_YELLOW_CARD_MID) {
 					//Red card
-					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !");
+					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !////////////////////////////////////////////");
 					this.alPlayerRedCard.add(player);
 					player.setRedCard(true);
 					alPlayer.remove(player);
@@ -1623,7 +1624,7 @@ public class MatchSimulation {
 					//Yellow card, check if the player already had a yellow card
 					if(player.getYellowCard()) {
 						//Red card
-						game.alrecap.add(player.getLastName()+" commet une faute, il prend un carton jaune mais en avait déjà un donc c'est le rouge !");
+						game.alrecap.add(player.getLastName()+" commet une faute, il prend un carton jaune mais en avait déjà un donc c'est le rouge !//////////////////////////////////////");
 						this.alPlayerRedCard.add(player);
 						player.setRedCard(true);
 						alPlayer.remove(player);
@@ -1640,7 +1641,7 @@ public class MatchSimulation {
 				//Check if it is a red or yellow card
 				if(random.nextInt(101)> MatchSimulationParameter.LUCK_GET_YELLOW_CARD_DEF) {
 					//Red card
-					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !");
+					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !///////////////////////////////////////////////");
 					this.alPlayerRedCard.add(player);
 					player.setRedCard(true);
 					alPlayer.remove(player);
@@ -1648,7 +1649,7 @@ public class MatchSimulation {
 					//Yellow card, check if the player already had a yellow card
 					if(player.getYellowCard()) {
 						//Red card
-						game.alrecap.add(player.getLastName()+" commet une faute, il prend un carton jaune mais en avait déjà un donc c'est le rouge !");
+						game.alrecap.add(player.getLastName()+" commet une faute, il prend un carton jaune mais en avait déjà un donc c'est le rouge !///////////////////////////////////");
 						this.alPlayerRedCard.add(player);
 						player.setRedCard(true);
 						alPlayer.remove(player);
