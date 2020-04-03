@@ -99,11 +99,11 @@ public class MatchView extends JPanel{
 	public Graphics choosePlayer(int x, int y, Player p, Team t, Graphics g) {
 		if(p.getYellowCard()) {
 			g.setColor(Color.YELLOW);
-			g.fillRect(x-15, y, 10, 20);
+		    g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
 		}
-		if(p.getRedCard()) {
+		if(t.getTeamName() == m.getTeamA().getTeamName()) {
 			g.setColor(Color.RED);
-			g.fillRect(x-15, y, 10, 20);
+		    g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
 		}
 		g.setColor(Color.WHITE);
 		int length = ((p.getLastName().length())*10)+40;
@@ -132,11 +132,11 @@ public class MatchView extends JPanel{
 			g.drawString(Integer.toString(p.getPlayerStatistic().getPhysique()), (765*mf.getWidth())/MAINFRAME_WIDTH, (425*mf.getHeight())/MAINFRAME_HEIGHT);
 			if(p.getYellowCard()) {
 				g.setColor(Color.YELLOW);
-				g.fillRect(685, 285, 15, 20);
+			    g.fillRect((685*mf.getWidth())/MAINFRAME_WIDTH, (285*mf.getHeight())/MAINFRAME_HEIGHT, 15, 20);
 			}
 			if(p.getRedCard()) {
 				g.setColor(Color.RED);
-				g.fillRect(685, 285, 15, 20);
+			    g.fillRect((685*mf.getWidth())/MAINFRAME_WIDTH, (285*mf.getHeight())/MAINFRAME_HEIGHT, 15, 20);
 			}
 		}
 		return g;
@@ -295,8 +295,8 @@ public class MatchView extends JPanel{
 	//draw the summary of the match and cut the text into pages
 	public Graphics drawRecap(Graphics g) {
 		//System.out.println(i +"  "+j);
-		if(Mouse.x > 1050 && Mouse.x < 1100) {
-		    if(Mouse.y > 610+30 && Mouse.y < 650+30 && Mouse.click == true) {
+		if(Mouse.x > (1050*mf.getWidth())/MAINFRAME_WIDTH && Mouse.x < (1100*mf.getWidth())/MAINFRAME_WIDTH) {
+		    if(Mouse.y > ((610+30)*mf.getHeight())/MAINFRAME_HEIGHT && Mouse.y < ((650+30)*mf.getHeight())/MAINFRAME_HEIGHT && Mouse.click == true) {
 		    	if(state > 0) {
 		    		this.maxLines= (this.lastPage[state-1]);
 		    		this.newPage = this.maxLines;
@@ -304,7 +304,7 @@ public class MatchView extends JPanel{
 		    		Mouse.click = false;
 		    	}
 		    }
-		    if(Mouse.y > 900 +30 && Mouse.y < 1000+30 && Mouse.click == true) {
+		    if(Mouse.y > ((900+30)*mf.getHeight())/MAINFRAME_HEIGHT && Mouse.y < ((1000+30)*mf.getHeight())/MAINFRAME_HEIGHT && Mouse.click == true) {
 		    	if(this.curLine< m.getAlrecap().size()-1) {
 		    		this.lastPage[state] = this.newPage;
 		    		this.maxLines= this.curLine;
@@ -326,7 +326,7 @@ public class MatchView extends JPanel{
 	                int lastIndexOri = m.getAlrecap().get(this.curLine).length();
 	                int width = g.getFontMetrics().stringWidth(m.getAlrecap().get(this.curLine));
 	                str = m.getAlrecap().get(this.curLine);
-	                while(width > 580) {
+	                while(width > (580*mf.getWidth())/MAINFRAME_WIDTH) {
 	                    lastIndex = str.lastIndexOf(" ");
 	                    str = str.substring(0, lastIndex);
 	                    width = g.getFontMetrics().stringWidth(str);

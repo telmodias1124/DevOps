@@ -1499,7 +1499,7 @@ public class MatchSimulation {
 			if((alPlayerStarterTeamB.get(i).getNbrAction()>9) && (game.getNbrReplacementTeamB()<3)) {
 				Player newPlayer;
 				newPlayer = getRandomBenchPlayer(alPlayerStarterTeamB.get(i).getPosition(), alPlayerBenchTeamB);
-				game.alrecap.add(alPlayerStarterTeamA.get(i).getLastName()+" sort, remplacé par "+newPlayer.getLastName());
+				game.alrecap.add(alPlayerStarterTeamB.get(i).getLastName()+" sort, remplacé par "+newPlayer.getLastName());
 				alPlayerStarterTeamB.remove(i);
 				alPlayerStarterTeamB.add(newPlayer);
 				game.incrementNbrReplacementTeamB();
