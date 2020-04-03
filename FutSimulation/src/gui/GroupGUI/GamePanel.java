@@ -69,7 +69,7 @@ public class GamePanel extends JPanel {
 				if(i==2) {
 					JButton jbStart;
 					StartAction sa = new StartAction(this, this.gp, this.sp);
-					jbStart = new JButton("Start");
+					jbStart = new JButton();
 					try {
 	                    Image img = ImageIO.read(new File("images/next_phase.png"));
 	                    jbStart.setIcon(new ImageIcon(img));
@@ -84,7 +84,7 @@ public class GamePanel extends JPanel {
 				}
 				else if(i==1){
 					JButton jbExit;
-					jbExit = new JButton("Exit");
+					jbExit = new JButton();
 					try {
 	                    Image img = ImageIO.read(new File("images/exit.png"));
 	                    jbExit.setIcon(new ImageIcon(img));
@@ -99,7 +99,7 @@ public class GamePanel extends JPanel {
 					
 				}else if(i==3) {
 					JButton jbRestart;
-					jbRestart = new JButton("Restart Match");
+					jbRestart = new JButton();
 					try {
 	                    Image img = ImageIO.read(new File("images/restart.png"));
 	                    jbRestart.setIcon(new ImageIcon(img));
@@ -112,7 +112,7 @@ public class GamePanel extends JPanel {
 					panel.add(jbRestart);
 				}else if(i==0) {
 					JButton jbRestart;
-					jbRestart = new JButton("Restart");
+					jbRestart = new JButton();
 					try {
 	                    Image img = ImageIO.read(new File("images/restart_all.png"));
 	                    jbRestart.setIcon(new ImageIcon(img));
@@ -166,7 +166,7 @@ public class GamePanel extends JPanel {
         }
         if(group.equals("Groupe A")) {
         	JButton jbRestart;
-			jbRestart = new JButton("Restart");
+			jbRestart = new JButton();
 			try {
                 Image img = ImageIO.read(new File("images/restart_all.png"));
                 jbRestart.setIcon(new ImageIcon(img));
@@ -180,7 +180,7 @@ public class GamePanel extends JPanel {
         }
         if(group.equals("Groupe B")) {
             JButton jbExit;
-            jbExit = new JButton("Exit");
+            jbExit = new JButton();
             try {
                 Image img = ImageIO.read(new File("images/exit.png"));
                 jbExit.setIcon(new ImageIcon(img));
@@ -194,7 +194,7 @@ public class GamePanel extends JPanel {
         }
         if(group.equals("Groupe C")) {
             JButton jbKnock;
-            jbKnock = new JButton("Knockout Phase");
+            jbKnock = new JButton();
             try {
                 Image img = ImageIO.read(new File("images/knockout_phase.png"));
                 jbKnock.setIcon(new ImageIcon(img));
@@ -208,7 +208,7 @@ public class GamePanel extends JPanel {
             standingPanel.add(jbKnock);
         }if(group.equals("Groupe D")) {
         	JButton jbRestart;
-			jbRestart = new JButton("Restart Match");
+			jbRestart = new JButton();
 			try {
                 Image img = ImageIO.read(new File("images/restart.png"));
                 jbRestart.setIcon(new ImageIcon(img));

@@ -29,7 +29,7 @@ import process.KnockoutPhaseSimulation;
 
 public class Start extends JFrame{
 
-	
+	public KnockoutPhaseSimulation kss;
 	private static final long serialVersionUID = 0;
 		
 	public Start() {
@@ -39,6 +39,7 @@ public class Start extends JFrame{
 		this.setPreferredSize(new Dimension(GlobalParameter.STARTFRAME_WIDTH,GlobalParameter.STARTRAME_HEIGHT));
 		//this.setLayout(new GridLayout(1,4));
 		this.setMinimumSize(new Dimension(GlobalParameter.STARTFRAME_WIDTH,GlobalParameter.STARTRAME_HEIGHT));
+		this.setResizable(false);
 		this.getContentPane().setBackground(Color.GRAY);
 		this.pack();
 		this.setVisible(true);
@@ -112,7 +113,8 @@ public class Start extends JFrame{
 	    System.out.println(ks.finalToString());
 
 	    mf.createGroupPhasePanel(groupePhase.gp, ks.kp, groupePhase);
-
+	    
+	    this.kss = ks;
 	    mf.revalidate();
 	    mf.repaint();
 

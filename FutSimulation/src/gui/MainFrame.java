@@ -22,9 +22,9 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 2230254401958956708L;
 	
 	private GroupPhasePanel gpp;
-	private KnockoutPhase kp;
+	public KnockoutPhase kp;
 	private GroupPhase gp;
-	private GroupPhaseSimulation groupPhase;
+	public GroupPhaseSimulation groupPhase;
 	
 	private Color blue_dark = new Color(11,21,70);
 	
