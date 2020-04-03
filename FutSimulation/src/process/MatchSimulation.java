@@ -16,7 +16,7 @@ public class MatchSimulation {
 	private Team teamStart;
 	//Release 1 algo
 	//private int nbActionEqA, nbActionEqB, diffLevel, numberLaps;
-	private ArrayList<Player> alPlayerStarterTeamA, alPlayerStarterTeamB, alPlayerBenchTeamA, alPlayerBenchTeamB;
+	private ArrayList<Player> alPlayerStarterTeamA, alPlayerStarterTeamB, alPlayerBenchTeamA, alPlayerBenchTeamB, alPlayerRedCard;
 	
 	public MatchSimulation() {
 		this.random = new Random();
@@ -118,6 +118,7 @@ public class MatchSimulation {
 		this.alPlayerBenchTeamA = new ArrayList<Player>();
 		this.alPlayerStarterTeamB = new ArrayList<Player>();
 		this.alPlayerBenchTeamB = new ArrayList<Player>();
+		this.alPlayerRedCard = new ArrayList<Player>();
 		
 		for(Player p : game.getTeamA().getStarter()) {
 			Player clonePlayer = new Player();
@@ -1590,6 +1591,7 @@ public class MatchSimulation {
 				if(random.nextInt(101)> MatchSimulationParameter.LUCK_GET_YELLOW_CARD_ATT) {
 					//Red card
 					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !");
+					this.
 					player.setRedCard(true);
 					alPlayer.remove(player);
 				}else {

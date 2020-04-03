@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -97,14 +98,30 @@ public class MatchView extends JPanel{
 	
 	//Display of cards and player statistics
 	public Graphics choosePlayer(int x, int y, Player p, Team t, Graphics g) {
-		if(p.getYellowCard()) {
-			g.setColor(Color.YELLOW);
-		    g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
+		ArrayList<Player> alTeamMatch = new ArrayList<Player>();
+		boolean contains = false;
+		if(t.getTeamName().equals(m.getTeamA().getTeamName())) {
+			alTeamMatch = m.getAlPlayerStarterTeamA();
 		}
-		if(t.getTeamName() == m.getTeamA().getTeamName()) {
+		else {
+			alTeamMatch = m.getAlPlayerStarterTeamB();
+		}
+		for(Player player : alTeamMatch) {
+			if((player.getLastName().equals(p.getLastName())) && (player.getFirstName().equals(p.getFirstName()))) {
+				contains = true;
+			}
+		}
+		if(contains) {
+			if(p.getYellowCard()) {
+				g.setColor(Color.YELLOW);
+			    g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
+			}
+		}else {
 			g.setColor(Color.RED);
-		    g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
+			g.fillRect(((x-15)*mf.getWidth())/MAINFRAME_WIDTH, (y*mf.getHeight())/MAINFRAME_HEIGHT, 10, 20);
 		}
+		
+		
 		g.setColor(Color.WHITE);
 		int length = ((p.getLastName().length())*10)+40;
 		int newY = y + 30;
@@ -205,60 +222,60 @@ public class MatchView extends JPanel{
 	public Graphics drawPlayers(Graphics g) {
 		g.setColor(Color.WHITE);
 	 
-	    g.drawString(m.getAlPlayerStarterTeamA().get(0).getPosition() +" " +m.getAlPlayerStarterTeamA().get(0).getFirstName().substring(0,1)+"."+" "+ m.getAlPlayerStarterTeamA().get(0).getLastName(), (125*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(0).getPosition() +" " +m.getTeamA().getStarter().get(0).getFirstName().substring(0,1)+"."+" "+ m.getTeamA().getStarter().get(0).getLastName(), (125*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
 
-	    g.drawString(m.getAlPlayerStarterTeamA().get(1).getPosition() +"  " +m.getAlPlayerStarterTeamA().get(1).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamA().get(1).getLastName(), (260*mf.getWidth())/MAINFRAME_WIDTH, (90*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamA().get(2).getPosition() +" " +m.getAlPlayerStarterTeamA().get(2).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamA().get(2).getLastName(), (260*mf.getWidth())/MAINFRAME_WIDTH, (170*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamA().get(3).getPosition() +" " +m.getAlPlayerStarterTeamA().get(3).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamA().get(3).getLastName(), (260*mf.getWidth())/MAINFRAME_WIDTH, (260*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamA().get(4).getPosition() +" " +m.getAlPlayerStarterTeamA().get(4).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamA().get(4).getLastName(), (260*mf.getWidth())/MAINFRAME_WIDTH, (330*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(1).getPosition() +"  " +m.getTeamA().getStarter().get(1).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(1).getLastName(), (260*mf.getWidth())/MAINFRAME_WIDTH, (90*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(2).getPosition() +" " +m.getTeamA().getStarter().get(2).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(2).getLastName(), (260*mf.getWidth())/MAINFRAME_WIDTH, (170*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(3).getPosition() +" " +m.getTeamA().getStarter().get(3).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(3).getLastName(), (260*mf.getWidth())/MAINFRAME_WIDTH, (260*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(4).getPosition() +" " +m.getTeamA().getStarter().get(4).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(4).getLastName(), (260*mf.getWidth())/MAINFRAME_WIDTH, (330*mf.getHeight())/MAINFRAME_HEIGHT);
 	    
-	    g.drawString(m.getAlPlayerStarterTeamA().get(5).getPosition() +" " +m.getAlPlayerStarterTeamA().get(5).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamA().get(5).getLastName(), (400*mf.getWidth())/MAINFRAME_WIDTH, (140*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamA().get(6).getPosition() +" " +m.getAlPlayerStarterTeamA().get(6).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamA().get(6).getLastName(), (400*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamA().get(7).getPosition() +" " +m.getAlPlayerStarterTeamA().get(7).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamA().get(7).getLastName(), (400*mf.getWidth())/MAINFRAME_WIDTH, (295*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(5).getPosition() +" " +m.getTeamA().getStarter().get(5).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(5).getLastName(), (400*mf.getWidth())/MAINFRAME_WIDTH, (140*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(6).getPosition() +" " +m.getTeamA().getStarter().get(6).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(6).getLastName(), (400*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(7).getPosition() +" " +m.getTeamA().getStarter().get(7).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(7).getLastName(), (400*mf.getWidth())/MAINFRAME_WIDTH, (295*mf.getHeight())/MAINFRAME_HEIGHT);
 	    
-	    g.drawString(m.getAlPlayerStarterTeamA().get(8).getPosition() +" " +m.getAlPlayerStarterTeamA().get(8).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamA().get(8).getLastName(), (590*mf.getWidth())/MAINFRAME_WIDTH, (140*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamA().get(9).getPosition() +" " +m.getAlPlayerStarterTeamA().get(9).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamA().get(9).getLastName(), (590*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamA().get(10).getPosition() +" " +m.getAlPlayerStarterTeamA().get(10).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamA().get(10).getLastName(), (590*mf.getWidth())/MAINFRAME_WIDTH, (295*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(8).getPosition() +" " +m.getTeamA().getStarter().get(8).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(8).getLastName(), (590*mf.getWidth())/MAINFRAME_WIDTH, (140*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(9).getPosition() +" " +m.getTeamA().getStarter().get(9).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(9).getLastName(), (590*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamA().getStarter().get(10).getPosition() +" " +m.getTeamA().getStarter().get(10).getFirstName().substring(0,1)+"." +" "+ m.getTeamA().getStarter().get(10).getLastName(), (590*mf.getWidth())/MAINFRAME_WIDTH, (295*mf.getHeight())/MAINFRAME_HEIGHT);
 
 	    
-	    g.drawString(m.getAlPlayerStarterTeamB().get(0).getPosition() +" " +m.getAlPlayerStarterTeamB().get(0).getFirstName().substring(0,1)+"."+" "+ m.getAlPlayerStarterTeamB().get(0).getLastName(), ((MAINFRAME_WIDTH - 240)*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(0).getPosition() +" " +m.getTeamB().getStarter().get(0).getFirstName().substring(0,1)+"."+" "+ m.getTeamB().getStarter().get(0).getLastName(), ((MAINFRAME_WIDTH - 240)*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
 
-	    g.drawString(m.getAlPlayerStarterTeamB().get(1).getPosition() +"  " +m.getAlPlayerStarterTeamB().get(1).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamB().get(1).getLastName(), ((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (90*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamB().get(2).getPosition() +" " +m.getAlPlayerStarterTeamB().get(2).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamB().get(2).getLastName(), ((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (170*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamB().get(3).getPosition() +" " +m.getAlPlayerStarterTeamB().get(3).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamB().get(3).getLastName(), ((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (260*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamB().get(4).getPosition() +" " +m.getAlPlayerStarterTeamB().get(4).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamB().get(4).getLastName(), ((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (330*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(1).getPosition() +"  " +m.getTeamB().getStarter().get(1).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(1).getLastName(), ((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (90*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(2).getPosition() +" " +m.getTeamB().getStarter().get(2).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(2).getLastName(), ((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (170*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(3).getPosition() +" " +m.getTeamB().getStarter().get(3).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(3).getLastName(), ((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (260*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(4).getPosition() +" " +m.getTeamB().getStarter().get(4).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(4).getLastName(), ((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (330*mf.getHeight())/MAINFRAME_HEIGHT);
 	    
-	    g.drawString(m.getAlPlayerStarterTeamB().get(5).getPosition() +" " +m.getAlPlayerStarterTeamB().get(5).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamB().get(5).getLastName(), ((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (140*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamB().get(6).getPosition() +" " +m.getAlPlayerStarterTeamB().get(6).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamB().get(6).getLastName(), ((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamB().get(7).getPosition() +" " +m.getAlPlayerStarterTeamB().get(7).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamB().get(7).getLastName(), ((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (295*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(5).getPosition() +" " +m.getTeamB().getStarter().get(5).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(5).getLastName(), ((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (140*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(6).getPosition() +" " +m.getTeamB().getStarter().get(6).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(6).getLastName(), ((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(7).getPosition() +" " +m.getTeamB().getStarter().get(7).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(7).getLastName(), ((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (295*mf.getHeight())/MAINFRAME_HEIGHT);
 	    
-	    g.drawString(m.getAlPlayerStarterTeamB().get(8).getPosition() +" " +m.getAlPlayerStarterTeamB().get(8).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamB().get(8).getLastName(), ((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (140*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamB().get(9).getPosition() +" " +m.getAlPlayerStarterTeamB().get(9).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamB().get(9).getLastName(), ((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString(m.getAlPlayerStarterTeamB().get(10).getPosition() +" " +m.getAlPlayerStarterTeamB().get(10).getFirstName().substring(0,1)+"." +" "+ m.getAlPlayerStarterTeamB().get(10).getLastName(), ((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (295*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(8).getPosition() +" " +m.getTeamB().getStarter().get(8).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(8).getLastName(), ((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (140*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(9).getPosition() +" " +m.getTeamB().getStarter().get(9).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(9).getLastName(), ((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (215*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString(m.getTeamB().getStarter().get(10).getPosition() +" " +m.getTeamB().getStarter().get(10).getFirstName().substring(0,1)+"." +" "+ m.getTeamB().getStarter().get(10).getLastName(), ((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (295*mf.getHeight())/MAINFRAME_HEIGHT);
 	    
-	    g = choosePlayer((125*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(0), m.getTeamA(), g);
-	    g = choosePlayer((260*mf.getWidth())/MAINFRAME_WIDTH, (70*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(1), m.getTeamA(), g);
-	    g = choosePlayer((260*mf.getWidth())/MAINFRAME_WIDTH, (150*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(2), m.getTeamA(), g);
-	    g = choosePlayer((260*mf.getWidth())/MAINFRAME_WIDTH, (240*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(3), m.getTeamA(), g);
-	    g = choosePlayer((260*mf.getWidth())/MAINFRAME_WIDTH, (310*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(4), m.getTeamA(), g);
-	    g = choosePlayer((400*mf.getWidth())/MAINFRAME_WIDTH, (120*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(5), m.getTeamA(), g);
-	    g = choosePlayer((400*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(6), m.getTeamA(), g);
-	    g = choosePlayer((400*mf.getWidth())/MAINFRAME_WIDTH, (275*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(7), m.getTeamA(), g);
-	    g = choosePlayer((590*mf.getWidth())/MAINFRAME_WIDTH, (120*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(8), m.getTeamA(), g);
-	    g = choosePlayer((590*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(9), m.getTeamA(), g);
-	    g = choosePlayer((590*mf.getWidth())/MAINFRAME_WIDTH, (275*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamA().get(10), m.getTeamA(), g);
+	    g = choosePlayer((125*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(0), m.getTeamA(), g);
+	    g = choosePlayer((260*mf.getWidth())/MAINFRAME_WIDTH, (70*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(1), m.getTeamA(), g);
+	    g = choosePlayer((260*mf.getWidth())/MAINFRAME_WIDTH, (150*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(2), m.getTeamA(), g);
+	    g = choosePlayer((260*mf.getWidth())/MAINFRAME_WIDTH, (240*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(3), m.getTeamA(), g);
+	    g = choosePlayer((260*mf.getWidth())/MAINFRAME_WIDTH, (310*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(4), m.getTeamA(), g);
+	    g = choosePlayer((400*mf.getWidth())/MAINFRAME_WIDTH, (120*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(5), m.getTeamA(), g);
+	    g = choosePlayer((400*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(6), m.getTeamA(), g);
+	    g = choosePlayer((400*mf.getWidth())/MAINFRAME_WIDTH, (275*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(7), m.getTeamA(), g);
+	    g = choosePlayer((590*mf.getWidth())/MAINFRAME_WIDTH, (120*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(8), m.getTeamA(), g);
+	    g = choosePlayer((590*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(9), m.getTeamA(), g);
+	    g = choosePlayer((590*mf.getWidth())/MAINFRAME_WIDTH, (275*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamA().getStarter().get(10), m.getTeamA(), g);
 	    
-	    g = choosePlayer(((MAINFRAME_WIDTH - 240)*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(0), m.getTeamB(), g);
-	    g = choosePlayer(((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (70*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(1), m.getTeamB(), g);
-	    g = choosePlayer(((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (150*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(2), m.getTeamB(), g);
-	    g = choosePlayer(((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (240*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(3), m.getTeamB(), g);
-	    g = choosePlayer(((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (310*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(4), m.getTeamB(), g);
-	    g = choosePlayer(((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (120*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(5), m.getTeamB(), g);
-	    g = choosePlayer(((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(6), m.getTeamB(), g);
-	    g = choosePlayer(((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (275*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(7), m.getTeamB(), g);
-	    g = choosePlayer(((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (120*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(8), m.getTeamB(), g);
-	    g = choosePlayer(((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(9), m.getTeamB(), g);
-	    g = choosePlayer(((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (275*mf.getHeight())/MAINFRAME_HEIGHT, m.getAlPlayerStarterTeamB().get(10), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 240)*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(0), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (70*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(1), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (150*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(2), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (240*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(3), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 360)*mf.getWidth())/MAINFRAME_WIDTH, (310*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(4), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (120*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(5), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(6), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 500)*mf.getWidth())/MAINFRAME_WIDTH, (275*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(7), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (120*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(8), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (195*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(9), m.getTeamB(), g);
+	    g = choosePlayer(((MAINFRAME_WIDTH - 690)*mf.getWidth())/MAINFRAME_WIDTH, (275*mf.getHeight())/MAINFRAME_HEIGHT, m.getTeamB().getStarter().get(10), m.getTeamB(), g);
 	    
 		return g;
 	}

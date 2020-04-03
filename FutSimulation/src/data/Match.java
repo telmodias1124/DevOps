@@ -30,7 +30,7 @@ public class Match {
 	private int nbrReplacementTeamA;
 	private int nbrReplacementTeamB;
 	public ArrayList<String> alrecap = new ArrayList<String>();
-	private ArrayList<Player> alPlayerStarterTeamA, alPlayerStarterTeamB, alPlayerBenchTeamA, alPlayerBenchTeamB;
+	private ArrayList<Player> alPlayerStarterTeamA, alPlayerStarterTeamB, alPlayerBenchTeamA, alPlayerBenchTeamB, alPlayerRedCard;
 	
 	public Match() {
 		this.scoreA = 0;
@@ -57,6 +57,7 @@ public class Match {
 		this.alPlayerBenchTeamA = new ArrayList<Player>();
 		this.alPlayerStarterTeamB = new ArrayList<Player>();
 		this.alPlayerBenchTeamB = new ArrayList<Player>();
+		this.alPlayerRedCard = new ArrayList<Player>();
 	}
 	
 	public Match(Team teamA, Team teamB) {
@@ -86,6 +87,7 @@ public class Match {
 		this.alPlayerBenchTeamA = new ArrayList<Player>();
 		this.alPlayerStarterTeamB = new ArrayList<Player>();
 		this.alPlayerBenchTeamB = new ArrayList<Player>();
+		this.alPlayerRedCard = new ArrayList<Player>();
 	}
 	
 	public Match(Team teamA, Team teamB, int scoreA, int scoreB, Team winner, Team loser) {
@@ -101,6 +103,7 @@ public class Match {
 		this.alPlayerBenchTeamA = new ArrayList<Player>();
 		this.alPlayerStarterTeamB = new ArrayList<Player>();
 		this.alPlayerBenchTeamB = new ArrayList<Player>();
+		this.alPlayerRedCard = new ArrayList<Player>();
 	}
 	
 		public Match(Team teamA, Team teamB, int scoreA, int scoreB, int totalKickA, int totalKickB, int passA, int passB,
@@ -137,6 +140,7 @@ public class Match {
 		this.alPlayerBenchTeamA = new ArrayList<Player>();
 		this.alPlayerStarterTeamB = new ArrayList<Player>();
 		this.alPlayerBenchTeamB = new ArrayList<Player>();
+		this.alPlayerRedCard = new ArrayList<Player>();
 	}
 		
 
@@ -432,6 +436,14 @@ public class Match {
 
 	public void setAlPlayerBenchTeamB(ArrayList<Player> alPlayerBenchTeamB) {
 		this.alPlayerBenchTeamB = alPlayerBenchTeamB;
+	}
+
+	public ArrayList<Player> getAlPlayerRedCard() {
+		return alPlayerRedCard;
+	}
+
+	public void setAlPlayerRedCard(ArrayList<Player> alPlayerRedCard) {
+		this.alPlayerRedCard = alPlayerRedCard;
 	}
 	
 	
