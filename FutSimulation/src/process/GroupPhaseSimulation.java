@@ -33,7 +33,6 @@ public class GroupPhaseSimulation {
 		updateStandingsFalse();
 	}
 	
-	/* ou passer l'arraylist des equipes */
 	@SuppressWarnings("unchecked")
 	private void createGroups(ArrayList<Team> alTeams) {
 		alSort = (ArrayList<Team>)alTeams.clone();

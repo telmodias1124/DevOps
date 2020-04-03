@@ -369,7 +369,7 @@ public class MatchSimulation {
 						pass(tDef, tAtt, "def", newPlayer);
 					}else {
 						//Check if Goalkeeper touch the ball and then go out or just the kick go out
-						if(random.nextInt(101)< MatchSimulationParameter.CHANCE_CORNER_KICK) {
+						if(random.nextInt(101)< MatchSimulationParameter.LUCK_CORNER_KICK) {
 							//Corner
 							game.alrecap.add("Le gardien la touche mais le ballon sort du terrain.");
 							game.alrecap.add("Corner pour l'équipe "+ tAtt.getTeamName()+" tapé par "+player.getLastName());
@@ -400,7 +400,7 @@ public class MatchSimulation {
 					//Defender doesn't get the ball but check if he commits a foul or not
 					if(random.nextInt(101)  < MatchSimulationParameter.FOULS_ON_KICK + this.calLuck(-5,11)) {
 						//Ball goes out on defender's pressure
-						if(random.nextInt(101) < MatchSimulationParameter.CHANCE_CORNER_KICK) {
+						if(random.nextInt(101) < MatchSimulationParameter.LUCK_CORNER_KICK) {
 							//Corner
 							game.alrecap.add("Le ballon est dévié par "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName()+" dans sa surface");
 							game.alrecap.add("Corner pour l'équipe "+ tAtt.getTeamName()+" tapé par "+player.getLastName());
@@ -468,7 +468,7 @@ public class MatchSimulation {
 						pass(tDef, tAtt, "def", newPlayer);
 					}else {
 						//Check if Goalkeeper touch the ball and then go out or just the kick go out
-						if(random.nextInt(101)< MatchSimulationParameter.CHANCE_CORNER_KICK) {
+						if(random.nextInt(101)< MatchSimulationParameter.LUCK_CORNER_KICK) {
 							//Corner
 							game.alrecap.add("Le gardien la touche mais le ballon sort du terrain.");
 							game.alrecap.add("Corner pour l'équipe "+ tAtt.getTeamName()+" tapé par "+player.getLastName());
@@ -499,7 +499,7 @@ public class MatchSimulation {
 					//Defender doesn't get the ball but check if he commits a foul or not
 					if(random.nextInt(101)  < MatchSimulationParameter.FOULS_ON_KICK + this.calLuck(-5,11)) {
 						//Ball goes out on defender's pressure, check who will have the ball
-						if(random.nextInt(101)< MatchSimulationParameter.CHANCE_TOUCHE) {
+						if(random.nextInt(101)< MatchSimulationParameter.LUCK_TOUCHE) {
 							game.alrecap.add("Le ballon est dévié par "+newPlayer.getLastName()+" pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain");
 							game.alrecap.add("Touche pour l'équipe "+ tAtt.getTeamName()+ " par "+player.getLastName());
 							incrementAction(tAtt);
@@ -543,9 +543,9 @@ public class MatchSimulation {
 					if(random.nextInt(101)  > defender+ this.calLuck(-5,11)) {
 						//Check if it will be a medium or long kick
 						incrementTotalPass(tAtt);
-						if(random.nextInt(101)  < MatchSimulationParameter.CHANCE_MEDIUM_KICK+ this.calLuck(-5,11)) {
+						if(random.nextInt(101)  < MatchSimulationParameter.LUCK_MEDIUM_KICK+ this.calLuck(-5,11)) {
 							//Medium kick, check who will get the ball
-							if(random.nextInt(101)  < MatchSimulationParameter.CHANCE_GET_MEDIUM_KICK + this.calLuck(-5,11)) {
+							if(random.nextInt(101)  < MatchSimulationParameter.LUCK_GET_MEDIUM_KICK + this.calLuck(-5,11)) {
 								//Attacker get the ball
 								newPlayer = getRandomPlayer("M", tAtt, player);
 								game.alrecap.add("Dégagement réussi par "+player.getLastName()+" pour l'équipe "+ tAtt.getTeamName()+", "+newPlayer.getLastName()+" récupère le ballon au milieu du terrain");
@@ -561,7 +561,7 @@ public class MatchSimulation {
 							}
 						} else {
 							//Long kick, check who will get the ball
-							if(random.nextInt(101)  < MatchSimulationParameter.CHANCE_GET_LONG_KICK + this.calLuck(-5,11)) {
+							if(random.nextInt(101)  < MatchSimulationParameter.LUCK_GET_LONG_KICK + this.calLuck(-5,11)) {
 								//Attacker get the ball
 								newPlayer = getRandomPlayer("A", tAtt, player);
 								game.alrecap.add("Dégagement long réussi par "+player.getLastName()+ "pour l'équipe "+ tAtt.getTeamName()+" "+newPlayer.getLastName()+" récupère le ballon en attaque");
@@ -586,7 +586,7 @@ public class MatchSimulation {
 				}
 				else {
 					//The ball go out, check who will have the ball
-					if(random.nextInt(101) < MatchSimulationParameter.CHANCE_TOUCHE) {
+					if(random.nextInt(101) < MatchSimulationParameter.LUCK_TOUCHE) {
 						game.alrecap.add("Le ballon sort suite à la pression de "+newPlayer.getLastName()+" de l'équipe "+ tDef.getTeamName());
 						game.alrecap.add("Touche pour l'équipe"+ tDef.getTeamName() +" par "+newPlayer.getLastName()+" en attaque");
 						incrementAction(tAtt);
@@ -678,7 +678,7 @@ public class MatchSimulation {
 			
 			game.alrecap.add("L'équipe "+tAtt.getTeamName()+" hésite en la passe et le tir");
 			//Check if attacker will try to kick or pass
-			if(random.nextInt(101) < MatchSimulationParameter.CHANCE_KICK_THAN_PASS_A) {
+			if(random.nextInt(101) < MatchSimulationParameter.LUCK_KICK_THAN_PASS_A) {
 				//Try to kick
 				game.alrecap.add(nbActions+"min - " + player.getLastName() + " tente le tir direct");
 				incrementTotalKicks(tAtt);
@@ -709,7 +709,7 @@ public class MatchSimulation {
 						}else {
 							game.alrecap.add("Le ballon sort sur le tir de "+player.getLastName());
 							//Check if Goalkeeper touch the ball and then go out or just the kick go out
-							if(random.nextInt(101)< MatchSimulationParameter.CHANCE_CORNER_KICK) {
+							if(random.nextInt(101)< MatchSimulationParameter.LUCK_CORNER_KICK) {
 								//Corner
 								game.alrecap.add("Le gardien la touche mais le ballon sort du terrain.");
 								game.alrecap.add("Corner pour l'équipe "+ tAtt.getTeamName()+" tiré par "+player.getLastName());
@@ -737,7 +737,7 @@ public class MatchSimulation {
 				game.alrecap.add(nbActions+"min - "+ player.getLastName() + " tente la passe en attaque");
 				incrementTotalPass(tAtt);
 				//Check if the pass is intercept
-				if(random.nextInt(101) < MatchSimulationParameter.CHANCE_FREEKICK_INTERCEPT_PASS) {
+				if(random.nextInt(101) < MatchSimulationParameter.LUCK_FREEKICK_INTERCEPT_PASS) {
 					//Pass successful
 					newPlayer = getRandomPlayer("A", tAtt, player);
 					game.alrecap.add("Passe réussi par "+ player.getLastName() +" à "+newPlayer.getLastName()+", ballon dans la surface");
@@ -763,7 +763,7 @@ public class MatchSimulation {
 			
 			game.alrecap.add("L'équipe "+tAtt.getTeamName()+" hésite en la passe et le dégagement");
 			//Check if attacker will try to kick or pass
-			if(random.nextInt(101) < MatchSimulationParameter.CHANCE_KICK_THAN_PASS_M) {
+			if(random.nextInt(101) < MatchSimulationParameter.LUCK_KICK_THAN_PASS_M) {
 				game.alrecap.add(nbActions+"min - Tentative de dégagement depuis le milieu du terrain par "+ player.getLastName());
 				//Check if kick is successful
 				incrementTotalPass(tAtt);
@@ -787,7 +787,7 @@ public class MatchSimulation {
 				//Bad kick 
 				else {
 					//Check who pulls out the ball
-					if(random.nextInt(101) < MatchSimulationParameter.CHANCE_TOUCHE) {
+					if(random.nextInt(101) < MatchSimulationParameter.LUCK_TOUCHE) {
 						newPlayer = getRandomPlayer("D", tDef, player);
 						game.alrecap.add("Le ballon sort suite à la pression de "+newPlayer.getLastName());
 						game.alrecap.add("Touche pour l'équipe"+ tDef.getTeamName()+ " au milieu du terrain, remis en jeu par "+newPlayer.getLastName());
@@ -807,7 +807,7 @@ public class MatchSimulation {
 				game.alrecap.add(nbActions+"min - "+ player.getLastName() + " tente la passe depuis le milieu du terrain");
 				incrementTotalPass(tAtt);
 				//Check if the ball will be intercept
-				if(random.nextInt(101) <= MatchSimulationParameter.CHANCE_FREEKICK_INTERCEPT_PASS) {
+				if(random.nextInt(101) <= MatchSimulationParameter.LUCK_FREEKICK_INTERCEPT_PASS) {
 					//Pass successful
 					newPlayer = getRandomPlayer("M", tAtt, player);
 					game.alrecap.add("Passe réussi par "+ player.getLastName()+ " à "+newPlayer.getLastName()+", ballon au milieu du terrain");
@@ -831,15 +831,15 @@ public class MatchSimulation {
 			defender = calculateKickDef(tDef, position, newPlayer);
 			
 			//Check if attacker will try to kick or pass
-			if(random.nextInt(101) < MatchSimulationParameter.CHANCE_KICK_THAN_PASS_D) {
+			if(random.nextInt(101) < MatchSimulationParameter.LUCK_KICK_THAN_PASS_D) {
 				game.alrecap.add(nbActions+"min - Tentative de dégagement par "+player.getLastName()+" de l'équipe "+ tAtt.getTeamName()+" depuis son camp");
 				//Check if kick is successful
 				if(random.nextInt(101)  < attacker+ this.calLuck(-5,11)) {
 					incrementTotalPass(tAtt);
 					//Check if it will be a medium or long kick
-					if(random.nextInt(101) < MatchSimulationParameter.CHANCE_MEDIUM_KICK) {
+					if(random.nextInt(101) < MatchSimulationParameter.LUCK_MEDIUM_KICK) {
 						//Check who will get the ball
-						if(random.nextInt(101) + this.calLuck(-5,11) < MatchSimulationParameter.CHANCE_GET_MEDIUM_KICK) {
+						if(random.nextInt(101) + this.calLuck(-5,11) < MatchSimulationParameter.LUCK_GET_MEDIUM_KICK) {
 							//Attacker get the ball
 							newPlayer = getRandomPlayer("M", tAtt, player);
 							game.alrecap.add("Dégagement réussi par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon au milieu du terrain");
@@ -855,7 +855,7 @@ public class MatchSimulation {
 						}
 					} else {
 						//Check who will get the ball
-						if(random.nextInt(101) + this.calLuck(-5,11) < MatchSimulationParameter.CHANCE_GET_LONG_KICK) {
+						if(random.nextInt(101) + this.calLuck(-5,11) < MatchSimulationParameter.LUCK_GET_LONG_KICK) {
 							//Attacker get the ball
 							newPlayer = getRandomPlayer("A", tAtt, player);
 							game.alrecap.add("Dégagement long réussi par "+ player.getLastName()+", "+newPlayer.getLastName()+" récupère le ballon en attaque");
@@ -884,7 +884,7 @@ public class MatchSimulation {
 				game.alrecap.add(nbActions+"min - L'équipe "+ tAtt.getTeamName()+ " tente la passe depuis leur camp");
 				incrementTotalPass(tAtt);
 				//Check if the ball will be intercept
-				if(random.nextInt(101)<= MatchSimulationParameter.CHANCE_FREEKICK_INTERCEPT_PASS) {
+				if(random.nextInt(101)<= MatchSimulationParameter.LUCK_FREEKICK_INTERCEPT_PASS) {
 					//Pass successful
 					newPlayer = getRandomPlayer("D", tAtt, player);
 					game.alrecap.add("Passe réussi par "+ player.getLastName()+" à "+newPlayer.getLastName()+" ballon en défense");
@@ -940,7 +940,7 @@ public class MatchSimulation {
 				//Bas pass
 				else {
 					//Check who push out the ball
-					if(random.nextInt(101) < MatchSimulationParameter.CHANCE_TOUCHE) {
+					if(random.nextInt(101) < MatchSimulationParameter.LUCK_TOUCHE) {
 						game.alrecap.add(nbActions+"min - Passe raté par "+player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" dans leur camp, remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
@@ -1000,7 +1000,7 @@ public class MatchSimulation {
 				//Bas pass
 				else {
 					//Check who push out the ball
-					if(random.nextInt(101) < MatchSimulationParameter.CHANCE_TOUCHE) {
+					if(random.nextInt(101) < MatchSimulationParameter.LUCK_TOUCHE) {
 						game.alrecap.add(nbActions+"min - Passe raté par "+player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
@@ -1060,7 +1060,7 @@ public class MatchSimulation {
 				//Bad pass
 				else {
 					//Check who push out the ball
-					if(random.nextInt(101) < MatchSimulationParameter.CHANCE_TOUCHE) {
+					if(random.nextInt(101) < MatchSimulationParameter.LUCK_TOUCHE) {
 						game.alrecap.add(nbActions+"min - Passe raté par "+player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" en attaque remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
@@ -1156,7 +1156,7 @@ public class MatchSimulation {
 				//Bad dribble
 				else {
 					//Check who push out the ball
-					if(random.nextInt(101) < MatchSimulationParameter.CHANCE_TOUCHE) {
+					if(random.nextInt(101) < MatchSimulationParameter.LUCK_TOUCHE) {
 						game.alrecap.add(nbActions+"min - Dribble raté par "+ player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" dans leur camp remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
@@ -1212,7 +1212,7 @@ public class MatchSimulation {
 				//Bad dribble
 				else {
 					//Check who push out the ball
-					if(random.nextInt(101) < MatchSimulationParameter.CHANCE_TOUCHE) {
+					if(random.nextInt(101) < MatchSimulationParameter.LUCK_TOUCHE) {
 						game.alrecap.add(nbActions+"min - Dribble raté par "+ player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("min - Touche pour l'équipe "+ tDef.getTeamName()+" au milieu du terrain remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
@@ -1268,7 +1268,7 @@ public class MatchSimulation {
 				//Bad dribble
 				else {
 					//Check who push out the ball
-					if(random.nextInt(101) < MatchSimulationParameter.CHANCE_TOUCHE) {
+					if(random.nextInt(101) < MatchSimulationParameter.LUCK_TOUCHE) {
 						game.alrecap.add(nbActions+"min - Dribble raté par "+ player.getLastName()+" et le ballon sort du terrain");
 						game.alrecap.add("Touche pour l'équipe "+ tDef.getTeamName()+" en attaque remis en jeu par "+newPlayer.getLastName());
 						incrementAction(tAtt);
@@ -1392,9 +1392,6 @@ public class MatchSimulation {
 			}
 		}
 		
-		if((att.size() < 2) || (def.size() < 2) || (mid.size() < 2)) {
-			System.out.println("////////////////////// att "+att.size()+" def "+def.size()+" mid "+mid.size());
-		}
 		//Check if the new player name is note equals to the current player name
 		if(actualPlayer.equals(player)) {
 			player = getRandomPlayer(position, team, actualPlayer);
@@ -1484,19 +1481,25 @@ public class MatchSimulation {
 	}
 	
 	private void checkTirednessPlayers() {
+		//Check if a player in the team is tired
 		for(int i = 0 ; i <  alPlayerStarterTeamA.size(); i++) {
-			if((alPlayerStarterTeamA.get(i).getNbrAction()>8) && (game.getNbrReplacementTeamA()<3)) {
+			//Check if team have exceeded replacement limit and if the player have exceeded number of action
+			if((alPlayerStarterTeamA.get(i).getNbrAction()>9) && (game.getNbrReplacementTeamA()<3)) {
 				Player newPlayer;
 				newPlayer = getRandomBenchPlayer(alPlayerStarterTeamA.get(i).getPosition(), alPlayerBenchTeamA);
+				game.alrecap.add(alPlayerStarterTeamA.get(i).getLastName()+" sort, remplacé par "+newPlayer.getLastName());
 				alPlayerStarterTeamA.remove(i);
 				alPlayerStarterTeamA.add(newPlayer);
 				game.incrementNbrReplacementTeamA();
+				;
 			}
 		}
 		for(int i = 0 ; i <  alPlayerStarterTeamB.size(); i++) {
-			if((alPlayerStarterTeamB.get(i).getNbrAction()>8) && (game.getNbrReplacementTeamB()<3)) {
+			//Check if team have exceeded replacement limit and if the player have exceeded number of action
+			if((alPlayerStarterTeamB.get(i).getNbrAction()>9) && (game.getNbrReplacementTeamB()<3)) {
 				Player newPlayer;
 				newPlayer = getRandomBenchPlayer(alPlayerStarterTeamB.get(i).getPosition(), alPlayerBenchTeamB);
+				game.alrecap.add(alPlayerStarterTeamA.get(i).getLastName()+" sort, remplacé par "+newPlayer.getLastName());
 				alPlayerStarterTeamB.remove(i);
 				alPlayerStarterTeamB.add(newPlayer);
 				game.incrementNbrReplacementTeamB();
@@ -1510,7 +1513,7 @@ public class MatchSimulation {
 		//Check player's position
 		if(player.getPosition().contentEquals("A")) {
 			//Check if the player is injured
-			if(random.nextInt(101) > MatchSimulationParameter.CHANCE__NOT_INJURY_ATT) {
+			if(random.nextInt(101) > MatchSimulationParameter.LUCK_NOT_INJURY_ATT) {
 				//Check the team to make replacement
 				if(team.getTeamName().equals(game.getTeamA().getTeamName())) {
 					alPlayerStarterTeamA.remove(player);
@@ -1528,7 +1531,7 @@ public class MatchSimulation {
 			}
 		} else if(player.getPosition().contentEquals("M")) {
 			//Check if the player is injured
-			if(random.nextInt(101) > MatchSimulationParameter.CHANCE__NOT_INJURY_MID) {
+			if(random.nextInt(101) > MatchSimulationParameter.LUCK_NOT_INJURY_MID) {
 				//Check the team to make replacement
 				if(team.getTeamName().equals(game.getTeamA().getTeamName())) {
 					alPlayerStarterTeamA.remove(player);
@@ -1546,7 +1549,7 @@ public class MatchSimulation {
 			}
 		} else if(player.getPosition().contentEquals("D")) {
 			//Check if the player is injured
-			if(random.nextInt(101) > MatchSimulationParameter.CHANCE__NOT_INJURY_DEF) {
+			if(random.nextInt(101) > MatchSimulationParameter.LUCK_NOT_INJURY_DEF) {
 				//Check the team to make replacement
 				if(team.getTeamName().equals(game.getTeamA().getTeamName())) {
 					alPlayerStarterTeamA.remove(player);
@@ -1570,7 +1573,6 @@ public class MatchSimulation {
 	}
 	
 	private void getCard(Player player, Team team) {
-		game.alrecap.add(player.getLastName()+" ///////////////////////////////////////////////////////////////////////////////////////////////");
 		ArrayList<Player> alPlayer = new ArrayList<Player>();
 		//Check the team to get the players starter array
 		if(team.getTeamName().equals(game.getTeamA().getTeamName())) {
@@ -1583,9 +1585,9 @@ public class MatchSimulation {
 		//Check player's position
 		if(player.getPosition().contentEquals("A")) {
 			//Check if the player get a card
-			if(random.nextInt(101) > MatchSimulationParameter.CHANCE_NOT_GET_CARD_ATT) {
+			if(random.nextInt(101) > MatchSimulationParameter.LUCK_NOT_GET_CARD_ATT) {
 				//Check if it is a red or yellow card
-				if(random.nextInt(101)> MatchSimulationParameter.CHANCE_GET_YELLOW_CARD_ATT) {
+				if(random.nextInt(101)> MatchSimulationParameter.LUCK_GET_YELLOW_CARD_ATT) {
 					//Red card
 					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !");
 					player.setRedCard(true);
@@ -1606,9 +1608,9 @@ public class MatchSimulation {
 			}
 		} else if(player.getPosition().contentEquals("M")) {
 			//Check if the player get a card
-			if(random.nextInt(101) > MatchSimulationParameter.CHANCE_NOT_GET_CARD_MID) {
+			if(random.nextInt(101) > MatchSimulationParameter.LUCK_NOT_GET_CARD_MID) {
 				//Check if it is a red or yellow card
-				if(random.nextInt(101)> MatchSimulationParameter.CHANCE_GET_YELLOW_CARD_MID) {
+				if(random.nextInt(101)> MatchSimulationParameter.LUCK_GET_YELLOW_CARD_MID) {
 					//Red card
 					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !");
 					player.setRedCard(true);
@@ -1629,9 +1631,9 @@ public class MatchSimulation {
 			}
 		} else if(player.getPosition().contentEquals("D")) {
 			//Check if the player get a card
-			if(random.nextInt(101) > MatchSimulationParameter.CHANCE_NOT_GET_CARD_DEF) {
+			if(random.nextInt(101) > MatchSimulationParameter.LUCK_NOT_GET_CARD_DEF) {
 				//Check if it is a red or yellow card
-				if(random.nextInt(101)> MatchSimulationParameter.CHANCE_GET_YELLOW_CARD_DEF) {
+				if(random.nextInt(101)> MatchSimulationParameter.LUCK_GET_YELLOW_CARD_DEF) {
 					//Red card
 					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !");
 					player.setRedCard(true);
@@ -1683,6 +1685,7 @@ public class MatchSimulation {
 			}
 		}
 		
+		//Check if the team has enough players to play the game
 		if(att.size()<2) {
 			if(mid.size()>2) {
 				player = mid.get(random.nextInt(mid.size()));
@@ -1816,33 +1819,6 @@ public class MatchSimulation {
 
 	public void setGame(Match game) {
 		this.game = game;
-	}
-	
-	public void printjoeur() {
-		System.out.println("Match simulation");
-		for(Player p : alPlayerStarterTeamA) {
-			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
-		}
-		System.out.println("");
-		for(Player p : alPlayerStarterTeamB) {
-			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
-		}
-		System.out.println("Match");
-		for(Player p : game.getAlPlayerStarterTeamA()) {
-			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
-		}
-		System.out.println("");
-		for(Player p : game.getAlPlayerStarterTeamB()) {
-			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
-		}
-		System.out.println("Team");
-		for(Player p : game.getTeamA().getStarter()) {
-			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
-		}
-		System.out.println("");
-		for(Player p : game.getTeamB().getStarter()) {
-			System.out.println("Nom "+p.getLastName()+" actions "+p.getNbrAction());
-		}
 	}
 	
 	
