@@ -25,20 +25,20 @@ public class StartAction implements ActionListener {
 	}
 	public void actionPerformed(ActionEvent e) {
 		this.gamePanel.removeAll();
-		this.gamePanel.createGamePanel("Group A", this.gp.getListMatchGroupA());
-		this.gamePanel.createGamePanel("Group B", this.gp.getListMatchGroupB());
-		this.gamePanel.createGamePanel("Group C", this.gp.getListMatchGroupC());
-		this.gamePanel.createGamePanel("Group D", this.gp.getListMatchGroupD());
+		this.gamePanel.createGamePanel("Groupe A", this.gp.getListMatchGroupA());
+		this.gamePanel.createGamePanel("Groupe B", this.gp.getListMatchGroupB());
+		this.gamePanel.createGamePanel("Groupe C", this.gp.getListMatchGroupC());
+		this.gamePanel.createGamePanel("Groupe D", this.gp.getListMatchGroupD());
 		this.gamePanel.revalidate();
 		this.gamePanel.repaint();
 		this.gamePanel.setVisible(true);
 		this.gamePanel.getMf().getGroupPhase().updateStandings();
 		
 		this.standingPanel.removeAll();
-		this.standingPanel.fillStandingPanel("Group A", this.gp.getStandingGroupA(), true);
-		this.standingPanel.fillStandingPanel("Group B", this.gp.getStandingGroupB(), true);
-		this.standingPanel.fillStandingPanel("Group C", this.gp.getStandingGroupC(), true);
-		this.standingPanel.fillStandingPanel("Group D", this.gp.getStandingGroupD(), true);
+		this.standingPanel.fillStandingPanel("Groupe A", this.gp.getStandingGroupA(), true);
+		this.standingPanel.fillStandingPanel("Groupe B", this.gp.getStandingGroupB(), true);
+		this.standingPanel.fillStandingPanel("Groupe C", this.gp.getStandingGroupC(), true);
+		this.standingPanel.fillStandingPanel("Groupe D", this.gp.getStandingGroupD(), true);
 		
 		this.standingPanel.revalidate();
 		this.standingPanel.repaint();

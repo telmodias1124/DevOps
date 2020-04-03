@@ -13,6 +13,7 @@ import data.Standing;
 import data.Team;
 import data.TeamData;
 import gui.MainFrame;
+import gui.Start;
 
 public class test {
 
@@ -21,7 +22,8 @@ public class test {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TeamData td = new TeamData();
+		Start StartFrame = new Start();
+		/*TeamData td = new TeamData();
 		ArrayList<Team> al = new ArrayList<Team>();
 		td.createTeams(al);
 		Team bel = null, fr = null;
@@ -30,7 +32,7 @@ public class test {
 		groupePhase.setAlTeams(al);
 		groupePhase.simulate();
 		
-		groupePhase.gp.getListMatchGroupA().get(0);
+		groupePhase.gp.getListMatchGroupA().get(0);*/
 		/*for(Team t : al) {
 			if(t.getTeamName().equals("Belgium")) {
 				bel = t;
@@ -38,17 +40,17 @@ public class test {
 			if(t.getTeamName().equals("France")) {
 				fr = t;
 			}
-		}/*
+		}
 		
-		//for(Player p : bel.getStarter()) {
-		//	System.out.println("Nom "+p.getFirstName()+" Position "+p.getPosition()+" Att "+p.getPlayerStatistic().getShoot());
-		//}
+		for(Player p : bel.getStarter()) {
+			System.out.println("Nom "+p.getFirstName()+" Position "+p.getPosition()+" Att "+p.getPlayerStatistic().getShoot());
+		}
 		//System.out.println(""+p.getFirstName()+" Position "+p.getPosition()+" Att "+p.getPlayerStatistic().getShoot());
-		/*for(Player p : fr.getStarter()) {
-			System.out.println("Nom "+p.getLastName()+" Position "+p.getPosition()+" Att "+p.getPlayerStatistic().getShoot());
-		}*/
+		for(Player p : fr.getStarter()) {
+			System.out.println("Nom "+p.getFirstName()+" Position "+p.getPosition()+" Att "+p.getPlayerStatistic().getShoot());
+		}
 		
-		/*Match match = new Match(bel, fr);
+		Match match = new Match(bel, fr);
 		MatchSimulation ms = new MatchSimulation();
 		
 		match.setOvertime(true);
@@ -63,29 +65,29 @@ public class test {
 		
 		
 		
-		//System.out.println(groupePhase.groupToString());
-		//System.out.println(groupePhase.matchsToString());
-		//System.out.println(groupePhase.standingToString());
+		/*System.out.println(groupePhase.groupToString());
+		System.out.println(groupePhase.matchsToString());
+		System.out.println(groupePhase.standingToString());*/
 		
 		/*for(String n : groupePhase.gp.getListMatchGroupC().get(2).alrecap) {
 			   System.out.println(n);
 		}*/
 		
-		KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
+		/*KnockoutPhaseSimulation ks = new KnockoutPhaseSimulation();
 		ks.setListQuarter(groupePhase.gp.getStandingGroupA(), groupePhase.gp.getStandingGroupB(), groupePhase.gp.getStandingGroupC(), groupePhase.gp.getStandingGroupD());
 		ks.simulate();
-		//System.out.println(ks.quartersToString());
-		//System.out.println(ks.semiToString());
-		//System.out.println(ks.finalToString());
+		System.out.println(ks.quartersToString());
+		System.out.println(ks.semiToString());
+		System.out.println(ks.finalToString());*/
 		
 		
-		MainFrame mf = new MainFrame();
-		mf.setGroupPhase(groupePhase);
-		mf.createGroupPhasePanel(groupePhase.gp, ks.kp, groupePhase);
+		//MainFrame mf = new MainFrame();
+		//mf.setGroupPhase(groupePhase);
+		//mf.createGroupPhasePanel(groupePhase.gp, ks.kp, groupePhase);
 		//mf.createMatchView(groupePhase.gp.getListMatchGroupA().get(0));
 		//mf.createKnockout();
-		mf.revalidate();
-		mf.repaint();
+		//mf.revalidate();
+		//mf.repaint();
 		
 		
 		

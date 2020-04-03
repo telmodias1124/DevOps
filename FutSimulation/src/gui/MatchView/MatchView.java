@@ -212,13 +212,13 @@ public class MatchView extends JPanel{
 	    g.drawImage(field, (550*mf.getWidth())/MAINFRAME_WIDTH, (600*mf.getHeight())/MAINFRAME_HEIGHT, (400*mf.getWidth())/MAINFRAME_WIDTH, (400*mf.getHeight())/MAINFRAME_HEIGHT, null);
 	    
 	    try {
-	    	flag = ImageIO.read(new File("images/ballon.png"));
+	    	flag = ImageIO.read(new File("images/fleche_haut.png"));
 		    }
 		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(flag, (1050*mf.getWidth())/MAINFRAME_WIDTH, (600*mf.getHeight())/MAINFRAME_HEIGHT, (50*mf.getWidth())/MAINFRAME_WIDTH, (50*mf.getHeight())/MAINFRAME_HEIGHT, null);
+	    g.drawImage(flag, (1050*mf.getWidth())/MAINFRAME_WIDTH, (610*mf.getHeight())/MAINFRAME_HEIGHT, (50*mf.getWidth())/MAINFRAME_WIDTH, (50*mf.getHeight())/MAINFRAME_HEIGHT, null);
 	    
 	    try {
-	    	flag = ImageIO.read(new File("images/ballon.png"));
+	    	flag = ImageIO.read(new File("images/fleche_bas.png"));
 		    }
 		    catch (Exception e) { /*handled in paintComponent()*/ }
 	    g.drawImage(flag, (1050*mf.getWidth())/MAINFRAME_WIDTH, (900*mf.getHeight())/MAINFRAME_HEIGHT, (50*mf.getWidth())/MAINFRAME_WIDTH, (50*mf.getHeight())/MAINFRAME_HEIGHT, null);
@@ -323,14 +323,14 @@ public class MatchView extends JPanel{
 	
 	public Graphics drawRecap(Graphics g) {
 		if(Mouse.x > 1050 && Mouse.x < 1100) {
-		    if(Mouse.y > 600+30 && Mouse.y < 650+30 && Mouse.click == true) {
+		    if(Mouse.y > 610+30 && Mouse.y < 650+30 && Mouse.click == true) {
 		    	if(state > 0) {
 		    		state--;
 		    		Mouse.click = false;
 		    	}
 		    }
 		    if(Mouse.y > 900 +30 && Mouse.y < 1000+30 && Mouse.click == true) {
-		    	if(state < (m.getAlrecap().size()/17)) {
+		    	if(state < (m.getAlrecap().size()/13)) {
 		    		state++;
 		    		Mouse.click = false;
 		    	}
@@ -338,32 +338,70 @@ public class MatchView extends JPanel{
 		}
 		    
 		g.setColor(Color.WHITE);
+		/*int k=0;
 		int j = 0;
-		for(int i=0; i< 10; i++) {
-		    if(i+(state*10)< m.getAlrecap().size()) {
+		for(int i=0; i< 15; i++) {
+		    if(i+(state*15)< m.getAlrecap().size()) {
 		    	String str = new String();
                 String str2 = new String();
-                int lastIndex = m.getAlrecap().get(i+(state*10)).length();
-                int lastIndexOri = m.getAlrecap().get(i+(state*10)).length();
-                int width = g.getFontMetrics().stringWidth(m.getAlrecap().get(i+(state*10)));
-                str = m.getAlrecap().get(i+(state*10));
+                int lastIndex = m.getAlrecap().get(k+(state*15)).length();
+                int lastIndexOri = m.getAlrecap().get(k+(state*15)).length();
+                int width = g.getFontMetrics().stringWidth(m.getAlrecap().get(k+(state*15)));
+                str = m.getAlrecap().get(k+(state*15));
                 while(width > 580) {
                     lastIndex = str.lastIndexOf(" ");
                     str = str.substring(0, lastIndex);
                     width = g.getFontMetrics().stringWidth(str);
-                    str2 = m.getAlrecap().get(i+(state*10)).substring(lastIndex, lastIndexOri);
+                    str2 = m.getAlrecap().get(k+(state*15)).substring(lastIndex, lastIndexOri);
                 }
-                if(g.getFontMetrics().stringWidth(m.getAlrecap().get(i+(state*10))) > 580) {
+                if(g.getFontMetrics().stringWidth(m.getAlrecap().get(k+(state*10))) > 580) {
                     g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
                     j++;
                     g.drawString(str2, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
                     j++;
+                    i++;
                 }else {
                     g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
                     j++;
                 }
+                k++;
 		    }
+		}*/
+		int k=0;
+		int j=0;
+		for(int i =0; i<13  ; i++) {
+			if(i+(state*13) < m.getAlrecap().size()) {
+				String str = new String();
+				String str2 = new String();
+				int lastIndex = m.getAlrecap().get(k+(state*13)).length();
+                int lastIndexOri = m.getAlrecap().get(k+(state*13)).length();
+                int width = g.getFontMetrics().stringWidth(m.getAlrecap().get(k+(state*13)));
+				str = m.getAlrecap().get(k+(state*13));
+				if(g.getFontMetrics().stringWidth(str) > 580) {
+					while(width > 580) {
+	                    lastIndex = str.lastIndexOf(" ");
+	                    str = str.substring(0, lastIndex);
+	                    width = g.getFontMetrics().stringWidth(str);
+	                    str2 = m.getAlrecap().get(k+(state*13)).substring(lastIndex, lastIndexOri);	                    
+	                }
+					g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
+					j++;
+					g.drawString(str2, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
+					j++;
+					i++;
+				}else {
+					g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
+					j++;
+				}
+				k++;
+				
+			}
+			
 		}
+		for(String n : m.getAlrecap()) {
+			   System.out.println(n);
+		}
+		
 		return g;
 	}
 	
