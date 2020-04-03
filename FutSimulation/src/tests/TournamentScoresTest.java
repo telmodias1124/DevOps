@@ -1,7 +1,7 @@
 package tests;
 
 import gui.MainFrame;
-import gui.Start;
+import gui.StartFrame;
 import process.KnockoutPhaseSimulation;
 
 /** CLASS THAT TEST THE SCORES IN THE TOURNAMENT **/
@@ -52,7 +52,7 @@ public class TournamentScoresTest {
 	
 	public static void main(String[] args) {
 		
-		Start startFrame = new Start();
+		StartFrame startFrame = new StartFrame();
 		startFrame.createMainFrame();
 		
 		TournamentTeamsTest(startFrame.kss);

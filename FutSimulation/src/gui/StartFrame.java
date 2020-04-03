@@ -27,12 +27,12 @@ import listener.Mouse;
 import process.GroupPhaseSimulation;
 import process.KnockoutPhaseSimulation;
 
-public class Start extends JFrame{
+public class StartFrame extends JFrame{
 
 	public KnockoutPhaseSimulation kss;
 	private static final long serialVersionUID = 0;
 		
-	public Start() {
+	public StartFrame() {
 		super("Start FutSimulation");
 		this.addMouseListener(new Mouse());
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -1,9 +1,9 @@
 package tests;
 import java.util.concurrent.TimeUnit;
 
-import gui.Start;
+import gui.StartFrame;
 import process.GroupPhaseSimulation;
-import process.test;
+import process.Start;
 
 public class ExecutionTimeTest {
 
@@ -42,7 +42,7 @@ public class ExecutionTimeTest {
 		
 		public static void main(String[] args) {
 			startTime();
-			Start StartFrame = new Start();
+			StartFrame StartFrame = new StartFrame();
 			endTime();
 			TimeCompare();
 		}
