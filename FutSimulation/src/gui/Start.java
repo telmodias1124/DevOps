@@ -37,7 +37,6 @@ public class Start extends JFrame{
 		this.addMouseListener(new Mouse());
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setPreferredSize(new Dimension(GlobalParameter.STARTFRAME_WIDTH,GlobalParameter.STARTRAME_HEIGHT));
-		//this.setLayout(new GridLayout(1,4));
 		this.setMinimumSize(new Dimension(GlobalParameter.STARTFRAME_WIDTH,GlobalParameter.STARTRAME_HEIGHT));
 		this.setResizable(false);
 		this.getContentPane().setBackground(Color.GRAY);
@@ -50,7 +49,6 @@ public class Start extends JFrame{
 		this.add(dp);
 		this.revalidate();
 		this.repaint();
-		//createMainFrame();
 	}
 	
 	class DrawPane extends JPanel{
@@ -75,8 +73,6 @@ public class Start extends JFrame{
 			
 			g.drawString("Commencer", 500, 360);
 			g.drawString("Simulation", 517, 400);
-			//g.drawRect(0, 300, 400, 200);
-			//g.drawRect(400, 300, 400, 200);
 			
 			if(chooseOption()) {
 				JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -121,7 +117,6 @@ public class Start extends JFrame{
 	}
 	
 	public boolean chooseOption() {
-		//System.out.println(Mouse.x +" "+ Mouse.y);
 		if(Mouse.y > 330 && Mouse.y < GlobalParameter.STARTRAME_HEIGHT + 30) {
 			if(Mouse.x > 0 && Mouse.x < 400) {
 				return true;

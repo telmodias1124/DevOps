@@ -133,7 +133,7 @@ public class MatchView extends JPanel{
 		int length = ((p.getLastName().length())*10)+40;
 		int newY = y + 30;
 		int moyenne = (p.getPlayerStatistic().getPace()+p.getPlayerStatistic().getShoot()+p.getPlayerStatistic().getPass()+p.getPlayerStatistic().getDribble()+p.getPlayerStatistic().getDef()+p.getPlayerStatistic().getPhysique())/6;
-		//g.drawRect(x, y, length, 20);
+	
 		if(Mouse.x > x && Mouse.x < x + length && Mouse.y > newY && Mouse.y < newY + 20) {
 			try {
 			    carte = ImageIO.read(new File("images/carte_vierge.png"));
