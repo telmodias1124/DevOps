@@ -119,7 +119,7 @@ public class Start extends JFrame{
 	}
 	
 	public boolean chooseOption() {
-		System.out.println(Mouse.x +" "+ Mouse.y);
+		//System.out.println(Mouse.x +" "+ Mouse.y);
 		if(Mouse.y > 330 && Mouse.y < GlobalParameter.STARTRAME_HEIGHT + 30) {
 			if(Mouse.x > 0 && Mouse.x < 400) {
 				return true;

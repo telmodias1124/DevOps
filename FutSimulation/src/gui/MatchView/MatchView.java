@@ -1,43 +1,24 @@
 package gui.MatchView;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.MouseListener;
 import java.io.File;
-import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
-import data.KnockoutPhase;
 import data.Match;
 import data.Player;
-import data.PlayerStatistic;
 import data.Team;
 import gui.GlobalParameter;
-import gui.JImagePanel;
-import gui.JLinePanel;
 import gui.MainFrame;
-import gui.actions.ExitAction;
-import gui.actions.NextAction;
 import listener.Mouse;
 
 
 public class MatchView extends JPanel{
 	private static final long serialVersionUID = 7690322266008392032L;
-	//private LinkedList<Match> alMatch;
-
 	private Image viewBackground;
 	private Image field;
 	private Image flag;
@@ -47,6 +28,11 @@ public class MatchView extends JPanel{
 	private int state = 0;
 	private static int MAINFRAME_WIDTH = GlobalParameter.MAINFRAME_WIDTH;
 	private static int MAINFRAME_HEIGHT = GlobalParameter.MAINFRAME_HEIGHT;
+	private int i = 0;
+	private int j = 0;
+	private int lk = 0;
+	private int newI = 0;
+	private int retenuI[] = new int[30];
 	Font font = new Font("SansSerif", Font.BOLD, 18);
 	Font fontScore = new Font("SansSerif", Font.BOLD, 40);
 
@@ -100,7 +86,7 @@ public class MatchView extends JPanel{
 	    g.drawString(m.getTeamA().getTeamName(), ((MAINFRAME_WIDTH - 1035)*mf.getWidth()/MAINFRAME_WIDTH), ((460*mf.getHeight())/MAINFRAME_HEIGHT));
 	    
 	    //g.drawString("Nbr d'Actions : "+Integer.toString(m.getAlrecap().size()), 310, (620*mf.getHeight())/MAINFRAME_HEIGHT);
-	    g.drawString("Pages : "+Integer.toString(state+1)+"/"+Integer.toString((m.getAlrecap().size()/17)+1), (340*mf.getWidth())/MAINFRAME_WIDTH, (620*mf.getHeight())/MAINFRAME_HEIGHT);
+	    g.drawString("Pages : "+Integer.toString(state+1), (360*mf.getWidth())/MAINFRAME_WIDTH, (620*mf.getHeight())/MAINFRAME_HEIGHT);
 	   
 	    g = drawRecap(g);
 	    	
@@ -115,6 +101,14 @@ public class MatchView extends JPanel{
 	}
 	
 	public Graphics choosePlayer(int x, int y, Player p, Team t, Graphics g) {
+		if(p.getYellowCard()) {
+			g.setColor(Color.YELLOW);
+			g.fillRect(x-15, y, 10, 20);
+		}
+		if(p.getRedCard()) {
+			g.setColor(Color.RED);
+			g.fillRect(x-15, y, 10, 20);
+		}
 		g.setColor(Color.WHITE);
 		int length = ((p.getLastName().length())*10)+40;
 		int newY = y + 30;
@@ -150,14 +144,7 @@ public class MatchView extends JPanel{
 			}
 		}
 		
-		if(p.getYellowCard()) {
-			g.setColor(Color.YELLOW);
-			g.fillRect(x-15, y, 10, 20);
-		}
-		if(p.getRedCard()) {
-			g.setColor(Color.RED);
-			g.fillRect(x-15, y, 10, 20);
-		}
+		
 		return g;
 	}
 	
@@ -300,8 +287,6 @@ public class MatchView extends JPanel{
 		g.drawString("Corners : " + Integer.toString(m.getCornersA()), (35*mf.getWidth())/MAINFRAME_WIDTH, (770*mf.getHeight())/MAINFRAME_HEIGHT);
 		g.drawString("Précision Tirs : " + Integer.toString((int)percentShootA)+"%", (35*mf.getWidth())/MAINFRAME_WIDTH, (800*mf.getHeight())/MAINFRAME_HEIGHT);
 		g.drawString("Précision Passes : " + Integer.toString((int)percentPassA)+"%", (35*mf.getWidth())/MAINFRAME_WIDTH, (830*mf.getHeight())/MAINFRAME_HEIGHT);
-		/*float percentPassA = ((float)m.getPassA()/(float)m.getTotalPassA())*100;
-		g.drawString("Pourcentages de passes réussis : " + Integer.toString((int) percentPassA), (35*mf.getWidth())/MAINFRAME_WIDTH, (870*mf.getHeight())/MAINFRAME_HEIGHT);*/
 		
 		float percentPassB = ((float)m.getPassB()/(float)m.getTotalPassB())*100;
 		float percentShootB = ((float)m.getScoreB()/(float)m.getTotalKickB())*100;
@@ -314,23 +299,26 @@ public class MatchView extends JPanel{
 		g.drawString("Corners : " + Integer.toString(m.getCornersB()), ((1201 + 35)*mf.getWidth())/MAINFRAME_WIDTH, (770*mf.getHeight())/MAINFRAME_HEIGHT);
 		g.drawString("Précision Tirs : " + Integer.toString((int)percentShootB)+"%", ((1201 + 35)*mf.getWidth())/MAINFRAME_WIDTH, (800*mf.getHeight())/MAINFRAME_HEIGHT);
 		g.drawString("Précision Passes : " + Integer.toString((int)percentPassB)+"%", ((1201 + 35)*mf.getWidth())/MAINFRAME_WIDTH, (830*mf.getHeight())/MAINFRAME_HEIGHT);
-		/*float percentPassB = ((float)m.getPassA()/(float)m.getTotalPassA())*100;
-		g.drawString("Pourcentages de passes réussis : " + Integer.toString((int) percentPassB), ((1201 + 35)*mf.getWidth())/MAINFRAME_WIDTH, (870*mf.getHeight())/MAINFRAME_HEIGHT);*/
-		
 		
 		return g;
 	}
 	
 	public Graphics drawRecap(Graphics g) {
+		//System.out.println(i +"  "+j);
 		if(Mouse.x > 1050 && Mouse.x < 1100) {
 		    if(Mouse.y > 610+30 && Mouse.y < 650+30 && Mouse.click == true) {
 		    	if(state > 0) {
+		    		this.i = (this.retenuI[state-1]);
+		    		this.newI = this.i;
 		    		state--;
 		    		Mouse.click = false;
 		    	}
 		    }
 		    if(Mouse.y > 900 +30 && Mouse.y < 1000+30 && Mouse.click == true) {
-		    	if(state < (m.getAlrecap().size()/13)) {
+		    	if(this.j < m.getAlrecap().size()-1) {
+		    		this.retenuI[state] = this.newI;
+		    		this.i = this.j;
+		    		this.newI = this.i;
 		    		state++;
 		    		Mouse.click = false;
 		    	}
@@ -338,71 +326,44 @@ public class MatchView extends JPanel{
 		}
 		    
 		g.setColor(Color.WHITE);
-		/*int k=0;
-		int j = 0;
-		for(int i=0; i< 15; i++) {
-		    if(i+(state*15)< m.getAlrecap().size()) {
-		    	String str = new String();
-                String str2 = new String();
-                int lastIndex = m.getAlrecap().get(k+(state*15)).length();
-                int lastIndexOri = m.getAlrecap().get(k+(state*15)).length();
-                int width = g.getFontMetrics().stringWidth(m.getAlrecap().get(k+(state*15)));
-                str = m.getAlrecap().get(k+(state*15));
-                while(width > 580) {
-                    lastIndex = str.lastIndexOf(" ");
-                    str = str.substring(0, lastIndex);
-                    width = g.getFontMetrics().stringWidth(str);
-                    str2 = m.getAlrecap().get(k+(state*15)).substring(lastIndex, lastIndexOri);
-                }
-                if(g.getFontMetrics().stringWidth(m.getAlrecap().get(k+(state*10))) > 580) {
-                    g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
-                    j++;
-                    g.drawString(str2, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
-                    j++;
-                    i++;
-                }else {
-                    g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
-                    j++;
-                }
-                k++;
-		    }
-		}*/
-		int k=0;
-		int j=0;
-		for(int i =0; i<13  ; i++) {
-			if(i+(state*13) < m.getAlrecap().size()) {
-				String str = new String();
-				String str2 = new String();
-				int lastIndex = m.getAlrecap().get(k+(state*13)).length();
-                int lastIndexOri = m.getAlrecap().get(k+(state*13)).length();
-                int width = g.getFontMetrics().stringWidth(m.getAlrecap().get(k+(state*13)));
-				str = m.getAlrecap().get(k+(state*13));
-				if(g.getFontMetrics().stringWidth(str) > 580) {
-					while(width > 580) {
+		
+			int h = 0;
+			for(this.j = this.i; this.j < this.i + 13; this.j++) {
+				if(this.j < m.getAlrecap().size()-1) {
+					String str = new String();
+	                String str2 = new String();
+	                int lastIndex = m.getAlrecap().get(this.j).length();
+	                int lastIndexOri = m.getAlrecap().get(this.j).length();
+	                int width = g.getFontMetrics().stringWidth(m.getAlrecap().get(this.j));
+	                str = m.getAlrecap().get(this.j);
+	                while(width > 580) {
 	                    lastIndex = str.lastIndexOf(" ");
 	                    str = str.substring(0, lastIndex);
 	                    width = g.getFontMetrics().stringWidth(str);
-	                    str2 = m.getAlrecap().get(k+(state*13)).substring(lastIndex, lastIndexOri);	                    
+	                    str2 = m.getAlrecap().get(this.j).substring(lastIndex, lastIndexOri);
 	                }
-					g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
-					j++;
-					g.drawString(str2, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
-					j++;
-					i++;
-				}else {
-					g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(j*25));
-					j++;
+	                if(g.getFontMetrics().stringWidth(m.getAlrecap().get(this.j)) > 580) {
+	                    g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(h*25));
+	                    h++;
+	                    g.drawString(str2, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(h*25));
+	                    h++;
+	                    this.i--;
+	                }
+	                else {
+	                    g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(h*25));
+	                    h++;
+	                }
 				}
-				k++;
-				
 			}
 			
+			this.i = this.newI;
+			
+		if(this.lk == 0) {
+			for(String n : m.getAlrecap()) {
+	            System.out.println(n);
+	            this.lk = 1;
+			}
 		}
-		for(String n : m.getAlrecap()) {
-			   System.out.println(n);
-		}
-		
 		return g;
 	}
-	
 }
