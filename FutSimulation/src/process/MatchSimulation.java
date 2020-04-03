@@ -1591,7 +1591,7 @@ public class MatchSimulation {
 				if(random.nextInt(101)> MatchSimulationParameter.LUCK_GET_YELLOW_CARD_ATT) {
 					//Red card
 					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !");
-					this.
+					this.alPlayerRedCard.add(player);
 					player.setRedCard(true);
 					alPlayer.remove(player);
 				}else {
@@ -1599,6 +1599,7 @@ public class MatchSimulation {
 					if(player.getYellowCard()) {
 						//Red card
 						game.alrecap.add(player.getLastName()+" commet une faute, il prend un carton jaune mais en avait déjà un donc c'est le rouge !");
+						this.alPlayerRedCard.add(player);
 						player.setRedCard(true);
 						alPlayer.remove(player);
 					}else {
@@ -1615,6 +1616,7 @@ public class MatchSimulation {
 				if(random.nextInt(101)> MatchSimulationParameter.LUCK_GET_YELLOW_CARD_MID) {
 					//Red card
 					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !");
+					this.alPlayerRedCard.add(player);
 					player.setRedCard(true);
 					alPlayer.remove(player);
 				}else {
@@ -1622,6 +1624,7 @@ public class MatchSimulation {
 					if(player.getYellowCard()) {
 						//Red card
 						game.alrecap.add(player.getLastName()+" commet une faute, il prend un carton jaune mais en avait déjà un donc c'est le rouge !");
+						this.alPlayerRedCard.add(player);
 						player.setRedCard(true);
 						alPlayer.remove(player);
 					}else {
@@ -1638,6 +1641,7 @@ public class MatchSimulation {
 				if(random.nextInt(101)> MatchSimulationParameter.LUCK_GET_YELLOW_CARD_DEF) {
 					//Red card
 					game.alrecap.add(player.getLastName()+" commet une très grosse faute, il prend un carton rouge !");
+					this.alPlayerRedCard.add(player);
 					player.setRedCard(true);
 					alPlayer.remove(player);
 				}else {
@@ -1645,6 +1649,7 @@ public class MatchSimulation {
 					if(player.getYellowCard()) {
 						//Red card
 						game.alrecap.add(player.getLastName()+" commet une faute, il prend un carton jaune mais en avait déjà un donc c'est le rouge !");
+						this.alPlayerRedCard.add(player);
 						player.setRedCard(true);
 						alPlayer.remove(player);
 					}else {

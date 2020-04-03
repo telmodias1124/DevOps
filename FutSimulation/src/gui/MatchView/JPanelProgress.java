@@ -25,5 +25,4 @@ public class JPanelProgress extends JPanel {
 		
 		this.add(jTextArea);
 	}
-
 }
