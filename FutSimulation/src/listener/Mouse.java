@@ -13,7 +13,7 @@ public class Mouse implements MouseListener {
     public void mouseClicked(MouseEvent arg0) {
     	Mouse.x = arg0.getX();
     	Mouse.y = arg0.getY();
-    	System.out.println(x +" ,"+ y + " MOUSE");
+    	//System.out.println(x +" ,"+ y + " MOUSE");
     	click = true;
     }
     public void mouseEntered(MouseEvent arg0) {}

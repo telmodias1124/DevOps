@@ -28,11 +28,10 @@ public class MatchView extends JPanel{
 	private int state = 0;
 	private static int MAINFRAME_WIDTH = GlobalParameter.MAINFRAME_WIDTH;
 	private static int MAINFRAME_HEIGHT = GlobalParameter.MAINFRAME_HEIGHT;
-	private int i = 0;
-	private int j = 0;
-	private int lk = 0;
-	private int newI = 0;
-	private int retenuI[] = new int[30];
+	private int maxLines= 0;
+	private int curLine= 0;
+	private int newPage = 0;
+	private int lastPage[] = new int[30];
 	Font font = new Font("SansSerif", Font.BOLD, 18);
 	Font fontScore = new Font("SansSerif", Font.BOLD, 40);
 
@@ -46,7 +45,6 @@ public class MatchView extends JPanel{
 		this.mf = mf;
 	}
 	
-	
 	protected void paintComponent(Graphics g){
 		
 		super.paintComponent(g); 
@@ -54,7 +52,7 @@ public class MatchView extends JPanel{
 	    g.setColor(Color.BLACK);
 	    
 	    g = drawImages(g);
-	    //Phase + deroulement
+
 	    g.fillRect((650*mf.getWidth())/MAINFRAME_WIDTH, (475*mf.getHeight())/MAINFRAME_HEIGHT, (200*mf.getWidth())/MAINFRAME_WIDTH, (100*mf.getHeight())/MAINFRAME_HEIGHT);
 	    g.fillRect((450*mf.getWidth())/MAINFRAME_WIDTH, (600*mf.getHeight())/MAINFRAME_HEIGHT, (600*mf.getWidth())/MAINFRAME_WIDTH, (400*mf.getHeight())/MAINFRAME_HEIGHT);
 	   
@@ -79,20 +77,17 @@ public class MatchView extends JPanel{
 	    }
 	    
 	    g.setFont(font);
-
-	    //Drapeau et equipe
 	    
 	    g.drawString(m.getTeamB().getTeamName(), ((MAINFRAME_WIDTH - 435)*mf.getWidth()/MAINFRAME_WIDTH), ((460*mf.getHeight())/MAINFRAME_HEIGHT));
 	    g.drawString(m.getTeamA().getTeamName(), ((MAINFRAME_WIDTH - 1035)*mf.getWidth()/MAINFRAME_WIDTH), ((460*mf.getHeight())/MAINFRAME_HEIGHT));
 	    
-	    //g.drawString("Nbr d'Actions : "+Integer.toString(m.getAlrecap().size()), 310, (620*mf.getHeight())/MAINFRAME_HEIGHT);
 	    g.drawString("Pages : "+Integer.toString(state+1), (360*mf.getWidth())/MAINFRAME_WIDTH, (620*mf.getHeight())/MAINFRAME_HEIGHT);
 	   
 	    g = drawRecap(g);
 	    	
 	    g = drawPlayers(g);
 	    
-	    g = drawStatistiqes(g);
+	    g = drawStatistics(g);
 
 	    g.setColor(Color.WHITE);
 	    g.drawLine(0, (600*mf.getHeight())/MAINFRAME_HEIGHT, mf.getWidth(), (600*mf.getHeight())/MAINFRAME_HEIGHT);
@@ -100,6 +95,7 @@ public class MatchView extends JPanel{
 	    repaint();
 	}
 	
+	//Display of cards and player statistics
 	public Graphics choosePlayer(int x, int y, Player p, Team t, Graphics g) {
 		if(p.getYellowCard()) {
 			g.setColor(Color.YELLOW);
@@ -143,8 +139,6 @@ public class MatchView extends JPanel{
 				g.fillRect(685, 285, 15, 20);
 			}
 		}
-		
-		
 		return g;
 	}
 	
@@ -193,12 +187,6 @@ public class MatchView extends JPanel{
 	    g.drawImage(flag, (1201*mf.getWidth())/MAINFRAME_WIDTH, (600*mf.getHeight())/MAINFRAME_HEIGHT, (600*mf.getWidth())/MAINFRAME_WIDTH, (400*mf.getHeight())/MAINFRAME_HEIGHT, null);
 	    
 	    try {
-	    	flag = ImageIO.read(new File("images/ballon.png"));
-		    }
-		    catch (Exception e) { /*handled in paintComponent()*/ }
-	    g.drawImage(field, (550*mf.getWidth())/MAINFRAME_WIDTH, (600*mf.getHeight())/MAINFRAME_HEIGHT, (400*mf.getWidth())/MAINFRAME_WIDTH, (400*mf.getHeight())/MAINFRAME_HEIGHT, null);
-	    
-	    try {
 	    	flag = ImageIO.read(new File("images/fleche_haut.png"));
 		    }
 		    catch (Exception e) { /*handled in paintComponent()*/ }
@@ -213,6 +201,7 @@ public class MatchView extends JPanel{
 		return g;
 	}
 	
+	//Display of all players on the field
 	public Graphics drawPlayers(Graphics g) {
 		g.setColor(Color.WHITE);
 	 
@@ -274,7 +263,7 @@ public class MatchView extends JPanel{
 		return g;
 	}
 	
-	public Graphics drawStatistiqes(Graphics g) {
+	public Graphics drawStatistics(Graphics g) {
 		g.setColor(Color.WHITE);
 		float percentPassA = ((float)m.getPassA()/(float)m.getTotalPassA())*100;
 		float percentShootA = ((float)m.getScoreA()/(float)m.getTotalKickA())*100;
@@ -303,22 +292,23 @@ public class MatchView extends JPanel{
 		return g;
 	}
 	
+	//draw the summary of the match and cut the text into pages
 	public Graphics drawRecap(Graphics g) {
 		//System.out.println(i +"  "+j);
 		if(Mouse.x > 1050 && Mouse.x < 1100) {
 		    if(Mouse.y > 610+30 && Mouse.y < 650+30 && Mouse.click == true) {
 		    	if(state > 0) {
-		    		this.i = (this.retenuI[state-1]);
-		    		this.newI = this.i;
+		    		this.maxLines= (this.lastPage[state-1]);
+		    		this.newPage = this.maxLines;
 		    		state--;
 		    		Mouse.click = false;
 		    	}
 		    }
 		    if(Mouse.y > 900 +30 && Mouse.y < 1000+30 && Mouse.click == true) {
-		    	if(this.j < m.getAlrecap().size()-1) {
-		    		this.retenuI[state] = this.newI;
-		    		this.i = this.j;
-		    		this.newI = this.i;
+		    	if(this.curLine< m.getAlrecap().size()-1) {
+		    		this.lastPage[state] = this.newPage;
+		    		this.maxLines= this.curLine;
+		    		this.newPage = this.maxLines;
 		    		state++;
 		    		Mouse.click = false;
 		    	}
@@ -328,26 +318,26 @@ public class MatchView extends JPanel{
 		g.setColor(Color.WHITE);
 		
 			int h = 0;
-			for(this.j = this.i; this.j < this.i + 13; this.j++) {
-				if(this.j < m.getAlrecap().size()-1) {
+			for(this.curLine= this.maxLines; this.curLine< this.maxLines+ 13; this.curLine++) {
+				if(this.curLine< m.getAlrecap().size()-1) {
 					String str = new String();
 	                String str2 = new String();
-	                int lastIndex = m.getAlrecap().get(this.j).length();
-	                int lastIndexOri = m.getAlrecap().get(this.j).length();
-	                int width = g.getFontMetrics().stringWidth(m.getAlrecap().get(this.j));
-	                str = m.getAlrecap().get(this.j);
+	                int lastIndex = m.getAlrecap().get(this.curLine).length();
+	                int lastIndexOri = m.getAlrecap().get(this.curLine).length();
+	                int width = g.getFontMetrics().stringWidth(m.getAlrecap().get(this.curLine));
+	                str = m.getAlrecap().get(this.curLine);
 	                while(width > 580) {
 	                    lastIndex = str.lastIndexOf(" ");
 	                    str = str.substring(0, lastIndex);
 	                    width = g.getFontMetrics().stringWidth(str);
-	                    str2 = m.getAlrecap().get(this.j).substring(lastIndex, lastIndexOri);
+	                    str2 = m.getAlrecap().get(this.curLine).substring(lastIndex, lastIndexOri);
 	                }
-	                if(g.getFontMetrics().stringWidth(m.getAlrecap().get(this.j)) > 580) {
+	                if(g.getFontMetrics().stringWidth(m.getAlrecap().get(this.curLine)) > 580) {
 	                    g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(h*25));
 	                    h++;
 	                    g.drawString(str2, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(h*25));
 	                    h++;
-	                    this.i--;
+	                    this.maxLines--;
 	                }
 	                else {
 	                    g.drawString(str, (460*mf.getWidth())/MAINFRAME_WIDTH, (625*mf.getHeight())/MAINFRAME_HEIGHT+(h*25));
@@ -356,14 +346,8 @@ public class MatchView extends JPanel{
 				}
 			}
 			
-			this.i = this.newI;
+			this.maxLines= this.newPage;
 			
-		if(this.lk == 0) {
-			for(String n : m.getAlrecap()) {
-	            System.out.println(n);
-	            this.lk = 1;
-			}
-		}
 		return g;
 	}
 }
